@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as o,d as t}from"./index-bfbc37cc.js";const a={},c={class:"admin-container"},n=t("div",{"side-nav":""},null,-1),r=[n];function _(d,i,p,l,f,h){return s(),o("div",c,r)}const u=e(a,[["render",_]]);export{u as default};
