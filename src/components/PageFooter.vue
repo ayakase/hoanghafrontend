@@ -1,0 +1,342 @@
+<template>
+    <div class="footer-container">
+        <div class="footer-head">
+            <div class="footer-head-item">
+                <img src="../assets/images/ftimg1.png" class="footer-head-icon" alt="">
+                <div class="footer-head-text">
+                    <p><span style="color: #ff6b00; font-weight: bold;">TƯ VẤN 24/7</span></p>
+                    <p><span style="color: white;">Tổng đài tư vấn 349349, Hỗ trợ 24/7
+
+                        </span></p>
+                </div>
+            </div>
+            <div class="footer-head-item">
+                <img src="../assets/images/ftimg2.png" class="footer-head-icon" alt="">
+                <div class="footer-head-text">
+                    <p><span style="color: #ff6b00; font-weight: bold;">BẢO HIỂM DỊCH VỤ</span></p>
+                    <p><span style="color: white;">Cam kết hoàn tiền nếu Dịch vụ không đúng</span></p>
+                </div>
+            </div>
+            <div class="footer-head-item">
+                <img src="../assets/images/ftimg3.png" class="footer-head-icon" alt="">
+                <div class="footer-head-text">
+                    <p><span style="color: #ff6b00; font-weight: bold;">CHẤT LƯỢNG HÀNG ĐẦU</span></p>
+                    <p><span style="color: white;">Không cạnh tranh về giá, chỉ tập trung vào chất lượng</span></p>
+                </div>
+            </div>
+            <div class="footer-head-item">
+                <img src="../assets/images/ftimg4.png" class="footer-head-icon" alt="">
+                <div class="footer-head-text">
+                    <p><span style="color: #ff6b00; font-weight: bold;">NIỀM TIN PHÁT TRIỂN</span></p>
+                    <p><span style="color: white;">Nỗ lực phát tiển để trở thành Công ty lữ hành hàng đầu tại Lào Cai</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-main-content">
+            <div class="footer-section footer-section-1">
+                <div class="section-top-bar"></div>
+                <h3>CÔNG TY TNHH MTV DU LỊCH QUỐC TẾ HOÀNG HÀ</h3>
+                <div class="introduce-footer">
+                    <div class="introduce-item">
+                        <img src="../assets/icon-contact/vector.png" class="introduce-icon" alt="">
+                        <p><b>Văn phòng chính: </b> 040 Trần Nguyên Hãn, phường Lào Cai, thành phố Lào Cai, tỉnh Lào Cai
+                        </p>
+                    </div>
+                    <div class="introduce-item">
+                        <img src="../assets/icon-contact/location.png" class="introduce-icon" alt="">
+                        <p><b>Địa chỉ: </b> 116b đường Sơn Đạo, phường Cốc Lếu, thành phố Lào Cai, tỉnh Lào Cai</p>
+                    </div>
+                    <div class="introduce-item">
+                        <img src="../assets/icon-contact/e-mail.png" class="introduce-icon" alt="">
+                        <div>
+                            <p> <b>Điện thoại: </b> (084) 385 5158</p>
+                            <p> <b>Fax: </b> 0214 3.858,178</p>
+                            <p> <b>Di động: </b>0904.678.168 - 0904.243.088</p>
+                        </div>
+                    </div>
+                    <div class="introduce-item">
+                        <img src="../assets/icon-contact/phone.png" class="introduce-icon" alt="">
+                        <p> <b>Email: </b> dlhoanghalaocai@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section footer-section-2">
+                <div class="about-us">
+                    <div class="section-top-bar"></div>
+                    <h3>Về chúng tôi</h3>
+                    <div class="about-us-items">
+                        <p class="about-us-item">Chính sách và quy định chung</p>
+                        <p class="about-us-item">Bảo hiểm dịch vụ</p>
+                        <p class="about-us-item">Quy trình đặt dịch vụ và thanh toán</p>
+                    </div>
+                </div>
+                <div class="follow-us">
+                    <div class="section-top-bar"></div>
+                    <h3>Theo dõi chúng tôi</h3>
+                    <div class="follow-us-items">
+                        <div class="follow-us-item">
+                            <img src="../assets/icon-mxh/instagram-logo.png" class="follow-icon" alt="">
+                            <p>Instagram</p>
+                        </div>
+                        <div class="follow-us-item">
+                            <img src="../assets/icon-mxh/facebook-logo.png" class="follow-icon" alt="">
+                            <p>Facebook</p>
+                        </div>
+                        <div class="follow-us-item">
+                            <img src="../assets/icon-mxh/zalo-logo.png" class="follow-icon" alt="">
+                            <p>Zalo</p>
+                        </div>
+                        <div class="follow-us-item">
+                            <img src="../assets/icon-mxh/messenger.png" class="follow-icon" alt="">
+                            <p>Messenger</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="footer-section footer-section-3">
+                <div class="section-top-bar"></div>
+                <h2>Đăng ký tư vấn</h2>
+                <div class="footer-form">
+                    <p class="footer-form-label">Họ tên</p>
+                    <input class="form-control footer-input" type="text" placeholder="Họ tên"
+                        aria-label="default input example">
+                    <p class="footer-form-label">Số điện thoại</p>
+                    <input class="form-control footer-input" type="text" placeholder="Số điện thoại"
+                        aria-label="default input example">
+                    <p class="footer-form-label">Email</p>
+                    <input class="form-control footer-input" type="text" placeholder="Email"
+                        aria-label="default input example">
+                    <p class="footer-form-label">Ghi chú</p>
+                    <textarea class="form-control footer-text-area" placeholder="Ghi chú" id="floatingTextarea"></textarea>
+                </div>
+                <button type="button" @click="sendInfo" class="btn btn-success footer-form-button">Đăng ký</button>
+            </div>
+
+        </div>
+        <p class="copyright">@ 2014 Du lịch Hoàng Hà</p>
+
+        <!-- <img src="../assets/images/footer-img.png" class="footer-img" alt=""> -->
+    </div>
+</template>
+
+<script>
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+export default {
+    name: 'footer',
+    setup() {
+        function sendInfo() {
+            toast.success("Đã gửi thông tin", {
+                autoClose: 2000,
+                theme: "dark",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        }
+        return {
+            sendInfo
+        }
+    }
+}
+</script>
+<style >
+.copyright {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: #045B48;
+    font-size: larger;
+}
+
+.footer-container {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+@media screen and (max-width: 992px) {
+    .footer-container {
+        display: none;
+    }
+}
+
+.footer-img {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+}
+
+.footer-head {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 0.8rem;
+    padding-bottom: 2rem;
+    flex-direction: row;
+    /* height: 6rem; */
+    background-color: #045B48;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.644) 0px 6px 8px;
+
+}
+
+.footer-head-item {
+    width: 20%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+}
+
+.footer-head-icon {
+    height: 5rem;
+    width: 5rem;
+}
+
+.footer-head-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-head-text p {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-main-content {
+    background-image: url('../assets/images/footer-img.png');
+    display: flex;
+    height: 45rem;
+    padding-top: 2rem;
+    flex-direction: row;
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 5rem;
+    width: 100%;
+}
+
+.section-top-bar {
+    border-top: 3px solid #045b48;
+    height: 1rem;
+}
+
+.footer-section-1 {
+    width: 25rem;
+    color: #045b48;
+}
+
+.footer-section-2 {
+    width: 20rem;
+    color: #045b48;
+}
+
+.footer-section-3 {
+    color: #045b48;
+    width: 25rem;
+    position: relative;
+
+}
+
+.footer-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-input {
+    height: 3rem;
+    border-radius: 0.7rem;
+    background-color: #dbebe1;
+    border: 1px solid #a1ffc5;
+}
+
+.footer-form-button {
+    margin-top: 2rem;
+    position: absolute;
+    right: 0;
+}
+
+.footer-note-input {
+    height: 8rem;
+}
+
+.footer-text-area {
+    border-radius: 0.7rem;
+    height: 8rem;
+    background-color: #dbebe1;
+    border: 1px solid #a1ffc5;
+}
+
+.footer-form-label {
+    margin: 0;
+    padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.6rem;
+    font-size: large;
+
+}
+
+textarea {
+    resize: none;
+}
+
+.about-us-items {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.about-us-item {
+    font-size: large;
+}
+
+.follow-icon {
+    width: 3rem;
+}
+
+.follow-us-item {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.follow-us-item p {
+    margin: 0;
+    padding: 0;
+    font-size: large;
+}
+
+.follow-us-items {
+    padding-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.introduce-item {
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+    gap: 1rem;
+}
+
+.introduce-icon {
+    width: 2rem;
+    height: 100%;
+
+}
+
+.introduce-footer {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+</style>
