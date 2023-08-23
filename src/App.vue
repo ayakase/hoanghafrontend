@@ -45,11 +45,12 @@ export default {
 
 <template>
   <div class="header-container">
-
-    <div class="banner-text">
-      <!-- <p class="company-name">HOÀNG HÀ</p>
+    <RouterLink class=" btn btn-success active admin-button" to="/admin" aria-current="page" href="#">Admin
+    </RouterLink>
+    <!-- <div class="banner-text"> -->
+    <!-- <p class="company-name">HOÀNG HÀ</p>
       <p class="subtext-1">travel and tourism</p> -->
-    </div>
+    <!-- </div> -->
     <img src="./assets/stamp.png" alt="" class="stamp">
     <img src="./assets/header1.jpg" alt="" class="banner">
     <nav class="navbar navbar-expand-lg custom-bg">
@@ -119,6 +120,7 @@ export default {
               <input @keydown.enter.prevent="searchSend" v-model="searchText" class="form-control me-2 search-box"
                 type="search" placeholder="Search" aria-label="Search">
             </form>
+
             <li class="nav-item hotline">
               <a class="nav-link active" to="/" aria-current="page" href="tel:0124 3.855.158">HOTLINE: <span
                   style="color: rgb(255, 208, 0);">02143855158</span>
@@ -382,5 +384,11 @@ nav {
 
 .home-breadcrumb {
   text-decoration: none !important;
+}
+
+.admin-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 }
 </style>

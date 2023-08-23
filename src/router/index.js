@@ -52,6 +52,18 @@ const router = createRouter({
         { path: 'quy-trinh', component: () => import('../views/about/ProcedureView.vue') },
 
       ]
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/admin/DashboardView.vue'),
+      children: [
+        { path: 'dat-tour', component: () => import('../views/admin/OrderManage.vue') },
+        { path: 'quan-ly-tour', component: () => import('../views/admin/TourManage.vue') },
+        { path: 'bai-viet', component: () => import('../views/admin/PostManage.vue') },
+        { path: 'them-tour', component: () => import('../views/admin/AddTour.vue') },
+
+      ]
     }
   ]
 })

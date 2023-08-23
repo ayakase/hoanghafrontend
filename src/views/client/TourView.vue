@@ -50,7 +50,7 @@ import PlaceModal from '../../components/PlaceModal.vue'
                 <div style="height: 5rem;"></div>
                 <p>Giá tour: <span style="color: #ff6b00;">121212</span></p>
                 <div class="action-button">
-                    <button class="btn place-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Đặt tour</button>
+                    <button class="btn place-btn" data-bs-toggle="modal" data-bs-target="#placeModal">Đặt tour</button>
                     <button class="btn advise-btn">Tư vấn</button>
                 </div>
             </div>

@@ -95,6 +95,9 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 let posts = ref()
 onMounted(() => {
+    baseUrl.get("/").then((response) => {
+        console.log(response)
+    })
     setTimeout(() => {
         posts.value = [
             {

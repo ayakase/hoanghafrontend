@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div style="margin-top: 0rem;" class="modal fade" id="exampleModal" tabindex="-1"
+        <div style="margin-top: 0rem;" class="modal fade" id="placeModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" style="background-color: F1FAF4;">
                 <div class="modal-content" style="background-color: #F1FAF4;">

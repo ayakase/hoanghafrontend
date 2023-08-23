@@ -32,6 +32,7 @@ import { RouterLink, RouterView } from 'vue-router'
   flex-direction: column;
   width: 20rem;
   background-color: #F1FAF4;
+  height: fit-content;
 }
 
 .about-sidebar-item {

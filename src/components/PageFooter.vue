@@ -96,24 +96,25 @@
 
                 </div>
             </div>
-            <div class="footer-section footer-section-3">
+            <form class="footer-section footer-section-3">
                 <div class="section-top-bar"></div>
                 <h2>Đăng ký tư vấn</h2>
                 <div class="footer-form">
                     <p class="footer-form-label">Họ tên</p>
-                    <input class="form-control footer-input" type="text" placeholder="Họ tên"
-                        aria-label="default input example">
+                    <input class="form-control footer-input" type="text" placeholder="Họ tên" v-model="footerName"
+                        aria-label="default input example" required>
                     <p class="footer-form-label">Số điện thoại</p>
-                    <input class="form-control footer-input" type="text" placeholder="Số điện thoại"
-                        aria-label="default input example">
+                    <input class="form-control footer-input" type="number" placeholder="Số điện thoại"
+                        v-model="footerPhoneNumber" aria-label="default input example" required>
                     <p class="footer-form-label">Email</p>
-                    <input class="form-control footer-input" type="text" placeholder="Email"
-                        aria-label="default input example">
+                    <input class="form-control footer-input" type="email" placeholder="Email" v-model="footerEmail"
+                        aria-label="default input example" required>
                     <p class="footer-form-label">Ghi chú</p>
-                    <textarea class="form-control footer-text-area" placeholder="Ghi chú" id="floatingTextarea"></textarea>
+                    <textarea class="form-control footer-text-area" placeholder="Ghi chú" id="floatingTextarea"
+                        v-model="footerNote" required></textarea>
                 </div>
-                <button type="button" @click="sendInfo" class="btn btn-success footer-form-button">Đăng ký</button>
-            </div>
+                <button type="submit" @click.prevent="sendInfo" class="btn btn-success footer-form-button">Đăng ký</button>
+            </form>
 
         </div>
         <p class="copyright">@ 2014 Du lịch Hoàng Hà</p>
@@ -122,24 +123,48 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-export default {
-    name: 'footer',
-    setup() {
-        function sendInfo() {
-            toast.success("Đã gửi thông tin", {
-                autoClose: 2000,
-                theme: "dark",
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
+import baseUrl from '../connect';
+
+import { ref } from 'vue'
+const footerName = ref()
+const footerPhoneNumber = ref()
+const footerEmail = ref()
+const footerNote = ref()
+function sendInfo() {
+    if (!footerName.value || !footerPhoneNumber.value || !footerNote.value || !footerEmail.value) {
+        console.log("not done")
+        toast.error("Bạn cần điền đầy đủ thông tin", {
+            autoClose: 1000,
+            theme: "dark",
+            position: toast.POSITION.BOTTOM_RIGHT,
+        });
+    } else {
+        const footerData = {
+            name: footerName.value,
+            phone: footerPhoneNumber.value,
+            email: footerEmail.value,
+            note: footerNote.value
         }
-        return {
-            sendInfo
-        }
+        baseUrl.post("/footer", footerData)
+            .then(response => {
+                console.log(response.data)
+                toast.success("Đã nhận thông tin", {
+                    autoClose: 2000,
+                    theme: "dark",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            })
+            .catch(error => {
+                console.error(error)
+
+            })
     }
 }
+
+
 </script>
 <style >
 .copyright {
