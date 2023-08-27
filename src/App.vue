@@ -136,7 +136,7 @@ export default {
     <RouterView />
   </div>
 
-  <div class="spacer" style="height: 8rem;"></div>
+  <!-- <div class="spacer" style="height: 8rem;"></div> -->
   <PageFooter></PageFooter>
   <scrollToTop></scrollToTop>
   <!-- <div class="chat-btn">
@@ -188,6 +188,7 @@ export default {
 
 .header-container {
   position: relative;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .banner-text {

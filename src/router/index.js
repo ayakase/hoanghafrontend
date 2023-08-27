@@ -61,11 +61,12 @@ const router = createRouter({
         { path: 'dat-tour', component: () => import('../views/admin/OrderManage.vue') },
         { path: 'quan-ly-tour', component: () => import('../views/admin/TourManage.vue') },
         { path: 'bai-viet', component: () => import('../views/admin/PostManage.vue') },
-        { path: 'them-tour', component: () => import('../views/admin/AddTour.vue') },
-
+        { path: 'quan-li-tour/them-tour', component: () => import('../views/admin/AddTour.vue') },
+        { path: 'thong-ke', component: () => import('../views/admin/StatisticPage.vue') },
       ]
     }
   ]
+
 })
 
 export default router

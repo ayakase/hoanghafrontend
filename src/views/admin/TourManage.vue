@@ -1,7 +1,7 @@
 <template>
     <div class="admin-tour-crud">
         <SortingComponent></SortingComponent>
-        <button @click="router.push('/admin/them-tour')" class="btn btn-success add-tour" style="margin-bottom: 1rem;">
+        <button @click="router.push('/admin/quan-li-tour/them-tour')" class="btn btn-success add-tour" style="margin-bottom: 1rem;">
             Thêm tour mới <i class="fa-solid fa-plus"></i>
         </button>
 
@@ -34,7 +34,6 @@
                 </tr>
             </tbody>
         </table>
-
         <v-pagination v-model="page" :length="30" :total-visible="7" prev-icon="fa-solid fa-chevron-left"
             next-icon="fa-solid fa-chevron-right"></v-pagination>
         <div>{{ page }}</div>

@@ -52,6 +52,11 @@ import { RouterLink, RouterView } from 'vue-router'
 
 }
 
+.router-link-active {
+  background-color: #97CBB4;
+  border-right: #FF6B00 solid 6px;
+}
+
 .about-content {
   background-color: #F1FAF4;
   width: 72%;
