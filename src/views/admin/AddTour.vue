@@ -3,34 +3,78 @@
         <h2 style="text-align: center; padding-top: 2rem;">Thêm Tour mới</h2>
         <div class="mb-3">
             <label for="" class="form-label">Tiêu đề tour</label>
-            <input type="text" class="form-control" id="" placeholder="">
+            <input type="text" class="form-control" id="" placeholder="" v-model="tourTitle">
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Lịch Trình</label>
-            <input type="text" class="form-control" id="" placeholder="">
+            <input type="text" class="form-control" id="" placeholder="" v-model="tourSchedule">
         </div>
-        <div class="type-date-from">
+        <div class="category-type-from">
             <div class="mb-3 w-25">
-                <label for="" class="form-label">Loại tour </label>
-                <input type="text" class="form-control" id="" placeholder="">
+                <label for="" class="form-label">Danh mục </label>
+                <select class="form-select  mb-3" aria-label="Smal select example" v-model="tourCategory">
+                    <option value="1">Du lịch Trung Quốc</option>
+                    <option value="2">Du lịch trong nước</option>
+                    <option value="3">Du lịch quốc tế</option>
+                </select>
             </div>
             <div class="mb-3 w-25">
-                <label for="" class="form-label">Thời gian (Ngày)</label>
-                <input type="number" class="form-control" id="" placeholder="">
+                <label for="" class="form-label">Loại tour </label>
+                <select class="form-select  mb-3" aria-label="Small select example" v-model="tourType">
+                    <option value="Ghép đoàn" selected>Ghép đoàn</option>
+                    <option value="Đi riêng">Đi riêng</option>
+                    <option value="Ghép đoàn / Đi riêng">Ghép đoàn/đi riêng</option>
+                </select>
             </div>
             <div class="mb-3 w-25">
                 <label for="" class="form-label">Khởi hành từ</label>
-                <input type="text" class="form-control" id="" placeholder="">
+                <input type="text" class="form-control" id="" placeholder="" v-model="tourFrom">
             </div>
         </div>
+        <div style="display: flex;flex-direction: row;align-items: center;">
+            <div class="mb-3 w-25">
+                <label for="" class="form-label">Thời gian (Ngày)</label>
+                <input type="number" class="form-control" id="" placeholder="" v-model="tourLength">
+            </div>
+            <v-switch v-model="isHot" label="Tour hot" color="orange-darken-3" hide-details></v-switch>
 
-        <div class="mb-3">
-            <label for="" class="form-label">Vận chuyển</label>
-            <input type="text" class="form-control" id="" placeholder="">
         </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Giá Tour</label>
-            <input type="text" class="form-control" id="" placeholder="">
+        <div class="mb-3 w-50">
+            <label for="" class="form-label">Di chuyển: <span v-for="transport in tourTransport" :key="transport">
+                    {{ transport }}, </span></label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Máy bay" id="plane-check" v-model="tourTransport">
+                <label class="form-check-label" for="plane-check">
+                    Máy bay
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Ô tô" id="car-check" v-model="tourTransport">
+                <label class="form-check-label" for="car-check">
+                    Ô tô
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Tàu hỏa" id="train-check" v-model="tourTransport">
+                <label class="form-check-label" for="train-check">
+                    Tàu hỏa
+                </label>
+            </div>
+        </div>
+        <div class="age-price">
+            <div class="mb-3 w-25">
+                <label for="" class="form-label">Giá Người lớn (VNĐ)</label>
+                <input type="number" class="form-control" id="" placeholder="" v-model="adultPrice">
+            </div>
+            <div class="mb-3 w-25">
+                <label for="" class="form-label">Giá trẻ em(Từ 5-11 tuổi) (VNĐ)</label>
+                <input type="number" class="form-control" id="" placeholder="" v-model="youngPrice">
+            </div>
+            <div class="mb-3 w-25">
+                <label for="" class="form-label">Giá trẻ em (Dưới 5 tuổi) (VNĐ)</label>
+                <input type="number" class="form-control" id="" placeholder="" v-model="childPrice">
+            </div>
+
         </div>
         <div class="accordion" id="">
             <div class="accordion-item">
@@ -41,7 +85,7 @@
                     </button>
                 </h2>
                 <div id="accordion-special" class="accordion-collapse collapse show">
-                    <Editor v-model="Tiny" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
+                    <Editor v-model="tourSpecial" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
                         plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
@@ -57,7 +101,7 @@
                     </button>
                 </h2>
                 <div id="accordion-bonus" class="accordion-collapse collapse">
-                    <Editor v-model="Tiny" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
+                    <Editor v-model="tourBonus" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
                         plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
@@ -73,7 +117,7 @@
                     </button>
                 </h2>
                 <div id="accordion-visa" class="accordion-collapse collapse">
-                    <Editor v-model="Tiny" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
+                    <Editor v-model="tourVisa" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
                         plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
@@ -89,7 +133,7 @@
                     </button>
                 </h2>
                 <div id="accordion-detail" class="accordion-collapse collapse">
-                    <Editor v-model="Tiny" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
+                    <Editor v-model="tourDetail" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
                         plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
@@ -106,7 +150,7 @@
                     </button>
                 </h2>
                 <div id="accordion-price-service" class="accordion-collapse collapse">
-                    <Editor v-model="Tiny" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
+                    <Editor v-model="tourPriceService" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
                         plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
@@ -122,7 +166,7 @@
                     </button>
                 </h2>
                 <div id="accordion-guide" class="accordion-collapse collapse">
-                    <Editor v-model="Tiny" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
+                    <Editor v-model="tourGuide" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
                         plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
@@ -138,15 +182,84 @@
                 'outdent indent | numlist bullist | emoticons',
         }" /> -->
     </div>
-    <div v-html="Tiny" style="width: 80%;
-"></div>
+    <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
+    <!-- <div>{{ tourType }}</div> -->
 </template>
 
 <script setup>
+import baseUrl from '../../connect';
+
 import Editor from '@tinymce/tinymce-vue'
 import { ref } from 'vue'
-let Tiny = ref()
+let tourTitle = ref("")
+let tourSchedule = ref("")
+let tourCategory = ref()
+let tourType = ref("")
+let tourFrom = ref("")
+let tourLength = ref()
+let isHot = ref(false)
+let tourTransport = ref([])
+let adultPrice = ref()
+let youngPrice = ref()
+let childPrice = ref()
+let tourSpecial = ref()
+let tourBonus = ref()
+let tourVisa = ref()
+let tourDetail = ref()
+let tourPriceService = ref()
+let tourGuide = ref()
+function addTour() {
+    // console.log("tourTitle:", tourTitle.value);
+    // console.log("tourSchedule:", tourSchedule.value);
+    // console.log("tourCategory:", tourCategory.value);
+    // console.log("tourType:", tourType.value);
+    // console.log("tourFrom:", tourFrom.value);
+    // console.log("tourLength:", tourLength.value);
+    // console.log("isHot:", isHot.value);
+    // console.log("tourTransport:", tourTransport.value);
+    // console.log("adultPrice:", adultPrice.value);
+    // console.log("youngPrice:", youngPrice.value);
+    // console.log("childPrice:", childPrice.value);
+    // console.log("tourSpecial:", tourSpecial.value);
+    // console.log("tourBonus:", tourBonus.value);
+    // console.log("tourVisa:", tourVisa.value);
+    // console.log("tourDetail:", tourDetail.value);
+    // console.log("tourPriceService:", tourPriceService.value);
+    // console.log("tourGuide:", tourGuide.value);
+    const tourData = {
+        tourTitle: tourTitle.value,
+        tourSchedule: tourSchedule.value,
+        tourCategory: tourCategory.value,
+        tourType: tourType.value,
+        tourFrom: tourFrom.value,
+        tourLength: tourLength.value,
+        isHot: isHot.value,
+        tourTransport: tourTransport.value,
+        adultPrice: adultPrice.value,
+        youngPrice: youngPrice.value,
+        childPrice: childPrice.value,
+        tourSpecial: tourSpecial.value,
+        tourBonus: tourBonus.value,
+        tourVisa: tourVisa.value,
+        tourDetail: tourDetail.value,
+        tourPriceService: tourPriceService.value,
+        tourGuide: tourGuide.value,
+    };
+    // console.log(tourData)
+    baseUrl.post("/tour", tourData)
+        .then(response => {
+            console.log(response.data)
+            // toast.success("Đã nhận thông tin", {
+            //     autoClose: 2000,
+            //     theme: "dark",
+            //     position: toast.POSITION.BOTTOM_RIGHT,
+            // });
+        })
+        .catch(error => {
+            console.error(error)
 
+        })
+}
 </script>
 
 <style  scoped>
@@ -157,8 +270,14 @@ let Tiny = ref()
     background-color: aliceblue;
 }
 
-.type-date-from {
+.category-type-from {
     display: flex;
+    justify-content: space-between;
+}
+
+.age-price {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
 }
 
