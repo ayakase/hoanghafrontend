@@ -188,7 +188,8 @@
 
 <script setup>
 import baseUrl from '../../connect';
-
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import Editor from '@tinymce/tinymce-vue'
 import { ref } from 'vue'
 let tourTitle = ref("")
@@ -234,7 +235,7 @@ function addTour() {
         tourFrom: tourFrom.value,
         tourLength: tourLength.value,
         isHot: isHot.value,
-        tourTransport: tourTransport.value,
+        tourTransport: tourTransport.value.toString(),
         adultPrice: adultPrice.value,
         youngPrice: youngPrice.value,
         childPrice: childPrice.value,
@@ -246,18 +247,22 @@ function addTour() {
         tourGuide: tourGuide.value,
     };
     // console.log(tourData)
-    baseUrl.post("/tour", tourData)
+    baseUrl.post("/admin/tour", tourData)
         .then(response => {
             console.log(response.data)
-            // toast.success("Đã nhận thông tin", {
-            //     autoClose: 2000,
-            //     theme: "dark",
-            //     position: toast.POSITION.BOTTOM_RIGHT,
-            // });
+            toast.success("Đã nhận thông tin", {
+                autoClose: 2000,
+                theme: "dark",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
         })
         .catch(error => {
             console.error(error)
-
+            toast.error("Lỗi vc", {
+                autoClose: 2000,
+                theme: "dark",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
         })
 }
 </script>
