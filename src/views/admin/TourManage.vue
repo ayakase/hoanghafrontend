@@ -6,7 +6,7 @@
             Thêm tour mới <i class="fa-solid fa-plus"></i>
         </button>
 
-        <table class="table table-success table-striped">
+        <table class="table table-success table-striped" style="width: 80vw;">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -17,8 +17,10 @@
                     <th scope="col">Số ngày</th>
                     <th scope="col">Tour Hot</th>
                     <th scope="col">Phương tiện</th>
+                    <th scope="col"> Tạo lúc </th>
+                    <th scope="col"> Chỉnh sửa </th>
+                    <th scope="col"> Xóa</th>
 
-                    
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +33,10 @@
                     <td>{{ tour.days }}</td>
                     <td>{{ tour.ishottour }}</td>
                     <td>{{ tour.transportation }}</td>
-                    
+                    <td>{{ formatDate(tour.createdAt) }}</td>
+                    <td> <button class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
+                    </td>
+                    <td> <button class="delete-button"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
 
             </tbody>
@@ -62,7 +67,29 @@ onMounted(() => {
             //     position: toast.POSITION.BOTTOM_RIGHT,
             // });
         })
+    console.log(formatDate("2023-08-29T19:20:29.000Z"))
 })
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    return new Date(date).toLocaleString('vi-VN', options).replace(' tháng ', '/').replace('lúc', '').replace(', ', '/');
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.edit-button {
+    width: 100%;
+}
+
+.edit-button:hover {
+    color: white;
+}
+
+.delete-button {
+    width: 100%;
+}
+
+.delete-button:hover {
+    color: white;
+
+}
+</style>
