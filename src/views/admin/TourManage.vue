@@ -1,12 +1,46 @@
 <template>
     <div class="admin-tour-crud">
-        <SortingComponent></SortingComponent>
-        <button @click="router.push('/admin/quan-li-tour/them-tour')" class="btn btn-success add-tour"
+        <button @click="router.push('/admin/quan-li-tour/them-tour')" class="btn btn-success add-btn"
             style="margin-bottom: 1rem;">
             Thêm tour mới <i class="fa-solid fa-plus"></i>
         </button>
 
-        <table class="table table-success table-striped" style="width: 80vw;">
+        <div class="sorting-container">
+            <div style="font-size: larger;">Bộ lọc:</div>
+            <div class="sorting-button-container">
+                <form class="d-flex search-container">
+                    <button class="btn btn-outline-success" @click.prevent=""><i class="fas fa-search"></i></button>
+                    <input @keydown.enter.prevent="" class="form-control me-2 search-box" type="search"
+                        placeholder="Tìm kiếm theo tên" aria-label="Search">
+                </form>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp; <i
+                                class="fa-solid fa-virus-covid"></i> </button>
+                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
+                                class="fa-solid fa-flag"></i> </button>
+                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
+                                class="fa-solid fa-globe"></i></button>
+                    </div>
+                </div>
+                <button class="sort-button btn btn-success" @click="Newest">Mới nhất &nbsp; <i
+                        class="fa-solid fa-arrow-up-wide-short"></i></button>
+                <button class="sort-button btn btn-success" @click="Oldest">Cũ nhất &nbsp; <i
+                        class="fa-solid fa-arrow-down-wide-short"></i></button>
+                <button class="btn btn-success" @click="reRender"><i class="fa-solid fa-rotate-right"></i></button>
+                <!-- <button class="sort-button btn btn-success">Chưa xử lý &nbsp; <i
+                        class="fa-solid fa-hourglass fa-spin"></i></button>
+                <button class="sort-button btn btn-success">Đã xử lí &nbsp; <i
+                        class="fa-solid fa-check fa-beat"></i></button> -->
+            </div>
+        </div>
+        <table :key="componentKey" class="table table-success table-striped"
+            style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -24,7 +58,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="tour in tourTable" :key="tour">
+                <tr v-for="tour in tourTable" :key="tour" class="each-tour-row">
                     <th scope="row">{{ tour.id }}</th>
                     <td>{{ tour.title }}</td>
                     <td>{{ tour.schedule }}</td>
@@ -36,39 +70,117 @@
                     <td>{{ formatDate(tour.createdAt) }}</td>
                     <td> <button class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
-                    <td> <button class="delete-button"><i class="fa-solid fa-trash"></i></button></td>
+                    <td> <button class="delete-button" @click="deleteTour(tour.id)"><i
+                                class="fa-solid fa-trash"></i></button></td>
                 </tr>
 
             </tbody>
         </table>
-        <v-pagination v-model="page" :length="30" :total-visible="7" prev-icon="fa-solid fa-chevron-left"
-            next-icon="fa-solid fa-chevron-right"></v-pagination>
-        <div>{{ page }}</div>
+        <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
+            prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
+        <div>{{ pageNumber }}</div>
     </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import SortingComponent from '../../components/SortingComponent.vue';
 import { useRouter } from 'vue-router';
 import baseUrl from '../../connect';
-
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 const router = useRouter();
-let page = ref()
+let pageNumber = ref(1)
 let tourTable = ref()
+let totalPage = ref()
 onMounted(() => {
-    baseUrl.get("/admin/tour",)
+    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + 1)
         .then(response => {
             console.log(response.data)
-            tourTable.value = response.data
+            tourTable.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+
             // toast.success("Đã nhận thông tin", {
             //     autoClose: 2000,
             //     theme: "dark",
             //     position: toast.POSITION.BOTTOM_RIGHT,
             // });
-        })
-    console.log(formatDate("2023-08-29T19:20:29.000Z"))
+        }).catch((error) => {
+            console.error(error);
+        });
+    // console.log(formatDate("2023-08-29T19:20:29.000Z"))
 })
+function getTourbyPage() {
+    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then(response => {
+            console.log(response.data)
+            tourTable.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+        }).catch((error) => {
+            console.error(error);
+        });
+}
+function deleteTour(id) {
+    console.log(id)
+    baseUrl.delete("/admin/tour/" + id)
+        .then(response => {
+            console.log(response)
+            toast.success("Đã xóa", {
+                autoClose: 2000,
+                theme: "dark",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            reRender()
+        }).catch((error) => {
+            console.error(error);
+        });
+
+}
+//Chọn category
+let categoryLabel = ref("Trung Quốc")
+let categoryNumber = ref(1)
+function categoryChina() {
+    categoryLabel.value = "Trung Quốc"
+    categoryNumber.value = 1
+    reRender()
+}
+function categoryDomestic() {
+    categoryLabel.value = "Trong nước"
+    categoryNumber.value = 2
+    reRender()
+
+} function categoryGlobal() {
+    categoryLabel.value = "Quốc tế"
+    categoryNumber.value = 3
+    reRender()
+
+}
+// sắp xếp
+let sortOrder = ref("DESC")
+function Newest() {
+    sortOrder.value = "DESC"
+    reRender()
+}
+function Oldest() {
+    sortOrder.value = "ASC"
+    reRender()
+}
+
+function reRender() {
+    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then(response => {
+            console.log(response.data)
+            tourTable.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+            // toast.success("Đã nhận thông tin", {
+            //     autoClose: 2000,
+            //     theme: "dark",
+            //     position: toast.POSITION.BOTTOM_RIGHT,
+            // });
+        }).catch((error) => {
+            console.error(error);
+        });
+}
+
 function formatDate(date) {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
     return new Date(date).toLocaleString('vi-VN', options).replace(' tháng ', '/').replace('lúc', '').replace(', ', '/');
@@ -76,6 +188,11 @@ function formatDate(date) {
 </script>
 
 <style scoped>
+.add-btn {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
 .edit-button {
     width: 100%;
 }
@@ -92,4 +209,33 @@ function formatDate(date) {
     color: white;
 
 }
+
+.sorting-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.sorting-button-container {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sort-button {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+/* .each-tour-row {
+    transition: transform .2s;
+
+}
+
+.each-tour-row:hover {
+    transform: scale(1.1);
+} */
 </style>
