@@ -22,7 +22,9 @@
             </div>
             <div v-if="posts" v-for="post in posts" :key="post" class="tour-individual" @click="router.push('/tourdetail')">
                 <div class=" image-container">
-                    <img src="../../assets/tourimg.png" style="width: 100%;" alt="">
+                    <!-- <img src="" style="width: 100%;" alt=""> -->
+                    <v-img :width="300" aspect-ratio="16/9" cover
+                        src="https://blog.wego.com/wp-content/uploads/shutterstock_449250082_zi32oc.jpg"></v-img>
                 </div>
                 <div class="tour-detail-container">
                     <div class="title"> {{ post.title }}</div>
