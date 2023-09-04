@@ -31,13 +31,18 @@
                 <input type="text" class="form-control" id="" placeholder="" v-model="tourFrom">
             </div>
         </div>
-        <div style="display: flex;flex-direction: row;align-items: center;">
-            <div class="mb-3 w-25">
-                <label for="" class="form-label">Thời gian (Ngày)</label>
+
+        <label for="" class="form-label">Thời gian: {{ tourLength }}N{{ tourLength - 1 }}Đ</label>
+        <div style="display: flex;flex-direction: row;align-items: center; ">
+            <div class="w-25" style="margin-right: 5rem;">
                 <input type="number" class="form-control" id="" placeholder="" v-model="tourLength">
             </div>
-            <v-switch v-model="isHot" label="Tour hot" color="orange-darken-3" hide-details></v-switch>
+            <div style="display: flex; flex-direction: row;align-items: center;">
+                <v-switch v-model="isHot" label="Tour hot" color="orange-darken-3" style="margin-right: 1rem;"
+                    hide-details></v-switch>
+                <i v-if="isHot" style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
 
+            </div>
         </div>
         <div class="mb-3 w-50">
             <label for="" class="form-label">Di chuyển: <span v-for="transport in tourTransport" :key="transport">
@@ -60,6 +65,12 @@
                     Tàu hỏa
                 </label>
             </div>
+        </div>
+        <div class="recommend-container" style="width: 60%; display: flex; flex-direction: row;">
+            <label for="customRange2" class="form-label" style="width: 10rem;">Mức độ đề xuất:</label>
+            <p style="width: 2rem;margin-right: 1rem;color:red;font-weight: bold;" :style="{ color: recommendColor }">{{
+                recommendText }}</p>
+            <input type="range" class="form-range" min="0" max="10" id="customRange2" step="0.5" v-model="recommendText">
         </div>
         <div class="age-price">
             <div class="mb-3 w-25">
@@ -191,13 +202,13 @@ import baseUrl from '../../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import Editor from '@tinymce/tinymce-vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 let tourTitle = ref("")
 let tourSchedule = ref("")
 let tourCategory = ref()
 let tourType = ref("")
 let tourFrom = ref("")
-let tourLength = ref()
+let tourLength = ref(1)
 let isHot = ref(false)
 let tourTransport = ref([])
 let adultPrice = ref()
@@ -209,6 +220,16 @@ let tourVisa = ref()
 let tourDetail = ref()
 let tourPriceService = ref()
 let tourGuide = ref()
+let recommendText = ref(0)
+let recommendColor = computed(() => {
+    if (recommendText.value >= 0 && recommendText.value <= 3) {
+        return 'red';
+    } else if (recommendText.value >= 4 && recommendText.value <= 6) {
+        return 'orange';
+    } else {
+        return 'green';
+    }
+});
 function addTour() {
     // console.log("tourTitle:", tourTitle.value);
     // console.log("tourSchedule:", tourSchedule.value);
@@ -272,7 +293,7 @@ function addTour() {
     width: 75vw;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: aliceblue;
+    background-color: #d0dfd8;
 }
 
 .category-type-from {

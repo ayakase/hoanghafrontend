@@ -148,7 +148,7 @@ function sendInfo() {
             email: footerEmail.value,
             note: footerNote.value
         }
-        baseUrl.post("/footer", footerData)
+        baseUrl.post("/client/footer", footerData)
             .then(response => {
                 console.log(response.data)
                 toast.success("Đã nhận thông tin", {

@@ -84,7 +84,7 @@ export default {
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/hottour" aria-current="page" href="#">Tour Hot &nbsp;<i class="fa-solid fa-fire fa-bounce"></i>
+                  <RouterLink class="nav-link active" to="/hottour" aria-current="page" href="#">Tour Hot &nbsp;<i style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
                   </RouterLink>
                 </li>
                 <li>
