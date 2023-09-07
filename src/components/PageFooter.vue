@@ -117,9 +117,13 @@
             </form>
 
         </div>
-        <p class="copyright">@ 2014 Du lịch Hoàng Hà</p>
+        <p class="copyright">@ 2014 Du lịch Hoàng Hà <br>Designed and developed by <a style="color: #045B48;font-weight: bold;"
+                href="https://github.com/ayakase">Ayakase</a> and <a href="https://github.com/BinBlun"
+                style="color: #045B48;font-weight: bold;">BinBlun</a>
+        </p>
 
-        <!-- <img src="../assets/images/footer-img.png" class="footer-img" alt=""> -->
+
+        <!-- <img src=" ../assets/images/footer-img.png" class="footer-img" alt=""> -->
     </div>
 </template>
 
@@ -170,11 +174,13 @@ function sendInfo() {
 .copyright {
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: 10px;
     text-align: center;
     color: #045B48;
     font-size: larger;
 }
+
+
 
 .footer-container {
     position: relative;

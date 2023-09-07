@@ -138,6 +138,7 @@ function deleteTour(id) {
 //Chọn category
 let categoryLabel = ref("Trung Quốc")
 let categoryNumber = ref(1)
+
 function categoryChina() {
     categoryLabel.value = "Trung Quốc"
     categoryNumber.value = 1

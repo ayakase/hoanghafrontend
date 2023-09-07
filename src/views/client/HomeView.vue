@@ -116,7 +116,9 @@
       </div>
     </div>
   </div> -->
-  <div class="carousel-container carousel-desktop" style="width: 80rem; margin: auto; margin-top: 5rem;">
+  <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 2rem;"><i style="color: orangered;"
+      class="fa-solid fa-fire fa-bounce"></i>&nbsp;Hot Sale</h2>
+  <div class="carousel-container carousel-desktop" style="width: 80rem; margin: auto; margin-top: 2rem;">
     <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
       :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
       <swiper-slide>

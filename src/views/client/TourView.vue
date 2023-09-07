@@ -1,5 +1,7 @@
 <script setup>
 import PlaceModal from '../../components/PlaceModal.vue'
+import { onMounted, ref } from 'vue';
+import baseUrl from '../../connect';
 
 </script>
 <template>
