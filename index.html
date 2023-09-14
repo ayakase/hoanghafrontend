@@ -6,6 +6,13 @@
   <link rel="icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hoàng Hà Travel</title>
+  <style>
+    .zalo-chat-widget {
+      z-index: 99999 !important;
+      bottom: 6rem !important;
+      right: 1.6rem !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -15,7 +22,11 @@
   <!-- <div class="zalo-chat-widget" data-oaid="3528532083488856060"
     data-welcome-message="DLHH chào anh/chị, không biết anh/chị cần hỗ trợ tư vấn tour nào ạ?" data-autopopup="0"
     data-width="" data-height=""></div> -->
+  <div class="zalo-chat-widget" data-oaid="3528532083488856060"
+    data-welcome-message="DLHH chào anh/chị, không biết anh/chị cần hỗ trợ tư vấn tour nào ạ?" data-autopopup="0"
+    data-width="" data-height="" onclick="removeBtn()"></div>
   <script src="https://sp.zalo.me/plugins/sdk.js"></script>
+
 </body>
 
 </html>

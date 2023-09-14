@@ -193,12 +193,7 @@
                 </div>
             </div>
         </div>
-        <!-- <Editor v-model="Tiny" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
-            plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
-            toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
-                'alignleft aligncenter alignright alignjustify | ' +
-                'outdent indent | numlist bullist | emoticons',
-        }" /> -->
+
     </div>
     <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
     <div v-html="tourGuide"></div>
@@ -232,8 +227,10 @@ let recommendText = ref(0)
 let recommendColor = computed(() => {
     if (recommendText.value >= 0 && recommendText.value <= 3) {
         return 'red';
-    } else if (recommendText.value >= 4 && recommendText.value <= 6) {
+    } else if (recommendText.value > 3 && recommendText.value <= 6) {
         return 'orange';
+    } else if (recommendText.value > 6 && recommendText.value <= 8) {
+        return 'blue';
     } else {
         return 'green';
     }
@@ -244,33 +241,35 @@ function processImg(event) {
     if (event.target.files.length) {
         thumbnailSrc.value = URL.createObjectURL(event.target.files[0]);
     }
-    tourThumbnail = event.target.files[0]
-    console.log(tourThumbnail.value);
+    tourThumbnail.value = event.target.files[0]
 }
 function addTour() {
-    console.log(tourThumbnail)
-    const tourData = {
-        tourTitle: tourTitle.value,
-        tourThumbnail: tourThumbnail.value,
-        tourSchedule: tourSchedule.value,
-        tourCategory: tourCategory.value,
-        tourType: tourType.value,
-        tourFrom: tourFrom.value,
-        tourLength: tourLength.value,
-        isHot: isHot.value,
-        tourTransport: tourTransport.value.toString(),
-        adultPrice: adultPrice.value,
-        youngPrice: youngPrice.value,
-        childPrice: childPrice.value,
-        tourSpecial: tourSpecial.value,
-        tourBonus: tourBonus.value,
-        tourVisa: tourVisa.value,
-        tourDetail: tourDetail.value,
-        tourPriceService: tourPriceService.value,
-        tourGuide: tourGuide.value,
-    };
-    // console.log(tourData)
-    baseUrl.post("/admin/tour", tourData)
+    // console.log(tourThumbnail.value)
+    const tourData = new FormData();
+    tourData.append('tourTitle', tourTitle.value);
+    tourData.append('tourThumbnail', tourThumbnail.value);
+    tourData.append('tourSchedule', tourSchedule.value);
+    tourData.append('tourCategory', tourCategory.value);
+    tourData.append('tourType', tourType.value);
+    tourData.append('tourFrom', tourFrom.value);
+    tourData.append('tourLength', tourLength.value);
+    tourData.append('isHot', isHot.value);
+    tourData.append('tourTransport', tourTransport.value.toString());
+    tourData.append('adultPrice', adultPrice.value);
+    tourData.append('youngPrice', youngPrice.value);
+    tourData.append('childPrice', childPrice.value);
+    tourData.append('tourSpecial', tourSpecial.value);
+    tourData.append('tourBonus', tourBonus.value);
+    tourData.append('tourVisa', tourVisa.value);
+    tourData.append('tourDetail', tourDetail.value);
+    tourData.append('tourPriceService', tourPriceService.value);
+    tourData.append('tourGuide', tourGuide.value);
+
+    baseUrl.post("/admin/tour", tourData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
         .then(response => {
             console.log(response.data)
             toast.success("Đã nhận thông tin", {

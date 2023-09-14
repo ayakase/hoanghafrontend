@@ -119,9 +119,7 @@ let showChatbox = () => {
                 <img src="./assets/call-center.png" alt="" class="call-icon">
               </a>
             </li>
-            <div class="zalo-chat-widget" data-oaid="3528532083488856060"
-              data-welcome-message="DLHH chào anh/chị, không biết anh/chị cần hỗ trợ tư vấn tour nào ạ?"
-              data-autopopup="0" data-width="" data-height=""></div>
+            
           </ul>
         </div>
       </div>
@@ -383,9 +381,5 @@ nav {
   top: 1rem;
 }
 
-.zalo-chat-widget {
-  z-index: 99999 !important;
-  bottom: 6rem !important;
-  right: 1.6rem !important;
-}
+
 </style>
