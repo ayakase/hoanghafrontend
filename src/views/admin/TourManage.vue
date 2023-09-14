@@ -190,6 +190,7 @@ function formatDate(date) {
 
 <style scoped>
 .add-btn {
+    margin-top: 2rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }

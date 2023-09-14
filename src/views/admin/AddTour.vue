@@ -5,6 +5,13 @@
             <label for="" class="form-label">Tiêu đề tour</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tourTitle">
         </div>
+        <div class="mb-3 thumbnail">
+            <label for="formFile" class="form-label">Hình thu nhỏ</label>
+            <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg">
+            <div style="width: 20rem;margin-top: 1rem;">
+                <img :src=thumbnailSrc alt="" style="width: 100%;">
+            </div>
+        </div>
         <div class="mb-3">
             <label for="" class="form-label">Lịch Trình</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tourSchedule">
@@ -204,6 +211,7 @@ import 'vue3-toastify/dist/index.css';
 import Editor from '@tinymce/tinymce-vue'
 import { ref, computed } from 'vue'
 let tourTitle = ref("")
+let tourThumbnail = ref(null)
 let tourSchedule = ref("")
 let tourCategory = ref()
 let tourType = ref("")
@@ -230,26 +238,20 @@ let recommendColor = computed(() => {
         return 'green';
     }
 });
+const thumbnailSrc = ref()
+function processImg(event) {
+    console.log(event);
+    if (event.target.files.length) {
+        thumbnailSrc.value = URL.createObjectURL(event.target.files[0]);
+    }
+    tourThumbnail = event.target.files[0]
+    console.log(tourThumbnail.value);
+}
 function addTour() {
-    // console.log("tourTitle:", tourTitle.value);
-    // console.log("tourSchedule:", tourSchedule.value);
-    // console.log("tourCategory:", tourCategory.value);
-    // console.log("tourType:", tourType.value);
-    // console.log("tourFrom:", tourFrom.value);
-    // console.log("tourLength:", tourLength.value);
-    // console.log("isHot:", isHot.value);
-    // console.log("tourTransport:", tourTransport.value);
-    // console.log("adultPrice:", adultPrice.value);
-    // console.log("youngPrice:", youngPrice.value);
-    // console.log("childPrice:", childPrice.value);
-    // console.log("tourSpecial:", tourSpecial.value);
-    // console.log("tourBonus:", tourBonus.value);
-    // console.log("tourVisa:", tourVisa.value);
-    // console.log("tourDetail:", tourDetail.value);
-    // console.log("tourPriceService:", tourPriceService.value);
-    // console.log("tourGuide:", tourGuide.value);
+    console.log(tourThumbnail)
     const tourData = {
         tourTitle: tourTitle.value,
+        tourThumbnail: tourThumbnail.value,
         tourSchedule: tourSchedule.value,
         tourCategory: tourCategory.value,
         tourType: tourType.value,
@@ -286,6 +288,7 @@ function addTour() {
             });
         })
 }
+
 </script>
 
 <style  scoped>

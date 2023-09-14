@@ -1,45 +1,38 @@
-<script>
+<script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { ref, onMounted } from 'vue';
 import PageFooter from './components/PageFooter.vue'
 import scrollToTop from './components/ScrollToTop.vue'
-export default {
-  components: { PageFooter, scrollToTop },
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast.warn("Trang web đang trong quá trình xây dựng, còn nhiều thiết sót mong bạn thông cảm", {
-        autoClose: 60000,
-        theme: "dark",
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
-    }
+const notify = () => {
+  toast.warn("Trang web đang trong quá trình xây dựng, còn nhiều thiết sót mong bạn thông cảm", {
+    autoClose: 60000,
+    theme: "dark",
+    position: toast.POSITION.BOTTOM_RIGHT,
+  });
+}
 
-    let searchText = ref("")
-    function searchSend() {
-      toast.success("Đang tìm kiếm " + searchText.value, {
-        autoClose: 5000,
-        theme: "dark",
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
-    }
-    onMounted(() => {
-      showChatbox = false;
-      // notify()
-    })
-    let chatBoxValue = ref(false)
-    let showChatbox = () => {
-      if (chatBoxValue.value == false) {
-        chatBoxValue.value = true;
-      } else if (chatBoxValue.value == true) {
-        chatBoxValue.value = false;
-      }
-    }
-    return { searchSend, searchText, showChatbox, chatBoxValue };
+let searchText = ref("")
+function searchSend() {
+  toast.success("Đang tìm kiếm " + searchText.value, {
+    autoClose: 5000,
+    theme: "dark",
+    position: toast.POSITION.BOTTOM_RIGHT,
+  });
+}
+onMounted(() => {
+  showChatbox = false;
+  notify()
+})
+let chatBoxValue = ref(false)
+let showChatbox = () => {
+  if (chatBoxValue.value == false) {
+    chatBoxValue.value = true;
+  } else if (chatBoxValue.value == true) {
+    chatBoxValue.value = false;
   }
-};
+}
 
 </script>
 
@@ -84,7 +77,8 @@ export default {
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/hottour" aria-current="page" href="#">Tour Hot &nbsp;<i style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
+                  <RouterLink class="nav-link active" to="/hottour" aria-current="page" href="#">Tour Hot &nbsp;<i
+                      style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
                   </RouterLink>
                 </li>
                 <li>
@@ -115,17 +109,19 @@ export default {
               <RouterLink class="nav-link active" to="/register" aria-current="page" href="#">Đăng ký</RouterLink>
             </li> -->
             <form class="d-flex search-container">
-              <button class="btn btn-outline-success" @click.prevent="searchSend"><i class="fas fa-search"></i></button>
               <input @keydown.enter.prevent="searchSend" v-model="searchText" class="form-control me-2 search-box"
                 type="search" placeholder="Search" aria-label="Search">
             </form>
-
+            <button class="btn btn-outline-success" @click.prevent="searchSend"><i class="fas fa-search"></i></button>
             <li class="nav-item hotline">
               <a class="nav-link active" to="/" aria-current="page" href="tel:0124 3.855.158">HOTLINE: <span
                   style="color: rgb(255, 208, 0);">02143855158</span>
                 <img src="./assets/call-center.png" alt="" class="call-icon">
               </a>
             </li>
+            <div class="zalo-chat-widget" data-oaid="3528532083488856060"
+              data-welcome-message="DLHH chào anh/chị, không biết anh/chị cần hỗ trợ tư vấn tour nào ạ?"
+              data-autopopup="0" data-width="" data-height=""></div>
           </ul>
         </div>
       </div>
@@ -213,7 +209,6 @@ export default {
 
 .subtext-1 {
   color: #045B48;
-
   font-size: larger;
   padding-left: 1rem;
   padding-bottom: 1.3rem;
@@ -238,13 +233,12 @@ nav {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  z-index: 9999;
   position: absolute;
   bottom: 0;
 }
 
 .custom-bg {
-  background-color: rgba(255, 255, 255, 0.247);
+  background-color: #cdf2cad1;
   ;
 }
 
@@ -277,11 +271,7 @@ nav {
 }
 
 
-.scroll-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-}
+
 
 .chat-btn {
   position: fixed;
@@ -322,6 +312,7 @@ nav {
 .search-box {
   background: none;
   margin-left: 1rem;
+  border: #0aa886 1px solid;
 }
 
 .search-container {
@@ -390,5 +381,11 @@ nav {
   position: absolute;
   right: 1rem;
   top: 1rem;
+}
+
+.zalo-chat-widget {
+  z-index: 99999 !important;
+  bottom: 6rem !important;
+  right: 1.6rem !important;
 }
 </style>

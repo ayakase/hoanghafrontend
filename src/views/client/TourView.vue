@@ -2,55 +2,85 @@
 import PlaceModal from '../../components/PlaceModal.vue'
 import { onMounted, ref } from 'vue';
 import baseUrl from '../../connect';
+import { useRoute } from 'vue-router';
+const route = useRoute();
+const tourDetail = ref()
+onMounted(() => {
+    console.log(route.query.id)
+    baseUrl.get("client/each-tour/" + route.query.id).then(response => {
+        console.log(response.data[0])
+        tourDetail.value = (response.data[0])
+    }).catch((error) => {
+        console.error(error);
+    });
+})
+let tabSec1 = ref()
+let tabSec2 = ref()
 
 </script>
 <template>
     <PlaceModal></PlaceModal>
     <!-- :title="gameTitle" :description="gameDescription" :download="downloadUrl" -->
     <hr class="hr" />
-    <div class="content-container-outer">
+    <div v-if="tourDetail" class="content-container-outer">
         <div class="main-content">
-            <h2 style="margin-bottom: 2rem;"> Khám phá đảo quốc Sư Tử Singapore 4N3Đ</h2>
-            <div class="image-gallery">
-                <!-- Gallery -->
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                            class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+            <h2 style="margin-bottom: 2rem;"> {{ tourDetail.title }}</h2>
 
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
-                            class="w-100 shadow-1-strong rounded mb-4" alt="Wintry Mountain Landscape" />
-                    </div>
+            <v-card class="first-section" elevation="0">
+                <v-tabs class="tab-slider" v-model="tabSec1" color="white" align-tabs="start">
+                    <v-tab class="each-tab" value="one">Điểm khác biệt</v-tab>
+                    <p style="width: 4rem;"></p>
+                    <v-tab class="each-tab" value="two">Dịch vụ đi kèm</v-tab>
+                    <p style="width: 4rem;"></p>
 
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
-                            class="w-100 shadow-1-strong rounded mb-4" alt="Mountains in the Clouds" />
+                    <v-tab class="each-tab" value="three">Visa</v-tab>
+                </v-tabs>
 
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                            class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
-                    </div>
+                <v-card-text>
+                    <v-window v-model="tabSec1">
+                        <v-window-item value="one" v-html="tourDetail.special">
+                        </v-window-item>
+                        <v-window-item value="two" v-html="tourDetail.bonus">
+                        </v-window-item>
 
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
-                            class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+                        <v-window-item value="three" v-html="tourDetail.visa">
 
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
-                            class="w-100 shadow-1-strong rounded mb-4" alt="Yosemite National Park" />
-                    </div>
-                </div>
-                <!-- Gallery -->
-            </div>
+                        </v-window-item>
+                    </v-window>
+                </v-card-text>
+            </v-card>
+            <v-card class="second-section" elevation="0">
+                <v-tabs class="tab-slider" v-model="tabSec2" color="white" align-tabs="start">
+                    <v-tab class="each-tab" value="one">Lịch trình chi tiết</v-tab>
+                    <p style="width: 4rem;"></p>
+                    <v-tab class="each-tab" value="two">Bảng giá và dịch vụ</v-tab>
+                    <p style="width: 4rem;"></p>
+
+                    <v-tab class="each-tab" value="three">Lưu ý và hướng dẫn</v-tab>
+                </v-tabs>
+
+                <v-card-text>
+                    <v-window v-model="tabSec2">
+                        <v-window-item value="one" v-html="tourDetail.detail">
+                        </v-window-item>
+                        <v-window-item value="two" v-html="tourDetail.priceservice">
+                        </v-window-item>
+                        <v-window-item value="three" v-html="tourDetail.guide">
+                        </v-window-item>
+                    </v-window>
+                </v-card-text>
+            </v-card>
         </div>
         <div class="side-bar">
-            <div class="place-order">
-                <h5> Khám phá đảo quốc Sư Tử Singapore 4N3Đ</h5>
-                <p>Lịch trình: <span style="color: #ff6b00;"> Lào Cai-Nội Bài-Singapore-Hà Nội</span></p>
-                <p>Loại tour: <span style="color: #ff6b00;">Ghép đoàn</span></p>
-                <p>Thời gian <span style="color: #ff6b00;">4N3Đ</span></p>
-                <p>Khởi hành: <span style="color: #ff6b00;">Lào Cai</span></p>
-                <p>Vận chuyển: <span style="color: #ff6b00;">Ô tô/ Máy bay</span></p>
+            <div class="place-order" v-if="tourDetail">
+                <h5> {{ tourDetail.title }}</h5>
+                <p>Lịch trình: <span style="color: #ff6b00;"> {{ tourDetail.schedule }}</span></p>
+                <p>Loại tour: <span style="color: #ff6b00;">{{ tourDetail.tourtype }}</span></p>
+                <p>Thời gian <span style="color: #ff6b00;">{{ tourDetail.days }}N{{ tourDetail.days - 1 }}Đ</span></p>
+                <p>Khởi hành: <span style="color: #ff6b00;">{{ tourDetail.departure }}</span></p>
+                <p>Vận chuyển: <span style="color: #ff6b00;">{{ tourDetail.transportation }}</span></p>
                 <div style="height: 5rem;"></div>
-                <p>Giá tour: <span style="color: #ff6b00;">121212</span></p>
+                <p>Giá tour: <span style="color: #ff6b00;">{{ numeralFormat(tourDetail.adultprice) }}</span></p>
                 <div class="action-button">
                     <button class="btn place-btn" data-bs-toggle="modal" data-bs-target="#placeModal">Đặt tour</button>
                     <button class="btn advise-btn">Tư vấn</button>
@@ -106,7 +136,28 @@ import baseUrl from '../../connect';
     justify-content: space-around;
 }
 
+.first-section {
+    background-color: #DBEBE1;
+    padding: 2rem;
+    box-sizing: border-box;
+}
 
+.second-section {
+    margin-top: 4rem;
+    background-color: #DBEBE1;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.tab-slider {
+    width: 100%;
+}
+
+.each-tab {
+    background-color: #97CBB4;
+    padding: left 1rem;
+    padding-right: 1rem;
+}
 
 .hr {
     width: 100%;
@@ -117,18 +168,6 @@ import baseUrl from '../../connect';
     display: flex;
     flex-direction: column;
 }
-
-.first-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: #f1faf4;
-    border-radius: 1rem;
-    padding-top: 1rem;
-    padding-left: 1rem;
-}
-
-
 
 .choose-plan {
     margin-top: 1rem;
@@ -144,18 +183,6 @@ import baseUrl from '../../connect';
 
 .choose-btn:hover {
     background-color: #86c5a9;
-}
-
-.first-section-detail {
-    background-color: #a4d4be;
-    height: 60%;
-    border-radius: 1rem;
-    padding: 2rem;
-    box-sizing: border-box;
-}
-
-.first-section-content {
-    margin-left: 1rem;
 }
 
 .side-bar {

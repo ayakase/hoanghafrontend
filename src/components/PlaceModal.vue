@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div style="margin-top: 0rem;" class="modal fade" id="placeModal" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="z-index: 9999;">
+        <div style="margin-top: 0rem;" class="modal fade" id="placeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" style="background-color: F1FAF4;">
                 <div class="modal-content" style="background-color: #F1FAF4;">
                     <div class="modal-header">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn" style="background-color: #97CBB4;" :href="download" target="_blank">Đặt Tour</a>
+                        <a class="btn" style="background-color: #97CBB4;" target="_blank">Đặt Tour</a>
 
                     </div>
                 </div>

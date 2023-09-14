@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
-    "@morioh/v-lightbox": "^1.0.3",
     "@popperjs/core": "^2.11.8",
     "@tinymce/tinymce-vue": "^5.1.0",
     "axios": "^1.4.0",

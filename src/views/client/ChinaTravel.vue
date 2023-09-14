@@ -19,15 +19,21 @@
                         <div class="sort-type">Giá tour</div>
                     </div>
                 </div>
-                <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual"
-                    @click="router.push('/tourdetail')">
-                    <div class="image-container">
-                        <!-- <img src="" style="width: 100%;" alt=""> -->
-                        <v-img class="thumbnail"
-                            src="https://blog.wego.com/wp-content/uploads/shutterstock_449250082_zi32oc.jpg"></v-img>
+                <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
+                    <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
+                        <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
+                            style="width: 100%;" alt=""> -->
+                        <v-img cover :width="50" class="thumbnail"
+                            src="https://www.intrepidtravel.com/adventures/wp-content/uploads/2017/03/rsz_china_zhangjiajie-np.jpg">
+                            <template v-slot:placeholder>
+                                <div class="d-flex align-center justify-center fill-height">
+                                    <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                                </div>
+                            </template></v-img>
                     </div>
                     <div class="tour-detail-container">
-                        <div class="title"> {{ tour.title }}</div>
+                        <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
+                            tour.title }}</div>
                         <div class="below-section" style="">
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
@@ -104,9 +110,8 @@ let sortOrder = ref("DESC")
 
 onMounted(() => {
     baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value).then((response) => {
-        setTimeout(() => {
-            tourList.value = response.data.rows
-        }, 2000);
+
+        tourList.value = response.data.rows
     })
 })
 
@@ -121,8 +126,7 @@ function getTourbyPage() {
         });
 }
 </script>
-
-<style>
+<style scoped>
 .china-container {
     padding-top: 2rem;
     width: 90%;
@@ -180,6 +184,11 @@ p {
     font-size: 22px;
     font-weight: bold;
     color: #045B48;
+    cursor: pointer;
+}
+
+.title:hover {
+    color: #ff6b10;
 }
 
 .tour-container {
@@ -190,13 +199,12 @@ p {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
     flex-direction: row;
     background-color: #F1FAF4;
     margin-bottom: 1rem;
     padding: 1rem;
 }
-
-
 
 .inner-container {
     display: flex;
@@ -213,8 +221,6 @@ p {
     flex-direction: row;
     margin-bottom: 2rem;
 }
-
-
 
 .sort-container {
     margin-bottom: 2rem;
@@ -236,15 +242,22 @@ p {
     padding: 0.8rem;
 }
 
-
-
 .image-container {
-    width: 22rem;
-    padding-left: 2rem;
+    width: 18rem;
+    display: inline-block;
+    cursor: pointer;
+    overflow: hidden !important;
 }
 
 .thumbnail {
     width: 100% !important;
+    transition: .3s ease-in-out;
+}
+
+.thumbnail:hover {
+    opacity: 0.6;
+    filter: alpha(opacity=30);
+    transform: scale(1.3);
 }
 
 .hot-tour {}

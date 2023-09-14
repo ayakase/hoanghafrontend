@@ -27,7 +27,7 @@ export default {
 .scroll-button {
     height: 3rem;
     width: 3rem;
-    border-radius: 20rem;
+    border-radius: 10rem;
     transition: transform 0.2s ease-in-out;
     z-index: 9999 !important;
 }
