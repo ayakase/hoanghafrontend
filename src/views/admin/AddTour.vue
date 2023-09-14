@@ -280,8 +280,8 @@ function addTour() {
         })
         .catch(error => {
             console.error(error)
-            toast.error("Lỗi vc", {
-                autoClose: 2000,
+            toast.error("Lỗi " + error + " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang", {
+                autoClose: 10000,
                 theme: "dark",
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
