@@ -12,7 +12,6 @@ const notify = () => {
     position: toast.POSITION.BOTTOM_RIGHT,
   });
 }
-
 let searchText = ref("")
 function searchSend() {
   toast.success("Đang tìm kiếm " + searchText.value, {
@@ -23,7 +22,7 @@ function searchSend() {
 }
 onMounted(() => {
   showChatbox = false;
-  notify()
+  // notify()
 })
 let chatBoxValue = ref(false)
 let showChatbox = () => {
@@ -45,7 +44,7 @@ let showChatbox = () => {
       <p class="subtext-1">travel and tourism</p> -->
     <!-- </div> -->
     <img src="./assets/stamp.png" alt="" class="stamp">
-    <img src="./assets/header1.jpg" alt="" class="banner">
+    <img src="./assets/images/header1.jpg" alt="" class="banner">
     <nav class="navbar navbar-expand-lg custom-bg">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -83,14 +82,17 @@ let showChatbox = () => {
                 </li>
                 <li>
                   <RouterLink class="nav-link active" to="/domestictravel" aria-current="page" href="#">Du lịch trong nước
+                    &nbsp; <i class="fa-solid fa-flag"></i>
                   </RouterLink>
                 </li>
                 <li>
                   <RouterLink class="nav-link active" to="/chinatravel" aria-current="page" href="#">Du lịch Trung Quốc
+                    &nbsp; <i class="fa-solid fa-vihara"></i>
                   </RouterLink>
                 </li>
                 <li>
                   <RouterLink class="nav-link active" to="/foreigntravel" aria-current="page" href="#">Du lịch quốc tế
+                    &nbsp; <i class="fa-solid fa-globe"></i>
                   </RouterLink>
                 </li>
                 <li>
@@ -119,7 +121,7 @@ let showChatbox = () => {
                 <img src="./assets/call-center.png" alt="" class="call-icon">
               </a>
             </li>
-            
+
           </ul>
         </div>
       </div>
@@ -260,7 +262,7 @@ nav {
 .dropdown-menu {
   /* margin-top: 1rem; */
   background-color: #dbebe1;
-  width: 12rem;
+  width: 15rem;
 }
 
 .nav-link:hover {
@@ -380,6 +382,4 @@ nav {
   right: 1rem;
   top: 1rem;
 }
-
-
 </style>

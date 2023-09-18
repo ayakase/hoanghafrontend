@@ -20,8 +20,8 @@
                         Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
                     </button>
                     <div class="dropdown-menu">
-                        <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp; <i
-                                class="fa-solid fa-virus-covid"></i> </button>
+                        <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp;<i
+                                class="fa-solid fa-vihara"></i> </button>
                         <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
                                 class="fa-solid fa-flag"></i> </button>
                         <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
@@ -54,7 +54,6 @@
                     <th scope="col"> Tạo lúc </th>
                     <th scope="col"> Chỉnh sửa </th>
                     <th scope="col"> Xóa</th>
-
                 </tr>
             </thead>
             <tbody>

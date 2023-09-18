@@ -237,7 +237,7 @@ function sendInfo() {
 }
 
 .footer-main-content {
-    background-image: url('../assets/images/footer-img.png');
+    background-image: url('../assets/images/footer-img.jpg');
     display: flex;
     height: 45rem;
     padding-top: 2rem;
