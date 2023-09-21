@@ -5,12 +5,12 @@
             <RouterLink class="admin-side-item" to="/admin/thong-ke"><span>Thống kê</span> <i
                     class="fa-solid fa-chart-line"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/anh-slider">Ảnh Slider</RouterLink>
             <RouterLink class="admin-side-item" to="/admin/dat-tour">Đặt Tour</RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour</RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-hot-tour">Tour Hot</RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider</RouterLink>
             <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết</RouterLink>
             <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Đăng ký tư vấn</RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Tour Hot</RouterLink>
 
         </div>
         <div class="admin-content">

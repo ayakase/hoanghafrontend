@@ -6,7 +6,6 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const tourDetail = ref()
 onMounted(() => {
-    console.log(route.query.id)
     baseUrl.get("client/each-tour/" + route.query.id).then(response => {
         console.log(response.data[0])
         tourDetail.value = (response.data[0])
@@ -19,7 +18,7 @@ let tabSec2 = ref()
 
 </script>
 <template>
-    <PlaceModal></PlaceModal>
+    <PlaceModal :tourId="route.query.id"></PlaceModal>
     <!-- :title="gameTitle" :description="gameDescription" :download="downloadUrl" -->
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">
@@ -211,7 +210,7 @@ let tabSec2 = ref()
     background-color: #DBEBE1;
     padding: 1rem;
     border-radius: 4px;
-    border: 2px solid rgb(80, 80, 80);
+    border: 2px solid rgb(138, 138, 138);
     margin-bottom: 4rem;
 }
 

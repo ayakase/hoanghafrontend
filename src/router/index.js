@@ -64,6 +64,11 @@ const router = createRouter({
         { path: 'quan-li-tour/them-tour', component: () => import('../views/admin/AddTour.vue') },
         { path: 'thong-ke', component: () => import('../views/admin/StatisticPage.vue') },
         { path: 'dang-ky-tu-van', component: () => import('../views/admin/FooterManage.vue') },
+        { path: 'quan-ly-hot-tour', component: () => import('../views/admin/HotTourManage.vue') },
+        { path: 'quan-ly-slider', component: () => import('../views/admin/SliderManage.vue') },
+
+
+
       ]
     }
   ]

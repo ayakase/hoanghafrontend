@@ -104,7 +104,7 @@
                     <input class="form-control footer-input" type="text" placeholder="Họ tên" v-model="footerName"
                         aria-label="default input example" required>
                     <p class="footer-form-label">Số điện thoại</p>
-                    <input class="form-control footer-input" type="number" placeholder="Số điện thoại"
+                    <input class="form-control footer-input" type="text" placeholder="Số điện thoại"
                         v-model="footerPhoneNumber" aria-label="default input example" required>
                     <p class="footer-form-label">Email</p>
                     <input class="form-control footer-input" type="email" placeholder="Email" v-model="footerEmail"
@@ -139,7 +139,6 @@ const footerEmail = ref()
 const footerNote = ref()
 function sendInfo() {
     if (!footerName.value || !footerPhoneNumber.value || !footerNote.value || !footerEmail.value) {
-        console.log("not done")
         toast.error("Bạn cần điền đầy đủ thông tin", {
             autoClose: 1000,
             theme: "dark",
@@ -163,7 +162,6 @@ function sendInfo() {
             })
             .catch(error => {
                 console.error(error)
-
             })
     }
 }

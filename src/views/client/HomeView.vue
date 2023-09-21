@@ -79,47 +79,26 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="hot-sale-container">
-    <div class="hot-sale-header">
-      <img src="../../assets/images/fireicon.png" alt="">
-      <h2>Hot Sale</h2>
+  <div class="slide-container" style="background-color: #F1FAF4;">
+    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 2rem;color: #045B48;"><i
+        style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>&nbsp;Hot Sale</h2>
+    <HeartLoading></HeartLoading>
+    <div class="carousel-container carousel-desktop" style="width: 90rem; margin: auto; margin-top: 2rem;">
+      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
+        <swiper-slide v-for="item in 5" :key="item">
+          <div class="card hot-sale-item" style="background: none;border: none;">
+            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
+              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper>
     </div>
-    <div class="hot-sale-items">
-      <div class="card hot-sale-item" style="background: none;border: none;">
-        <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-          <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-        </div>
-      </div>
-      <div class="card hot-sale-item" style="background: none;border: none;">
-        <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-          <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-        </div>
-      </div>
-      <div class="card hot-sale-item" style="background: none;border: none;">
-        <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-          <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-        </div>
-      </div>
-      <div class="card hot-sale-item" style="background: none;border: none;">
-        <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-          <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 2rem;"><i style="color: orangered;"
-      class="fa-solid fa-fire fa-bounce"></i>&nbsp;Hot Sale</h2>
-  <div class="carousel-container carousel-desktop" style="width: 80rem; margin: auto; margin-top: 2rem;">
-    <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
+    <div class="carousel-container carousel-mobile" style="width: 80%; margin: auto; margin-top: 5rem;">
+      <!-- <swiper :modules="modules" :slides-per-view="2" space-between="50" navigation :pagination="{ clickable: true }"
       :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
       <swiper-slide>
         <div class="card hot-sale-item" style="background: none;border: none;">
@@ -193,90 +172,70 @@
           </div>
         </div>
       </swiper-slide>
-    </swiper>
+    </swiper> -->
+    </div>
   </div>
-  <div class="carousel-container carousel-mobile" style="width: 80%; margin: auto; margin-top: 5rem;">
-    <swiper :modules="modules" :slides-per-view="2" space-between="50" navigation :pagination="{ clickable: true }"
-      :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+  <div class="slide-container">
+    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i
+        class="fa-solid fa-vihara" style="color: #ff5c5c;"></i>&nbsp;Du lịch Trung Quốc</h2>
+    <div v-if="chinaSlide" class="carousel-container carousel-desktop"
+      style="width: 90rem; margin: auto; margin-top: 2rem;">
+      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
+        <swiper-slide v-for="item in chinaSlide" :key="item">
+          <div class="card hot-sale-item" style="background: none;border: none;">
+            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
+            </div>
           </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper>
+        </swiper-slide>
+      </swiper>
+    </div>
+    <HeartLoading v-else></HeartLoading>
   </div>
-  <div class="domestic-travel-container">
+  <div class="slide-container" style="background-color: #F1FAF4;">
+    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i class="fa-solid fa-flag"
+        style="color: #e3e637;"></i>&nbsp;Du lịch trong nước</h2>
+    <div class="carousel-container carousel-desktop" style="width: 90rem; margin: auto; margin-top: 2rem;">
+      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
+        <swiper-slide v-for="item in 5" :key="item">
+          <div class="card hot-sale-item" style="background: none;border: none;">
+            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
+              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
+    <HeartLoading></HeartLoading>
+  </div>
+  <div class="slide-container">
+    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i
+        class="fa-solid fa-globe" style="color: #3772d7;"></i>&nbsp;Du lịch quốc tế</h2>
+    <div class="carousel-container carousel-desktop" style="width: 90rem; margin: auto; margin-top: 2rem;">
+      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
+        <swiper-slide v-for="item in 5" :key="item">
+          <div class="card hot-sale-item" style="background: none;border: none;">
+            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
+              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
   </div>
 </template>
 
 <script>
+import HeartLoading from '../../components/HeartLoading.vue';
 import { useRouter } from 'vue-router';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -284,11 +243,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { onMounted, ref } from 'vue';
 
 export default {
   components: {
     Swiper,
     SwiperSlide,
+    HeartLoading,
   },
   setup() {
     const router = useRouter();
@@ -298,7 +259,33 @@ export default {
     const onSlideChange = () => {
       console.log('slide change');
     };
+    const chinaSlide = ref()
+    onMounted(() => {
+      setTimeout(() => {
+        chinaSlide.value = [{
+          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+          price: 12031209,
+        }, {
+          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+          price: 12031209,
+        }, {
+          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+          price: 12031209,
+        }, {
+          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+          price: 12031209,
+        }, {
+          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+          price: 12031209,
+        }, {
+          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+          price: 12031209,
+        }
+        ]
+      }, 2000);
+    })
     return {
+      chinaSlide,
       router, onSwiper,
       onSlideChange,
       modules: [Navigation, Pagination, Scrollbar, A11y],
@@ -316,16 +303,10 @@ export default {
   width: 85%;
 }
 
-.hot-sale-items {
-  padding-top: 2rem;
-  margin: auto;
-  width: 85%;
-  display: flex;
-  flex-direction: row;
-  flex: 50%;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  text-overflow: ellipsis;
+.slide-container {
+  padding-bottom: 3rem;
+  padding-top: 0.1rem;
+  margin-top: 2rem;
 }
 
 .hot-sale-item {
@@ -333,24 +314,11 @@ export default {
   transition: transform 0.2s ease-in-out;
 }
 
-
-
-.hot-sale-container {
-  margin-top: 6rem !important;
-  padding-top: 1rem;
-  margin: auto;
-  padding: auto;
-  width: 100%;
-  height: 30rem;
-  background-color: #d3ecd7;
-  text-overflow: ellipsis;
-}
-
 .sale-img {
   border-radius: 1rem;
 }
 
-.hot-sale-header {
+.slide-header {
   display: flex;
   flex-direction: row;
   margin: auto;
@@ -359,7 +327,6 @@ export default {
 }
 
 .slide {
-  /* border-radius: 1rem; */
   width: 60%;
 }
 
