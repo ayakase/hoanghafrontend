@@ -106,13 +106,13 @@ let totalPage = ref()
 let pageNumber = ref(1)
 let tourList = ref()
 let sortOrder = ref("DESC")
-
+let orderBy = ref("recommented")
 onMounted(() => {
-    baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value).then((response) => {
-        tourList.value = response.data.rows
-    })
+    baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then((response) => {
+            tourList.value = response.data.rows
+        })
 })
-
 function getTourbyPage() {
     baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {

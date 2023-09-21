@@ -5,6 +5,7 @@ import 'vue3-toastify/dist/index.css';
 import { ref, onMounted } from 'vue';
 import PageFooter from './components/PageFooter.vue'
 import scrollToTop from './components/ScrollToTop.vue'
+import MessengerBtn from './components/MessengerBtn.vue'
 import baseUrl from './connect';
 
 const notify = () => {
@@ -152,6 +153,7 @@ let showChatbox = () => {
 
   <!-- <div class="spacer" style="height: 8rem;"></div> -->
   <PageFooter></PageFooter>
+  <MessengerBtn></MessengerBtn>
   <scrollToTop></scrollToTop>
   <!-- <div class="chat-btn">
     <button @click="showChatbox" type="button" class="btn btn-success scroll-button"><i

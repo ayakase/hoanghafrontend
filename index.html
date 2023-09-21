@@ -9,8 +9,13 @@
   <style>
     .zalo-chat-widget {
       z-index: 99999 !important;
-      bottom: 6rem !important;
+      bottom: 10rem !important;
       right: 1.6rem !important;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zalo-chat-widget:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -25,6 +30,7 @@
   <div class="zalo-chat-widget" data-oaid="3528532083488856060"
     data-welcome-message="DLHH chào anh/chị, không biết anh/chị cần hỗ trợ tư vấn tour nào ạ?" data-autopopup="0"
     data-width="" data-height="" onclick="removeBtn()"></div>
+
   <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
 </body>

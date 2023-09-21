@@ -39,7 +39,7 @@
                         class="fa-solid fa-check fa-beat"></i></button> -->
             </div>
         </div>
-        <table :key="componentKey" class="table table-success table-striped"
+        <table :key="componentKey" class="table table-success table-striped table-hover"
             style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>
@@ -58,15 +58,16 @@
             </thead>
             <tbody>
                 <tr v-for="tour in tourTable" :key="tour" class="each-tour-row">
-                    <th scope="row">{{ tour.id }}</th>
-                    <td>{{ tour.title }}</td>
-                    <td>{{ tour.schedule }}</td>
-                    <td>{{ tour.tourcategory }}</td>
-                    <td>{{ tour.departure }}</td>
-                    <td>{{ tour.days }}</td>
-                    <td>{{ tour.ishottour }}</td>
-                    <td>{{ tour.transportation }}</td>
-                    <td>{{ formatDate(tour.createdAt) }}</td>
+                    <th scope="row" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.id }}</th>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.title }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.schedule }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.tourcategory }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.departure }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.days }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.ishottour }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.transportation }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ formatDate(tour.createdAt)
+                    }}</td>
                     <td> <button class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
                     <td> <button class="delete-button" @click="deleteTour(tour.id)"><i
@@ -232,11 +233,12 @@ function formatDate(date) {
 }
 
 /* .each-tour-row {
-    transition: transform .2s;
+    transition: color .2s ease-in;
 
-}
+} */
 
 .each-tour-row:hover {
-    transform: scale(1.1);
-} */
+    color: aliceblue !important;
+    cursor: pointer;
+}
 </style>

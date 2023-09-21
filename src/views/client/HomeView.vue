@@ -345,7 +345,7 @@ export default {
             title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
             price: 12031209,
           }]
-      }, 2000);
+      }, 4000);
     })
     return {
       chinaSlide, domesticSlide, foreignSlide, hotTourSlide,
