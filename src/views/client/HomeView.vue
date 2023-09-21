@@ -4,10 +4,10 @@
       <div class="travel-category">
         <div class="travel-category-item" @click="router.push('/domestictravel')">
           <p>Du lịch trong nước</p> <i class="fa-solid fa-chevron-right"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             99+
             <span class="visually-hidden">unread messages</span>
-          </span>
+          </span> -->
         </div>
         <div class="travel-category-item" @click="router.push('/chinatravel')">
           <p>Du lịch Trung Quốc </p><i class=" fa-solid fa-chevron-right"></i>
@@ -82,23 +82,25 @@
   <div class="slide-container" style="background-color: #F1FAF4;">
     <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 2rem;color: #045B48;"><i
         style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>&nbsp;Hot Sale</h2>
-    <HeartLoading></HeartLoading>
-    <div class="carousel-container carousel-desktop" style="width: 90rem; margin: auto; margin-top: 2rem;">
+    <div v-if="hotTourSlide" class="carousel-container carousel-desktop"
+      style="width: 90rem; margin: auto; margin-top: 2rem;">
       <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-        <swiper-slide v-for="item in 5" :key="item">
+        <swiper-slide v-for="item in hotTourSlide" :key="item">
           <div class="card hot-sale-item" style="background: none;border: none;">
             <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
             </div>
           </div>
         </swiper-slide>
       </swiper>
     </div>
-    <div class="carousel-container carousel-mobile" style="width: 80%; margin: auto; margin-top: 5rem;">
-      <!-- <swiper :modules="modules" :slides-per-view="2" space-between="50" navigation :pagination="{ clickable: true }"
+    <HeartLoading v-else></HeartLoading>
+  </div>
+  <div class="carousel-container carousel-mobile" style="width: 80%; margin: auto; margin-top: 5rem;">
+    <!-- <swiper :modules="modules" :slides-per-view="2" space-between="50" navigation :pagination="{ clickable: true }"
       :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
       <swiper-slide>
         <div class="card hot-sale-item" style="background: none;border: none;">
@@ -173,7 +175,6 @@
         </div>
       </swiper-slide>
     </swiper> -->
-    </div>
   </div>
   <div class="slide-container">
     <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i
@@ -198,39 +199,42 @@
   <div class="slide-container" style="background-color: #F1FAF4;">
     <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i class="fa-solid fa-flag"
         style="color: #e3e637;"></i>&nbsp;Du lịch trong nước</h2>
-    <div class="carousel-container carousel-desktop" style="width: 90rem; margin: auto; margin-top: 2rem;">
+    <div v-if="domesticSlide" class="carousel-container carousel-desktop"
+      style="width: 90rem; margin: auto; margin-top: 2rem;">
       <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-        <swiper-slide v-for="item in 5" :key="item">
+        <swiper-slide v-for="item in domesticSlide" :key="item">
           <div class="card hot-sale-item" style="background: none;border: none;">
             <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
             </div>
           </div>
         </swiper-slide>
       </swiper>
     </div>
-    <HeartLoading></HeartLoading>
+    <HeartLoading v-else></HeartLoading>
   </div>
   <div class="slide-container">
     <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i
         class="fa-solid fa-globe" style="color: #3772d7;"></i>&nbsp;Du lịch quốc tế</h2>
-    <div class="carousel-container carousel-desktop" style="width: 90rem; margin: auto; margin-top: 2rem;">
+    <div v-if="foreignSlide" class="carousel-container carousel-desktop"
+      style="width: 90rem; margin: auto; margin-top: 2rem;">
       <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-        <swiper-slide v-for="item in 5" :key="item">
+        <swiper-slide v-for="item in foreignSlide" :key="item">
           <div class="card hot-sale-item" style="background: none;border: none;">
             <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
             </div>
           </div>
         </swiper-slide>
       </swiper>
     </div>
+    <HeartLoading v-else></HeartLoading>
   </div>
 </template>
 
@@ -260,6 +264,9 @@ export default {
       console.log('slide change');
     };
     const chinaSlide = ref()
+    const domesticSlide = ref()
+    const foreignSlide = ref()
+    const hotTourSlide = ref()
     onMounted(() => {
       setTimeout(() => {
         chinaSlide.value = [{
@@ -280,12 +287,68 @@ export default {
         }, {
           title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
           price: 12031209,
-        }
-        ]
+        }],
+          domesticSlide.value = [{
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }],
+          foreignSlide.value = [{
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }],
+          hotTourSlide.value = [{
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }, {
+            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
+            price: 12031209,
+          }]
       }, 2000);
     })
     return {
-      chinaSlide,
+      chinaSlide, domesticSlide, foreignSlide, hotTourSlide,
       router, onSwiper,
       onSlideChange,
       modules: [Navigation, Pagination, Scrollbar, A11y],

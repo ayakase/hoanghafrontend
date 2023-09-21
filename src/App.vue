@@ -5,6 +5,8 @@ import 'vue3-toastify/dist/index.css';
 import { ref, onMounted } from 'vue';
 import PageFooter from './components/PageFooter.vue'
 import scrollToTop from './components/ScrollToTop.vue'
+import baseUrl from './connect';
+
 const notify = () => {
   toast.warn("Trang web đang trong quá trình xây dựng, còn nhiều thiết sót mong bạn thông cảm", {
     autoClose: 60000,
@@ -21,6 +23,23 @@ function searchSend() {
   });
 }
 onMounted(() => {
+  baseUrl.get("/connect")
+    .then((response) => {
+      console.log(response)
+      toast.success("Đã kết nối với server", {
+        autoClose: 5000,
+        theme: "dark",
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    })
+    .catch((error) => {
+      console.error(error)
+      toast.error("Lỗi kết nối với server", {
+        autoClose: 6000,
+        theme: "dark",
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    });
   showChatbox = false;
   // notify()
 })
