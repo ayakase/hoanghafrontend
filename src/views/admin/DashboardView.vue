@@ -1,16 +1,23 @@
 <template>
     <div class="admin-container">
         <div class="admin-side-nav">
-            <div class="admin-side-item"><i class="fa-solid fa-user"></i></div>
+            <RouterLink class="admin-side-item" to="/admin/tai-khoan-admin">Tài khoản<i class="fa-solid fa-user"></i>
+            </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/thong-ke"><span>Thống kê</span> <i
                     class="fa-solid fa-chart-line"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/dat-tour">Đặt Tour</RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour</RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/quan-ly-hot-tour">Tour Hot</RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider</RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết</RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Đăng ký tư vấn</RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/dat-tour">Đặt Tour<i class="fa-solid fa-box-archive"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour <i
+                    class="fa-regular fa-paper-plane"></i></RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-hot-tour">Tour Hot <i class="fa-solid fa-fire"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider<i class="fa-regular fa-image"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết<i class="fa-regular fa-newspaper"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Đăng ký tư vấn<i class="fa-solid fa-headset"></i>
+            </RouterLink>
 
         </div>
         <div class="admin-content">
@@ -54,8 +61,8 @@ import { RouterLink, RouterView } from 'vue-router'
 .admin-side-item:hover {
     background-color: #b6e4cf;
     width: 13rem;
-    border-bottom-right-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
@@ -64,8 +71,8 @@ import { RouterLink, RouterView } from 'vue-router'
 .router-link-active {
     background-color: #b6e4cf;
     width: 13rem;
-    border-bottom-right-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 

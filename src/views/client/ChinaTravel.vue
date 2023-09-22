@@ -212,6 +212,7 @@ p {
 
 .tour-individual {
     width: 100%;
+    max-height: 15rem;
     display: flex;
     justify-content: space-between;
     gap: 2rem;

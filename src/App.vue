@@ -259,7 +259,7 @@ nav {
 }
 
 .custom-bg {
-  background-color: #cdf2cad1;
+  background-color: #cefecaa8;
   ;
 }
 

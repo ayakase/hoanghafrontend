@@ -21,7 +21,7 @@ export default {
 .scroll-top {
     position: fixed;
     bottom: 2rem;
-    right: 2rem;
+    right: 5.8rem;
 }
 
 .scroll-button {

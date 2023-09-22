@@ -27,7 +27,7 @@
 <style >
 .messenger-btn {
     position: fixed;
-    bottom: 6.2rem;
+    bottom: 6rem;
     right: 2rem;
 }
 

@@ -295,7 +295,10 @@ function addTour() {
     width: 75vw;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #d0dfd8;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 1rem;
+    background-color: #dbf4e8;
 }
 
 .category-type-from {
