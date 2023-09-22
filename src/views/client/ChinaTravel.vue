@@ -13,11 +13,12 @@
                 <div class="sort-container">
                     <p>Sắp xếp theo: </p>
                     <div class="sort-types">
-                        <div class="sort-type">Hoàng Hà đề xuất</div>
-                        <div class="sort-type">Mới nhất</div>
-                        <div class="sort-type">Thời lượng tour</div>
-                        <div class="sort-type">Giá tour</div>
+                        <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
+                        <div class="sort-type" @click="newest">Mới nhất</div>
+                        <div class="sort-type" @click="duration">Thời lượng tour</div>
+                        <div class="sort-type" @click="price">Giá tour</div>
                     </div>
+                    <p>{{ orderBy }} {{ sortOrder }}</p>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
                     <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
@@ -107,6 +108,22 @@ let pageNumber = ref(1)
 let tourList = ref()
 let sortOrder = ref("DESC")
 let orderBy = ref("recommented")
+function newest() {
+    orderBy.value = 'date'
+    sortOrder.value = 'DESC'
+}
+function recommend() {
+    orderBy.value = 'recommend'
+    sortOrder.value = 'DESC'
+}
+function price() {
+    orderBy.value = 'price'
+    sortOrder.value = 'ASC'
+}
+function duration() {
+    orderBy.value = 'duration'
+    sortOrder.value = 'ASC'
+}
 onMounted(() => {
     baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
         .then((response) => {
