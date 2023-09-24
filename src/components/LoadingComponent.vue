@@ -25,8 +25,8 @@ export default {
 }
 
 .fingerprint-spinner {
-    height: 10rem;
-    width: 10rem;
+    height: 30rem;
+    width: 100%;
     padding: 2px;
     overflow: hidden;
     position: relative;

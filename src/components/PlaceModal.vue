@@ -92,7 +92,7 @@ function sendOrder() {
         baseUrl.post("/client/order", orderData)
             .then(response => {
                 console.log(response.data)
-                toast.success("Đã nhận thông tin", {
+                toast.success("Đặt tour thành công", {
                     autoClose: 2000,
                     theme: "colored",
                     position: toast.POSITION.BOTTOM_RIGHT,
