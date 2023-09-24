@@ -20,6 +20,8 @@
                         Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
                     </button>
                     <div class="dropdown-menu">
+                        <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
+                                class="fa-regular fa-rectangle-list"></i> </button>
                         <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp;<i
                                 class="fa-solid fa-vihara"></i> </button>
                         <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
@@ -121,24 +123,34 @@ function getTourbyPage() {
 }
 function deleteTour(id) {
     console.log(id)
-    baseUrl.delete("/admin/tour/" + id)
-        .then(response => {
-            console.log(response)
-            toast.success("Đã xóa", {
-                autoClose: 2000,
-                theme: "dark",
-                position: toast.POSITION.BOTTOM_RIGHT,
+    let text = "Bạn có chắc chắn muốn xóa Tour ?";
+    if (confirm(text) == true) {
+        baseUrl.delete("/admin/tour/" + id)
+            .then(response => {
+                console.log(response)
+                toast.success("Đã xóa", {
+                    autoClose: 2000,
+                    theme: "dark",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+                reRender()
+            }).catch((error) => {
+                console.error(error);
             });
-            reRender()
-        }).catch((error) => {
-            console.error(error);
-        });
+
+    }
 
 }
 //Chọn category
-let categoryLabel = ref("Trung Quốc")
-let categoryNumber = ref(1)
+let categoryLabel = ref("Tất cả")
+let categoryNumber = ref(0)
 
+function categoryAll() {
+    categoryLabel.value = "Tất cả"
+    categoryNumber.value = 0
+    reRender()
+
+}
 function categoryChina() {
     categoryLabel.value = "Trung Quốc"
     categoryNumber.value = 1
