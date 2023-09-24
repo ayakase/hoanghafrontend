@@ -111,30 +111,50 @@ let orderBy = ref("recommented")
 function newest() {
     orderBy.value = 'date'
     sortOrder.value = 'DESC'
+    reRender()
+
 }
 function recommend() {
     orderBy.value = 'recommend'
     sortOrder.value = 'DESC'
+    reRender()
+
 }
 function price() {
     orderBy.value = 'price'
     sortOrder.value = 'ASC'
+    reRender()
+
 }
 function duration() {
     orderBy.value = 'duration'
     sortOrder.value = 'ASC'
+    reRender()
+
 }
 onMounted(() => {
     baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
         .then((response) => {
             tourList.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+
         })
 })
 function getTourbyPage() {
     baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
-            tourTable.value = response.data.rows
+            tourList.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+        }).catch((error) => {
+            console.error(error);
+        });
+}
+function reRender() {
+    baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then(response => {
+            console.log(response.data)
+            tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {
             console.error(error);
