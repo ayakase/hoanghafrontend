@@ -5,20 +5,26 @@ import baseUrl from '../../connect';
 import { useRoute } from 'vue-router';
 const route = useRoute();
 const tourDetail = ref()
+const adultPrice = ref()
+const teenagerPrice = ref()
+const childPrice = ref()
 onMounted(() => {
     baseUrl.get("client/each-tour/" + route.query.id).then(response => {
         console.log(response.data[0])
-        tourDetail.value = (response.data[0])
+        tourDetail.value = response.data[0]
+        adultPrice.value = response.data[0].adultprice
+        teenagerPrice.value = response.data[0].youngprice
+        childPrice.value = response.data[0].childprice
     }).catch((error) => {
         console.error(error);
     });
 })
 let tabSec1 = ref()
 let tabSec2 = ref()
-
 </script>
 <template>
-    <PlaceModal :tourId="route.query.id"></PlaceModal>
+    <PlaceModal :tourId="route.query.id" :childPrice="childPrice" :adultPrice="adultPrice" :teenagerPrice="teenagerPrice">
+    </PlaceModal>
     <!-- :title="gameTitle" :description="gameDescription" :download="downloadUrl" -->
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">

@@ -1,5 +1,5 @@
 <template>
-    <div class="footer-form-manage">
+    <div class="advisory-manage">
         <div class="solve-btn-container"
             style="display: flex;flex-direction: row; width:15%; justify-content: space-between;">
             <button class="btn btn-success">
@@ -41,7 +41,7 @@ let sortOrder = ref("DESC");
 let page = ref(1)
 let formInfo = ref()
 onMounted(() => {
-    baseUrl.get("/admin/footer/" + sortOrder.value + "/" + 1)
+    baseUrl.get("/admin/advisory/" + sortOrder.value + "/" + 1)
         .then(response => {
             console.log(response.data)
             formInfo.value = response.data.rows

@@ -187,6 +187,7 @@ let showChatbox = () => {
 
 .chatbox-leave-active {
   animation: bounce-in 0.5s reverse;
+  
 }
 
 @keyframes bounce-in {

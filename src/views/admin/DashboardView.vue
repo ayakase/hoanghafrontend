@@ -8,6 +8,8 @@
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/dat-tour">Đặt Tour<i class="fa-solid fa-box-archive"></i>
             </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Đăng ký tư vấn<i class="fa-solid fa-headset"></i>
+            </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour <i
                     class="fa-regular fa-paper-plane"></i></RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-hot-tour">Tour Hot <i class="fa-solid fa-fire"></i>
@@ -15,8 +17,6 @@
             <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider<i class="fa-regular fa-image"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết<i class="fa-regular fa-newspaper"></i>
-            </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Đăng ký tư vấn<i class="fa-solid fa-headset"></i>
             </RouterLink>
 
         </div>
@@ -38,7 +38,7 @@ import { RouterLink, RouterView } from 'vue-router'
     display: flex;
     flex-direction: column;
     background-color: #97CBB4;
-    width: 10rem;
+    width: 11rem;
     height: inherit;
     box-shadow: rgba(0, 0, 0, 0.24) 5px 3px 8px;
 }
@@ -54,13 +54,13 @@ import { RouterLink, RouterView } from 'vue-router'
     justify-content: space-between;
     align-items: center;
     transition: width 0.1s ease-in-out;
-    width: 10rem;
+    width: 11rem;
 
 }
 
 .admin-side-item:hover {
     background-color: #b6e4cf;
-    width: 12.5rem;
+    width: 13.5rem;
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -69,7 +69,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 .router-link-active {
     background-color: #b6e4cf;
-    width: 12.5rem;
+    width: 13.5rem;
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
