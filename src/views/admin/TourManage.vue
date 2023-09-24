@@ -41,7 +41,7 @@
                         class="fa-solid fa-check fa-beat"></i></button> -->
             </div>
         </div>
-        <table :key="componentKey" class="table table-success table-striped table-hover"
+        <table v-if="tourTable" :key="componentKey" class="table table-success table-striped table-hover"
             style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>
@@ -78,6 +78,7 @@
 
             </tbody>
         </table>
+        <TableLoading v-else></TableLoading>
         <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
             prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
         <div>{{ pageNumber }}</div>
@@ -90,6 +91,7 @@ import { useRouter } from 'vue-router';
 import baseUrl from '../../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import TableLoading from '../../components/TableLoading.vue';
 const router = useRouter();
 let pageNumber = ref(1)
 let tourTable = ref()
