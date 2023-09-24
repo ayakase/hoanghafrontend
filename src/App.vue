@@ -63,7 +63,8 @@ let showChatbox = () => {
     <!-- <p class="company-name">HOÀNG HÀ</p>
       <p class="subtext-1">travel and tourism</p> -->
     <!-- </div> -->
-    <img src="./assets/stamp.png" alt="" class="stamp">
+    <RouterLink class="stamp" to="/"><img src="./assets/stamp.png" alt="" class="">
+    </RouterLink>
     <img src="./assets/images/header1.jpg" alt="" class="banner">
     <nav class="navbar navbar-expand-lg custom-bg">
       <div class="container-fluid">
@@ -290,6 +291,7 @@ nav {
   border-bottom: 1px solid #ffffff;
   color: white;
 }
+
 .search-box {
   background: none;
   margin-left: 1rem;
