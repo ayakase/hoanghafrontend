@@ -123,7 +123,7 @@ function getTourbyPage() {
 }
 function deleteTour(id) {
     console.log(id)
-    let text = "Bạn có chắc chắn muốn xóa Tour ?";
+    let text = "Bạn có chắc chắn muốn xóa Tour " + id;
     if (confirm(text) == true) {
         baseUrl.delete("/admin/tour/" + id)
             .then(response => {
