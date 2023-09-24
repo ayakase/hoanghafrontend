@@ -4,7 +4,6 @@
             style="margin-bottom: 1rem;">
             Thêm tour mới <i class="fa-solid fa-plus"></i>
         </button>
-
         <div class="sorting-container">
             <div style="font-size: larger;">Bộ lọc:</div>
             <div class="sorting-button-container">
@@ -203,6 +202,10 @@ function formatDate(date) {
 </script>
 
 <style scoped>
+.admin-tour-crud {
+    width: 100%;
+}
+
 .add-btn {
     margin-top: 2rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

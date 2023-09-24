@@ -77,5 +77,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 .admin-content {
     padding-left: 4rem;
+    padding-right: 4rem;
+    width: 100%;
 }
 </style>
