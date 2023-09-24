@@ -60,26 +60,22 @@ import { RouterLink, RouterView } from 'vue-router'
 
 .admin-side-item:hover {
     background-color: #b6e4cf;
-    width: 13rem;
+    width: 12.5rem;
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
-
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }
 
 .router-link-active {
     background-color: #b6e4cf;
-    width: 13rem;
+    width: 12.5rem;
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
-
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-
 }
 
 .admin-content {
-    padding-left: 5rem;
+    padding-left: 4rem;
 }
 </style>

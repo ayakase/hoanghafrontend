@@ -236,7 +236,7 @@ let showChatbox = () => {
 }
 
 .stamp {
-  display: none;
+  /* display: none; */
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -290,46 +290,6 @@ nav {
   border-bottom: 1px solid #ffffff;
   color: white;
 }
-
-
-
-
-.chat-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 6rem;
-}
-
-.chat-box {
-  position: absolute;
-  right: 4rem;
-  bottom: 1rem;
-  width: 20rem;
-  height: 26rem;
-  background-color: antiquewhite;
-  border-radius: 1rem;
-  border: #afafaf solid 2px;
-  z-index: 99999 !important;
-}
-
-.chat-section {
-  overflow: hidden;
-  width: 100%;
-  background-color: wheat;
-}
-
-.chat-text {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 3rem;
-  padding-left: 2rem;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  border: none;
-
-}
-
 .search-box {
   background: none;
   margin-left: 1rem;

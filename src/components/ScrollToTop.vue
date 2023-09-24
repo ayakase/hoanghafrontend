@@ -29,7 +29,7 @@ export default {
     width: 3rem;
     border-radius: 10rem;
     transition: transform 0.2s ease-in-out;
-    z-index: 9999 !important;
+    z-index: 9999999999999999999 !important;
 }
 
 .scroll-button:hover {
