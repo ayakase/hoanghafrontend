@@ -61,7 +61,7 @@
                     <th scope="row" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.id }}</th>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.title }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.schedule }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.tourcategory }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.Category.name }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.departure }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.days }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.ishottour }}</td>
