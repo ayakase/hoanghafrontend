@@ -28,8 +28,8 @@ onMounted(() => {
     .then((response) => {
       console.log(response)
       toast.success("Đã kết nối với server", {
-        autoClose: 5000,
-        theme: "dark",
+        autoClose: 2000,
+        theme: "colored",
         position: toast.POSITION.BOTTOM_RIGHT,
       });
     })
@@ -37,7 +37,7 @@ onMounted(() => {
       console.error(error)
       toast.error("Lỗi kết nối với server", {
         autoClose: 6000,
-        theme: "dark",
+        theme: "colored",
         position: toast.POSITION.BOTTOM_RIGHT,
       });
     });

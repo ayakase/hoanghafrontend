@@ -94,7 +94,7 @@ function sendOrder() {
                 console.log(response.data)
                 toast.success("Đã nhận thông tin", {
                     autoClose: 2000,
-                    theme: "dark",
+                    theme: "colored",
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
             })

@@ -274,15 +274,15 @@ function addTour() {
             console.log(response.data)
             toast.success("Đã nhận thông tin", {
                 autoClose: 2000,
-                theme: "dark",
+                theme: "colored",
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
         })
         .catch(error => {
             console.error(error)
             toast.error("Lỗi " + error + " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang", {
-                autoClose: 10000,
-                theme: "dark",
+                autoClose: 2000,
+                theme: "colored",
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
         })
