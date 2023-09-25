@@ -1,22 +1,28 @@
 <template>
-    <div class="china-container">
+    <div class="domestic-container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                         chủ</a></li>
-                <li class="breadcrumb-item">Du lịch trong nước</li>
+                <li class="breadcrumb-item">Du lịch Trung Quốc</li>
             </ol>
         </nav>
-        <h2 style="color: #ff6b00;">Du lịch trong nước</h2>
+        <h2 style="color: #ff6b00;">Du lịch Trung Quốc</h2>
         <div class="section-container">
             <div class="tour-container">
                 <div class="sort-container">
                     <p>Sắp xếp theo: </p>
                     <div class="sort-types">
-                        <div class="sort-type">Hoàng Hà đề xuất</div>
-                        <div class="sort-type">Mới nhất</div>
-                        <div class="sort-type">Thời lượng tour</div>
-                        <div class="sort-type">Giá tour</div>
+                        <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
+                        <div class="sort-type" @click="newest">Mới nhất</div>
+                        <div class="sort-type" @click="duration">Thời lượng tour</div>
+                        <div class="sort-type" @click="price">Giá tour</div>
+
+                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC">Từ cao đến thấp &nbsp; <i
+                                class="fa-solid fa-arrow-down-wide-short"></i> </div>
+                        <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao &nbsp; <i
+                                class="fa-solid fa-arrow-up-wide-short"></i></div>
+
                     </div>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
@@ -34,6 +40,9 @@
                         <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
+                            <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
+                            }}</span>
+                            </div>
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
@@ -97,7 +106,7 @@
 <script setup>
 import LoadingComponent from '../../components/LoadingComponent.vue';
 import baseUrl from '../../connect';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
@@ -105,19 +114,64 @@ const router = useRouter();
 let totalPage = ref()
 let pageNumber = ref(1)
 let tourList = ref()
+let orderBy = ref("createdAt")
 let sortOrder = ref("DESC")
+function orderASC() {
+    sortOrder.value = 'ASC'
+    reRender()
 
+}
+function orderDESC() {
+    sortOrder.value = 'DESC'
+    reRender()
+
+}
+function newest() {
+    orderBy.value = 'createdAt'
+    sortOrder.value = 'DESC'
+    reRender()
+
+}
+function recommend() {
+    orderBy.value = 'recommend'
+    sortOrder.value = 'DESC'
+    reRender()
+
+}
+function price() {
+    orderBy.value = 'adultprice'
+    sortOrder.value = 'ASC'
+    reRender()
+
+}
+function duration() {
+    orderBy.value = 'days'
+    sortOrder.value = 'DESC'
+    reRender()
+
+}
 onMounted(() => {
-    baseUrl.get("/client/tour/" + 2 + "/" + sortOrder.value + "/" + pageNumber.value).then((response) => {
-        tourList.value = response.data.rows
-    })
+    baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then((response) => {
+            tourList.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+        })
 })
-
 function getTourbyPage() {
-    baseUrl.get("/client/tour/" + 2 + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
-            tourTable.value = response.data.rows
+            tourList.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+        }).catch((error) => {
+            console.error(error);
+        });
+}
+function reRender() {
+    baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then(response => {
+            console.log(response.data)
+            tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {
             console.error(error);
@@ -125,7 +179,7 @@ function getTourbyPage() {
 }
 </script>
 <style scoped>
-.china-container {
+.domestic-container {
     padding-top: 2rem;
     width: 90%;
     margin: auto;
@@ -195,6 +249,7 @@ p {
 
 .tour-individual {
     width: 100%;
+    max-height: 15rem;
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -234,10 +289,14 @@ p {
 }
 
 .sort-type {
-    width: 10rem;
+    width: 12rem;
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
+}
+
+.sort-type:active {
+    background-color: #d1f7df;
 }
 
 .image-container {
