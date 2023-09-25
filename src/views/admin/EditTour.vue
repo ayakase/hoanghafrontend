@@ -254,7 +254,6 @@ function addTour() {
     tourData.append('tourFrom', tourFrom.value);
     tourData.append('tourLength', tourLength.value);
     tourData.append('isHot', isHot.value);
-    tourData.append('recommend', recommendText.value);
     tourData.append('tourTransport', tourTransport.value.toString());
     tourData.append('adultPrice', adultPrice.value);
     tourData.append('youngPrice', youngPrice.value);

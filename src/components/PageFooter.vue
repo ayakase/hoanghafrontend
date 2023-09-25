@@ -76,52 +76,41 @@
                     <div class="section-top-bar"></div>
                     <h3>Theo dõi chúng tôi</h3>
                     <div class="follow-us-items">
-                        <div class="follow-us-item">
-                            <img src="../assets/icon-mxh/instagram-logo.png" class="follow-icon" alt="">
-                            <p>Instagram</p>
+                        <div class="insta-and-facebook ">
+                            <div class="follow-us-item">
+                                <img src="../assets/icon-mxh/instagram-logo.png" class="follow-icon" alt="">
+                                <p>Instagram</p>
+                            </div>
+                            <div class="follow-us-item">
+                                <img src="../assets/icon-mxh/facebook-logo.png" class="follow-icon" alt="">
+                                <p>Facebook</p>
+                            </div>
                         </div>
-                        <div class="follow-us-item">
-                            <img src="../assets/icon-mxh/facebook-logo.png" class="follow-icon" alt="">
-                            <p>Facebook</p>
-                        </div>
-                        <div class="follow-us-item">
-                            <img src="../assets/icon-mxh/zalo-logo.png" class="follow-icon" alt="">
-                            <p>Zalo</p>
-                        </div>
-                        <div class="follow-us-item">
-                            <img src="../assets/icon-mxh/messenger.png" class="follow-icon" alt="">
-                            <p>Messenger</p>
-                        </div>
+                        <p class="copyright">@ 2014 Du lịch Hoàng Hà <br>Designed and developed by <a
+                                style="color: #045B48;font-weight: bold;" href="https://github.com/ayakase">Ayakase</a> and
+                            <a href="https://github.com/BinBlun" style="color: #045B48;font-weight: bold;">BinBlun</a>
+                        </p>
                     </div>
-
                 </div>
             </div>
             <form class="footer-section footer-section-3">
                 <div class="section-top-bar"></div>
                 <h2>Đăng ký tư vấn</h2>
                 <div class="footer-form">
-                    <p class="footer-form-label">Họ tên</p>
                     <input class="form-control footer-input" type="text" placeholder="Họ tên" v-model="footerName"
                         aria-label="default input example" required>
-                    <p class="footer-form-label">Số điện thoại</p>
                     <input class="form-control footer-input" type="text" placeholder="Số điện thoại"
                         v-model="footerPhoneNumber" aria-label="default input example" required>
-                    <p class="footer-form-label">Email</p>
                     <input class="form-control footer-input" type="email" placeholder="Email" v-model="footerEmail"
                         aria-label="default input example" required>
-                    <p class="footer-form-label">Ghi chú</p>
                     <textarea class="form-control footer-text-area" placeholder="Ghi chú" id="floatingTextarea"
                         v-model="footerNote" required></textarea>
                 </div>
-                <button type="submit" @click.prevent="sendInfo" class="btn btn-success footer-form-button">Đăng ký</button>
+                <button type="submit" @click.prevent="sendInfo" class="btn btn-success footer-form-button">Đăng
+                    ký</button>
             </form>
 
         </div>
-        <p class="copyright">@ 2014 Du lịch Hoàng Hà <br>Designed and developed by <a style="color: #045B48;font-weight: bold;"
-                href="https://github.com/ayakase">Ayakase</a> and <a href="https://github.com/BinBlun"
-                style="color: #045B48;font-weight: bold;">BinBlun</a>
-        </p>
-
 
         <!-- <img src=" ../assets/images/footer-img.png" class="footer-img" alt=""> -->
     </div>
@@ -169,17 +158,6 @@ function sendInfo() {
 
 </script>
 <style >
-.copyright {
-    position: absolute;
-    width: 100%;
-    bottom: 10px;
-    text-align: center;
-    color: #045B48;
-    font-size: larger;
-}
-
-
-
 .footer-container {
     position: relative;
     width: 100%;
@@ -202,8 +180,8 @@ function sendInfo() {
 .footer-head {
     display: flex;
     flex-wrap: wrap;
-    padding-top: 0.8rem;
-    padding-bottom: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     flex-direction: row;
     /* height: 6rem; */
     background-color: #045B48;
@@ -237,10 +215,11 @@ function sendInfo() {
 .footer-main-content {
     background-image: url('../assets/images/footer-img.jpg');
     display: flex;
-    height: 45rem;
-    padding-top: 2rem;
+    height: 30rem;
+    padding-top: 1rem;
     flex-direction: row;
     background-repeat: no-repeat;
+    background-position: center center;
     background-size: cover;
     justify-content: space-between;
     padding-left: 2rem;
@@ -285,7 +264,8 @@ function sendInfo() {
 .footer-form-button {
     margin-top: 2rem;
     position: absolute;
-    right: 0;
+    left: 0;
+    z-index: 99;
 }
 
 .footer-note-input {
@@ -324,14 +304,20 @@ textarea {
     font-size: large;
 }
 
+.insta-and-facebook {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
 .follow-icon {
     width: 3rem;
 }
 
 .follow-us-item {
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
     align-items: center;
 }
 
@@ -342,10 +328,18 @@ textarea {
 }
 
 .follow-us-items {
+    width: 24rem;
+    /* background-color: rebeccapurple; */
     padding-top: 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    justify-content: space-around;
+    gap: 0.5rem;
+}
+
+.copyright {
+    /* background-color: rebeccapurple; */
+    font-size: 17px;
 }
 
 .introduce-item {
@@ -362,10 +356,9 @@ textarea {
 }
 
 .introduce-footer {
-    padding-top: 2rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
 
 }
 </style>

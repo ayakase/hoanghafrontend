@@ -17,8 +17,13 @@
                         <div class="sort-type" @click="newest">Mới nhất</div>
                         <div class="sort-type" @click="duration">Thời lượng tour</div>
                         <div class="sort-type" @click="price">Giá tour</div>
+
+                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC">Từ cao đến thấp &nbsp; <i
+                                class="fa-solid fa-arrow-down-wide-short"></i> </div>
+                        <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao &nbsp; <i
+                                class="fa-solid fa-arrow-up-wide-short"></i></div>
+
                     </div>
-                    <p>{{ orderBy }} {{ sortOrder }}</p>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
                     <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
@@ -35,6 +40,9 @@
                         <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
+                            <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
+                            }}</span>
+                            </div>
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
@@ -98,7 +106,7 @@
 <script setup>
 import LoadingComponent from '../../components/LoadingComponent.vue';
 import baseUrl from '../../connect';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
@@ -106,10 +114,20 @@ const router = useRouter();
 let totalPage = ref()
 let pageNumber = ref(1)
 let tourList = ref()
+let orderBy = ref("createdAt")
 let sortOrder = ref("DESC")
-let orderBy = ref("recommented")
+function orderASC() {
+    sortOrder.value = 'ASC'
+    reRender()
+
+}
+function orderDESC() {
+    sortOrder.value = 'DESC'
+    reRender()
+
+}
 function newest() {
-    orderBy.value = 'date'
+    orderBy.value = 'createdAt'
     sortOrder.value = 'DESC'
     reRender()
 
@@ -121,27 +139,26 @@ function recommend() {
 
 }
 function price() {
-    orderBy.value = 'price'
+    orderBy.value = 'adultprice'
     sortOrder.value = 'ASC'
     reRender()
 
 }
 function duration() {
-    orderBy.value = 'duration'
-    sortOrder.value = 'ASC'
+    orderBy.value = 'days'
+    sortOrder.value = 'DESC'
     reRender()
 
 }
 onMounted(() => {
-    baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/tour/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then((response) => {
             tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
-
         })
 })
 function getTourbyPage() {
-    baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/tour/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
             tourList.value = response.data.rows
@@ -151,7 +168,7 @@ function getTourbyPage() {
         });
 }
 function reRender() {
-    baseUrl.get("/client/tour/" + 1 + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/tour/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
             tourList.value = response.data.rows
@@ -272,10 +289,14 @@ p {
 }
 
 .sort-type {
-    width: 10rem;
+    width: 12rem;
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
+}
+
+.sort-type:active {
+    background-color: #d1f7df;
 }
 
 .image-container {
@@ -296,5 +317,4 @@ p {
     transform: scale(1.3);
 }
 
-.hot-tour {}
-</style>
+.hot-tour {}</style>
