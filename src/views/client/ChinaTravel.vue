@@ -100,6 +100,8 @@
             </div> -->
         </div>
     </div>
+    <div class="fb-comments" data-href="https://dulichhoangha.com/du-lich-trung-quoc" data-width="500" data-numposts="10">
+    </div>
 </template>
 
 <script setup>
