@@ -28,7 +28,8 @@
                 <button class="btn btn-success" @click="fetchOrder"><i class="fa-solid fa-rotate-right"></i></button>
             </div>
         </div>
-        <table class="table table-success table-striped" style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+        <table v-if="orderTable" class="table table-success table-striped"
+            style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>
                     <th style="vertical-align: top;" scope="col">Tên tour</th>
@@ -64,6 +65,7 @@
 
             </tbody>
         </table>
+        <TableLoading v-else></TableLoading>
         <v-pagination @click="getOrderbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
             prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
         <div>{{ pageNumber }}</div>
@@ -71,6 +73,7 @@
 </template>
 
 <script setup>
+import TableLoading from '../../components/TableLoading.vue';
 import { ref, onMounted } from 'vue';
 import baseUrl from '../../connect';
 let pageNumber = ref(1)

@@ -4,10 +4,7 @@
       <div class="travel-category">
         <div class="travel-category-item" @click="router.push('/du-lich-trong-nuoc')">
           <p>Du lịch trong nước</p> <i class="fa-solid fa-chevron-right"></i>
-          <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            99+
-            <span class="visually-hidden">unread messages</span>
-          </span> -->
+
         </div>
         <div class="travel-category-item" @click="router.push('/du-lich-trung-quoc')">
           <p>Du lịch Trung Quốc </p><i class=" fa-solid fa-chevron-right"></i>
@@ -34,21 +31,21 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../../assets/images/Slide.png" class="d-block w-100 slide-img" alt="...">
+            <img src="../../assets/images/placeholder.png" class="d-block slide-img" alt="...">
             <!-- <div class="carousel-caption d-none d-md-block">
               <h5>First slide label</h5>
               <p>Some representative placeholder content for the first slide.</p>
             </div> -->
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/Slide.png" class="d-block w-100 slide-img" alt="...">
+            <img src="../../assets/images/example.jpg" class="d-block slide-img" alt="...">
             <!-- <div class="carousel-caption d-none d-md-block">
               <h5>Second slide label</h5>
               <p>Some representative placeholder content for the second slide.</p>
             </div> -->
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/Slide.png" class="d-block w-100 slide-img" alt="...">
+            <img src="../../assets/images/Slide.png" class="d-block slide-img" alt="...">
             <!-- <div class="carousel-caption d-none d-md-block">
               <h5>Third slide label</h5>
               <p>Some representative placeholder content for the third slide.</p>
@@ -127,6 +124,7 @@ export default {
 .hot-sale-item {
   transition: transform 0.2s ease-in-out;
 }
+
 .slide-header {
   display: flex;
   flex-direction: row;
@@ -147,19 +145,22 @@ export default {
 }
 
 .carousel-item {
-  height: 100% !important;
+  height: 25rem !important;
 }
 
 .slide-img {
   height: 100%;
+  width: 100%;
   object-fit: cover;
 }
+
 .home-first-section {
   display: flex;
   gap: 1rem;
   flex-direction: row;
   justify-content: space-around;
 }
+
 .travel-category {
   position: relative;
   display: flex;
@@ -171,6 +172,7 @@ export default {
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 .travel-category-item {
   box-sizing: border-box;
   flex: 1;
