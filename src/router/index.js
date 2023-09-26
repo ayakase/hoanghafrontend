@@ -62,17 +62,14 @@ const router = createRouter({
         { path: 'quan-ly-tour', component: () => import('../views/admin/TourManage.vue') },
         { path: 'bai-viet', component: () => import('../views/admin/PostManage.vue') },
         { path: 'quan-li-tour/them-tour', component: () => import('../views/admin/AddTour.vue') },
+        { path: 'quan-li-tour/chinh-sua-tour', component: () => import('../views/admin/EditTour.vue') },
         { path: 'thong-ke', component: () => import('../views/admin/StatisticPage.vue') },
         { path: 'dang-ky-tu-van', component: () => import('../views/admin/AdvisoryManage.vue') },
         { path: 'quan-ly-hot-tour', component: () => import('../views/admin/HotTourManage.vue') },
         { path: 'quan-ly-slider', component: () => import('../views/admin/SliderManage.vue') },
         { path: 'tai-khoan-admin', component: () => import('../views/admin/AdminAccount.vue') },
-
-
-
-
       ]
-    }
+    },
   ]
 
 })

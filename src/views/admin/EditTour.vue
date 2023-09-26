@@ -1,6 +1,6 @@
 <template>
     <div class="add-container">
-        <h2 style="text-align: center; padding-top: 2rem;">Thêm Tour mới</h2>
+        <h2 style="text-align: center; padding-top: 2rem;">Chỉnh sửa nội dung Tour</h2>
         <div class="mb-3">
             <label for="" class="form-label">Tiêu đề tour</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tourTitle">
@@ -193,9 +193,8 @@
                 </div>
             </div>
         </div>
-
+        <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Lưu Tour</div>
     </div>
-    <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
     <div v-html="tourGuide"></div>
 </template>
 
@@ -204,7 +203,12 @@ import baseUrl from '../../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import Editor from '@tinymce/tinymce-vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router';
+const route = useRoute();
+onMounted(() => {
+    console.log(route.query.id);
+})
 let tourTitle = ref("")
 let tourThumbnail = ref(null)
 let tourSchedule = ref("")
@@ -296,7 +300,8 @@ function addTour() {
     padding-left: 1rem;
     padding-right: 1rem;
     margin-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 4rem;
+    margin-bottom: 2rem;
     border-radius: 1rem;
     background-color: #dbf4e8;
 }

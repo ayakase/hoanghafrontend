@@ -114,6 +114,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+table {
+    border-radius: 1rem !important;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
 .order-manage-container {
     margin-top: 2rem;
     width: 100%;

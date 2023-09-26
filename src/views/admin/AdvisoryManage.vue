@@ -54,4 +54,10 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+table {
+    border-radius: 1rem !important;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+</style>

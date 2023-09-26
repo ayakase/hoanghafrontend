@@ -193,9 +193,8 @@
                 </div>
             </div>
         </div>
-
+        <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
     </div>
-    <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
     <div v-html="tourGuide"></div>
 </template>
 
@@ -297,7 +296,8 @@ function addTour() {
     padding-left: 1rem;
     padding-right: 1rem;
     margin-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 4rem;
+    margin-bottom: 2rem;
     border-radius: 1rem;
     background-color: #dbf4e8;
 }

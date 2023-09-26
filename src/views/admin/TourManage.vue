@@ -69,7 +69,8 @@
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.transportation }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ formatDate(tour.createdAt)
                     }}</td>
-                    <td> <button class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
+                    <td> <button @click="router.push({ path: '/admin/quan-li-tour/chinh-sua-tour', query: { id: tour.id } })"
+                            class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
                     <td> <button class="delete-button" @click="deleteTour(tour.id)"><i
                                 class="fa-solid fa-trash"></i></button></td>
@@ -202,6 +203,12 @@ function formatDate(date) {
 </script>
 
 <style scoped>
+table {
+    border-radius: 1rem !important;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
 .admin-tour-crud {
     width: 100%;
 }
