@@ -98,6 +98,8 @@ let pageNumber = ref(1)
 let tourTable = ref()
 let totalPage = ref()
 function fetchTour() {
+    tourTable.value = null
+
     baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)

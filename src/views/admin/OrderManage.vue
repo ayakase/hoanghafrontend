@@ -79,45 +79,8 @@ let sortOrder = ref("DESC");
 let orderTable = ref()
 let stateLabel = ref("Chưa xử lý")
 let solveState = ref(0)
-function Newest() {
-    sortOrder.value = "DESC";
-    fetchOrder()
-}
-function Oldest() {
-    sortOrder.value = "ASC";
-    fetchOrder()
-}
-
-function solved() {
-    stateLabel.value = "Đã xử lý"
-    solveState.value = 1
-    fetchOrder()
-}
-function unsolved() {
-    stateLabel.value = "Chưa xử lý"
-    solveState.value = 0
-    fetchOrder()
-}
-
-function formatDate(date) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    return new Date(date).toLocaleString('vi-VN', options).replace(' tháng ', '/').replace('lúc', '').replace(', ', '/');
-}
-onMounted(() => {
-    fetchOrder()
-})
-function getOrderbyPage() {
-    fetchOrder()
-}
-function solveOrder(id) {
-    baseUrl.put("/admin/order/" + id).then((response) => {
-        console.log(response)
-        fetchOrder()
-    }).catch((error) => {
-        console.log(error)
-    });
-}
 function fetchOrder() {
+    orderTable.value = null;
     baseUrl.get("/admin/order/" + sortOrder.value + "/" + solveState.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
@@ -129,6 +92,51 @@ function fetchOrder() {
             console.error(error);
         });
 }
+onMounted(() => {
+    fetchOrder()
+})
+function Newest() {
+    sortOrder.value = "DESC";
+    orderTable.value = null;
+    fetchOrder()
+}
+function Oldest() {
+    sortOrder.value = "ASC";
+    orderTable.value = null;
+    fetchOrder()
+}
+
+function solved() {
+    stateLabel.value = "Đã xử lý"
+    solveState.value = 1
+    orderTable.value = null;
+    fetchOrder()
+}
+function unsolved() {
+    stateLabel.value = "Chưa xử lý"
+    solveState.value = 0
+    orderTable.value = null;
+    fetchOrder()
+}
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    return new Date(date).toLocaleString('vi-VN', options).replace(' tháng ', '/').replace('lúc', '').replace(', ', '/');
+}
+
+function getOrderbyPage() {
+    orderTable.value = null;
+    fetchOrder()
+}
+function solveOrder(id) {
+    baseUrl.put("/admin/order/" + id).then((response) => {
+        console.log(response)
+        fetchOrder()
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
 </script>
 
 <style scoped>
