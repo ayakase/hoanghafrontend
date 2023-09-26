@@ -68,7 +68,6 @@
         <TableLoading v-else></TableLoading>
         <v-pagination @click="getOrderbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
             prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
-        <div>{{ pageNumber }}</div>
     </div>
 </template>
 

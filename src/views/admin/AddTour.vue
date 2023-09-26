@@ -194,15 +194,9 @@
             </div>
         </div>
         <div class="mt-10 mb-2">
-            <!-- <div id="my-strictly-unique-vue-upload-multiple-image" style="text-align: center;">
-
-                <vue-upload-multiple-image @upload-success="uploadImageSuccess" @before-remove="beforeRemove"
-                    @edit-image="editImage" @data-change="dataChange"></vue-upload-multiple-image>
-            </div> -->
         </div>
         <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
     </div>
-    <div v-html="tourGuide"></div>
 </template>
 
 <script setup>
