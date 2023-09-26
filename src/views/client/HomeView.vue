@@ -35,24 +35,24 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img src="../../assets/images/Slide.png" class="d-block w-100 slide-img" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <!-- <div class="carousel-caption d-none d-md-block">
               <h5>First slide label</h5>
               <p>Some representative placeholder content for the first slide.</p>
-            </div>
+            </div> -->
           </div>
           <div class="carousel-item">
             <img src="../../assets/images/Slide.png" class="d-block w-100 slide-img" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <!-- <div class="carousel-caption d-none d-md-block">
               <h5>Second slide label</h5>
               <p>Some representative placeholder content for the second slide.</p>
-            </div>
+            </div> -->
           </div>
           <div class="carousel-item">
             <img src="../../assets/images/Slide.png" class="d-block w-100 slide-img" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <!-- <div class="carousel-caption d-none d-md-block">
               <h5>Third slide label</h5>
               <p>Some representative placeholder content for the third slide.</p>
-            </div>
+            </div> -->
           </div>
         </div>
         <button class="carousel-control-prev carousel-btn-prev" type="button" data-bs-target="#carouselExampleCaptions"
@@ -79,180 +79,15 @@
       </div>
     </div>
   </div>
-  <div class="slide-container" style="background-color: #F1FAF4;">
-    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 2rem;color: #045B48;"><i
-        style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>&nbsp;Hot Sale</h2>
-    <div v-if="hotTourSlide" class="carousel-container carousel-desktop"
-      style="width: 90rem; margin: auto; margin-top: 2rem;">
-      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
-        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-        <swiper-slide v-for="item in hotTourSlide" :key="item">
-          <div class="card hot-sale-item" style="background: none;border: none;">
-            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
-    </div>
-    <HeartLoading v-else></HeartLoading>
-  </div>
-  <div class="carousel-container carousel-mobile" style="width: 80%; margin: auto; margin-top: 5rem;">
-    <!-- <swiper :modules="modules" :slides-per-view="2" space-between="50" navigation :pagination="{ clickable: true }"
-      :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="card hot-sale-item" style="background: none;border: none;">
-          <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper> -->
-  </div>
-  <div class="slide-container">
-    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i
-        class="fa-solid fa-vihara" style="color: #ff5c5c;"></i>&nbsp;Du lịch Trung Quốc</h2>
-    <div v-if="chinaSlide" class="carousel-container carousel-desktop"
-      style="width: 90rem; margin: auto; margin-top: 2rem;">
-      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
-        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-        <swiper-slide v-for="item in chinaSlide" :key="item">
-          <div class="card hot-sale-item" style="background: none;border: none;">
-            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
-    </div>
-    <HeartLoading v-else></HeartLoading>
-  </div>
-  <div class="slide-container" style="background-color: #F1FAF4;">
-    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i class="fa-solid fa-flag"
-        style="color: #e3e637;"></i>&nbsp;Du lịch trong nước</h2>
-    <div v-if="domesticSlide" class="carousel-container carousel-desktop"
-      style="width: 90rem; margin: auto; margin-top: 2rem;">
-      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
-        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-        <swiper-slide v-for="item in domesticSlide" :key="item">
-          <div class="card hot-sale-item" style="background: none;border: none;">
-            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
-    </div>
-    <HeartLoading v-else></HeartLoading>
-  </div>
-  <div class="slide-container">
-    <h2 style="margin: auto;padding: auto;text-align: center;margin-top: 4rem;color: #045B48;"><i
-        class="fa-solid fa-globe" style="color: #3772d7;"></i>&nbsp;Du lịch quốc tế</h2>
-    <div v-if="foreignSlide" class="carousel-container carousel-desktop"
-      style="width: 90rem; margin: auto; margin-top: 2rem;">
-      <swiper :modules="modules" :slides-per-view="4" :space-between="50" navigation :pagination="{ clickable: true }"
-        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange" :rewind="true">
-        <swiper-slide v-for="item in foreignSlide" :key="item">
-          <div class="card hot-sale-item" style="background: none;border: none;">
-            <img src="../../assets/images/img2.png" class="card-img-top sale-img" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ item.price }}</span> VNĐ </p>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
-    </div>
-    <HeartLoading v-else></HeartLoading>
-  </div>
 </template>
 
 <script>
 import HeartLoading from '../../components/HeartLoading.vue';
 import { useRouter } from 'vue-router';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import { onMounted, ref } from 'vue';
 
 export default {
   components: {
-    Swiper,
-    SwiperSlide,
     HeartLoading,
   },
   setup() {
@@ -267,92 +102,9 @@ export default {
     const domesticSlide = ref()
     const foreignSlide = ref()
     const hotTourSlide = ref()
-    onMounted(() => {
-      setTimeout(() => {
-        chinaSlide.value = [{
-          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-          price: 12031209,
-        }, {
-          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-          price: 12031209,
-        }, {
-          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-          price: 12031209,
-        }, {
-          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-          price: 12031209,
-        }, {
-          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-          price: 12031209,
-        }, {
-          title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-          price: 12031209,
-        }],
-          domesticSlide.value = [{
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }],
-          foreignSlide.value = [{
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }],
-          hotTourSlide.value = [{
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }, {
-            title: 'Lào Cai - Hà Khẩu - Kiến Thủy - 2N1Đ',
-            price: 12031209,
-          }]
-      }, 4000);
-    })
+    onMounted(() => { })
     return {
-      chinaSlide, domesticSlide, foreignSlide, hotTourSlide,
-      router, onSwiper,
-      onSlideChange,
-      modules: [Navigation, Pagination, Scrollbar, A11y],
-
+      router,
     }
   }
 }
@@ -373,20 +125,15 @@ export default {
 }
 
 .hot-sale-item {
-  /* width: 20rem !important; */
   transition: transform 0.2s ease-in-out;
 }
-
-.sale-img {
-  border-radius: 1rem;
-}
-
 .slide-header {
   display: flex;
   flex-direction: row;
   margin: auto;
   padding: auto;
-  width: 12rem
+  width: 12rem;
+
 }
 
 .slide {
@@ -394,7 +141,8 @@ export default {
 }
 
 .carousel-inner {
-  /* width: 50vh; */
+  border-radius: 1rem;
+
   height: 100%;
 }
 
@@ -403,20 +151,15 @@ export default {
 }
 
 .slide-img {
-  border-radius: 1rem;
   height: 100%;
   object-fit: cover;
 }
-
-
-
 .home-first-section {
   display: flex;
   gap: 1rem;
   flex-direction: row;
   justify-content: space-around;
 }
-
 .travel-category {
   position: relative;
   display: flex;
@@ -428,7 +171,6 @@ export default {
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
 .travel-category-item {
   box-sizing: border-box;
   flex: 1;
