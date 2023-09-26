@@ -4,10 +4,10 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                         chủ</a></li>
-                <li class="breadcrumb-item">Du lịch Trung Quốc</li>
+                <li class="breadcrumb-item">Du lịch trong nước</li>
             </ol>
         </nav>
-        <h2 style="color: #ff6b00;">Du lịch Trung Quốc</h2>
+        <h2 style="color: #ff6b00;">Du lịch trong nước</h2>
         <div class="section-container">
             <div class="tour-container">
                 <div class="sort-container">

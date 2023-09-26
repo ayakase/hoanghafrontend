@@ -9,7 +9,7 @@
                         placeholder="Tìm kiếm theo tên" aria-label="Search">
                 </form>
 
-                <div class="btn-group">
+                <!-- <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" style="color: white;">
                         Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
@@ -22,16 +22,16 @@
                         <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
                                 class="fa-solid fa-globe"></i></button>
                     </div>
-                </div>
+                </div> -->
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" style="color: white;">
-                        Tình trạng &nbsp; <i class="fa-solid fa-check-to-slot">: </i> {{ categoryLabel }}
+                        Trạng thái &nbsp; <i class="fa-solid fa-check-to-slot">: </i> {{ stateLabel }}
                     </button>
                     <div class="dropdown-menu">
-                        <button class="dropdown-item" @click="categoryDomestic">Chưa xử lí &nbsp; <i
-                                class="fa-solid fa-xmark"></i> </button>
-                        <button class="dropdown-item" @click="categoryChina">Đã xử lí &nbsp;<i
+                        <button class="dropdown-item" @click="unsolved">Chưa xử lí &nbsp; <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <button class="dropdown-item" @click="solved">Đã xử lí &nbsp;<i
                                 class="fa-solid fa-check"></i></button>
                     </div>
                 </div>
@@ -46,53 +46,34 @@
                         class="fa-solid fa-check fa-beat"></i></button> -->
             </div>
         </div>
-        <table :key="componentKey" class="table table-success table-striped"
-            style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+        <table class="table table-success table-striped" style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Tên tour</th>
-                    <th scope="col">Khách hàng</th>
-                    <th scope="col">SĐT</th>
-                    <th scope="col">Ngày đặt</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Trẻ em(dưới 5)</th>
-                    <th scope="col">Trẻ em(5-11) tuổi</th>
-                    <th scope="col"> Người lớn(trên 12 tuổi)</th>
-                    <th scope="col"> Số ngày</th>
-                    <th scope="col"> Ghi chú</th>
+                    <th style="vertical-align: top;" scope="col">Tên tour</th>
+                    <th style="vertical-align: top;" scope="col">Khách hàng</th>
+                    <th style="vertical-align: top;" scope="col">SĐT</th>
+                    <th style="vertical-align: top;" scope="col">Ngày đặt</th>
+                    <th style="vertical-align: top;" scope="col">Email</th>
+                    <th style="vertical-align: top;" scope="col">Trẻ em (dưới 5)</th>
+                    <th style="vertical-align: top;" scope="col">Trẻ em (5-11) tuổi</th>
+                    <th style="vertical-align: top;" scope="col"> Người lớn (trên 12 tuổi) </th>
+                    <th style="vertical-align: top;" scope="col"> Ghi chú</th>
+                    <th style="vertical-align: top;" scope="col">Hành động</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="each-tour-row">
-                    <th scope="row">1</th>
-                    <td> Lao Cai</td>
-                    <td>Bui Duc Anh</td>
-                    <td>012401242412</td>
-                    <td>12/8/4332</td>
-                    <td>sdsd@gmail.com</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td style="max-width: 15rem;">sdka asdd sad sd d fsd f sdf sdf ds sd f sdf sdf sdf sd fsd fs df sf sdf
-                        sdf df sdf sdf sd fs dfs dfs dfsd fsd </td>
-                </tr>
-
-                <tr v-for="tour in tourTable" :key="tour" class="each-tour-row">
-                    <th scope="row">{{ tour.id }}</th>
-                    <td>{{ tour.title }}</td>
-                    <td>{{ tour.schedule }}</td>
-                    <td>{{ tour.tourcategory }}</td>
-                    <td>{{ tour.departure }}</td>
-                    <td>{{ tour.days }}</td>
-                    <td>{{ tour.ishottour }}</td>
-                    <td>{{ tour.transportation }}</td>
-                    <td>{{ formatDate(tour.createdAt) }}</td>
-                    <td> <button class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
+                <tr v-for="order in orderTable" :key="order" class="each-tour-row">
+                    <td>{{ order.Tour.title }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>{{ formatDate(order.createdAt) }}</td>
+                    <td>{{ order.email }}</td>
+                    <td>{{ order.children }}</td>
+                    <td>{{ order.teenager }}</td>
+                    <td>{{ order.adult }}</td>
+                    <td>{{ order.note }}</td>
+                    <td> <button class="solve-btn"><i class="fa-solid fa-check-to-slot"></i></button>
                     </td>
-                    <td> <button class="delete-button" @click="deleteTour(tour.id)"><i
-                                class="fa-solid fa-trash"></i></button></td>
                 </tr>
 
             </tbody>
@@ -100,15 +81,42 @@
     </div>
 </template>
 
-<script>
-export default {
-
+<script setup>
+import { ref, onMounted } from 'vue';
+import baseUrl from '../../connect';
+let page = ref(1)
+let sortOrder = ref("DESC");
+let orderTable = ref()
+let stateLabel = ref("Chưa xử lý")
+function solved() {
+    stateLabel.value = "Đã xử lý"
 }
+function unsolved() {
+    stateLabel.value = "Chưa xử lý"
+}
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    return new Date(date).toLocaleString('vi-VN', options).replace(' tháng ', '/').replace('lúc', '').replace(', ', '/');
+}
+onMounted(() => {
+    baseUrl.get("/admin/order/" + sortOrder.value + "/" + 1)
+        .then(response => {
+            console.log(response.data)
+            orderTable.value = response.data.rows
+            // formInfo.value = response.data.count / 10 + 1
+            console.log(orderTable.value)
+        }).catch((error) => {
+            console.error(error);
+        });
+})
+
 </script>
 
 <style scoped>
 .order-manage-container {
-    width: 90em;
+    margin-top: 2rem;
+    width: 100%;
     /* background-color: blueviolet; */
 }
 
@@ -130,5 +138,13 @@ export default {
 .sort-button {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
+}
+
+.solve-btn {
+    width: 100%;
+}
+
+.solve-btn:hover {
+    color: white;
 }
 </style>

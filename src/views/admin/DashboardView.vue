@@ -40,6 +40,7 @@ import { RouterLink, RouterView } from 'vue-router'
     background-color: #97CBB4;
     width: 11rem;
     height: inherit;
+    min-height: 45rem;
     box-shadow: rgba(0, 0, 0, 0.24) 5px 3px 8px;
 }
 

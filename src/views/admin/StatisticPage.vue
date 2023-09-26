@@ -76,14 +76,16 @@ function clicked() {
 <style scoped>
 .year-chart,
 .week-chart {
-    width: 45rem;
+    width: 40%;
 }
 
 .chart-container {
-    width: 100em;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
     margin-top: 2rem;
 }
 </style>

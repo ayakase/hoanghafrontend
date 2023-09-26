@@ -40,7 +40,7 @@
                         class="fa-solid fa-check fa-beat"></i></button> -->
             </div>
         </div>
-        <table v-if="tourTable" :key="componentKey" class="table table-success table-striped table-hover"
+        <table v-if="tourTable" class="table table-success table-striped table-hover"
             style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>

@@ -26,7 +26,6 @@ function searchSend() {
 onMounted(() => {
   baseUrl.get("/connect")
     .then((response) => {
-      console.log(response)
       toast.success("Đã kết nối với server", {
         autoClose: 2000,
         theme: "colored",
@@ -97,31 +96,33 @@ let showChatbox = () => {
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/hottour" aria-current="page" href="#">Tour Hot &nbsp;<i
+                  <RouterLink class="nav-link active" to="/tour-hot" aria-current="page" href="#">Tour Hot &nbsp;<i
                       style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
                   </RouterLink>
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/domestictravel" aria-current="page" href="#">Du lịch trong nước
+                  <RouterLink class="nav-link active" to="/du-lich-trong-nuoc" aria-current="page" href="#">Du lịch trong
+                    nước
                     &nbsp; <i class="fa-solid fa-flag"></i>
                   </RouterLink>
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/chinatravel" aria-current="page" href="#">Du lịch Trung Quốc
+                  <RouterLink class="nav-link active" to="/du-lich-trung-quoc" aria-current="page" href="#">Du lịch Trung
+                    Quốc
                     &nbsp; <i class="fa-solid fa-vihara"></i>
                   </RouterLink>
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/foreigntravel" aria-current="page" href="#">Du lịch quốc tế
+                  <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Du lịch quốc tế
                     &nbsp; <i class="fa-solid fa-globe"></i>
                   </RouterLink>
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/foreigntravel" aria-current="page" href="#">Dịch vụ du lịch
+                  <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Dịch vụ du lịch
                   </RouterLink>
                 </li>
                 <li>
-                  <RouterLink class="nav-link active" to="/foreigntravel" aria-current="page" href="#">Cẩm nang
+                  <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Cẩm nang
                   </RouterLink>
                 </li>
 
@@ -187,7 +188,7 @@ let showChatbox = () => {
 
 .chatbox-leave-active {
   animation: bounce-in 0.5s reverse;
-  
+
 }
 
 @keyframes bounce-in {

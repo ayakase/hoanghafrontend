@@ -11,23 +11,23 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/foreigntravel',
-      name: 'foreigntravel',
+      path: '/du-lich-quoc-te',
+      name: 'du-lich-quoc-te',
       component: () => import('../views/client/ForeignTravel.vue')
     },
     {
-      path: '/domestictravel',
-      name: 'domestictravel',
+      path: '/du-lich-trong-nuoc',
+      name: 'du-lich-trong-nuoc',
       component: () => import('../views/client/DomesticTravel.vue')
     },
     {
-      path: '/hottour',
-      name: 'hottour',
+      path: '/tour-hot',
+      name: 'tour-hot',
       component: () => import('../views/client/HotTourView.vue')
     },
     {
-      path: '/chinatravel',
-      name: 'chinatravel',
+      path: '/du-lich-trung-quoc',
+      name: 'du-lich-trung-quoc',
       component: () => import('../views/client/ChinaTravel.vue')
     },
     {

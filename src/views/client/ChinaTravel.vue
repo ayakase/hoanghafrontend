@@ -63,7 +63,7 @@
                     prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
                 <div>{{ pageNumber }}</div>
             </div>
-            <div class="hot-tour">
+            <!-- <div class="hot-tour">
                 <h2 style="padding-left: 1rem;">Tour hot</h2>
                 <div class="card" style="background: none;border: none;">
                     <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
@@ -97,8 +97,7 @@
                         <hr class="hr" />
                     </div>
                 </div>
-
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -289,7 +288,6 @@ p {
 }
 
 .sort-type {
-    width: 12rem;
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
@@ -317,4 +315,5 @@ p {
     transform: scale(1.3);
 }
 
-.hot-tour {}</style>
+.hot-tour {}
+</style>

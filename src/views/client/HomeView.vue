@@ -2,17 +2,17 @@
   <div class="home-container">
     <div class="home-first-section">
       <div class="travel-category">
-        <div class="travel-category-item" @click="router.push('/domestictravel')">
+        <div class="travel-category-item" @click="router.push('/du-lich-trong-nuoc')">
           <p>Du lịch trong nước</p> <i class="fa-solid fa-chevron-right"></i>
           <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             99+
             <span class="visually-hidden">unread messages</span>
           </span> -->
         </div>
-        <div class="travel-category-item" @click="router.push('/chinatravel')">
+        <div class="travel-category-item" @click="router.push('/du-lich-trung-quoc')">
           <p>Du lịch Trung Quốc </p><i class=" fa-solid fa-chevron-right"></i>
         </div>
-        <div class="travel-category-item" @click="router.push('/foreigntravel')">
+        <div class="travel-category-item" @click="router.push('/du-lich-quoc-te')">
           <p>Du lịch quốc tế </p><i class="fa-solid fa-chevron-right"></i>
         </div>
         <div class="travel-category-item">
