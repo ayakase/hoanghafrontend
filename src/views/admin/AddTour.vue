@@ -193,6 +193,11 @@
                 </div>
             </div>
         </div>
+        <div class="mt-10 mb-2">
+            <div>
+                <v-file-input chips multiple label="Thư viện ảnh"></v-file-input>
+            </div>
+        </div>
         <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
     </div>
     <div v-html="tourGuide"></div>
