@@ -8,7 +8,6 @@ const tourDetail = ref()
 const adultPrice = ref()
 const teenagerPrice = ref()
 const childPrice = ref()
-let pageUrl = ref("https://dulichhoangha.com/tourdetail?id=" + route.query.id)
 onMounted(() => {
     baseUrl.get("client/each-tour/" + route.query.id).then(response => {
         console.log(response.data[0])
@@ -130,14 +129,7 @@ let tabSec2 = ref()
         </div>
     </div>
     <div>
-        <div class="fb-comments" :data-href="pageUrl" data-width="500" data-numposts="10"></div>
     </div>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
 </template>
 <style>
 .content-container-outer {
