@@ -117,59 +117,48 @@ let orderBy = ref("createdAt")
 let sortOrder = ref("DESC")
 function orderASC() {
     sortOrder.value = 'ASC'
-    reRender()
+    fetchTour()
 
 }
 function orderDESC() {
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
 function newest() {
     orderBy.value = 'createdAt'
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
 function recommend() {
     orderBy.value = 'recommend'
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
 function price() {
     orderBy.value = 'adultprice'
     sortOrder.value = 'ASC'
-    reRender()
+    fetchTour()
 
 }
 function duration() {
     orderBy.value = 'days'
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
 onMounted(() => {
-    baseUrl.get("/client/tour/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
-        .then((response) => {
-            tourList.value = response.data.rows
-            totalPage.value = response.data.count / 10 + 1
-        })
+    fetchTour()
 })
 function getTourbyPage() {
-    baseUrl.get("/client/tour/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
-        .then(response => {
-            console.log(response.data)
-            tourList.value = response.data.rows
-            totalPage.value = response.data.count / 10 + 1
-        }).catch((error) => {
-            console.error(error);
-        });
+    fetchTour()
 }
-function reRender() {
+function fetchTour() {
+    tourList.value = null;
     baseUrl.get("/client/tour/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
-            console.log(response.data)
             tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {

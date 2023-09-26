@@ -99,7 +99,6 @@ let tourTable = ref()
 let totalPage = ref()
 function fetchTour() {
     tourTable.value = null
-
     baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
@@ -113,7 +112,6 @@ onMounted(() => {
     fetchTour()
 })
 function getTourbyPage() {
-    tourTable.value = null
     fetchTour()
 }
 function deleteTour(id) {
@@ -142,27 +140,23 @@ let categoryNumber = ref(0)
 function categoryAll() {
     categoryLabel.value = "Tất cả"
     categoryNumber.value = 0
-    tourTable.value = null
     fetchTour()
 
 }
 function categoryChina() {
     categoryLabel.value = "Trung Quốc"
     categoryNumber.value = 1
-    tourTable.value = null
     fetchTour()
 }
 function categoryDomestic() {
     categoryLabel.value = "Trong nước"
     categoryNumber.value = 2
-    tourTable.value = null
 
     fetchTour()
 
 } function categoryGlobal() {
     categoryLabel.value = "Quốc tế"
     categoryNumber.value = 3
-    tourTable.value = null
 
     fetchTour()
 
@@ -171,13 +165,11 @@ function categoryDomestic() {
 let sortOrder = ref("DESC")
 function Newest() {
     sortOrder.value = "DESC"
-    tourTable.value = null
 
     fetchTour()
 }
 function Oldest() {
     sortOrder.value = "ASC"
-    tourTable.value = null
 
     fetchTour()
 }

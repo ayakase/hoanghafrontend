@@ -97,25 +97,21 @@ onMounted(() => {
 })
 function Newest() {
     sortOrder.value = "DESC";
-    orderTable.value = null;
     fetchOrder()
 }
 function Oldest() {
     sortOrder.value = "ASC";
-    orderTable.value = null;
     fetchOrder()
 }
 
 function solved() {
     stateLabel.value = "Đã xử lý"
     solveState.value = 1
-    orderTable.value = null;
     fetchOrder()
 }
 function unsolved() {
     stateLabel.value = "Chưa xử lý"
     solveState.value = 0
-    orderTable.value = null;
     fetchOrder()
 }
 
@@ -125,7 +121,6 @@ function formatDate(date) {
 }
 
 function getOrderbyPage() {
-    orderTable.value = null;
     fetchOrder()
 }
 function solveOrder(id) {
