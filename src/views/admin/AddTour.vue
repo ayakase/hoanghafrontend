@@ -104,7 +104,7 @@
                 </h2>
                 <div id="accordion-special" class="accordion-collapse collapse show">
                     <Editor v-model="tourSpecial" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
-                        plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
+                        plugins: '  lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
                             'outdent indent | numlist bullist | emoticons',
@@ -120,7 +120,7 @@
                 </h2>
                 <div id="accordion-bonus" class="accordion-collapse collapse">
                     <Editor v-model="tourBonus" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
-                        plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
+                        plugins: '  lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
                             'outdent indent | numlist bullist | emoticons',
@@ -136,7 +136,7 @@
                 </h2>
                 <div id="accordion-visa" class="accordion-collapse collapse">
                     <Editor v-model="tourVisa" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
-                        plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
+                        plugins: '  lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
                             'outdent indent | numlist bullist | emoticons',
@@ -152,7 +152,7 @@
                 </h2>
                 <div id="accordion-detail" class="accordion-collapse collapse">
                     <Editor v-model="tourDetail" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
-                        plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
+                        plugins: '  lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
                             'outdent indent | numlist bullist | emoticons',
@@ -169,7 +169,7 @@
                 </h2>
                 <div id="accordion-price-service" class="accordion-collapse collapse">
                     <Editor v-model="tourPriceService" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
-                        plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
+                        plugins: ' lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
                             'outdent indent | numlist bullist | emoticons',
@@ -185,7 +185,7 @@
                 </h2>
                 <div id="accordion-guide" class="accordion-collapse collapse">
                     <Editor v-model="tourGuide" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6" :init="{
-                        plugins: ' textcolor lists advlist link image table code help wordcount autosave emoticons',
+                        plugins: '  lists advlist link image table code help wordcount autosave emoticons',
                         toolbar: ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
                             'alignleft aligncenter alignright alignjustify | ' +
                             'outdent indent | numlist bullist | emoticons',
@@ -194,9 +194,11 @@
             </div>
         </div>
         <div class="mt-10 mb-2">
-            <div>
-                <v-file-input chips multiple label="Thư viện ảnh"></v-file-input>
-            </div>
+            <!-- <div id="my-strictly-unique-vue-upload-multiple-image" style="text-align: center;">
+
+                <vue-upload-multiple-image @upload-success="uploadImageSuccess" @before-remove="beforeRemove"
+                    @edit-image="editImage" @data-change="dataChange"></vue-upload-multiple-image>
+            </div> -->
         </div>
         <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Add Tour</div>
     </div>
@@ -209,6 +211,7 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import Editor from '@tinymce/tinymce-vue'
 import { ref, computed } from 'vue'
+
 let tourTitle = ref("")
 let tourThumbnail = ref(null)
 let tourSchedule = ref("")

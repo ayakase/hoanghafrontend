@@ -72,11 +72,7 @@ let showChatbox = () => {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-5 mb-lg-0">
-            <!-- <li class="nav-item">
-              <RouterLink class="nav-link active" to="/" aria-current="page" href="#">Trang Chủ</RouterLink>
-            </li> -->
-            <div class="vl"></div>
+          <ul class="navbar-nav me-auto ">
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -125,18 +121,18 @@ let showChatbox = () => {
                   <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Cẩm nang
                   </RouterLink>
                 </li>
-
               </ul>
             </li>
-            <div class="vl"></div>
-            <!-- <li class="nav-item">
-              <RouterLink class="nav-link active" to="/register" aria-current="page" href="#">Đăng ký</RouterLink>
-            </li> -->
-            <form class="d-flex search-container">
-              <input @keydown.enter.prevent="searchSend" v-model="searchText" class="form-control me-2 search-box"
-                type="search" placeholder="Search" aria-label="Search">
-            </form>
-            <button class="btn btn-outline-success" @click.prevent="searchSend"><i class="fas fa-search"></i></button>
+
+            <li>
+              <form class="d-flex search-container">
+                <input @keydown.enter.prevent="searchSend" v-model="searchText" class="form-control me-2 search-box"
+                  type="search" placeholder="Search" aria-label="Search">
+              </form>
+            </li>
+            <li>
+              <button class="btn btn-outline-success" @click.prevent="searchSend"><i class="fas fa-search"></i></button>
+            </li>
             <li class="nav-item hotline">
               <a class="nav-link active" to="/" aria-current="page" href="tel:0124 3.855.158">HOTLINE: <span
                   style="color: rgb(255, 208, 0);">02143855158</span>
@@ -152,11 +148,14 @@ let showChatbox = () => {
   <div class="content-container">
     <RouterView />
   </div>
-
+  <!-- <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.2522553192643!2d103.96182667493468!3d22.494716879547287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd139cd20452db%3A0x1e087d472f4b71ce!2zMTE2IFPGoW4gxJDhuqFvLCBD4buRYyBM4bq_dSwgTMOgbyBDYWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1695747411920!5m2!1svi!2s"
+    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe> -->
   <!-- <div class="spacer" style="height: 8rem;"></div> -->
   <PageFooter></PageFooter>
   <MessengerBtn></MessengerBtn>
-  <scrollToTop></scrollToTop>
+  <!-- <scrollToTop></scrollToTop> -->
   <!-- <div class="chat-btn">
     <button @click="showChatbox" type="button" class="btn btn-success scroll-button"><i
         class="fa-solid fa-message"></i></button>

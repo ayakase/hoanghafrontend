@@ -9,20 +9,6 @@
                         placeholder="Tìm kiếm theo tên" aria-label="Search">
                 </form>
 
-                <!-- <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" style="color: white;">
-                        Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
-                    </button>
-                    <div class="dropdown-menu">
-                        <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp;<i
-                                class="fa-solid fa-vihara"></i></button>
-                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
-                                class="fa-solid fa-flag"></i> </button>
-                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
-                                class="fa-solid fa-globe"></i></button>
-                    </div>
-                </div> -->
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" style="color: white;">
@@ -39,11 +25,7 @@
                         class="fa-solid fa-arrow-up-wide-short"></i></button>
                 <button class="sort-button btn btn-success" @click="Oldest">Cũ nhất &nbsp; <i
                         class="fa-solid fa-arrow-down-wide-short"></i></button>
-                <button class="btn btn-success" @click="reRender"><i class="fa-solid fa-rotate-right"></i></button>
-                <!-- <button class="sort-button btn btn-success">Chưa xử lý &nbsp; <i
-                        class="fa-solid fa-hourglass fa-spin"></i></button>
-                <button class="sort-button btn btn-success">Đã xử lí &nbsp; <i
-                        class="fa-solid fa-check fa-beat"></i></button> -->
+                <button class="btn btn-success" @click="fetchOrder"><i class="fa-solid fa-rotate-right"></i></button>
             </div>
         </div>
         <table class="table table-success table-striped" style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
@@ -72,27 +54,49 @@
                     <td>{{ order.teenager }}</td>
                     <td>{{ order.adult }}</td>
                     <td>{{ order.note }}</td>
-                    <td> <button class="solve-btn"><i class="fa-solid fa-check-to-slot"></i></button>
+                    <td v-if="order.solved == 0" style="vertical-align: middle;"> <button class="solve-btn"
+                            @click="solveOrder(order.id)"><i class="fa-regular fa-circle-check fa-lg"></i></button>
+                    </td>
+                    <td v-else style="vertical-align: middle;"> <button class="solve-btn" @click="solveOrder(order.id)"><i
+                                class="fa-regular fa-circle-xmark fa-lg"></i></button>
                     </td>
                 </tr>
 
             </tbody>
         </table>
+        <v-pagination @click="getOrderbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
+            prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
+        <div>{{ pageNumber }}</div>
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import baseUrl from '../../connect';
-let page = ref(1)
+let pageNumber = ref(1)
+let totalPage = ref()
 let sortOrder = ref("DESC");
 let orderTable = ref()
 let stateLabel = ref("Chưa xử lý")
+let solveState = ref(0)
+function Newest() {
+    sortOrder.value = "DESC";
+    fetchOrder()
+}
+function Oldest() {
+    sortOrder.value = "ASC";
+    fetchOrder()
+}
+
 function solved() {
     stateLabel.value = "Đã xử lý"
+    solveState.value = 1
+    fetchOrder()
 }
 function unsolved() {
     stateLabel.value = "Chưa xử lý"
+    solveState.value = 0
+    fetchOrder()
 }
 
 function formatDate(date) {
@@ -100,17 +104,31 @@ function formatDate(date) {
     return new Date(date).toLocaleString('vi-VN', options).replace(' tháng ', '/').replace('lúc', '').replace(', ', '/');
 }
 onMounted(() => {
-    baseUrl.get("/admin/order/" + sortOrder.value + "/" + 1)
+    fetchOrder()
+})
+function getOrderbyPage() {
+    fetchOrder()
+}
+function solveOrder(id) {
+    baseUrl.put("/admin/order/" + id).then((response) => {
+        console.log(response)
+        fetchOrder()
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+function fetchOrder() {
+    baseUrl.get("/admin/order/" + sortOrder.value + "/" + solveState.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
             orderTable.value = response.data.rows
-            // formInfo.value = response.data.count / 10 + 1
             console.log(orderTable.value)
+            totalPage.value = response.data.count / 10 + 1
+
         }).catch((error) => {
             console.error(error);
         });
-})
-
+}
 </script>
 
 <style scoped>

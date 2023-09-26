@@ -33,7 +33,7 @@
                         class="fa-solid fa-arrow-up-wide-short"></i></button>
                 <button class="sort-button btn btn-success" @click="Oldest">Cũ nhất &nbsp; <i
                         class="fa-solid fa-arrow-down-wide-short"></i></button>
-                <button class="btn btn-success" @click="reRender"><i class="fa-solid fa-rotate-right"></i></button>
+                <button class="btn btn-success" @click="fetchTour"><i class="fa-solid fa-rotate-right"></i></button>
                 <!-- <button class="sort-button btn btn-success">Chưa xử lý &nbsp; <i
                         class="fa-solid fa-hourglass fa-spin"></i></button>
                 <button class="sort-button btn btn-success">Đã xử lí &nbsp; <i
@@ -69,7 +69,8 @@
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.transportation }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ formatDate(tour.createdAt)
                     }}</td>
-                    <td> <button @click="router.push({ path: '/admin/quan-li-tour/chinh-sua-tour', query: { id: tour.id } })"
+                    <td> <button
+                            @click="router.push({ path: '/admin/quan-li-tour/chinh-sua-tour', query: { id: tour.id } })"
                             class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
                     <td> <button class="delete-button" @click="deleteTour(tour.id)"><i
@@ -96,24 +97,7 @@ const router = useRouter();
 let pageNumber = ref(1)
 let tourTable = ref()
 let totalPage = ref()
-onMounted(() => {
-    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + 1)
-        .then(response => {
-            console.log(response.data)
-            tourTable.value = response.data.rows
-            totalPage.value = response.data.count / 10 + 1
-
-            // toast.success("Đã nhận thông tin", {
-            //     autoClose: 2000,
-            //     theme: "dark",
-            //     position: toast.POSITION.BOTTOM_RIGHT,
-            // });
-        }).catch((error) => {
-            console.error(error);
-        });
-    // console.log(formatDate("2023-08-29T19:20:29.000Z"))
-})
-function getTourbyPage() {
+function fetchTour() {
     baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             console.log(response.data)
@@ -122,6 +106,12 @@ function getTourbyPage() {
         }).catch((error) => {
             console.error(error);
         });
+}
+onMounted(() => {
+    fetchTour()
+})
+function getTourbyPage() {
+    fetchTour()
 }
 function deleteTour(id) {
     console.log(id)
@@ -135,7 +125,7 @@ function deleteTour(id) {
                     theme: "dark",
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
-                reRender()
+                fetchTour()
             }).catch((error) => {
                 console.error(error);
             });
@@ -143,57 +133,40 @@ function deleteTour(id) {
     }
 
 }
-//Chọn category
 let categoryLabel = ref("Tất cả")
 let categoryNumber = ref(0)
 
 function categoryAll() {
     categoryLabel.value = "Tất cả"
     categoryNumber.value = 0
-    reRender()
+    fetchTour()
 
 }
 function categoryChina() {
     categoryLabel.value = "Trung Quốc"
     categoryNumber.value = 1
-    reRender()
+    fetchTour()
 }
 function categoryDomestic() {
     categoryLabel.value = "Trong nước"
     categoryNumber.value = 2
-    reRender()
+    fetchTour()
 
 } function categoryGlobal() {
     categoryLabel.value = "Quốc tế"
     categoryNumber.value = 3
-    reRender()
+    fetchTour()
 
 }
 // sắp xếp
 let sortOrder = ref("DESC")
 function Newest() {
     sortOrder.value = "DESC"
-    reRender()
+    fetchTour()
 }
 function Oldest() {
     sortOrder.value = "ASC"
-    reRender()
-}
-
-function reRender() {
-    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
-        .then(response => {
-            console.log(response.data)
-            tourTable.value = response.data.rows
-            totalPage.value = response.data.count / 10 + 1
-            // toast.success("Đã nhận thông tin", {
-            //     autoClose: 2000,
-            //     theme: "dark",
-            //     position: toast.POSITION.BOTTOM_RIGHT,
-            // });
-        }).catch((error) => {
-            console.error(error);
-        });
+    fetchTour()
 }
 
 function formatDate(date) {

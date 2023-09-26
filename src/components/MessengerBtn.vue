@@ -28,7 +28,7 @@
 .messenger-btn {
     position: fixed;
     bottom: 6rem;
-    right: 2rem;
+    right: 1rem;
 }
 
 .messenger-icon {

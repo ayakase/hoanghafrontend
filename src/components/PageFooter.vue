@@ -1,6 +1,6 @@
 <template>
     <div class="footer-container">
-        <div class="footer-head">
+        <!-- <div class="footer-head">
             <div class="footer-head-item">
                 <img src="../assets/images/ftimg1.png" class="footer-head-icon" alt="">
                 <div class="footer-head-text">
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
         <div class="footer-main-content">
             <div class="footer-section footer-section-1">
                 <div class="section-top-bar"></div>
@@ -93,7 +93,13 @@
                     </div>
                 </div>
             </div>
-            <form class="footer-section footer-section-3">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.2522553192643!2d103.96182667493468!3d22.494716879547287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd139cd20452db%3A0x1e087d472f4b71ce!2zMTE2IFPGoW4gxJDhuqFvLCBD4buRYyBM4bq_dSwgTMOgbyBDYWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1695747411920!5m2!1svi!2s"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!-- <form class="footer-section footer-section-3">
                 <div class="section-top-bar"></div>
                 <h2>Đăng ký tư vấn</h2>
                 <div class="footer-form">
@@ -108,7 +114,7 @@
                 </div>
                 <button type="submit" @click.prevent="sendInfo" class="btn btn-success footer-form-button">Đăng
                     ký</button>
-            </form>
+            </form> -->
 
         </div>
 
@@ -158,10 +164,19 @@ function sendInfo() {
 
 </script>
 <style >
+.map-container {
+    border-radius: 2rem;
+    border: 2px solid rgb(146, 146, 146);
+    overflow: hidden;
+    width: 30%;
+    height: 90%;
+}
+
 .footer-container {
     position: relative;
     width: 100%;
     bottom: 0;
+    border-top: 2px solid #045B48;
 }
 
 @media screen and (max-width: 992px) {
