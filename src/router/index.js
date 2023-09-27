@@ -50,7 +50,6 @@ const router = createRouter({
         { path: 'chinh-sach-va-quy-dinh', component: () => import('../views/about/PolicyView.vue') },
         { path: 'bao-hiem-dich-vu', component: () => import('../views/about/InsuranceView.vue') },
         { path: 'quy-trinh', component: () => import('../views/about/ProcedureView.vue') },
-
       ]
     },
     {
@@ -73,6 +72,7 @@ const router = createRouter({
         { path: 'quan-ly-hot-tour', component: () => import('../views/admin/HotTourManage.vue') },
         { path: 'quan-ly-slider', component: () => import('../views/admin/SliderManage.vue') },
         { path: 'tai-khoan-admin', component: () => import('../views/admin/AdminAccount.vue') },
+        { path: 'thu-vien', component: () => import('../views/admin/ImageLibrary.vue') },
       ]
     },
   ]

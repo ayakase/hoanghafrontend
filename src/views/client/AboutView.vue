@@ -61,5 +61,10 @@ import { RouterLink, RouterView } from 'vue-router'
   background-color: #F1FAF4;
   width: 72%;
   padding: 2rem;
+  height: 50rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-bottom: 2rem;
+  border-radius: 2rem;
 }
 </style>

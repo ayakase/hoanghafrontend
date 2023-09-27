@@ -14,6 +14,8 @@
                     class="fa-regular fa-paper-plane"></i></RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-hot-tour">Tour Hot <i class="fa-solid fa-fire"></i>
             </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/thu-vien">Thư viện ảnh<i class="fa-regular fa-image"></i>
+            </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider<i class="fa-regular fa-image"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết<i class="fa-regular fa-newspaper"></i>
@@ -65,7 +67,6 @@ import { RouterLink, RouterView } from 'vue-router'
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
 }
 
 .router-link-active {

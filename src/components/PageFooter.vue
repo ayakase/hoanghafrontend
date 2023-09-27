@@ -96,13 +96,13 @@
                     </div>
                 </div>
             </div>
-            <div class="map-container">
+            <!-- <div class="map-container">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.2522553192643!2d103.96182667493468!3d22.494716879547287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd139cd20452db%3A0x1e087d472f4b71ce!2zMTE2IFPGoW4gxJDhuqFvLCBD4buRYyBM4bq_dSwgTMOgbyBDYWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1695747411920!5m2!1svi!2s"
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <!-- <form class="footer-section footer-section-3">
+            </div> -->
+            <form class="footer-section footer-section-3">
                 <div class="section-top-bar"></div>
                 <h2>Đăng ký tư vấn</h2>
                 <div class="footer-form">
@@ -117,7 +117,7 @@
                 </div>
                 <button type="submit" @click.prevent="sendInfo" class="btn btn-success footer-form-button">Đăng
                     ký</button>
-            </form> -->
+            </form>
 
         </div>
 
