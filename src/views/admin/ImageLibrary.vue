@@ -17,23 +17,22 @@
             </div>
             <div class="image-grid">
                 <div v-for="image in images" :key="image" class="each-image">
-                    <img style="width: 100%;height: 100%; object-fit: cover;border: 1px solid rgb(95, 95, 95);"
-                        src="https://res.cloudinary.com/dxkmteupm/image/upload/v1695811427/slider-place-holder/awdwsr7ea2zysv4e2tak.jpg"
-                        alt="">
-                    <button class="delete-button"><i class="fa-regular fa-circle-xmark"
-                            style="color: #cb3a3a;"></i></button>
+                    <v-img cover class="each-image" :src=image.url @click="showUrl(image.url)">
+                        <template v-slot:placeholder>
+                            <div class="d-flex align-center justify-center fill-height">
+                                <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                            </div>
+                        </template></v-img>
                 </div>
             </div>
         </div>
         <div class="action-section">
             <h3>URL</h3>
-            <textarea readonly name="" id="" rows="8" placeholder=""
-                value="https://res.cloudinary.com/dxkmteupm/image/upload/v1695811427/slider-place-holder/awdwsr7ea2zysv4e2tak.jpg">
+            <textarea readonly name="" id="" rows="8" placeholder="" :value=copyUrl>
             </textarea>
             <button style="justify-self: end;align-self: end;font-size:x-large"><i class="fa-regular fa-copy"></i></button>
         </div>
     </div>
-    <div>{{ images }}</div>
 </template>
 
 <script setup>
@@ -42,17 +41,23 @@ import baseUrl from '../../connect';
 let images = ref()
 let files = ref([])
 let pageNumber = ref(1)
+let copyUrl = ref()
+function showUrl(url) {
+    console.log(url)
+    copyUrl.value = url
+}
 function uploadImage() {
     console.log(files)
 }
 onMounted(() => {
     console.log("a")
-    baseUrl.get('/admin/library/' + pageNumber.value).then((response) => {
-        console.log(response)
-        // images.value = response.resources
-    }).catch((error) => {
-        console.log(error)
-    })
+    baseUrl.get('/admin/library/' + pageNumber.value)
+        .then((response) => {
+            console.log(response.data.resources)
+            images.value = response.data.resources
+        }).catch((error) => {
+            console.log(error)
+        })
 })
 </script>
 
