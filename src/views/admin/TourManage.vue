@@ -65,7 +65,9 @@
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.Category.name }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.departure }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.days }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.ishottour }}</td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })" v-if="tour.ishottour == 1"> Có
+                    </td>
+                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })" v-else> Không</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.transportation }}</td>
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ formatDate(tour.createdAt)
                     }}</td>
