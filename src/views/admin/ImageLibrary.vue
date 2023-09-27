@@ -46,9 +46,10 @@ function uploadImage() {
     console.log(files)
 }
 onMounted(() => {
+    console.log("a")
     baseUrl.get('/admin/library/' + pageNumber.value).then((response) => {
-        console.log(response.resources)
-        images.value = response.resources
+        console.log(response)
+        // images.value = response.resources
     }).catch((error) => {
         console.log(error)
     })
