@@ -122,9 +122,9 @@ function deleteTour(id) {
         baseUrl.delete("/admin/tour/" + id)
             .then(response => {
                 console.log(response)
-                toast.success("Đã xóa", {
+                toast.info("Đã xóa", {
                     autoClose: 2000,
-                    theme: "dark",
+                    theme: "colored",
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
                 fetchTour()

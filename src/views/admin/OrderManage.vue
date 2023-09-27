@@ -73,6 +73,8 @@
 
 <script setup>
 import TableLoading from '../../components/TableLoading.vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import { ref, onMounted } from 'vue';
 import baseUrl from '../../connect';
 let pageNumber = ref(1)
@@ -129,6 +131,19 @@ function solveOrder(id) {
     baseUrl.put("/admin/order/" + id).then((response) => {
         console.log(response)
         fetchOrder()
+        if (solveState.value == 0) {
+            toast.success("Đã chuyển sang mục đã xử lý", {
+                autoClose: 2000,
+                theme: "colored",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        } else {
+            toast.info("Đã chuyển sang mục chưa xử lý", {
+                autoClose: 2000,
+                theme: "colored",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        }
     }).catch((error) => {
         console.log(error)
     });

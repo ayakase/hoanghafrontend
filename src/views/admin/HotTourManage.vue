@@ -182,6 +182,10 @@ table {
     overflow: hidden;
 }
 
+th {
+    vertical-align: top;
+}
+
 .admin-tour-crud {
     margin-top: 2rem;
     width: 100%;
