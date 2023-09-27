@@ -3,6 +3,7 @@ import PlaceModal from '../../components/PlaceModal.vue'
 import { onMounted, ref } from 'vue';
 import baseUrl from '../../connect';
 import { useRoute } from 'vue-router';
+import LoadingComponent from '../../components/LoadingComponent.vue';
 const route = useRoute();
 const tourDetail = ref()
 const adultPrice = ref()
@@ -128,6 +129,7 @@ let tabSec2 = ref()
             </div>
         </div>
     </div>
+    <LoadingComponent v-else></LoadingComponent>
     <div>
     </div>
 </template>
