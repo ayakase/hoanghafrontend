@@ -67,9 +67,12 @@
                     <div class="section-top-bar"></div>
                     <h3>Về chúng tôi</h3>
                     <div class="about-us-items">
-                        <p class="about-us-item">Chính sách và quy định chung</p>
-                        <p class="about-us-item">Bảo hiểm dịch vụ</p>
-                        <p class="about-us-item">Quy trình đặt dịch vụ và thanh toán</p>
+                        <p class="about-us-item" @click="router.push('/about/chinh-sach-va-quy-dinh')">Chính sách và quy
+                            định
+                            chung</p>
+                        <p class="about-us-item" @click="router.push('/about/bao-hiem-dich-vu')">Bảo hiểm dịch vụ</p>
+                        <p class="about-us-item" @click="router.push('/about/quy-trinh')">Quy trình đặt dịch
+                            vụ và thanh toán</p>
                     </div>
                 </div>
                 <div class="follow-us">
@@ -86,7 +89,7 @@
                                 <p>Facebook</p>
                             </div>
                         </div>
-                        <p class="copyright">@ 2014 Du lịch Hoàng Hà <br>Designed and developed by <a
+                        <p class="copyright">@ 2014 Du lịch Hoàng Hà <br>Developed by <a
                                 style="color: #045B48;font-weight: bold;" href="https://github.com/ayakase">Ayakase</a> and
                             <a href="https://github.com/BinBlun" style="color: #045B48;font-weight: bold;">BinBlun</a>
                         </p>
@@ -126,7 +129,8 @@
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import baseUrl from '../connect';
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 import { ref } from 'vue'
 const footerName = ref()
 const footerPhoneNumber = ref()
@@ -317,6 +321,10 @@ textarea {
 
 .about-us-item {
     font-size: large;
+}
+
+.about-us-item:hover {
+    cursor: pointer;
 }
 
 .insta-and-facebook {

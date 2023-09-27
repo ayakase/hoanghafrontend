@@ -3,20 +3,20 @@
     <div class="home-first-section">
       <div class="travel-category">
         <div class="travel-category-item" @click="router.push('/du-lich-trong-nuoc')">
-          <p>Du lịch trong nước</p> <i class="fa-solid fa-chevron-right"></i>
+          <h5>Du lịch trong nước</h5> <i class="fa-solid fa-chevron-right"></i>
 
         </div>
         <div class="travel-category-item" @click="router.push('/du-lich-trung-quoc')">
-          <p>Du lịch Trung Quốc </p><i class=" fa-solid fa-chevron-right"></i>
+          <h5>Du lịch Trung Quốc </h5><i class=" fa-solid fa-chevron-right"></i>
         </div>
         <div class="travel-category-item" @click="router.push('/du-lich-quoc-te')">
-          <p>Du lịch quốc tế </p><i class="fa-solid fa-chevron-right"></i>
+          <h5>Du lịch quốc tế </h5><i class="fa-solid fa-chevron-right"></i>
         </div>
         <div class="travel-category-item">
-          <p>Cẩm nang </p><i class="fa-solid fa-chevron-right"></i>
+          <h5>Cẩm nang </h5><i class="fa-solid fa-chevron-right"></i>
         </div>
         <div class="travel-category-item">
-          <p>Khuyến mãi</p> <i class="fa-solid fa-chevron-right"></i>
+          <h5>Khuyến mãi</h5> <i class="fa-solid fa-chevron-right"></i>
         </div>
       </div>
       <!-- data-bs-ride="carousel" -->
@@ -65,13 +65,13 @@
       </div>
       <div class="extended-category">
         <div class="extent-item">
-          <p>Hà Khẩu</p>
+          <h5>Hà Khẩu</h5>
         </div>
         <div class="extent-item">
-          <p>DV Visa</p>
+          <h5>DV Visa</h5>
         </div>
         <div class="extent-item">
-          <p>KS / Dịch vụ</p>
+          <h5>KS / Dịch vụ</h5>
         </div>
       </div>
     </div>
