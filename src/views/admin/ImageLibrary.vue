@@ -33,12 +33,14 @@
             <button style="justify-self: end;align-self: end;font-size:x-large"><i class="fa-regular fa-copy"></i></button>
         </div>
     </div>
+    <div>{{ images }}</div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import baseUrl from '../../connect';
-let images = ref([])
+let images = ref()
+let files = ref([])
 let pageNumber = ref(1)
 function uploadImage() {
     console.log(files)
