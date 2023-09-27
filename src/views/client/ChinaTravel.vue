@@ -63,41 +63,6 @@
                     prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
                 <div>{{ pageNumber }}</div>
             </div>
-            <!-- <div class="hot-tour">
-                <h2 style="padding-left: 1rem;">Tour hot</h2>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </template>

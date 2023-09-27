@@ -1,5 +1,5 @@
 <template>
-    <div class="outer-container">
+    <div class="china-container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
@@ -7,195 +7,153 @@
                 <li class="breadcrumb-item">Tour Hot</li>
             </ol>
         </nav>
-        <div class="inner-container">
-            <div class="hot-tour-sidebar">
-                <div style="background-color: #97CBB4;text-align: center;padding-top: 0.4rem;padding-bottom: 0.4rem;">
-                    <p><b>Địa điểm <span style="color: orangered;">HOT </span> quốc tế</b>
-                    </p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p><b>Du lịch Châu Á</b></p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Vân Nam - Trung Quốc</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Singapore</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Thái Lan</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Nhật Bản</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Dubai</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p><b>Du lịch Châu Âu</b></p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Tây Âu</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Pháp</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Bỉ</p>
-                </div>
-                <div class="hot-tour-sidebar-item">
-                    <p>Nga</p>
-                </div>
-            </div>
-            <div v-if="posts" class="tour-container">
-                <div class="tour-section-header">
-                    <!-- <img src="../assets/icon_title 1.png" alt=""> -->
-                    <h2>Tour Hot</h2>
-                </div>
+        <h2 style="color: #ff6b00;">Tour đang Hot</h2>
+        <div class="section-container">
+            <div class="tour-container">
                 <div class="sort-container">
                     <p>Sắp xếp theo: </p>
                     <div class="sort-types">
-                        <div class="sort-type">Hoàng Hà đề xuất</div>
-                        <div class="sort-type">Mới nhất</div>
-                        <div class="sort-type">Thời lượng tour</div>
-                        <div class="sort-type">Giá tour</div>
+                        <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
+                        <div class="sort-type" @click="newest">Mới nhất</div>
+                        <div class="sort-type" @click="duration">Thời lượng tour</div>
+                        <div class="sort-type" @click="price">Giá tour</div>
+                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC">Từ cao đến thấp &nbsp; <i
+                                class="fa-solid fa-arrow-down-wide-short"></i> </div>
+                        <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao &nbsp; <i
+                                class="fa-solid fa-arrow-up-wide-short"></i></div>
+
                     </div>
                 </div>
-                <div v-for="post in posts" :key="post" class="tour-individual" @click="router.push('/tourdetail')">
-                    <div class=" image-container">
-                        <img src="../../assets/tourimg.png" style="width: 100%;" alt="">
+                <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
+                    <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
+                        <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
+                            style="width: 100%;" alt=""> -->
+                        <v-img cover :width="50" class="thumbnail" :src=tour.thumbnail>
+                            <template v-slot:placeholder>
+                                <div class="d-flex align-center justify-center fill-height">
+                                    <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                                </div>
+                            </template></v-img>
                     </div>
                     <div class="tour-detail-container">
-                        <div class="title"> {{ post.title }}</div>
-                        <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ post.schedule }}</span>
+                        <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
+                            tour.title }}</div>
+                        <div class="below-section" style="">
+                            <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
+                            }}</span>
+                            </div>
+                            <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
+                            </div>
+                            <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
+                            </div>
+                            <div class="days"><b>Thời gian: </b>{{ tour.days }}N{{ tour.days - 1 }}Đ</div>
+                            <div class="departure"><b>Khởi hành: </b>{{ tour.departure }}</div>
+                            <div class="transportation"><b>Vận chuyển: </b>{{ tour.transportation }}</div>
                         </div>
-                        <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ post.tourtype }} </span>
-                        </div>
-                        <div class="days"><b>Thời gian: </b>{{ post.days }}N{{ post.days - 1 }}Đ</div>
-                        <div class="departure"><b>Khởi hành: </b>{{ post.departure }}</div>
-                        <div class="transportation"><b>Vận chuyển: </b>{{ post.transportation }}</div>
                     </div>
-                    <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{ numeralFormat(post.price)
+                    <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{
+                        numeralFormat(tour.adultprice)
                     }} </b></span>
                         <span style="color: orangered; font-weight: 100;"> VNĐ</span>
                     </div>
                 </div>
+                <LoadingComponent v-else />
+                <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
+                    prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
+                <div>{{ pageNumber }}</div>
             </div>
-            <LoadingComponent v-else />
         </div>
-
     </div>
 </template>
 
 <script setup>
 import LoadingComponent from '../../components/LoadingComponent.vue';
 import baseUrl from '../../connect';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-let posts = ref()
+
+// let posts = ref()
+let totalPage = ref()
+let pageNumber = ref(1)
+let tourList = ref()
+let orderBy = ref("createdAt")
+let sortOrder = ref("DESC")
+function orderASC() {
+    sortOrder.value = 'ASC'
+    fetchTour()
+
+}
+function orderDESC() {
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
+function newest() {
+    orderBy.value = 'createdAt'
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
+function recommend() {
+    orderBy.value = 'recommend'
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
+function price() {
+    orderBy.value = 'adultprice'
+    sortOrder.value = 'ASC'
+    fetchTour()
+
+}
+function duration() {
+    orderBy.value = 'days'
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
 onMounted(() => {
-    baseUrl.get("/").then((response) => {
-        console.log(response)
-    })
-    setTimeout(() => {
-        posts.value = [
-            {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 323480000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 348000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 300000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 300000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 300000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 300000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 300000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 300000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            }, {
-                title: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA - CÔN MINH (6N5Đ)",
-                schedule: "LÀO CAI - ĐẠI LÝ - LỆ GIANG - SHANGRILA",
-                days: 6,
-                transportation: "Ô tô/Tàu",
-                price: 300000,
-                tourtype: "Ghép/đoàn riêng",
-                departure: "Lào Cai"
-
-            },]
-    }, 1000);
+    fetchTour()
 })
-        // onMounted(() => {
-        //     baseUrl.get('/posts').then((response) => {
-        //         console.log(response.data)
-        //         posts.value = response.data
-        //     })
-        // })
-
-
-
+function getTourbyPage() {
+    fetchTour()
+}
+function fetchTour() {
+    tourList.value = null;
+    baseUrl.get("/client/hottour/" + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then(response => {
+            tourList.value = response.data.rows
+            totalPage.value = response.data.count / 10 + 1
+        }).catch((error) => {
+            console.error(error);
+        });
+}
 </script>
-
 <style scoped>
+.china-container {
+    padding-top: 2rem;
+    width: 90%;
+    margin: auto;
+    padding: auto;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.breadcrumb-item {
+    font-size: large;
+}
+
+.home-breadcrumb {
+    text-decoration: none !important;
+    font-weight: bold;
+    color: black;
+}
+
 p {
     margin: 0 !important;
     padding: 0 !important;
@@ -220,6 +178,9 @@ p {
 
 .tour-detail-container {
     width: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 }
 
@@ -227,23 +188,28 @@ p {
     font-size: 22px;
     font-weight: bold;
     color: #045B48;
+    cursor: pointer;
+}
+
+.title:hover {
+    color: #ff6b10;
 }
 
 .tour-container {
-    width: 80%;
+    width: 75%;
 }
 
 .tour-individual {
     width: 100%;
+    max-height: 15rem;
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
     flex-direction: row;
     background-color: #F1FAF4;
     margin-bottom: 1rem;
     padding: 1rem;
 }
-
-
 
 .inner-container {
     display: flex;
@@ -261,12 +227,6 @@ p {
     margin-bottom: 2rem;
 }
 
-.hot-tour-sidebar {
-    background-color: #F1FAF4;
-    width: 18%;
-    margin-right: 2rem;
-}
-
 .sort-container {
     margin-bottom: 2rem;
     display: flex;
@@ -281,28 +241,32 @@ p {
 }
 
 .sort-type {
-    width: 10rem;
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
 }
 
-.hot-tour-sidebar {
-    display: flex;
-    flex-direction: column;
-}
-
-.hot-tour-sidebar-item {
-    padding-left: 1rem;
-    height: 2.5rem;
-    padding-top: 0.5rem;
-}
-
-.hot-tour-sidebar-item:hover {
-    background-color: #97CBB4;
+.sort-type:active {
+    background-color: #d1f7df;
 }
 
 .image-container {
-    width: 16rem;
+    width: 18rem;
+    display: inline-block;
+    cursor: pointer;
+    overflow: hidden !important;
 }
+
+.thumbnail {
+    width: 100% !important;
+    transition: .3s ease-in-out;
+}
+
+.thumbnail:hover {
+    opacity: 0.6;
+    filter: alpha(opacity=30);
+    transform: scale(1.3);
+}
+
+.hot-tour {}
 </style>
