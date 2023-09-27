@@ -86,6 +86,7 @@ onMounted(() => {
     width: 10rem;
     height: 10rem;
     object-fit: cover;
+    background-color: white;
 }
 
 .action-section {
