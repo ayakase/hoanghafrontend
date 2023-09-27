@@ -16,7 +16,7 @@
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/thu-vien">Thư viện ảnh<i class="fa-regular fa-image"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider<i class="fa-regular fa-image"></i>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider<i class="fa-solid fa-photo-film"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết<i class="fa-regular fa-newspaper"></i>
             </RouterLink>
