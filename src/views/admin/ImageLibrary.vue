@@ -16,10 +16,9 @@
                         class="fa-solid fa-cloud-arrow-up"></i></button>
             </div>
             <div class="image-grid">
-                <div v-for="image in 30" class="each-image">
+                <div v-for="image in images" :key="image" class="each-image">
                     <img style="width: 100%;height: 100%; object-fit: cover;border: 1px solid rgb(95, 95, 95);"
-                        src="https://res.cloudinary.com/dxkmteupm/image/upload/v1695811427/slider-place-holder/awdwsr7ea2zysv4e2tak.jpg"
-                        alt="">
+                        src=image.url alt="" @click="showUrl(image.url)">
                     <button class="delete-button"><i class="fa-regular fa-circle-xmark"
                             style="color: #cb3a3a;"></i></button>
                 </div>
@@ -38,14 +37,18 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import baseUrl from '../../connect';
-let files = ref([])
+let images = ref([])
 let pageNumber = ref(1)
 function uploadImage() {
     console.log(files)
 }
+function showUrl(url) {
+    console.log(url)
+}
 onMounted(() => {
     baseUrl.get('/admin/library/' + pageNumber.value).then((response) => {
-        console.log(response)
+        console.log(response.resources)
+        images.value = response.resources
     }).catch((error) => {
         console.log(error)
     })
