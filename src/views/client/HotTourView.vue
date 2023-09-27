@@ -21,7 +21,6 @@
                                 class="fa-solid fa-arrow-down-wide-short"></i> </div>
                         <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao &nbsp; <i
                                 class="fa-solid fa-arrow-up-wide-short"></i></div>
-
                     </div>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
@@ -42,6 +41,7 @@
                             <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
                             }}</span>
                             </div>
+                            <div> <b>Danh mục: </b> <span style="color: green;">{{ tour.Category.name }} </span> </div>
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
