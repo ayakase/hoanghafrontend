@@ -1,5 +1,11 @@
 <template>
     <div class="library-container">
+        <v-img cover class="each-image" :src=copyUrl @click="showUrl(image.url)">
+            <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                    <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+            </template></v-img>
         <div class="images-section">
             <div style="display: flex;flex-direction: row;gap: 2rem; height:4rem;width: 80%;">
                 <v-file-input v-model="files" placeholder="Upload your documents" label="Ảnh" multiple
