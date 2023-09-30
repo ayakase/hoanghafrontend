@@ -56,8 +56,8 @@ let showChatbox = () => {
 
 <template>
   <div class="header-container">
-    <!-- <RouterLink class=" btn btn-success active admin-button" to="/admin" aria-current="page" href="#">Admin
-    </RouterLink> -->
+    <RouterLink class=" btn btn-success active admin-button" to="/admin" aria-current="page" href="#">Admin
+    </RouterLink>
     <!-- <div class="banner-text"> -->
     <!-- <p class="company-name">HOÀNG HÀ</p>
       <p class="subtext-1">travel and tourism</p> -->

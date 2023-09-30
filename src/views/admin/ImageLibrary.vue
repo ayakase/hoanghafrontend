@@ -1,13 +1,7 @@
 <template>
     <div class="library-container">
-        <v-img cover class="each-image" :src=copyUrl @click="showUrl(image.url)">
-            <template v-slot:placeholder>
-                <div class="d-flex align-center justify-center fill-height">
-                    <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
-                </div>
-            </template></v-img>
         <div class="images-section">
-            <div style="display: flex;flex-direction: row;gap: 2rem; height:4rem;width: 80%;">
+            <div style="display: flex;flex-direction: row;gap: 2rem;width: 80%;">
                 <v-file-input v-model="files" placeholder="Upload your documents" label="Ảnh" multiple
                     prepend-icon="fa-solid fa-images" class="image-upload">
                     <template v-slot:selection="{ fileNames }">
@@ -23,7 +17,7 @@
             </div>
             <div class="image-grid">
                 <div v-for="image in images" :key="image" class="each-image">
-                    <v-img cover class="each-image" :src=image.url @click="showUrl(image.url)">
+                    <v-img cover class="each-image" :src=image.url @click="toggleUrl(image.url)">
                         <template v-slot:placeholder>
                             <div class="d-flex align-center justify-center fill-height">
                                 <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
@@ -38,25 +32,43 @@
             </textarea>
             <button style="justify-self: end;align-self: end;font-size:x-large"><i class="fa-regular fa-copy"></i></button>
         </div>
+        <!-- <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
+            prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination> -->
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import baseUrl from '../../connect';
+import galleryData from '../../../gallery.json'
 let images = ref()
 let files = ref([])
-let pageNumber = ref(1)
+let pageNumber = ref(2)
 let copyUrl = ref()
+
 function showUrl(url) {
     console.log(url)
     copyUrl.value = url
 }
+function toggleUrl(url) {
+    let toggleState = ref()
+    if (toggleState.value) {
+        copyUrl.value = url
+        toggleState.value = !toggleState.value
+    } else {
+        copyUrl.value = ''
+        toggleState.value = !toggleState.value
+    }
+
+}
+
 function uploadImage() {
     console.log(files)
+    baseUrl
 }
 onMounted(() => {
-    console.log("a")
+    // console.log("a")
+    // images.value = galleryData
     baseUrl.get('/admin/library/' + pageNumber.value)
         .then((response) => {
             console.log(response.data.resources)
