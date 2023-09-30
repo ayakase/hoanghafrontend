@@ -66,11 +66,11 @@ function toggleUrl(url) {
 //     console.log(files)
 //     baseUrl
 // }
-let nextCursor = ref(null)
+let nextCursor = ref('')
 onMounted(() => {
     // console.log("a")
     // images.value = galleryData
-    baseUrl.get('/admin/library/' + nextCursor.value || '')
+    baseUrl.get('/admin/library/' + nextCursor.value)
         .then((response) => {
             console.log(response.data)
             images.value = response.data.resources
