@@ -24,6 +24,8 @@
                             </div>
                         </template></v-img>
                 </div>
+                <button @click="nextPage"> Next page</button>
+
             </div>
         </div>
         <div class="action-section">
@@ -32,8 +34,6 @@
             </textarea>
             <button style="justify-self: end;align-self: end;font-size:x-large"><i class="fa-regular fa-copy"></i></button>
         </div>
-        <!-- <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
-            prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination> -->
     </div>
 </template>
 
@@ -62,21 +62,32 @@ function toggleUrl(url) {
 
 }
 
-function uploadImage() {
-    console.log(files)
-    baseUrl
-}
+// function uploadImage() {
+//     console.log(files)
+//     baseUrl
+// }
+let nextCursor = ref()
 onMounted(() => {
     // console.log("a")
     // images.value = galleryData
-    baseUrl.get('/admin/library/' + pageNumber.value)
+    baseUrl.get('/admin/library/' + nextCursor.value)
+        .then((response) => {
+            console.log(response.data)
+            images.value = response.data.resources
+            nextCursor.value = response.data.next_cursor
+        }).catch((error) => {
+            console.log(error)
+        })
+})
+function nextPage() {
+    baseUrl.get('/admin/library/' + nextCursor.value)
         .then((response) => {
             console.log(response.data.resources)
             images.value = response.data.resources
         }).catch((error) => {
             console.log(error)
         })
-})
+}
 </script>
 
 <style scoped>
