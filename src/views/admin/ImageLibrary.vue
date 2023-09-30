@@ -66,7 +66,7 @@ function toggleUrl(url) {
 //     console.log(files)
 //     baseUrl
 // }
-let nextCursor = ref()
+let nextCursor = ref(null)
 onMounted(() => {
     // console.log("a")
     // images.value = galleryData
