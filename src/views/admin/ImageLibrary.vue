@@ -70,7 +70,7 @@ let nextCursor = ref(null)
 onMounted(() => {
     // console.log("a")
     // images.value = galleryData
-    baseUrl.get('/admin/library/' + nextCursor.value)
+    baseUrl.get('/admin/library/' + nextCursor.value || '')
         .then((response) => {
             console.log(response.data)
             images.value = response.data.resources
