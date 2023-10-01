@@ -16,6 +16,7 @@
                 <button class="btn btn-success" style="height: 90%;" @click="uploadImage">Tải ảnh lên &nbsp;<i
                         class="fa-solid fa-cloud-arrow-up"></i></button>
             </div>
+            <div><p>Chỉ nhận định dạng .png, .jpg, .jpeg, .gif, .webp. Mỗi lần tải lên không quá 10 files để đảm bảo đường truyềnf</p></div>
             <div class="image-grid">
                 <div v-for="image in images" :key="image" class="each-image">
                     <v-img cover class="each-image" :src=image.url @click="showUrl(image.url)">
@@ -25,11 +26,13 @@
                             </div>
                         </template></v-img>
                 </div>
-                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success "
+                
+            </div>
+            <div class="button-container" >
+                <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success "
                     v-if="nextCursor != null"> Tải thêm </button>
-                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success " v-else disabled> Tải
+                <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success " v-else disabled> Tải
                     thêm </button>
-
             </div>
         </div>
         <div class="action-section">
@@ -104,7 +107,7 @@ function uploadImage() {
         .catch(error => {
             console.error(error)
             showOverlay.value = false
-            toast.error("Lỗi " + error + " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang", {
+            toast.error("Lỗi " + error + " , kiểm tra lại định dạng của files", {
                 autoClose: 2000,
                 theme: "colored",
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -187,4 +190,18 @@ textarea {
     position: relative;
     left: 0.2rem;
     top: 0.8rem;
-}</style>
+}
+
+.button-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.load-btn {
+    width: 10rem;
+    height: 3rem;
+    font-size: larger;
+    font-weight: bold;
+}
+</style>
