@@ -1,4 +1,5 @@
 <template>
+    <LoadingOverlay v-if="showOverlay"></LoadingOverlay>
     <div class="library-container">
         <div class="images-section">
             <div style="display: flex;flex-direction: row;gap: 2rem;width: 80%;">
@@ -17,7 +18,7 @@
             </div>
             <div class="image-grid">
                 <div v-for="image in images" :key="image" class="each-image">
-                    <v-img cover class="each-image" :src=image.url @click="toggleUrl(image.url)">
+                    <v-img cover class="each-image" :src=image.url @click="showUrl(image.url)">
                         <template v-slot:placeholder>
                             <div class="d-flex align-center justify-center fill-height">
                                 <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
@@ -41,38 +42,39 @@
 import { ref, onMounted } from 'vue'
 import baseUrl from '../../connect';
 import galleryData from '../../../gallery.json'
+import LoadingOverlay from '../../components/LoadingOverlay.vue';
 let images = ref()
 let files = ref([])
 let pageNumber = ref(2)
 let copyUrl = ref()
-
+let showOverlay = ref(false)
 function showUrl(url) {
     console.log(url)
     copyUrl.value = url
 }
-function toggleUrl(url) {
-    let toggleState = ref()
-    if (toggleState.value) {
-        copyUrl.value = url
-        toggleState.value = !toggleState.value
-    } else {
-        copyUrl.value = ''
-        toggleState.value = !toggleState.value
-    }
+// function toggleUrl(url) {
+//     let toggleState = ref()
+//     if (toggleState.value) {
+//         copyUrl.value = url
+//         toggleState.value = !toggleState.value
+//     } else {
+//         copyUrl.value = ''
+//         toggleState.value = !toggleState.value
+//     }
 
-}
+// }
 
 // function uploadImage() {
 //     console.log(files)
 //     baseUrl
 // }
-let nextCursor = ref('')
+let nextCursor = ref(null)
 onMounted(() => {
-    // console.log("a")
-    // images.value = galleryData
-    baseUrl.get('/admin/library/' + nextCursor.value)
+    showOverlay.value = true
+    baseUrl.get('/admin/library')
         .then((response) => {
-            console.log(response.data)
+            showOverlay.value = false
+            console.log(response.data.next_cursor)
             images.value = response.data.resources
             nextCursor.value = response.data.next_cursor
         }).catch((error) => {
@@ -80,10 +82,14 @@ onMounted(() => {
         })
 })
 function nextPage() {
+    showOverlay.value = true
+
     baseUrl.get('/admin/library/' + nextCursor.value)
         .then((response) => {
-            console.log(response.data.resources)
-            images.value = response.data.resources
+            showOverlay.value = false
+            console.log(response.data.next_cursor)
+            images.value = images.value.concat(response.data.resources)
+            nextCursor.value = response.data.next_cursor
         }).catch((error) => {
             console.log(error)
         })

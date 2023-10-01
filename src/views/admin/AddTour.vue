@@ -1,4 +1,5 @@
 <template>
+<LoadingOverlay v-if="showOverlay"></LoadingOverlay>
     <div class="add-container">
         <h2 style="text-align: center; padding-top: 2rem;">Thêm Tour mới</h2>
         <div class="mb-3">
@@ -200,12 +201,13 @@
 </template>
 
 <script setup>
+import LoadingOverlay from '../../components/LoadingOverlay.vue';
 import baseUrl from '../../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import Editor from '@tinymce/tinymce-vue'
 import { ref, computed } from 'vue'
-
+let showOverlay = ref(false)
 let tourTitle = ref("")
 let tourThumbnail = ref(null)
 let tourSchedule = ref("")
@@ -245,6 +247,7 @@ function processImg(event) {
     tourThumbnail.value = event.target.files[0]
 }
 function addTour() {
+    showOverlay.value = true
     // console.log(tourThumbnail.value)
     const tourData = new FormData();
     tourData.append('tourTitle', tourTitle.value);
@@ -274,6 +277,7 @@ function addTour() {
     })
         .then(response => {
             console.log(response.data)
+            showOverlay.value = false
             toast.success("Đã nhận thông tin", {
                 autoClose: 2000,
                 theme: "colored",
@@ -282,6 +286,7 @@ function addTour() {
         })
         .catch(error => {
             console.error(error)
+            showOverlay.value = false
             toast.error("Lỗi " + error + " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang", {
                 autoClose: 2000,
                 theme: "colored",
