@@ -25,8 +25,10 @@
                             </div>
                         </template></v-img>
                 </div>
-                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success " v-if="nextCursor != null"> Tải thêm </button>
-                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success " v-else disabled > Tải thêm </button>
+                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success "
+                    v-if="nextCursor != null"> Tải thêm </button>
+                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success " v-else disabled> Tải
+                    thêm </button>
 
             </div>
         </div>
@@ -34,7 +36,8 @@
             <h3>URL</h3>
             <textarea readonly name="" id="" rows="8" placeholder="" :value=copyUrl>
             </textarea>
-            <button class="btn btn-success" style="justify-self: end;align-self: end;font-size:x-large"><i class="fa-regular fa-copy"></i></button>
+            <button class="btn btn-success" style="justify-self: end;align-self: end;font-size:x-large"><i
+                    class="fa-regular fa-copy"></i></button>
         </div>
     </div>
 </template>
@@ -43,6 +46,8 @@
 import { ref, onMounted } from 'vue'
 import baseUrl from '../../connect';
 import LoadingOverlay from '../../components/LoadingOverlay.vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 let images = ref()
 let files = ref([])
 let pageNumber = ref(2)
@@ -64,10 +69,46 @@ function showUrl(url) {
 
 // }
 
-// function uploadImage() {
-//     console.log(files)
-//     baseUrl
-// }
+function uploadImage() {
+    showOverlay.value = true
+    const imageData = new FormData()
+    for (const file of files.value) {
+        imageData.append('images', file);
+    }
+    baseUrl.post("/admin/library", imageData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+        .then(response => {
+            console.log(response.data)
+            files.value = []
+            showOverlay.value = false
+            toast.success("Đã nhận thông tin", {
+                autoClose: 2000,
+                theme: "colored",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            baseUrl.get('/admin/library')
+                .then((response) => {
+                    console.log(response.data.next_cursor)
+                    images.value = response.data.resources
+                    nextCursor.value = response.data.next_cursor
+                    showOverlay.value = false
+                }).catch((error) => {
+                    console.log(error)
+                })
+        })
+        .catch(error => {
+            console.error(error)
+            showOverlay.value = false
+            toast.error("Lỗi " + error + " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang", {
+                autoClose: 2000,
+                theme: "colored",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        })
+}
 let nextCursor = ref(null)
 onMounted(() => {
     showOverlay.value = true
@@ -144,5 +185,4 @@ textarea {
     position: relative;
     left: 0.2rem;
     top: 0.8rem;
-}
-</style>
+}</style>
