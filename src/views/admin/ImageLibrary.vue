@@ -89,6 +89,8 @@ function uploadImage() {
                 theme: "colored",
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
+            
+        }).then(() => {
             baseUrl.get('/admin/library')
                 .then((response) => {
                     console.log(response.data.next_cursor)
