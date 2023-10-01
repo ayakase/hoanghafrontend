@@ -12,18 +12,19 @@
 
 <style scoped>
 .load-container{
-    position: absolute;
+    position: fixed;
+    z-index: 9999;
     left: 0;
     top: 0;
     bottom: 0 !important;
-    height: 100em !important;
+    height: 100vh !important;
     width: 100vw;
+    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 .lds-ring {
-  z-index: 9999;
   position: fixed;
   top: 50vh;
   margin: auto !important;

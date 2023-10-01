@@ -21,7 +21,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 .about-container {
   padding-top: 5rem;
-  width: 80%;
+  width: 85%;
   margin: auto;
   display: flex;
   justify-content: space-between;
