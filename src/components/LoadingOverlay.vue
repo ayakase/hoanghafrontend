@@ -13,7 +13,6 @@
 <style scoped>
 .load-container{
     position: absolute;
-    z-index: 9999;
     left: 0;
     top: 0;
     bottom: 0 !important;
@@ -24,6 +23,7 @@
     justify-content: center;
 }
 .lds-ring {
+  z-index: 9999;
   position: fixed;
   top: 50vh;
   margin: auto !important;

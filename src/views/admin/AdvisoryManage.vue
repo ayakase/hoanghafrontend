@@ -46,7 +46,8 @@
                 <tr v-for="info in formInfo" :key="info" class="each-tour-row">
                     <td scope="row">{{ info.id }}</td>
                     <td scope="row">{{ info.name }}</td>
-                    <td scope="row"> Tour</td>
+                    <td scope="row" v-if="info.Tour"> {{info.Tour.title}}</td>
+                    <td v-else>Không </td>
                     <td scope="row">{{ info.phone }}</td>
                     <td scope="row">{{ info.email }}</td>
                     <td scope="row">{{ info.note }}</td>
@@ -66,10 +67,8 @@ let formInfo = ref()
 onMounted(() => {
     baseUrl.get("/admin/advisory/" + sortOrder.value + "/" + 1)
         .then(response => {
-            console.log(response.data)
             formInfo.value = response.data.rows
             // formInfo.value = response.data.count / 10 + 1
-            console.log(formInfo.value)
         }).catch((error) => {
             console.error(error);
         });

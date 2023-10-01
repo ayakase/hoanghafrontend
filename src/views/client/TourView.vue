@@ -1,5 +1,6 @@
 <script setup>
 import PlaceModal from '../../components/PlaceModal.vue'
+import AdvisoryModal from '../../components/AdvisoryModal.vue';
 import { onMounted, ref } from 'vue';
 import baseUrl from '../../connect';
 import { useRoute } from 'vue-router';
@@ -26,6 +27,7 @@ let tabSec2 = ref()
 <template>
     <PlaceModal :tourId="route.query.id" :childPrice="childPrice" :adultPrice="adultPrice" :teenagerPrice="teenagerPrice">
     </PlaceModal>
+    <AdvisoryModal :tourId="route.query.id"></AdvisoryModal>
     <!-- :title="gameTitle" :description="gameDescription" :download="downloadUrl" -->
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">
@@ -88,7 +90,7 @@ let tabSec2 = ref()
                 <p>Giá tour: <span style="color: #ff6b00;">{{ numeralFormat(tourDetail.adultprice) }}</span></p>
                 <div class="action-button">
                     <button class="btn place-btn" data-bs-toggle="modal" data-bs-target="#placeModal">Đặt tour</button>
-                    <button class="btn advise-btn">Tư vấn</button>
+                    <button class="btn advise-btn" data-bs-toggle="modal" data-bs-target="#advisoryModal">Tư vấn</button>
                 </div>
             </div>
             <div class="hot-tour">

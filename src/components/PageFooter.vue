@@ -123,15 +123,18 @@
 
         <!-- <img src=" ../assets/images/footer-img.png" class="footer-img" alt=""> -->
     </div>
+    <LoadingOverlay v-if="showOverlay"></LoadingOverlay>
 </template>
 
 <script setup>
+import LoadingOverlay from './LoadingOverlay.vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import baseUrl from '../connect';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 import { ref } from 'vue'
+const showOverlay = ref(false)
 const footerName = ref()
 const footerPhoneNumber = ref()
 const footerEmail = ref()
@@ -144,6 +147,7 @@ function sendInfo() {
             position: toast.POSITION.BOTTOM_RIGHT,
         });
     } else {
+        showOverlay.value = true
         const footerData = {
             name: footerName.value,
             phone: footerPhoneNumber.value,
@@ -152,6 +156,7 @@ function sendInfo() {
         }
         baseUrl.post("/client/advisory", footerData)
             .then(response => {
+                showOverlay.value = false
                 console.log(response.data)
                 toast.success("Đã nhận thông tin", {
                     autoClose: 2000,

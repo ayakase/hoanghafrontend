@@ -25,7 +25,8 @@
                             </div>
                         </template></v-img>
                 </div>
-                <button @click="nextPage"> Next page</button>
+                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success " v-if="nextCursor != null"> Tải thêm </button>
+                <button style="margin: auto; padding: auto;" @click="nextPage" class="btn btn-success " v-else disabled > Tải thêm </button>
 
             </div>
         </div>
@@ -33,7 +34,7 @@
             <h3>URL</h3>
             <textarea readonly name="" id="" rows="8" placeholder="" :value=copyUrl>
             </textarea>
-            <button style="justify-self: end;align-self: end;font-size:x-large"><i class="fa-regular fa-copy"></i></button>
+            <button class="btn btn-success" style="justify-self: end;align-self: end;font-size:x-large"><i class="fa-regular fa-copy"></i></button>
         </div>
     </div>
 </template>
@@ -41,7 +42,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import baseUrl from '../../connect';
-import galleryData from '../../../gallery.json'
 import LoadingOverlay from '../../components/LoadingOverlay.vue';
 let images = ref()
 let files = ref([])
@@ -98,6 +98,7 @@ function nextPage() {
 
 <style scoped>
 .library-container {
+    margin-bottom: 2rem;
     margin-top: 2rem;
     width: 100%;
     display: flex;

@@ -90,11 +90,11 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+const router = useRouter();
 import baseUrl from '../../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import TableLoading from '../../components/TableLoading.vue';
-const router = useRouter();
 let pageNumber = ref(1)
 let tourTable = ref()
 let totalPage = ref()
