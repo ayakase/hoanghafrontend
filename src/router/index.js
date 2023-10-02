@@ -66,40 +66,55 @@ const router = createRouter({
       name: 'admin',
       component: () => import('../views/admin/DashboardView.vue'),
       children: [
-        { path: 'dat-tour',
-         component: () => import('../views/admin/OrderManage.vue') 
+        {
+          path: 'dat-tour',
+          component: () => import('../views/admin/OrderManage.vue')
         },
-        { path: 'quan-ly-tour',
-         component: () => import('../views/admin/TourManage.vue') 
+        {
+          path: 'quan-ly-tour',
+          component: () => import('../views/admin/TourManage.vue')
         },
-        { path: 'bai-viet', 
-        component: () => import('../views/admin/PostManage.vue') 
+        {
+          path: 'bai-viet',
+          component: () => import('../views/admin/PostManage.vue')
         },
-        { path: 'quan-li-tour/them-tour', 
-        component: () => import('../views/admin/AddTour.vue') 
+        {
+          path: 'bai-viet/tao-bai-viet',
+          component: () => import('../views/admin/NewPost.vue')
         },
-        { path: 'quan-li-tour/chinh-sua-tour', 
-        component: () => import('../views/admin/EditTour.vue') 
+        {
+          path: 'quan-li-tour/them-tour',
+          component: () => import('../views/admin/AddTour.vue')
         },
-        { path: 'thong-ke', 
-        component: () => import('../views/admin/StatisticPage.vue') 
+        {
+          path: 'quan-li-tour/chinh-sua-tour',
+          component: () => import('../views/admin/EditTour.vue')
         },
-        { path: 'dang-ky-tu-van', 
-        component: () => import('../views/admin/AdvisoryManage.vue') 
+        {
+          path: 'thong-ke',
+          component: () => import('../views/admin/StatisticPage.vue')
         },
-        { path: 'quan-ly-hot-tour', 
-        component: () => import('../views/admin/HotTourManage.vue') 
+        {
+          path: 'dang-ky-tu-van',
+          component: () => import('../views/admin/AdvisoryManage.vue')
         },
-        { path: 'quan-ly-slider', 
-        component: () => import('../views/admin/SliderManage.vue') 
+        {
+          path: 'quan-ly-hot-tour',
+          component: () => import('../views/admin/HotTourManage.vue')
         },
-        { path: 'tai-khoan-admin', 
-        component: () => import('../views/admin/AdminAccount.vue') 
+        {
+          path: 'quan-ly-slider',
+          component: () => import('../views/admin/SliderManage.vue')
         },
-        { path: 'thu-vien', 
-        component: () => import('../views/admin/ImageLibrary.vue') 
+        {
+          path: 'tai-khoan-admin',
+          component: () => import('../views/admin/AdminAccount.vue')
         },
-       
+        {
+          path: 'thu-vien',
+          component: () => import('../views/admin/ImageLibrary.vue')
+        },
+
       ]
     },
   ]

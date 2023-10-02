@@ -1,0 +1,1 @@
+import{_ as o,g as t,o as a,c as n,j as c}from"./index-baf84528.js";const r={};function s(p,_,i,l,m,d){const e=t("v-avatar");return a(),n("div",null,[c(e,{image:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",size:"80"})])}const u=o(r,[["render",s]]);export{u as default};

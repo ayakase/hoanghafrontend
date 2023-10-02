@@ -16,7 +16,11 @@
                 <button class="btn btn-success" style="height: 90%;" @click="uploadImage">Tải ảnh lên &nbsp;<i
                         class="fa-solid fa-cloud-arrow-up"></i></button>
             </div>
-            <div><p>Chỉ nhận định dạng .png, .jpg, .jpeg, .gif, .webp. Mỗi lần tải lên không quá 10 files để đảm bảo đường truyềnf</p></div>
+            <div>
+                <p>Chỉ nhận định dạng .png, .jpg, .jpeg, .gif, .webp. Mỗi lần tải lên không quá 10 files để đảm bảo đường
+                    truyền</p>
+            </div>
+            <p><b>Đang hiển thị {{ displayCount }} trong số {{ totalCount }} ảnh</b></p>
             <div class="image-grid">
                 <div v-for="image in images" :key="image" class="each-image">
                     <v-img cover class="each-image" :src=image.url @click="showUrl(image.url)">
@@ -26,12 +30,13 @@
                             </div>
                         </template></v-img>
                 </div>
-                
+
             </div>
-            <div class="button-container" >
+            <div class="button-container">
                 <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success "
                     v-if="nextCursor != null"> Tải thêm </button>
-                <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success " v-else disabled> Tải
+                <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success " v-else
+                    disabled> Tải
                     thêm </button>
             </div>
         </div>
@@ -53,13 +58,14 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 let images = ref()
 let files = ref([])
-let pageNumber = ref(2)
 let copyUrl = ref()
 let showOverlay = ref(false)
 function showUrl(url) {
     console.log(url)
     copyUrl.value = url
 }
+let totalCount = ref()
+let displayCount = ref()
 // function toggleUrl(url) {
 //     let toggleState = ref()
 //     if (toggleState.value) {
@@ -83,8 +89,7 @@ function uploadImage() {
             'Content-Type': 'multipart/form-data',
         },
     })
-        .then(response => {
-            console.log(response.data)
+        .then((response) => {
             files.value = []
             showOverlay.value = false
             toast.success("Đã nhận thông tin", {
@@ -92,14 +97,15 @@ function uploadImage() {
                 theme: "colored",
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
-            
+
         }).then(() => {
             baseUrl.get('/admin/library')
                 .then((response) => {
-                    console.log(response.data.next_cursor)
                     images.value = response.data.resources
                     nextCursor.value = response.data.next_cursor
                     showOverlay.value = false
+                    totalCount.value = response.data.total_count
+                    displayCount.value = images.value.length
                 }).catch((error) => {
                     console.log(error)
                 })
@@ -120,9 +126,10 @@ onMounted(() => {
     baseUrl.get('/admin/library')
         .then((response) => {
             showOverlay.value = false
-            console.log(response.data.next_cursor)
             images.value = response.data.resources
             nextCursor.value = response.data.next_cursor
+            totalCount.value = response.data.total_count
+            displayCount.value = images.value.length
         }).catch((error) => {
             console.log(error)
         })
@@ -136,6 +143,8 @@ function nextPage() {
             console.log(response.data.next_cursor)
             images.value = images.value.concat(response.data.resources)
             nextCursor.value = response.data.next_cursor
+            totalCount.value = response.data.total_count
+            displayCount.value = images.value.length
         }).catch((error) => {
             console.log(error)
         })
@@ -198,10 +207,10 @@ textarea {
     flex-direction: row;
     justify-content: center;
 }
+
 .load-btn {
     width: 10rem;
     height: 3rem;
     font-size: larger;
     font-weight: bold;
-}
-</style>
+}</style>
