@@ -32,17 +32,14 @@
             aria-expanded="false"
             style="color: white"
           >
-            Danh mục &nbsp; <i class="fa-solid fa-book"> :</i>
-            {{ categoryLabel }}
+            Trạng thái &nbsp; <i class="fa-solid fa-book"> :</i>
+            {{ publishLabel }}
           </button>
           <div class="dropdown-menu">
-            <button class="dropdown-item" @click="categoryAll">
-              Tất cả &nbsp;<i class="fa-regular fa-rectangle-list"></i>
-            </button>
-            <button class="dropdown-item" @click="categoryChina">
+            <button class="dropdown-item" @click="publishedPost">
               Đã xuất bản &nbsp;<i class="fa-solid fa-vihara"></i>
             </button>
-            <button class="dropdown-item" @click="categoryDomestic">
+            <button class="dropdown-item" @click="unpublishedPost">
               Chưa xuất bản &nbsp; <i class="fa-solid fa-flag"></i>
             </button>
           </div>
@@ -53,7 +50,7 @@
         <button class="sort-button btn btn-success" @click="Oldest">
           Cũ nhất &nbsp; <i class="fa-solid fa-arrow-down-wide-short"></i>
         </button>
-        <button class="btn btn-success" @click="fetchTour">
+        <button class="btn btn-success" @click="fetchPost">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
         <!-- <button class="sort-button btn btn-success">Chưa xử lý &nbsp; <i
@@ -63,7 +60,7 @@
       </div>
     </div>
     <table
-      v-if="tourTable"
+      v-if="postTable"
       class="table table-success table-striped table-hover"
       style="width: 80vw; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px"
     >
@@ -72,86 +69,18 @@
           <th scope="col">ID</th>
           <th scope="col">Tiêu đề</th>
           <th scope="col">Nội dung</th>
-          <th scope="col">Danh mục</th>
+          <th scope="col">Ngày đăng</th>
           <th scope="col">Chỉnh sửa</th>
+          <th scope="col">Hành động</th>
           <th scope="col">Xóa</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="tour in tourTable" :key="tour" class="each-tour-row">
-          <th
-            scope="row"
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ tour.id }}
-          </th>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ tour.title }}
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ tour.schedule }}
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ tour.Category.name }}
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ tour.departure }}
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ tour.days }}
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-            v-if="tour.ishottour == 1"
-          >
-            Có
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-            v-else
-          >
-            Không
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ tour.transportation }}
-          </td>
-          <td
-            @click="
-              router.push({ path: '/tourdetail', query: { id: tour.id } })
-            "
-          >
-            {{ formatDate(tour.createdAt) }}
-          </td>
+        <tr v-for="post in postTable" :key="post" class="each-tour-row">
+          <td>{{ post.id }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.content }}</td>
+          <td>{{ formatDate(post.createdAt) }}</td>
           <td>
             <button
               @click="
@@ -163,6 +92,16 @@
               class="edit-button"
             >
               <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+          </td>
+          <td v-if="post.publish == 1" style="vertical-align: middle">
+            <button class="solve-btn" @click="publishPost(post.id)">
+              <i class="fa-regular fa-circle-check fa-lg"></i>
+            </button>
+          </td>
+          <td v-else style="vertical-align: middle">
+            <button class="solve-btn" @click="publishPost(order.id)">
+              <i class="fa-regular fa-circle-xmark fa-lg"></i>
             </button>
           </td>
           <td>
@@ -194,14 +133,16 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import TableLoading from "../../components/TableLoading.vue";
 let pageNumber = ref(1);
-let tourTable = ref();
+
+let postTable = ref();
 let totalPage = ref();
-function fetchTour() {
-  tourTable.value = null;
+let publishState = ref(1);
+function fetchPost() {
+  postTable.value = null;
   baseUrl
     .get(
-      "/admin/tour/" +
-        categoryNumber.value +
+      "/admin/post/" +
+        publishState.value +
         "/" +
         sortOrder.value +
         "/" +
@@ -209,7 +150,7 @@ function fetchTour() {
     )
     .then((response) => {
       console.log(response.data);
-      tourTable.value = response.data.rows;
+      postTable.value = response.data.rows;
       totalPage.value = response.data.count / 10 + 1;
     })
     .catch((error) => {
@@ -217,10 +158,10 @@ function fetchTour() {
     });
 }
 onMounted(() => {
-  fetchTour();
+  fetchPost();
 });
 function getTourbyPage() {
-  fetchTour();
+  fetchPost();
 }
 function deleteTour(id) {
   console.log(id);
@@ -235,7 +176,7 @@ function deleteTour(id) {
           theme: "colored",
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-        fetchTour();
+        fetchPost();
       })
       .catch((error) => {
         console.error(error);
@@ -247,15 +188,26 @@ function deleteTour(id) {
 let sortOrder = ref("DESC");
 function Newest() {
   sortOrder.value = "DESC";
-
-  fetchTour();
+  fetchPost();
 }
 function Oldest() {
   sortOrder.value = "ASC";
-
-  fetchTour();
+  fetchPost();
 }
-
+const publishLabel = ref("Đã xuất bản");
+function publishedPost() {
+  publishState.value = 1;
+  publishLabel.value = "Đã xuất bản";
+  fetchPost();
+}
+function unpublishedPost() {
+  publishState.value = 0;
+  publishLabel.value = "Chưa xuất bản";
+  fetchPost();
+}
+function publishPost(id){
+  console.log()
+}
 function formatDate(date) {
   const options = {
     year: "numeric",

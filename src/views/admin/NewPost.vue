@@ -9,7 +9,7 @@
         class="form-control"
         id=""
         placeholder=""
-        v-model="tourTitle"
+        v-model="postTitle"
       />
     </div>
     <div class="mb-3 thumbnail">
@@ -63,11 +63,11 @@
     </div>
     <div class="mt-10 mb-2"></div>
     <div
-      @click="addTour"
+      @click="addpost"
       class="btn btn-success"
       style="margin-top: 1rem; right: 0; float: right"
     >
-      Add Tour
+      Add post
     </div>
   </div>
 </template>
@@ -79,41 +79,30 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import Editor from "@tinymce/tinymce-vue";
 import { ref, computed } from "vue";
-let publishState = ref(false);
+const publishState = ref(true);
+const showOverlay = ref(false);
 const thumbnailSrc = ref();
+const postTitle = ref();
+const postContent = ref();
+const postThumbnail = ref();
+
 function processImg(event) {
   console.log(event);
   if (event.target.files.length) {
     thumbnailSrc.value = URL.createObjectURL(event.target.files[0]);
   }
-  tourThumbnail.value = event.target.files[0];
+  postThumbnail.value = event.target.files[0];
 }
-function addTour() {
+function addpost() {
   showOverlay.value = true;
-  // console.log(tourThumbnail.value)
-  const tourData = new FormData();
-  tourData.append("tourTitle", tourTitle.value);
-  tourData.append("tourThumbnail", tourThumbnail.value);
-  tourData.append("tourSchedule", tourSchedule.value);
-  tourData.append("tourCategory", tourCategory.value);
-  tourData.append("tourType", tourType.value);
-  tourData.append("tourFrom", tourFrom.value);
-  tourData.append("tourLength", tourLength.value);
-  tourData.append("isHot", isHot.value);
-  tourData.append("recommend", recommendText.value);
-  tourData.append("tourTransport", tourTransport.value.toString());
-  tourData.append("adultPrice", adultPrice.value);
-  tourData.append("youngPrice", youngPrice.value);
-  tourData.append("childPrice", childPrice.value);
-  tourData.append("tourSpecial", tourSpecial.value);
-  tourData.append("tourBonus", tourBonus.value);
-  tourData.append("tourVisa", tourVisa.value);
-  tourData.append("tourDetail", tourDetail.value);
-  tourData.append("tourPriceService", tourPriceService.value);
-  tourData.append("tourGuide", tourGuide.value);
-
+  // console.log(postThumbnail.value)
+  const postData = new FormData();
+  postData.append("postTitle", postTitle.value);
+  postData.append("postThumbnail", postThumbnail.value);
+  postData.append("postContent", postContent.value);
+  postData.append("publishState", publishState.value);
   baseUrl
-    .post("/admin/tour", tourData, {
+    .post("/admin/post", postData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
