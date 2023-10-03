@@ -33,11 +33,14 @@
 
             </div>
             <div class="button-container">
-                <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success "
+                <!-- <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success "
                     v-if="nextCursor != null"> Tải thêm </button>
                 <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success " v-else
                     disabled> Tải
-                    thêm </button>
+                    thêm </button> -->
+                    <div ref="target">
+                        Load more
+                    </div>
             </div>
         </div>
         <div class="action-section">
@@ -51,32 +54,41 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { useElementVisibility } from '@vueuse/core'
+
+import { ref, watch, onMounted } from 'vue'
 import baseUrl from '../../connect';
 import LoadingOverlay from '../../components/LoadingOverlay.vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+const target = ref(null)
+const isVisible = useElementVisibility(target)
+watch(isVisible,(newValue, oldValue) =>{
+    if(newValue === true) {
+
+    baseUrl.get('/admin/library/' + nextCursor.value)
+        .then((response) => {
+            showOverlay.value = false
+            console.log(response.data.next_cursor)
+            images.value = images.value.concat(response.data.resources)
+            nextCursor.value = response.data.next_cursor
+            totalCount.value = response.data.total_count
+            displayCount.value = images.value.length
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+})
 let images = ref()
 let files = ref([])
-let copyUrl = ref()
 let showOverlay = ref(false)
+let copyUrl = ref([])
 function showUrl(url) {
-    console.log(url)
-    copyUrl.value = url
+    copyUrl.value.push(url)
+    console.log(copyUrl.value)
 }
 let totalCount = ref()
 let displayCount = ref()
-// function toggleUrl(url) {
-//     let toggleState = ref()
-//     if (toggleState.value) {
-//         copyUrl.value = url
-//         toggleState.value = !toggleState.value
-//     } else {
-//         copyUrl.value = ''
-//         toggleState.value = !toggleState.value
-//     }
-
-// }
 
 function uploadImage() {
     showOverlay.value = true
@@ -213,4 +225,5 @@ textarea {
     height: 3rem;
     font-size: larger;
     font-weight: bold;
-}</style>
+}
+</style>
