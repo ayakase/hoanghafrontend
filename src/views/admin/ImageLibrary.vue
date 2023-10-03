@@ -38,7 +38,7 @@
                 <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success " v-else
                     disabled> Tải
                     thêm </button> -->
-                    <div ref="target">
+                    <div ref="target" style="margin-top: 10rem;">
                         <h4  v-if="loadMore && nextCursor"> Load thêm...</h4>
                     </div>
             </div>
