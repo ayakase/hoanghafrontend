@@ -39,7 +39,7 @@
                     disabled> Tải
                     thêm </button> -->
                     <div ref="target">
-                        Load more
+                        <h4  v-if="loadMore && nextCursor"> Load thêm...</h4>
                     </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ const target = ref(null)
 const isVisible = useElementVisibility(target)
 watch(isVisible,(newValue, oldValue) =>{
     if(newValue === true) {
-
+        loadMore.value = true
     baseUrl.get('/admin/library/' + nextCursor.value)
         .then((response) => {
             showOverlay.value = false
@@ -82,6 +82,7 @@ watch(isVisible,(newValue, oldValue) =>{
 let images = ref()
 let files = ref([])
 let showOverlay = ref(false)
+let loadMore = ref(false)
 let copyUrl = ref([])
 function showUrl(url) {
     copyUrl.value.push(url)
