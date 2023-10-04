@@ -31,7 +31,9 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../../assets/images/placeholder.png" class="d-block slide-img" alt="...">
+            <img
+              src="https://www.adorama.com/alc/wp-content/uploads/2018/11/landscape-photography-tips-yosemite-valley-feature.jpg"
+              class="d-block slide-img" alt="...">
             <!-- <div class="carousel-caption d-none d-md-block">
               <h5>First slide label</h5>
               <p>Some representative placeholder content for the first slide.</p>

@@ -192,16 +192,6 @@ p {
     padding: auto;
 }
 
-.breadcrumb-item {
-    font-size: large;
-}
-
-.home-breadcrumb {
-    text-decoration: none !important;
-    font-weight: bold;
-    color: black;
-}
-
 .tour-detail-container {
     width: 35rem;
     display: flex;
