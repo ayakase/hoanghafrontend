@@ -49,7 +49,7 @@ let tabSec2 = ref()
         <div class="main-content">
             <div>
                 <div class="iframe_container">
-                    <iframe src="https://www.tiktok.com/embed/7278272694066433282" class="iframe" allowfullscreen
+                    <iframe src="https://www.tiktok.com/embed/7285184881292774657" class="iframe" allowfullscreen
                         scrolling="no" allow="encrypted-media;"></iframe>
                 </div>
                 <div class="gallery">
