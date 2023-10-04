@@ -83,19 +83,19 @@
         <h1>{{ posts[0].title }}</h1>
       </div>
       <div class="post-2"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[1].thumbnail alt="">
-        <h4>{{ posts[0].title }}</h4>
+        <h4>{{ posts[1].title }}</h4>
       </div>
       <div class="post-3"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[2].thumbnail alt="">
-        <h4>{{ posts[0].title }}</h4>
+        <h4>{{ posts[2].title }}</h4>
       </div>
       <div class="post-4"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[3].thumbnail alt="">
-        <h4>{{ posts[0].title }}</h4>
+        <h4>{{ posts[3].title }}</h4>
       </div>
       <div class="post-5"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[4].thumbnail alt="">
-        <h4>{{ posts[0].title }}</h4>
+        <h4>{{ posts[4].title }}</h4>
       </div>
       <div class="post-6"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[5].thumbnail alt="">
-        <h4>{{ posts[0].title }}</h4>
+        <h4>{{ posts[5].title }}</h4>
       </div>
     </div>
     <div v-if="hotTour" style="width: 100%;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 4rem;">
@@ -113,7 +113,7 @@
         </Splide>
       </div>
     </div>
-    <div v-if="hotTour"
+    <div v-if="china"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch Trung Quốc &nbsp; <i
           class="fa-solid fa-vihara"></i>
@@ -129,7 +129,7 @@
         </Splide>
       </div>
     </div>
-    <div v-if="hotTour"
+    <div v-if="domestic"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch trong nước &nbsp; <i
           class="fa-solid fa-flag"></i>
@@ -145,7 +145,7 @@
         </Splide>
       </div>
     </div>
-    <div v-if="hotTour"
+    <div v-if="foreign"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch quốc tế &nbsp; <i
           class="fa-solid fa-globe"></i>
