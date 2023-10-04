@@ -20,6 +20,16 @@
                 <p>Chỉ nhận định dạng .png, .jpg, .jpeg, .gif, .webp. Mỗi lần tải lên không quá 10 files để đảm bảo đường
                     truyền</p>
             </div>
+            <div style="display: flex; gap: 1rem;width: 100%;flex-wrap: wrap;">
+                <div v-for="image in copyUrl" :key="image" class="each-image" @click="showUrl(image)">
+                    <v-img cover class=" each-image" :src=image>
+                        <template v-slot:placeholder>
+                            <div class="d-flex align-center justify-center fill-height">
+                                <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                            </div>
+                        </template></v-img>
+                </div>
+            </div>
             <p><b>Đang hiển thị {{ displayCount }} trong số {{ totalCount }} ảnh</b></p>
             <div class="image-grid">
                 <div v-for="image in images" :key="image" class="each-image">
@@ -50,15 +60,6 @@
             </textarea>
             <button class="btn btn-success" style="justify-self: end;align-self: end;font-size:x-large"><i
                     class="fa-regular fa-copy"></i></button>
-
-            <div v-for="image in copyUrl" :key="image" class="each-image">
-                <v-img cover class="each-image" :src=image>
-                    <template v-slot:placeholder>
-                        <div class="d-flex align-center justify-center fill-height">
-                            <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
-                        </div>
-                    </template></v-img>
-            </div>
         </div>
     </div>
 </template>
@@ -67,8 +68,8 @@
 import { useElementVisibility } from '@vueuse/core'
 
 import { ref, watch, onMounted } from 'vue'
-import baseUrl from '../../connect';
-import LoadingOverlay from '../../components/LoadingOverlay.vue';
+import baseUrl from '../connect';
+import LoadingOverlay from './LoadingOverlay.vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 const target = ref(null)

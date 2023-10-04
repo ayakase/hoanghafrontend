@@ -1,4 +1,4 @@
-<script setup>
+<script setup >
 import PlaceModal from '../../components/PlaceModal.vue'
 import AdvisoryModal from '../../components/AdvisoryModal.vue';
 import { onMounted, ref } from 'vue';
@@ -10,6 +10,7 @@ const tourDetail = ref()
 const adultPrice = ref()
 const teenagerPrice = ref()
 const childPrice = ref()
+const renderVideo = ref(false)
 onMounted(() => {
     baseUrl.get("client/each-tour/" + route.query.id).then(response => {
         console.log(response.data[0])
@@ -20,6 +21,9 @@ onMounted(() => {
     }).catch((error) => {
         console.error(error);
     });
+    setTimeout(() => {
+        renderVideo.value = true
+    }, 1000);
 })
 let tabSec1 = ref()
 let tabSec2 = ref()
@@ -31,7 +35,12 @@ let tabSec2 = ref()
     <!-- :title="gameTitle" :description="gameDescription" :download="downloadUrl" -->
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">
+
         <div class="main-content">
+            <div class="iframe_container">
+                <iframe src="https://www.tiktok.com/embed/7278272694066433282" class="iframe" allowfullscreen scrolling="no"
+                    allow="encrypted-media;"></iframe>
+            </div>
             <h2 style="margin-bottom: 2rem;"> {{ tourDetail.title }}</h2>
             <v-card class="first-section" elevation="0">
                 <v-tabs class="tab-slider" v-model="tabSec1" color="white" align-tabs="start">
@@ -244,5 +253,22 @@ let tabSec2 = ref()
     background-color: #FF6B00;
     width: 6rem;
     color: white;
+}
+
+.iframe_container {
+    left: 0;
+    /* width: 100%; */
+    height: 50rem;
+    position: relative;
+
+}
+
+.iframe {
+    top: 0;
+    left: 0;
+    /* width: 100%; */
+    height: 100%;
+    position: absolute;
+    border: 0;
 }
 </style>

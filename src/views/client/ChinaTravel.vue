@@ -29,7 +29,8 @@
                     <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
                         <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
                             style="width: 100%;" alt=""> -->
-                        <v-img cover :width="50" class="thumbnail" :src=tour.thumbnail>
+                        <v-img style="background-color: rebeccapurple;height: 100%;" cover :width="50" class="thumbnail"
+                            :src=tour.thumbnail>
                             <template v-slot:placeholder>
                                 <div class="d-flex align-center justify-center fill-height">
                                     <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>

@@ -1,6 +1,6 @@
 <template>
   <div class="home-container">
-    <div class="home-first-section">
+    <div class="home-first-section" style="margin-bottom: 5rem;">
       <div class="travel-category">
         <div class="travel-category-item" @click="router.push('/du-lich-trong-nuoc')">
           <h5>Du lịch trong nước</h5> <i class="fa-solid fa-chevron-right"></i>
@@ -75,39 +75,139 @@
         </div>
       </div>
     </div>
+
+    <div v-if="hotTour"
+      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
+          style="color: #ff6600;"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
+    <div v-if="hotTour"
+      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
+          style="color: #ff6600;"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in china" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
+    <div v-if="hotTour"
+      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
+          style="color: #ff6600;"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
+    <div v-if="hotTour"
+      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
+          style="color: #ff6600;"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import HeartLoading from '../../components/HeartLoading.vue';
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
+import '@splidejs/vue-splide/css';
+import baseUrl from '../../connect';
 
 export default {
   components: {
     HeartLoading,
+    Splide,
+    SplideSlide,
   },
   setup() {
+    let hotTour = ref()
+    let china = ref()
+    let domestic = ref()
+    let foreign = ref()
+    const options = {
+      rewind: true,
+      gap: '2rem',
+      perPage: 5,
+      perMove: 1,
+      autoplay: true,
+
+      // focus: 'center',
+
+    };
     const router = useRouter();
-    const onSwiper = (swiper) => {
-      console.log(swiper);
-    };
-    const onSlideChange = () => {
-      console.log('slide change');
-    };
-    const chinaSlide = ref()
-    const domesticSlide = ref()
-    const foreignSlide = ref()
-    const hotTourSlide = ref()
-    onMounted(() => { })
+    onMounted(() => {
+      baseUrl.get('/client/carousel/hottour').then((response) => {
+        console.log(response.data)
+        hotTour.value = response.data.rows
+      })
+      baseUrl.get('/client/carousel/china').then((response) => {
+        console.log(response.data)
+        china.value = response.data.rows
+      })
+      baseUrl.get('/client/carousel/domestic').then((response) => {
+        console.log(response.data)
+        domestic.value = response.data.rows
+      })
+      baseUrl.get('/client/carousel/global').then((response) => {
+        console.log(response.data)
+        global.value = response.data.rows
+      })
+    })
     return {
       router,
+      options,
+      hotTour,
+      china,
+      domestic,
+      foreign
     }
   }
 }
 </script>
 
 <style >
+.splide:not(.is-overflow) .splide__list {
+  justify-content: center;
+}
+
 .home-container {
   padding-top: 2rem;
   margin: auto;

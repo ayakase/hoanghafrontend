@@ -32,7 +32,6 @@
                     </p>
                 </div>
             </div>
-
         </div> -->
     <div class="footer-main-content">
       <div class="footer-section footer-section-1">
@@ -40,33 +39,21 @@
         <h3>CÔNG TY TNHH MTV DU LỊCH QUỐC TẾ HOÀNG HÀ</h3>
         <div class="introduce-footer">
           <div class="introduce-item">
-            <img
-              src="../assets/icon-contact/vector.png"
-              class="introduce-icon"
-              alt=""
-            />
+            <img src="../assets/icon-contact/vector.png" class="introduce-icon" alt="" />
             <p>
               <b>Văn phòng chính: </b> 040 Trần Nguyên Hãn, phường Lào Cai,
               thành phố Lào Cai, tỉnh Lào Cai
             </p>
           </div>
           <div class="introduce-item">
-            <img
-              src="../assets/icon-contact/location.png"
-              class="introduce-icon"
-              alt=""
-            />
+            <img src="../assets/icon-contact/location.png" class="introduce-icon" alt="" />
             <p>
               <b>Địa chỉ: </b> 116b đường Sơn Đạo, phường Cốc Lếu, thành phố Lào
               Cai, tỉnh Lào Cai
             </p>
           </div>
           <div class="introduce-item">
-            <img
-              src="../assets/icon-contact/e-mail.png"
-              class="introduce-icon"
-              alt=""
-            />
+            <img src="../assets/icon-contact/e-mail.png" class="introduce-icon" alt="" />
             <div>
               <p><b>Điện thoại: </b> (084) 385 5158</p>
               <p><b>Fax: </b> 0214 3.858,178</p>
@@ -74,11 +61,7 @@
             </div>
           </div>
           <div class="introduce-item">
-            <img
-              src="../assets/icon-contact/phone.png"
-              class="introduce-icon"
-              alt=""
-            />
+            <img src="../assets/icon-contact/phone.png" class="introduce-icon" alt="" />
             <p><b>Email: </b> dlhoanghalaocai@gmail.com</p>
           </div>
         </div>
@@ -88,16 +71,10 @@
           <div class="section-top-bar"></div>
           <h3>Về chúng tôi</h3>
           <div class="about-us-items">
-            <p
-              class="about-us-item"
-              @click="router.push('/about/chinh-sach-va-quy-dinh')"
-            >
+            <p class="about-us-item" @click="router.push('/about/chinh-sach-va-quy-dinh')">
               Chính sách và quy định chung
             </p>
-            <p
-              class="about-us-item"
-              @click="router.push('/about/bao-hiem-dich-vu')"
-            >
+            <p class="about-us-item" @click="router.push('/about/bao-hiem-dich-vu')">
               Bảo hiểm dịch vụ
             </p>
             <p class="about-us-item" @click="router.push('/about/quy-trinh')">
@@ -111,35 +88,19 @@
           <div class="follow-us-items">
             <div class="insta-and-facebook">
               <div class="follow-us-item">
-                <img
-                  src="../assets/icon-mxh/instagram-logo.png"
-                  class="follow-icon"
-                  alt=""
-                />
+                <img src="../assets/icon-mxh/instagram-logo.png" class="follow-icon" alt="" />
                 <p>Instagram</p>
               </div>
               <div class="follow-us-item">
-                <img
-                  src="../assets/icon-mxh/facebook-logo.png"
-                  class="follow-icon"
-                  alt=""
-                />
+                <img src="../assets/icon-mxh/facebook-logo.png" class="follow-icon" alt="" />
                 <p>Facebook</p>
               </div>
             </div>
             <p class="copyright">
               @ 2014 Du lịch Hoàng Hà <br />Developed by
-              <a
-                style="color: #045b48; font-weight: bold"
-                href="https://github.com/ayakase"
-                >Ayakase</a
-              >
+              <a style="color: #045b48; font-weight: bold" href="https://github.com/ayakase">Ayakase</a>
               and
-              <a
-                href="https://github.com/BinBlun"
-                style="color: #045b48; font-weight: bold"
-                >BinBlun</a
-              >
+              <a href="https://github.com/BinBlun" style="color: #045b48; font-weight: bold">BinBlun</a>
             </p>
           </div>
         </div>
@@ -154,43 +115,16 @@
         <div class="section-top-bar"></div>
         <h2>Đăng ký tư vấn</h2>
         <div class="footer-form">
-          <input
-            class="form-control footer-input"
-            type="text"
-            placeholder="Họ tên"
-            v-model="footerName"
-            aria-label="default input example"
-            required
-          />
-          <input
-            class="form-control footer-input"
-            type="text"
-            placeholder="Số điện thoại"
-            v-model="footerPhoneNumber"
-            aria-label="default input example"
-            required
-          />
-          <input
-            class="form-control footer-input"
-            type="email"
-            placeholder="Email"
-            v-model="footerEmail"
-            aria-label="default input example"
-            required
-          />
-          <textarea
-            class="form-control footer-text-area"
-            placeholder="Ghi chú"
-            id="floatingTextarea"
-            v-model="footerNote"
-            required
-          ></textarea>
+          <input class="form-control footer-input" type="text" placeholder="Họ tên" v-model="footerName"
+            aria-label="default input example" required />
+          <input class="form-control footer-input" type="text" placeholder="Số điện thoại" v-model="footerPhoneNumber"
+            aria-label="default input example" required />
+          <input class="form-control footer-input" type="email" placeholder="Email" v-model="footerEmail"
+            aria-label="default input example" required />
+          <textarea class="form-control footer-text-area" placeholder="Ghi chú" id="floatingTextarea" v-model="footerNote"
+            required></textarea>
         </div>
-        <button
-          type="submit"
-          @click.prevent="sendInfo"
-          class="btn btn-success footer-form-button"
-        >
+        <button type="submit" @click.prevent="sendInfo" class="btn btn-success footer-form-button">
           Đăng ký
         </button>
       </form>
@@ -203,6 +137,7 @@
 
 <script setup>
 import LoadingOverlay from "./LoadingOverlay.vue";
+import GalleryComponent from "./GalleryComponent.vue";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import baseUrl from "../connect";
@@ -314,9 +249,10 @@ function sendInfo() {
 }
 
 .footer-main-content {
-  background-image: url("../assets/images/footer-img.jpg");
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.187) 0%, rgba(0, 0, 0, 0.204) 100%), url("../assets/images/footer-img.jpg");
   display: flex;
   height: 28rem;
+
   /* padding-top: 1rem; */
   flex-direction: row;
   background-repeat: no-repeat;
