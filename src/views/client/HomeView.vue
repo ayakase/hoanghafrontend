@@ -75,75 +75,9 @@
         </div>
       </div>
     </div>
-
-    <div v-if="hotTour"
-      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
-          style="color: #ff6600;"></i>
-      </h2>
-      <div style="width: 95%;margin: auto;">
-        <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
-          </SplideSlide>
-        </Splide>
-      </div>
-    </div>
-    <div v-if="hotTour"
-      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
-          style="color: #ff6600;"></i>
-      </h2>
-      <div style="width: 95%;margin: auto;">
-        <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in china" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
-          </SplideSlide>
-        </Splide>
-      </div>
-    </div>
-    <div v-if="hotTour"
-      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
-          style="color: #ff6600;"></i>
-      </h2>
-      <div style="width: 95%;margin: auto;">
-        <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
-          </SplideSlide>
-        </Splide>
-      </div>
-    </div>
-    <div v-if="hotTour"
-      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;">Hot Tour &nbsp; <i class="fa-solid fa-fire fa-bounce"
-          style="color: #ff6600;"></i>
-      </h2>
-      <div style="width: 95%;margin: auto;">
-        <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
-          </SplideSlide>
-        </Splide>
-      </div>
-    </div>
     <h2 style="text-align: center;margin-bottom: 2rem;">Cẩm nang</h2>
     <div class="post-container" v-if="posts">
-      <div class="post-1" style="background-color: rebeccapurple;"><img
-          style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
+      <div class="post-1"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
         <h1>{{ posts[0].title }}</h1>
       </div>
       <div class="post-2"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[1].thumbnail alt="">
@@ -162,6 +96,70 @@
         <h4>{{ posts[0].title }}</h4>
       </div>
     </div>
+    <div v-if="hotTour" style="width: 100%;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 4rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Hot Tour &nbsp; <i
+          class="fa-solid fa-fire fa-bounce" style="color: #ff6600;"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
+    <div v-if="hotTour"
+      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch Trung Quốc &nbsp; <i
+          class="fa-solid fa-vihara"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in china" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
+    <div v-if="hotTour"
+      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch trong nước &nbsp; <i
+          class="fa-solid fa-flag"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
+    <div v-if="hotTour"
+      style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
+      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch quốc tế &nbsp; <i
+          class="fa-solid fa-globe"></i>
+      </h2>
+      <div style="width: 95%;margin: auto;">
+        <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+            style="cursor: pointer;">
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+          </SplideSlide>
+        </Splide>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -402,12 +400,16 @@ export default {
 
 .post-container>div>img {
   transition: all .2s ease-in-out;
+  filter: brightness(90%);
+  border-radius: 5px;
+
 
 }
 
 .post-container>div>img:hover {
   transform: scale(1.1);
   filter: brightness(50%);
+  cursor: pointer;
 }
 
 .post-container>div>h1 {

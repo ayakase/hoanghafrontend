@@ -1,5 +1,5 @@
 <template>
-    <div class="domestic-container">
+    <div class="china-container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
@@ -29,7 +29,7 @@
                     <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
                         <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
                             style="width: 100%;" alt=""> -->
-                        <v-img cover :width="50" class="thumbnail" :src=tour.thumbnail>
+                        <v-img style="height: 100%;" cover :width="50" class="thumbnail" :src=tour.thumbnail>
                             <template v-slot:placeholder>
                                 <div class="d-flex align-center justify-center fill-height">
                                     <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
@@ -65,39 +65,16 @@
             </div>
             <div class="hot-tour">
                 <h2 style="padding-left: 1rem;">Tour hot</h2>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
+                <div v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+                    class="card" style="background: none;border: none;">
+                    <img :src=tour.thumbnail class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+                        <h5 class="card-title">{{ tour.title }}</h5>
+                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice) }}</span>
+                            VNĐ </p>
                         <hr class="hr" />
                     </div>
                 </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -118,59 +95,56 @@ let orderBy = ref("createdAt")
 let sortOrder = ref("DESC")
 function orderASC() {
     sortOrder.value = 'ASC'
-    reRender()
+    fetchTour()
 
 }
 function orderDESC() {
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
 function newest() {
     orderBy.value = 'createdAt'
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
 function recommend() {
     orderBy.value = 'recommend'
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
 function price() {
     orderBy.value = 'adultprice'
     sortOrder.value = 'ASC'
-    reRender()
+    fetchTour()
 
 }
 function duration() {
     orderBy.value = 'days'
     sortOrder.value = 'DESC'
-    reRender()
+    fetchTour()
 
 }
+let hotTour = ref()
 onMounted(() => {
-    baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
-        .then((response) => {
-            tourList.value = response.data.rows
-            totalPage.value = response.data.count / 10 + 1
-        })
-})
-function getTourbyPage() {
-    baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    fetchTour()
+    baseUrl.get("/client/tour/hot-sidebar/" + 2)
         .then(response => {
-            console.log(response.data)
-            tourList.value = response.data.rows
-            totalPage.value = response.data.count / 10 + 1
+            console.log(response.data.rows)
+            hotTour.value = response.data.rows
         }).catch((error) => {
             console.error(error);
         });
+})
+function getTourbyPage() {
+    fetchTour()
 }
-function reRender() {
+function fetchTour() {
+    tourList.value = null;
     baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
-            console.log(response.data)
             tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {
@@ -179,7 +153,11 @@ function reRender() {
 }
 </script>
 <style scoped>
-.domestic-container {
+.hot-tour {
+    width: 16rem;
+}
+
+.china-container {
     padding-top: 2rem;
     width: 90%;
     margin: auto;
@@ -209,7 +187,7 @@ p {
 
 .outer-container {
     padding-top: 2rem;
-    width: 90%;
+    width: 95%;
     margin: auto;
     padding: auto;
 }
@@ -289,7 +267,6 @@ p {
 }
 
 .sort-type {
-    width: 12rem;
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
@@ -317,5 +294,9 @@ p {
     transform: scale(1.3);
 }
 
-.hot-tour {}
+.hot-tour {
+    position: sticky;
+    top: 0;
+    height: 100%;
+}
 </style>

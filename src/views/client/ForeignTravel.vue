@@ -13,17 +13,23 @@
                 <div class="sort-container">
                     <p>Sắp xếp theo: </p>
                     <div class="sort-types">
-                        <div class="sort-type">Hoàng Hà đề xuất</div>
-                        <div class="sort-type">Mới nhất</div>
-                        <div class="sort-type">Thời lượng tour</div>
-                        <div class="sort-type">Giá tour</div>
+                        <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
+                        <div class="sort-type" @click="newest">Mới nhất</div>
+                        <div class="sort-type" @click="duration">Thời lượng tour</div>
+                        <div class="sort-type" @click="price">Giá tour</div>
+
+                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC">Từ cao đến thấp &nbsp; <i
+                                class="fa-solid fa-arrow-down-wide-short"></i> </div>
+                        <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao &nbsp; <i
+                                class="fa-solid fa-arrow-up-wide-short"></i></div>
+
                     </div>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
                     <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
                         <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
                             style="width: 100%;" alt=""> -->
-                        <v-img cover :width="50" class="thumbnail" :src=tour.thumbnail>
+                        <v-img style="height: 100%;" cover :width="50" class="thumbnail" :src=tour.thumbnail>
                             <template v-slot:placeholder>
                                 <div class="d-flex align-center justify-center fill-height">
                                     <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
@@ -34,6 +40,9 @@
                         <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
+                            <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
+                            }}</span>
+                            </div>
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
@@ -56,35 +65,13 @@
             </div>
             <div class="hot-tour">
                 <h2 style="padding-left: 1rem;">Tour hot</h2>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
+                <div v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+                    class="card" style="background: none;border: none;">
+                    <img :src=tour.thumbnail class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
+                        <h5 class="card-title">{{ tour.title }}</h5>
+                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice) }}</span>
+                            VNĐ </p>
                         <hr class="hr" />
                     </div>
                 </div>
@@ -96,7 +83,7 @@
 <script setup>
 import LoadingComponent from '../../components/LoadingComponent.vue';
 import baseUrl from '../../connect';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
@@ -104,19 +91,61 @@ const router = useRouter();
 let totalPage = ref()
 let pageNumber = ref(1)
 let tourList = ref()
+let orderBy = ref("createdAt")
 let sortOrder = ref("DESC")
+function orderASC() {
+    sortOrder.value = 'ASC'
+    fetchTour()
 
+}
+function orderDESC() {
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
+function newest() {
+    orderBy.value = 'createdAt'
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
+function recommend() {
+    orderBy.value = 'recommend'
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
+function price() {
+    orderBy.value = 'adultprice'
+    sortOrder.value = 'ASC'
+    fetchTour()
+
+}
+function duration() {
+    orderBy.value = 'days'
+    sortOrder.value = 'DESC'
+    fetchTour()
+
+}
+let hotTour = ref()
 onMounted(() => {
-    baseUrl.get("/client/tour/" + 3 + "/" + sortOrder.value + "/" + pageNumber.value).then((response) => {
-        tourList.value = response.data.rows
-    })
-})
-
-function getTourbyPage() {
-    baseUrl.get("/client/tour/" + 3 + "/" + sortOrder.value + "/" + pageNumber.value)
+    fetchTour()
+    baseUrl.get("/client/tour/hot-sidebar/" + 3)
         .then(response => {
-            console.log(response.data)
-            tourTable.value = response.data.rows
+            console.log(response.data.rows)
+            hotTour.value = response.data.rows
+        }).catch((error) => {
+            console.error(error);
+        });
+})
+function getTourbyPage() {
+    fetchTour()
+}
+function fetchTour() {
+    tourList.value = null;
+    baseUrl.get("/client/tour/" + 3 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then(response => {
+            tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {
             console.error(error);
@@ -124,6 +153,10 @@ function getTourbyPage() {
 }
 </script>
 <style scoped>
+.hot-tour {
+    width: 16rem;
+}
+
 .china-container {
     padding-top: 2rem;
     width: 90%;
@@ -154,7 +187,7 @@ p {
 
 .outer-container {
     padding-top: 2rem;
-    width: 90%;
+    width: 95%;
     margin: auto;
     padding: auto;
 }
@@ -194,6 +227,7 @@ p {
 
 .tour-individual {
     width: 100%;
+    max-height: 15rem;
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -233,10 +267,13 @@ p {
 }
 
 .sort-type {
-    width: 10rem;
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
+}
+
+.sort-type:active {
+    background-color: #d1f7df;
 }
 
 .image-container {
@@ -257,5 +294,9 @@ p {
     transform: scale(1.3);
 }
 
-.hot-tour {}
+.hot-tour {
+    position: sticky;
+    top: 0;
+    height: 100%;
+}
 </style>
