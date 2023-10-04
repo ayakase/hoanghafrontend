@@ -140,6 +140,28 @@
         </Splide>
       </div>
     </div>
+    <h2 style="text-align: center;margin-bottom: 2rem;">Cẩm nang</h2>
+    <div class="post-container" v-if="posts">
+      <div class="post-1" style="background-color: rebeccapurple;"><img
+          style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
+        <h1>{{ posts[0].title }}</h1>
+      </div>
+      <div class="post-2"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[1].thumbnail alt="">
+        <h4>{{ posts[0].title }}</h4>
+      </div>
+      <div class="post-3"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[2].thumbnail alt="">
+        <h4>{{ posts[0].title }}</h4>
+      </div>
+      <div class="post-4"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[3].thumbnail alt="">
+        <h4>{{ posts[0].title }}</h4>
+      </div>
+      <div class="post-5"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[4].thumbnail alt="">
+        <h4>{{ posts[0].title }}</h4>
+      </div>
+      <div class="post-6"><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[5].thumbnail alt="">
+        <h4>{{ posts[0].title }}</h4>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -162,6 +184,7 @@ export default {
     let china = ref()
     let domestic = ref()
     let foreign = ref()
+    let posts = ref()
     const options = {
       rewind: true,
       gap: '2rem',
@@ -175,20 +198,20 @@ export default {
     const router = useRouter();
     onMounted(() => {
       baseUrl.get('/client/carousel/hottour').then((response) => {
-        console.log(response.data)
         hotTour.value = response.data.rows
       })
-      baseUrl.get('/client/carousel/china').then((response) => {
+      baseUrl.get('/client/carousel/post-grid').then((response) => {
         console.log(response.data)
+        posts.value = response.data.rows
+      })
+      baseUrl.get('/client/carousel/china').then((response) => {
         china.value = response.data.rows
       })
       baseUrl.get('/client/carousel/domestic').then((response) => {
-        console.log(response.data)
         domestic.value = response.data.rows
       })
-      baseUrl.get('/client/carousel/global').then((response) => {
-        console.log(response.data)
-        global.value = response.data.rows
+      baseUrl.get('/client/carousel/foreign').then((response) => {
+        foreign.value = response.data.rows
       })
     })
     return {
@@ -197,7 +220,8 @@ export default {
       hotTour,
       china,
       domestic,
-      foreign
+      foreign,
+      posts
     }
   }
 }
@@ -357,5 +381,85 @@ export default {
   .carousel-mobile {
     display: block;
   }
+}
+
+.post-container {
+  width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-gap: 1px;
+  grid-auto-flow: row;
+}
+
+.post-container>div {
+  position: relative;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+
+.post-container>div>img {
+  transition: all .2s ease-in-out;
+
+}
+
+.post-container>div>img:hover {
+  transform: scale(1.1);
+  filter: brightness(50%);
+}
+
+.post-container>div>h1 {
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: rgb(96, 96, 96);
+}
+
+.post-container>div>h4 {
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: rgb(96, 96, 96);
+}
+
+.post-1 {
+  grid-area: 1 / 1 / 3 / 3;
+  overflow: hidden;
+  height: 30rem;
+}
+
+.post-2 {
+  grid-area: 1 / 3 / 2 / 4;
+  height: 15rem;
+}
+
+.post-3 {
+  grid-area: 2 / 3 / 3 / 4;
+  height: 15rem;
+
+}
+
+.post-4 {
+  grid-area: 3 / 1 / 4 / 2;
+  height: 15rem;
+
+}
+
+.post-5 {
+  grid-area: 3 / 2 / 4 / 3;
+  height: 15rem;
+
+}
+
+.post-6 {
+  grid-area: 3 / 3 / 4 / 4;
+  height: 15rem;
+
 }
 </style>

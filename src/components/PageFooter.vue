@@ -137,7 +137,6 @@
 
 <script setup>
 import LoadingOverlay from "./LoadingOverlay.vue";
-import GalleryComponent from "./GalleryComponent.vue";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import baseUrl from "../connect";
@@ -249,7 +248,9 @@ function sendInfo() {
 }
 
 .footer-main-content {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.187) 0%, rgba(0, 0, 0, 0.204) 100%), url("../assets/images/footer-img.jpg");
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.187) 0%, rgba(0, 0, 0, 0.204) 100%), url("../assets/images/footer-img.jpg"); */
+  background-image: url("../assets/images/footer-img.jpg");
+
   display: flex;
   height: 28rem;
 
