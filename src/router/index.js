@@ -45,6 +45,11 @@ const router = createRouter({
       component: () => import('../views/client/TourView.vue')
     },
     {
+      path: '/postdetail',
+      name: 'postdetail',
+      component: () => import('../views/client/PostView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import('../views/client/AboutView.vue'),
