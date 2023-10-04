@@ -113,7 +113,7 @@
           <SplideSlide v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
             <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
           </SplideSlide>
         </Splide>
@@ -129,7 +129,7 @@
           <SplideSlide v-for="tour in china" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
             <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
           </SplideSlide>
         </Splide>
@@ -145,7 +145,7 @@
           <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
             <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
           </SplideSlide>
         </Splide>
@@ -161,7 +161,7 @@
           <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h4 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h4>
+            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
             <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
           </SplideSlide>
         </Splide>
@@ -194,7 +194,7 @@ export default {
     const options = {
       rewind: true,
       gap: '2rem',
-      perPage: 5,
+      perPage: 4,
       perMove: 1,
       autoplay: true,
 
