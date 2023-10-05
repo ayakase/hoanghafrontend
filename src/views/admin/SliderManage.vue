@@ -1,48 +1,18 @@
 <template>
     <div class="slider-manage-container">
-        <div class="img-section">
-            <div class="mb-3 thumbnail">
-                <label for="formFile" class="form-label">Slider 1</label>
-                <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg">
-                <div style="width: 25rem;margin-top: 1rem;">
-                    <img :src=thumbnailSrc alt="" style="width: 100%;">
+        <button @click="router.push('quan-li-slider/them-slide')" style="margin-bottom: 2rem;" class="btn btn-success">
+            Thêm Slider
+        </button>
+        <div class="slider-list">
+            <div class="slider-item" v-for="(item, index) in 5" :key="index">
+                <div class="slider-item-img">
+                    <v-img class="slider-img"
+                        src="https://res.cloudinary.com/dxkmteupm/image/upload/v1696536816/slider-images/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF_offzn1.jpg"
+                        alt="" style="width: 100%;"></v-img>
                 </div>
-            </div>
-            <div class="mb-3 thumbnail">
-                <label for="formFile" class="form-label">Slider 2</label>
-                <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg">
-                <div style="width: 25rem;margin-top: 1rem;">
-                    <img :src=thumbnailSrc alt="" style="width: 100%;">
-                </div>
-            </div>
-            <div class="mb-3 thumbnail">
-                <label for="formFile" class="form-label">Slider 3</label>
-                <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg">
-                <div style="width: 25rem;margin-top: 1rem;">
-                    <img :src=thumbnailSrc alt="" style="width: 100%;">
-                </div>
-            </div>
-        </div>
-        <div class="img-section">
-            <div class="mb-3 thumbnail">
-                <label for="formFile" class="form-label">Slider 1</label>
-                <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg">
-                <div style="width: 25rem;margin-top: 1rem;">
-                    <img :src=thumbnailSrc alt="" style="width: 100%;">
-                </div>
-            </div>
-            <div class="mb-3 thumbnail">
-                <label for="formFile" class="form-label">Slider 2</label>
-                <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg">
-                <div style="width: 25rem;margin-top: 1rem;">
-                    <img :src=thumbnailSrc alt="" style="width: 100%;">
-                </div>
-            </div>
-            <div class="mb-3 thumbnail">
-                <label for="formFile" class="form-label">Slider 3</label>
-                <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg">
-                <div style="width: 25rem;margin-top: 1rem;">
-                    <img :src=thumbnailSrc alt="" style="width: 100%;">
+                <div class="slider-content">
+                    <p>ID: </p>
+                    <p>Tiêu đề:</p>
                 </div>
             </div>
         </div>
@@ -51,8 +21,8 @@
 
 <script setup>
 import { ref } from 'vue';
-
-
+import { useRouter } from 'vue-router';
+let router = useRouter()
 const thumbnailSrc = ref()
 function processImg(event) {
     if (event.target.files.length) {
@@ -65,12 +35,36 @@ function processImg(event) {
 <style scoped>
 .slider-manage-container {
     margin-top: 2rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
 }
 
-.img-section {
-    width: 40%;
+.slider-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.slider-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-content {
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.slider-item-img {
+    width: 20rem;
+    overflow: hidden;
+}
+
+.slider-img {
+    border-radius: 1rem;
+    object-fit: cover;
 }
 </style>

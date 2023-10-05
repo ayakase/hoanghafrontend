@@ -13,13 +13,22 @@
                 <img :src="thumbnailSrc" alt="" style="width: 100%" />
             </div>
         </div>
+        <div class="form-label">Thư viện ảnh</div>
         <button style="color: white;margin-bottom: 2rem;" class="btn btn-success" @click="toggleGallery">Tải ảnh
             lên</button>
         <GalleryComponent v-if="showGallery"></GalleryComponent>
         <div class="mb-3">
+            <label for="custom-slug" class="form-label">Custom slug</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">/</span>
+                <input v-model="slug" type="text" class="form-control" placeholder="vi-du" id="custom-slug">
+            </div>
+
+        </div>
+        <!-- <div class="mb-3">
             <label for="" class="form-label">Tik Tok Video ID</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tiktokId" />
-        </div>
+        </div> -->
         <div class="mb-3">
             <label for="" class="form-label">Lịch Trình</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tourSchedule" />
@@ -87,17 +96,21 @@
             <input type="range" class="form-range" min="0" max="10" id="customRange2" step="0.5" v-model="recommendText" />
         </div>
         <div class="age-price">
-            <div class="mb-3 w-25">
-                <label for="" class="form-label">Giá Người lớn (VNĐ)</label>
+            <div class="mb-3 w-20">
+                <label for="" class="form-label">Giá Người lớn (Trên 12 tuổi) (VNĐ)</label>
                 <input type="number" class="form-control" id="" placeholder="" v-model="adultPrice" />
             </div>
-            <div class="mb-3 w-25">
-                <label for="" class="form-label">Giá trẻ em(Từ 5-11 tuổi) (VNĐ)</label>
-                <input type="number" class="form-control" id="" placeholder="" v-model="youngPrice" />
+            <div class="mb-3 w-20">
+                <label for="" class="form-label">Giá trẻ em(Từ 6 - 10 tuổi) (VNĐ)</label>
+                <input type="number" class="form-control" id="" placeholder="" v-model="teenagerPrice" />
             </div>
-            <div class="mb-3 w-25">
-                <label for="" class="form-label">Giá trẻ em (Dưới 5 tuổi) (VNĐ)</label>
+            <div class="mb-3 w-20">
+                <label for="" class="form-label">Giá trẻ em (Từ 2 - 5 tuổi) (VNĐ)</label>
                 <input type="number" class="form-control" id="" placeholder="" v-model="childPrice" />
+            </div>
+            <div class="mb-3 w-20">
+                <label for="" class="form-label">Giá trẻ em (Dưới 2 tuổi) (VNĐ)</label>
+                <input type="number" class="form-control" id="" placeholder="" v-model="infantPrice" />
             </div>
         </div>
         <div class="accordion" id="">
@@ -219,30 +232,36 @@
 </template>
 
 <script setup>
+import slugify from 'slugify'
 import LoadingOverlay from "../../components/LoadingOverlay.vue";
 import baseUrl from "../../connect";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import Editor from "@tinymce/tinymce-vue";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import GalleryComponent from "../../components/GalleryComponent.vue";
+
+
 let showGallery = ref()
 function toggleGallery() {
     showGallery.value = !showGallery.value
 }
 let showOverlay = ref(false);
 let tourTitle = ref("");
+
 let tourThumbnail = ref(null);
 let tourSchedule = ref("");
 let tourCategory = ref();
+// let tiktokId = ref("")
 let tourType = ref("");
 let tourFrom = ref("");
 let tourLength = ref(1);
 let isHot = ref(false);
 let tourTransport = ref([]);
 let adultPrice = ref();
-let youngPrice = ref();
+let teenagerPrice = ref();
 let childPrice = ref();
+let infantPrice = ref()
 let tourSpecial = ref();
 let tourBonus = ref();
 let tourVisa = ref();
@@ -250,6 +269,17 @@ let tourDetail = ref();
 let tourPriceService = ref();
 let tourGuide = ref();
 let recommendText = ref(0);
+function turnSlug(slug) {
+    return slugify(slug, {
+        locale: 'vi',
+        lower: true,
+    })
+}
+let slug = ref()
+watch(tourTitle, (newValue) => {
+    slug.value = turnSlug(newValue)
+})
+onMounted(() => { })
 let recommendColor = computed(() => {
     if (recommendText.value >= 0 && recommendText.value <= 3) {
         return "red";
@@ -275,8 +305,10 @@ function addTour() {
     const tourData = new FormData();
     tourData.append("tourTitle", tourTitle.value);
     tourData.append("tourThumbnail", tourThumbnail.value);
+    tourData.append("slug", slug.value)
     tourData.append("tourSchedule", tourSchedule.value);
     tourData.append("tourCategory", tourCategory.value);
+    // tourData.append("tiktokId", tiktokId.value)
     tourData.append("tourType", tourType.value);
     tourData.append("tourFrom", tourFrom.value);
     tourData.append("tourLength", tourLength.value);
@@ -284,8 +316,9 @@ function addTour() {
     tourData.append("recommend", recommendText.value);
     tourData.append("tourTransport", tourTransport.value.toString());
     tourData.append("adultPrice", adultPrice.value);
-    tourData.append("youngPrice", youngPrice.value);
+    tourData.append("teenagerPrice", teenagerPrice.value);
     tourData.append("childPrice", childPrice.value);
+    tourData.append("infantPrice", infantPrice.value);
     tourData.append("tourSpecial", tourSpecial.value);
     tourData.append("tourBonus", tourBonus.value);
     tourData.append("tourVisa", tourVisa.value);

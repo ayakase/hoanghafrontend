@@ -125,13 +125,17 @@ let showChatbox = () => {
             </li>
 
             <li>
-              <form class="d-flex search-container">
+
+            </li>
+            <li>
+              <form class="d-flex search-container" style="margin-top:.3rem;padding: 0;">
                 <input @keydown.enter.prevent="searchSend" v-model="searchText" class="form-control me-2 search-box"
                   type="search" placeholder="Search" aria-label="Search">
               </form>
             </li>
             <li>
-              <button class="btn btn-outline-success" @click.prevent="searchSend"><i class="fas fa-search"></i></button>
+              <button style="margin-top:.3rem;" class=" btn btn-outline-success" @click.prevent="searchSend"><i
+                  class="fas fa-search"></i></button>
             </li>
             <li class="nav-item hotline">
               <a class="nav-link active" to="/" aria-current="page" href="tel:0124 3.855.158">HOTLINE: <span
@@ -366,5 +370,14 @@ nav {
   position: absolute;
   right: 1rem;
   top: 1rem;
+}
+
+.dropend:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropend>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
 }
 </style>

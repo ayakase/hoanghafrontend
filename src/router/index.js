@@ -40,8 +40,8 @@ const router = createRouter({
       component: () => import('../views/admin/DashboardView.vue')
     },
     {
-      path: '/tourdetail',
-      name: 'tourdetail',
+      path: '/tour/:slug',
+      name: 'tour',
       component: () => import('../views/client/TourView.vue')
     },
     {
@@ -110,6 +110,10 @@ const router = createRouter({
         {
           path: 'quan-ly-slider',
           component: () => import('../views/admin/SliderManage.vue')
+        },
+        {
+          path: 'quan-li-slider/them-slide',
+          component: () => import('../views/admin/AddSlider.vue')
         },
         {
           path: 'tai-khoan-admin',

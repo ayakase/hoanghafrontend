@@ -4,53 +4,27 @@
     <h2 style="text-align: center; padding-top: 2rem">Tạo bài viết mới</h2>
     <div class="mb-3">
       <label for="" class="form-label">Tiêu đề</label>
-      <input
-        type="text"
-        class="form-control"
-        id=""
-        placeholder=""
-        v-model="postTitle"
-      />
+      <input type="text" class="form-control" id="" placeholder="" v-model="postTitle" />
     </div>
     <div class="mb-3 thumbnail">
       <label for="formFile" class="form-label">Hình thu nhỏ</label>
-      <input
-        class="form-control"
-        accept="image/*"
-        type="file"
-        id="formFile"
-        @change="processImg"
-      />
+      <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg" />
       <div style="width: 20rem; margin-top: 1rem">
         <img :src="thumbnailSrc" alt="" style="width: 100%" />
       </div>
     </div>
-    <div
-      style="
+    <div style="
         width: 12rem;
         display: flex;
         flex-direction: row;
         align-items: center;
-      "
-    >
-      <v-switch
-        v-model="publishState"
-        label="Xuất bản luôn"
-        color="info"
-        style="margin-right: 1rem"
-        hide-details
-      ></v-switch>
-      <i
-        v-if="publishState"
-        style="color: rgb(0, 102, 255)"
-        class="fa-regular fa-paper-plane"
-      ></i>
+      ">
+      <v-switch v-model="publishState" label="Xuất bản luôn" color="info" style="margin-right: 1rem"
+        hide-details></v-switch>
+      <i v-if="publishState" style="color: rgb(0, 102, 255)" class="fa-regular fa-paper-plane"></i>
     </div>
     <div>
-      <Editor
-        style="height: 50rem"
-        v-model="postContent"
-        api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6"
+      <Editor style="height: 50rem" v-model="postContent" api-key="8gzqmdnsiplu2pd33s0doas4xo8735024fznwlgttd4ldri6"
         :init="{
           plugins:
             '  lists advlist link image table code help wordcount autosave emoticons',
@@ -58,15 +32,10 @@
             ' forecolor backcolor | undo redo | styleselect | bold italic | ' +
             'alignleft aligncenter alignright alignjustify | ' +
             'outdent indent | numlist bullist | emoticons',
-        }"
-      />
+        }" />
     </div>
     <div class="mt-10 mb-2"></div>
-    <div
-      @click="addpost"
-      class="btn btn-success"
-      style="margin-top: 1rem; right: 0; float: right"
-    >
+    <div @click="addpost" class="btn btn-success" style="margin-top: 1rem; right: 0; float: right">
       Add post
     </div>
   </div>
@@ -121,8 +90,8 @@ function addpost() {
       showOverlay.value = false;
       toast.error(
         "Lỗi " +
-          error +
-          " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang",
+        error +
+        " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang",
         {
           autoClose: 2000,
           theme: "colored",

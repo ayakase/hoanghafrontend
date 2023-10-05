@@ -110,7 +110,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+          <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/tour/' + tour.slug })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
             <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
@@ -126,7 +126,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in china" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+          <SplideSlide v-for="tour in china" @click="router.push({ path: '/tour/' + tour.slug })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
             <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
@@ -142,7 +142,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tour/' + tour.slug })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
             <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
@@ -158,7 +158,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tour/' + tour.slug })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
             <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
@@ -234,6 +234,14 @@ export default {
 </script>
 
 <style >
+.slide-item {
+  height: 13rem;
+}
+
+img {
+  object-fit: cover !important;
+}
+
 .splide:not(.is-overflow) .splide__list {
   justify-content: center;
 }

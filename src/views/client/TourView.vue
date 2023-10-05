@@ -10,14 +10,25 @@ const tourDetail = ref()
 const adultPrice = ref()
 const teenagerPrice = ref()
 const childPrice = ref()
+const infantPrice = ref()
 const renderVideo = ref(false)
+const tourId = ref()
+const tiktokUrl = ref()
+const tiktokId = ref()
+
 onMounted(() => {
-    baseUrl.get("client/each-tour/" + route.query.id).then(response => {
+    console.log(route.params.slug)
+    baseUrl.get("client/each-tour/" + route.params.slug).then(response => {
         console.log(response.data[0])
         tourDetail.value = response.data[0]
-        adultPrice.value = response.data[0].adultprice
-        teenagerPrice.value = response.data[0].youngprice
-        childPrice.value = response.data[0].childprice
+        adultPrice.value = response.data[0].adult_price
+        teenagerPrice.value = response.data[0].teenager_price
+        childPrice.value = response.data[0].child_price
+        infantPrice.value = response.data[0].infant_price
+        tourId.value = response.data[0].id
+        tiktokId.value = response.data[0].tik_tok_id
+        tiktokUrl.value = 'https://www.tiktok.com/embed/' + tiktokId.value
+
     }).catch((error) => {
         console.error(error);
     });
@@ -39,18 +50,18 @@ let tabSec2 = ref()
 
         </ol>
     </nav>
-    <PlaceModal :tourId="route.query.id" :childPrice="childPrice" :adultPrice="adultPrice" :teenagerPrice="teenagerPrice">
+    <PlaceModal v-if="tourDetail" :tourId="tourId" :childPrice="childPrice" :adultPrice="adultPrice"
+        :teenagerPrice="teenagerPrice" :infantPrice="infantPrice">
     </PlaceModal>
-    <AdvisoryModal :tourId="route.query.id"></AdvisoryModal>
+    <AdvisoryModal :tourId="tourId"></AdvisoryModal>
     <!-- :title="gameTitle" :description="gameDescription" :download="downloadUrl" -->
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">
 
         <div class="main-content">
             <div>
-                <div class="iframe_container">
-                    <iframe src="https://www.tiktok.com/embed/7285184881292774657" class="iframe" allowfullscreen
-                        scrolling="no" allow="encrypted-media;"></iframe>
+                <div class="iframe_container" v-if=tiktokId>
+                    <iframe :src=tiktokUrl class="iframe" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
                 </div>
                 <div class="gallery">
                     <img src="https://picsum.photos/id/1028/300/300" alt="a forest after an apocalypse">
@@ -120,7 +131,7 @@ let tabSec2 = ref()
                 <p>Khởi hành: <span style="color: #ff6b00;">{{ tourDetail.departure }}</span></p>
                 <p>Vận chuyển: <span style="color: #ff6b00;">{{ tourDetail.transportation }}</span></p>
                 <div style="height: 5rem;"></div>
-                <p>Giá tour: <span style="color: #ff6b00;">{{ numeralFormat(tourDetail.adultprice) }}</span></p>
+                <p>Giá tour: <span style="color: #ff6b00;">{{ numeralFormat(tourDetail.adult_price) }}</span></p>
                 <div class="action-button">
                     <button class="btn place-btn" data-bs-toggle="modal" data-bs-target="#placeModal">Đặt tour</button>
                     <button class="btn advise-btn" data-bs-toggle="modal" data-bs-target="#advisoryModal">Tư vấn</button>
@@ -188,7 +199,7 @@ let tabSec2 = ref()
     padding-top: 1rem;
     margin: auto;
     padding: auto;
-    width: 85%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

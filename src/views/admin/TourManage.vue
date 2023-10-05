@@ -46,6 +46,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Tên tour</th>
+                    <th scope="col">Slug</th>
                     <th scope="col">Lịch trình</th>
                     <th scope="col">Danh mục</th>
                     <th scope="col">Khởi hành</th>
@@ -59,17 +60,24 @@
             </thead>
             <tbody>
                 <tr v-for="tour in tourTable" :key="tour" class="each-tour-row">
-                    <th scope="row" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.id }}</th>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.title }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.schedule }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.Category.name }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.departure }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.days }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })" v-if="tour.ishottour == 1"> Có
+                    <th scope="row" @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.id }}
+                    </th>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.title }}</td>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.slug }}</td>
+
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.schedule }}</td>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.Category.name }}
                     </td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })" v-else> Không</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ tour.transportation }}</td>
-                    <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ formatDate(tour.createdAt)
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.departure }}
+                    </td>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.days }}</td>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })" v-if="tour.ishottour == 1"> Có
+                    </td>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })" v-else> Không</td>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.transportation
+                    }}</td>
+                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{
+                        formatDate(tour.createdAt)
                     }}</td>
                     <td> <button
                             @click="router.push({ path: '/admin/quan-li-tour/chinh-sua-tour', query: { id: tour.id } })"

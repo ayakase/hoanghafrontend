@@ -28,19 +28,40 @@
                                 <p style="margin: 0;padding: 0;">Người lớn (Trên 12 tuổi)</p>
                                 <input type="number" style="height: 3rem;width: 8rem;" class="form-control" id=""
                                     placeholder="" v-model="adult">
+                                <p style="margin: 0;padding: 0;color: orangered"> x {{
+                                    numeralFormat(props.adultPrice) }}</p>
                             </div>
                             <div class="teenager"
                                 style="display: flex; align-items: center; justify-content: space-between;margin-bottom: 1rem;">
-                                <p style="margin: 0;padding: 0;">Trẻ em (Từ 5 - 11 tuổi)</p>
+                                <p style="margin: 0;padding: 0;">Trẻ em(Từ 6 - 10 tuổi)</p>
                                 <input type="number" style="height: 3rem;width: 8rem;" class="form-control" id=""
                                     placeholder="" v-model="teenager">
+                                <p style="margin: 0;padding: 0;color: orangered;"> x {{ numeralFormat(props.teenagerPrice)
+                                }}</p>
                             </div>
                             <div class="children"
                                 style="display: flex; align-items: center; justify-content: space-between;margin-bottom: 1rem;">
-                                <p style="margin: 0;padding: 0;">Trẻ em (Dưới 5 tuổi)</p>
+                                <p style="margin: 0;padding: 0;">Trẻ em (Từ 2 - 5 tuổi) </p>
                                 <input type="number" style="height: 3rem;width: 8rem;" class="form-control" id=""
                                     placeholder="" v-model="children">
+                                <p style="margin: 0;padding: 0;color: orangered"> x {{ numeralFormat(props.childPrice) }}
+                                </p>
                             </div>
+                            <div class="infant"
+                                style="display: flex; align-items: center; justify-content: space-between;margin-bottom: 1rem;">
+                                <p style="margin: 0;padding: 0;">Trẻ em (Dưới 2 tuổi) </p>
+                                <input type="number" style="height: 3rem;width: 8rem;" class="form-control" id=""
+                                    placeholder="" v-model="infant">
+                                <p style="margin: 0;padding: 0;color: orangered"> x {{ numeralFormat(props.infantPrice) }}
+                                </p>
+                            </div>
+                            <h4 class="mb-4">Tổng số tiền: <span style="color: chocolate;">{{ numeralFormat(totalPrice)
+                            }}</span></h4>
+                            <div style="display: flex; flex-direction: row;gap: 1rem; font-size: 1.5rem;">
+                                <!-- <p>Tổng số tiền:</p> <span style="color: orangered;"><count-up class="count-number"
+                                        :end-val=totalPrice :duration="1"></count-up></span> -->
+                            </div>
+
                             <div class="mb-3">
                                 <label class="form-label">Ghi chú</label>
                                 <textarea class="form-control" rows="3" v-model="note"></textarea>
@@ -58,18 +79,42 @@
 </template>
 
 <script setup>
+import CountUp from 'vue-countup-v3'
+
 import baseUrl from '../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { ref } from 'vue';
-const props = defineProps(['tourId'])
+import { computed, onMounted, ref } from 'vue';
+const props = defineProps(['tourId', 'childPrice', 'adultPrice', 'teenagerPrice', 'infantPrice'])
 console.log(props.tourId)
+console.log(props.adultPrice)
+console.log(props.teenagerPrice)
+console.log(props.childPrice)
+console.log(props.infantPrice)
+
+// let adultPrice = ref()
+// let childPrice = ref()
+// let teenagerPrice = ref()
+// onMounted(() => {
+//     adultPrice.value = props.adultPrice
+//     console.log(adultPrice.value)
+// })
+let totalPrice = computed(() => {
+    return props.adultPrice * adult.value
+        +
+        props.teenagerPrice * teenager.value
+        +
+        props.childPrice * children.value
+        +
+        props.infantPrice * infant.value
+})
 let name = ref("")
 let phone = ref("")
 let email = ref("")
 let adult = ref(1)
-let teenager = ref()
-let children = ref()
+let teenager = ref(0)
+let children = ref(0)
+let infant = ref(0)
 let note = ref("")
 function sendOrder() {
     if (!name.value || !phone.value || !email.value || !adult.value || !note.value) {
@@ -87,6 +132,7 @@ function sendOrder() {
             adult: adult.value,
             teenager: teenager.value,
             children: children.value,
+            infant: infant.value,
             note: note.value
         }
         baseUrl.post("/client/order", orderData)
@@ -105,4 +151,4 @@ function sendOrder() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

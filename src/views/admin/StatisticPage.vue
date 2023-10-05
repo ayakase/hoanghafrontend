@@ -1,16 +1,24 @@
 <template>
-    <div class="chart-container">
-        <div class="year-chart">
-            <Bar :data="yeardata" :options="options" />
+    <div class="outer-container">
+        <div class="access-number">
+            <h4 style="text-align: center;">Tổng lượt truy cập</h4>
+            <count-up class="count-number" :end-val="20005"></count-up>
         </div>
-        <div class="week-chart">
-            <Line :data="weekdata" :options="options" />
+        <div class="chart-container">
+            <div class="year-chart">
+                <Bar :data="yeardata" :options="options" />
+            </div>
+            <div class="week-chart">
+                <Line :data="weekdata" :options="options" />
+            </div>
         </div>
+        <button @click="clicked"> A </button>
     </div>
-    <button @click="clicked"> A </button>
 </template>
 
 <script setup>
+import CountUp from 'vue-countup-v3'
+
 import {
     Chart as ChartJS,
     Title,
@@ -74,18 +82,43 @@ function clicked() {
 </script>
 
 <style scoped>
+.access-number {
+    height: 10rem;
+    background-color: #cdecde;
+    width: 10rem;
+    padding: 0.5rem;
+    padding-top: 1.5rem;
+    border-radius: 1rem;
+
+}
+
+.count-number {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: red;
+}
+
 .year-chart,
 .week-chart {
-    width: 40%;
+    width: 49%;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #cdecde;
+}
+
+.outer-container {
+    width: 100%;
+    margin-top: 2rem;
 }
 
 .chart-container {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 </style>
