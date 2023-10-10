@@ -12,6 +12,10 @@
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour <i
                     class="fa-regular fa-paper-plane"></i></RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Khu vuc <i class="fa-regular fa-paper-plane"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Dia diem <i class="fa-regular fa-paper-plane"></i>
+            </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-hot-tour">Tour Hot <i class="fa-solid fa-fire"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/thu-vien">Thư viện ảnh<i class="fa-regular fa-image"></i>

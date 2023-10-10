@@ -8,7 +8,7 @@
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Liên kết</label>
-            <input type="text" class="form-control" id="" placeholder="" v-model="slideTitle" />
+            <input type="text" class="form-control" id="" placeholder="" v-model="slideUrl" />
         </div>
         <div class="mb-3 thumbnail">
             <label for="formFile" class="form-label">Hình ảnh</label>

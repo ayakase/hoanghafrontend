@@ -20,50 +20,14 @@
         </div>
       </div>
       <!-- data-bs-ride="carousel" -->
-      <div id="carouselExampleCaptions" class="carousel slide">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img
-              src="https://www.adorama.com/alc/wp-content/uploads/2018/11/landscape-photography-tips-yosemite-valley-feature.jpg"
-              class="d-block slide-img" alt="...">
-            <!-- <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
-            </div> -->
-          </div>
-          <div class="carousel-item">
-            <img src="../../assets/images/example.jpg" class="d-block slide-img" alt="...">
-            <!-- <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
-            </div> -->
-          </div>
-          <div class="carousel-item">
-            <img src="../../assets/images/Slide.png" class="d-block slide-img" alt="...">
-            <!-- <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
-            </div> -->
-          </div>
-        </div>
-        <button class="carousel-control-prev carousel-btn-prev" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next carousel-btn-next" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+      <div class="slide">
+        <Splide :options=headOption aria-label="">  
+          <SplideSlide v-for="slide in sliderItem" :key="slide">
+            <a :href="slide.tour_url"> 
+              <v-img class="slide-image" style=" border-radius: 1rem;" :src="slide.image_src"></v-img>
+            </a>
+          </SplideSlide>
+        </Splide>
       </div>
       <div class="extended-category">
         <div class="extent-item">
@@ -80,27 +44,33 @@
     <h2 style="text-align: center;margin-bottom: 2rem;">Cẩm nang</h2>
     <div class="post-container" v-if="posts">
       <div @click="router.push({ path: '/postdetail', query: { id: posts[0].id } })" class="post-1"
-        v-if=posts[0].thumbnail><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
+        v-if=posts[0].thumbnail>
+        <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
         <h1>{{ posts[0].title }}</h1>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[1].id } })" class="post-2"
-        v-if=posts[1].thumbnail><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[1].thumbnail alt="">
+        v-if=posts[1].thumbnail>
+        <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[1].thumbnail alt="">
         <h4>{{ posts[1].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[2].id } })" class="post-3"
-        v-if=posts[2].thumbnail><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[2].thumbnail alt="">
+        v-if=posts[2].thumbnail>
+        <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[2].thumbnail alt="">
         <h4>{{ posts[2].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[3].id } })" class="post-4"
-        v-if=posts[3].thumbnail><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[3].thumbnail alt="">
+        v-if=posts[3].thumbnail>
+        <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[3].thumbnail alt="">
         <h4>{{ posts[3].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[4].id } })" class="post-5"
-        v-if=posts[4].thumbnail><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[4].thumbnail alt="">
+        v-if=posts[4].thumbnail>
+        <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[4].thumbnail alt="">
         <h4>{{ posts[4].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[5].id } })" class="post-6"
-        v-if=posts[5].thumbnail><img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[5].thumbnail alt="">
+        v-if=posts[5].thumbnail>
+        <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[5].thumbnail alt="">
         <h4>{{ posts[5].title }}</h4>
       </div>
     </div>
@@ -112,7 +82,7 @@
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/tour/' + tour.slug })"
             style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <v-img style=" border-radius: 1rem;height: 100%;object-fit: cover;" :src=tour.thumbnail></v-img>
             <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
             <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
           </SplideSlide>
@@ -144,7 +114,13 @@
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tour/' + tour.slug })"
             style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
+            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
             <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
             <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
           </SplideSlide>
@@ -191,18 +167,27 @@ export default {
     let domestic = ref()
     let foreign = ref()
     let posts = ref()
+    let sliderItem = ref()
     const options = {
       rewind: true,
       gap: '2rem',
       perPage: 4,
       perMove: 1,
       autoplay: true,
-
       // focus: 'center',
-
     };
+    const headOption = {
+      drag: 'free',
+      autoplay: true,
+    }
     const router = useRouter();
     onMounted(() => {
+      baseUrl.get('/client/slide').then((response) => {
+        console.log(response.data.rows)
+        sliderItem.value = response.data.rows
+      }).catch((error) => {
+        console.log(error)
+      })
       baseUrl.get('/client/carousel/hottour').then((response) => {
         hotTour.value = response.data.rows
       })
@@ -227,15 +212,24 @@ export default {
       china,
       domestic,
       foreign,
-      posts
+      posts,
+      sliderItem,
+      headOption
     }
   }
 }
 </script>
 
 <style >
-.slide-item {
-  height: 13rem;
+.slide {
+  width: 60%;
+  height: 25rem;
+}
+
+.slide-image {
+  height: 25rem;
+  object-fit: cover;
+
 }
 
 img {
@@ -253,28 +247,11 @@ img {
   width: 85%;
 }
 
-.slide-container {
-  padding-bottom: 3rem;
-  padding-top: 0.1rem;
-  margin-top: 2rem;
-}
-
 .hot-sale-item {
   transition: transform 0.2s ease-in-out;
 }
 
-.slide-header {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  padding: auto;
-  width: 12rem;
 
-}
-
-.slide {
-  width: 60%;
-}
 
 .carousel-inner {
   border-radius: 1rem;
@@ -286,15 +263,10 @@ img {
   height: 25rem !important;
 }
 
-.slide-img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
 
 .home-first-section {
   display: flex;
-  gap: 1rem;
+  /* gap: 1rem; */
   flex-direction: row;
   justify-content: space-around;
 }
@@ -371,30 +343,6 @@ img {
   margin: auto;
   padding: auto;
   margin: 0;
-}
-
-.carousel-btn-prev:hover {
-  border-radius: 1rem;
-  background: linear-gradient(90deg, rgb(20, 20, 20) 0%, rgba(0, 212, 255, 0) 100%);
-}
-
-.carousel-btn-next:hover {
-  border-radius: 1rem;
-  background: linear-gradient(90deg, rgba(0, 212, 255, 0) 0%, rgb(20, 20, 20) 100%);
-}
-
-.carousel-mobile {
-  display: none;
-}
-
-@media screen and (max-width: 992px) {
-  .carousel-desktop {
-    display: none;
-  }
-
-  .carousel-mobile {
-    display: block;
-  }
 }
 
 .post-container {
@@ -478,6 +426,5 @@ img {
 .post-6 {
   grid-area: 3 / 3 / 4 / 4;
   height: 15rem;
-
 }
 </style>

@@ -4,15 +4,14 @@
             Thêm Slider
         </button>
         <div class="slider-list">
-            <div class="slider-item" v-for="(item, index) in 5" :key="index">
+            <div class="slider-item" v-for="(slide, index) in slideItem" :key="index">
                 <div class="slider-item-img">
-                    <v-img class="slider-img"
-                        src="https://res.cloudinary.com/dxkmteupm/image/upload/v1696536816/slider-images/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF_offzn1.jpg"
-                        alt="" style="width: 100%;"></v-img>
+                    <v-img class="slider-img" :src="slide.image_src" alt="" style="width: 100%;"></v-img>
                 </div>
                 <div class="slider-content">
-                    <p>ID: </p>
-                    <p>Tiêu đề:</p>
+                    <p>ID: {{ slide.id }} </p>
+                    <p>Tiêu đề: {{ slide.title }}</p>
+                    <p>Liên kết: {{ slide.tour_url }}</p>
                 </div>
             </div>
         </div>
@@ -20,16 +19,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import baseUrl from '../../connect';
 let router = useRouter()
-const thumbnailSrc = ref()
-function processImg(event) {
-    if (event.target.files.length) {
-        thumbnailSrc.value = URL.createObjectURL(event.target.files[0]);
-    }
-    tourThumbnail.value = event.target.files[0]
-}
+let slideItem = ref()
+onMounted(() => {
+    baseUrl.get('/admin/slider').then((response) => {
+        console.log(response.data.rows)
+        slideItem.value = response.data.rows
+    }).catch((error) => {
+        console.log(error)
+    })
+})
 </script>
 
 <style scoped>
@@ -45,21 +47,21 @@ function processImg(event) {
 }
 
 .slider-item {
+    width: 23rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
 }
 
 .slider-content {
     margin-top: 0.5rem;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+
 }
 
 .slider-item-img {
     width: 20rem;
+    height: 10rem;
     overflow: hidden;
 }
 
@@ -67,4 +69,5 @@ function processImg(event) {
     border-radius: 1rem;
     object-fit: cover;
 }
+
 </style>

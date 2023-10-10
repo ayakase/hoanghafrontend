@@ -24,6 +24,7 @@ function searchSend() {
   });
 }
 onMounted(() => {
+  baseUrl.post("/client/count")
   baseUrl.get("/connect")
     .then((response) => {
       toast.success("Đã kết nối với server", {
@@ -74,7 +75,7 @@ let showChatbox = () => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto ">
 
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 DANH MỤC
               </a>
@@ -122,10 +123,142 @@ let showChatbox = () => {
                   </RouterLink>
                 </li>
               </ul>
-            </li>
-
-            <li>
-
+            </li> -->
+            <li style="z-index: 9999999;">
+              <ul class="nav-menu" style="border: 0;padding: 0;">
+                <li class="dropdown">
+                  <a href="#">Danh Mục <span>&#11167;</span></a>
+                  <ul class="drop-one" style="margin: 0;padding: 0;">
+                    <li>
+                      <RouterLink class="nav-link active" to="/" aria-current="page" href="#">Trang chủ</RouterLink>
+                    </li>
+                    <li>
+                      <RouterLink class="nav-link active" to="/about/chinh-sach-va-quy-dinh" aria-current="page" href="#">
+                        Về
+                        chúng tôi
+                      </RouterLink>
+                    </li>
+                    <li>
+                      <RouterLink class="nav-link active" to="/tour-hot" aria-current="page" href="#">Tour Hot &nbsp;<i
+                          style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
+                      </RouterLink>
+                    </li>
+                    <RouterLink class="nav-link active" to="/du-lich-trung-quoc" aria-current="page" href="#">Du lịch
+                      Trung
+                      Quốc
+                      &nbsp; <i class="fa-solid fa-vihara"></i>
+                    </RouterLink>
+                    <li>
+                      <RouterLink class="nav-link active" to="/du-lich-trong-nuoc" aria-current="page" href="#">Du lịch
+                        trong
+                        nước
+                        &nbsp; <i class="fa-solid fa-flag"></i>
+                      </RouterLink>
+                      <ul class="drop-two" style="margin: 0;padding: 0;">
+                        <li>
+                          <a href="#">Du lich mien bac <span>&#11167;</span></a>
+                          <ul class="drop-three">
+                            <li class="region-item"><a href="#">Cat Ba</a></li>
+                            <li class="region-item"><a href="#">Ha Long</a></li>
+                            <li class="region-item"><a href="#">Sa Pa</a></li>
+                            <li class="region-item"><a href="#">Hanoi</a></li>
+                            <li class="region-item"><a href="#">Ninh Binh</a></li>
+                            <li class="region-item"><a href="#">Moc Chau</a></li>
+                            <li class="region-item"><a href="#">Co To</a></li>
+                            <li class="region-item"><a href="#">Tam Dao</a></li>
+                            <li class="region-item"><a href="#">Le Hoi</a></li>
+                          </ul>
+                        </li>
+                        <li> 
+                          <a href="#">Du lich mien nam <span>&#11167;</span></a>
+                          <ul class="drop-three">
+                            <li class="region-item"><a href="#">Da Nang</a></li>
+                            <li class="region-item"><a href="#">Hoi An</a></li>
+                            <li class="region-item"><a href="#">Hue</a></li>
+                            <li class="region-item"><a href="#">Quy Nhon</a></li>
+                            <li class="region-item"><a href="#">Ly Son</a></li>
+                            <li class="region-item"><a href="#">Nghe An</a></li>
+                            <li class="region-item"><a href="#">Quang Binh</a></li>
+                            <li class="region-item"><a href="#">Phan Thiet</a></li>
+                            <li class="region-item"><a href="#">Sam Son</a></li>
+                            <li class="region-item"><a href="#">Tay Nguyen</a></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="#">Du lich mien trung <span>&#11167;</span></a>
+                          <ul class="drop-three">
+                            <li class="region-item"><a href="#">Da Lat</a></li>
+                            <li class="region-item"><a href="#">Con Dao</a></li>
+                            <li class="region-item"><a href="#">Phu Quoc</a></li>
+                            <li class="region-item"><a href="#">Can Tho</a></li>
+                            <li class="region-item"><a href="#">Nha Trang</a></li>
+                            <li class="region-item"><a href="#">Sai Gon</a></li>
+                            <li class="region-item"><a href="#">Cam Ranh</a></li>
+                            <li class="region-item"><a href="#">Binh Phuoc</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Du lịch quốc
+                        tế
+                        &nbsp; <i class="fa-solid fa-globe"></i>
+                      </RouterLink>
+                      <ul class="drop-two">
+                        <li>
+                          <a href="#">Du lich Chau A<span>&#11167;</span></a>
+                          <ul class="drop-three">
+                            <li class="region-item"><a href="#">Campuchia</a></li>
+                            <li class="region-item"><a href="#">Malaysia</a></li>
+                            <li class="region-item"><a href="#">Thai Lan</a></li>
+                            <li class="region-item"><a href="#">Dubai</a></li>
+                            <li class="region-item"><a href="#">Nhat Ban</a></li>
+                            <li class="region-item"><a href="#">Singapore</a></li>
+                            <li class="region-item"><a href="#">Trung Quốc</a></li>
+                            <li class="region-item"><a href="#">Vân Nam - Trung Quốc</a></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="#">Du lich Chau Au<span>&#11167;</span></a>
+                          <ul class="drop-three">
+                            <li class="region-item"><a href="#">Tay Au</a></li>
+                            <li class="region-item"><a href="#">Phap</a></li>
+                            <li class="region-item"><a href="#">Bi</a></li>
+                            <li class="region-item"><a href="#">Nga</a></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="#">Du lich Chau My<span>&#11167;</span></a>
+                          <ul class="drop-three">
+                            <li class="region-item"><a href="#">My</a></li>
+                            <li class="region-item"><a href="#">Canada</a></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="#">Du lich Chau Uc<span>&#11167;</span></a>
+                          <ul class="drop-three">
+                            <li class="region-item"><a href="#">Uc</a></li>
+                            <li class="region-item"><a href="#">New Zealand</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <RouterLink class="nav-link active" to="/du-lich-trung-quoc" aria-current="page" href="#">Dich vu du
+                        lich
+                        &nbsp; <i class="fa-solid fa-vihara"></i>
+                      </RouterLink>
+                      <ul class="drop-two">
+                        <li class="region-item"><a href="#">Booking ve may bay</a></li>
+                        <li class="region-item"><a href="#">Dich vu lam ho chieu</a></li>
+                        <li class="region-item"><a href="#">Dat ve cap treo fansipan</a></li>
+                      </ul>
+                    </li>
+                    <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Cẩm nang
+                    </RouterLink>
+                  </ul>
+                </li>
+              </ul>
             </li>
             <li>
               <form class="d-flex search-container" style="margin-top:.3rem;padding: 0;">
@@ -161,28 +294,6 @@ let showChatbox = () => {
   <PageFooter></PageFooter>
   <MessengerBtn></MessengerBtn>
   <!-- <scrollToTop></scrollToTop> -->
-  <!-- <div class="chat-btn">
-    <button @click="showChatbox" type="button" class="btn btn-success scroll-button"><i
-        class="fa-solid fa-message"></i></button>
-    <Transition name="chatbox">
-      <div class="chat-box" v-if="chatBoxValue">
-        <div class="chat-header">
-          <i class="fa-solid fa-user-tie chat-user"></i>
-          <h3>Hỗ trợ trực tuyến</h3>
-        </div>
-        <div class="chat-section">
-          <p> Xin chao </p>
-          <p> Xin chao </p>
-          <p> Xin chao </p>
-          <p> Xin chao </p>
-          <p> Xin chao </p>
-          <p> Xin chao </p>
-          <p> Xin chao </p>
-        </div>
-        <input type="text" class="chat-text">
-      </div>
-    </Transition>
-  </div> -->
 </template>
 
 <style scoped>
@@ -335,32 +446,6 @@ nav {
   }
 }
 
-.chat-user {
-  box-sizing: border-box;
-  padding-top: 0.3rem;
-  font-size: 2rem;
-  text-align: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: rgb(192, 192, 192);
-  border-radius: 10rem;
-  border: solid 1px white;
-
-}
-
-.chat-header {
-  background-color: #1bb392;
-  color: white;
-  padding-top: 0.5rem;
-  padding-bottom: 0.6rem;
-  padding-left: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 1rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
 
 .home-breadcrumb {
   text-decoration: none !important;
@@ -372,12 +457,85 @@ nav {
   top: 1rem;
 }
 
-.dropend:hover>.dropdown-menu {
+* {
+  box-sizing: border-box;
+}
+
+ul.nav-menu {
+  text-decoration: none !important;
+  z-index: 99999999999999;
+  margin: 0;
+  padding: 0;
+  float: left;
+  margin-right: 100px;
+}
+
+.region-item:hover {
+  background-color: #0aa886;
+}
+
+ul.nav-menu li {
+  /* display: block; */
+  margin: 0;
+  padding: 0;
+  text-decoration: none !important;
+
+  list-style: none;
+  line-height: 50px;
+}
+
+ul.nav-menu li:hover {
+
+  /* background-color: #cefeca; */
+  position: relative;
+}
+
+ul.nav-menu li a {
+  text-decoration: none !important;
+
+  /* text-decoration: none; */
+  color: #000000;
+  /* text-transform: uppercase; */
+  padding: 10px 25px;
+}
+
+.drop-one {
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  display: none;
+  background: #dbebe1;
+}
+
+ul.nav-menu li:hover>.drop-one {
   display: block;
 }
 
-.dropend>.dropdown-toggle:active {
-  /*Without this, clicking will make it sticky*/
-  pointer-events: none;
+.drop-two {
+  margin: 0;
+  padding: 0;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #d3ecd7;
+  display: none;
+}
+
+.drop-one li:hover>.drop-two {
+  display: flex;
+}
+
+.drop-three {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  top: 0;
+  background: #d3ecd7;
+  display: block;
 }
 </style>

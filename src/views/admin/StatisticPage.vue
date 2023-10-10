@@ -2,7 +2,7 @@
     <div class="outer-container">
         <div class="access-number">
             <h4 style="text-align: center;">Tổng lượt truy cập</h4>
-            <count-up class="count-number" :end-val="20005"></count-up>
+            <count-up class="count-number" :end-val="count" :duration="1"></count-up>
         </div>
         <div class="chart-container">
             <div class="year-chart">
@@ -17,6 +17,7 @@
 </template>
 
 <script setup>
+import baseUrl from "../../connect";
 import CountUp from 'vue-countup-v3'
 
 import {
@@ -33,6 +34,15 @@ import {
 import { onMounted, ref } from 'vue';
 import { Bar, Line } from 'vue-chartjs'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, LineElement, PointElement)
+let count = ref()
+onMounted(() => {
+    baseUrl.get('/admin/count').then((response) => {
+        console.log(response.data)
+        count.value = response.data.count
+    }).catch((error) => {
+        console.log(error)
+    })
+})
 let yeardata = ref({
     labels: ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'],
     datasets: [
