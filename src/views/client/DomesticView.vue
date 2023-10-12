@@ -7,12 +7,18 @@
                 <li class="breadcrumb-item">Du lịch trong nước</li>
             </ol>
         </nav>
-        <h2 style="color: #ff6b00;">Du lịch trong nước</h2>
+        <!-- <h2 style="color: #ff6b00;">Du lịch trong nước</h2> -->
 
         <div class="section-container">
             <div class="side-bar-container">
-                <div style="background-color: rebeccapurple;" class="other-side-bar">
-                    Dia diem hot trong nuoc
+                <div v-if="categoryList" class="other-side-bar" style="padding: 1rem;">
+                    <p style="background-color: rgb(255, 135, 65);">Địa điểm Hot trong nước</p>
+                    <div v-for="region in categoryList.Regions" :key="region">
+                        <p style="background-color: rgb(255, 180, 76);">{{ region.name }}</p>
+                        <div v-for="location in region.Locations">
+                            <p style="background-color: #F1FAF4;">{{ location.name }}</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="hot-tour">
                     <h2 style="padding-left: 1rem;">Tour hot</h2>
@@ -79,8 +85,9 @@
                     </div>
                 </div>
                 <LoadingComponent v-else />
-                <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
-                    prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
+                <v-pagination v-if="totalPage" @click="getTourbyPage" v-model="pageNumber" :length="totalPage"
+                    :total-visible="5" prev-icon="fa-solid fa-chevron-left"
+                    next-icon="fa-solid fa-chevron-right"></v-pagination>
                 <div>{{ pageNumber }}</div>
             </div>
 
@@ -124,7 +131,7 @@ function recommend() {
 
 }
 function price() {
-    orderBy.value = 'adultprice'
+    orderBy.value = 'adult_price'
     sortOrder.value = 'ASC'
     fetchTour()
 
@@ -136,15 +143,19 @@ function duration() {
 
 }
 let hotTour = ref()
+const categoryList = ref()
 onMounted(() => {
     fetchTour()
     baseUrl.get("/client/category/hot-sidebar/" + 1)
         .then(response => {
-            console.log(response.data.rows)
-            hotTour.value = response.data.rows
+            hotTour.value = response.data
         }).catch((error) => {
             console.error(error);
         });
+    baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
+        console.log(response.data)
+        categoryList.value = response.data
+    })
 })
 function getTourbyPage() {
     fetchTour()
@@ -153,8 +164,19 @@ function fetchTour() {
     tourList.value = null;
     baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
+            console.log(response)
             tourList.value = response.data.rows
+            // response.data.rows[0].Regions.forEach(Region => {
+            //     Region.Locations.forEach(Location => {
+            //         Location.Tours.forEach(Tour => {
+            //             console.log(Tour)
+            //             tourList.value.push(Tour)
+            //         })
+            //     })
+            // })
+            // tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
+            console.log(totalPage)
         }).catch((error) => {
             console.error(error);
         });
