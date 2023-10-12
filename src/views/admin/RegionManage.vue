@@ -1,17 +1,14 @@
 <template>
     <div class="admin-tour-crud">
-        <button @click="router.push('/admin/quan-ly-tour/them-tour')" class="btn btn-success add-btn"
-            style="margin-bottom: 1rem;">
-            Thêm khu vực mới <i class="fa-solid fa-plus"></i>
-        </button>
-        <div class="sorting-container">
+
+        <div class="sorting-container" style="margin-top: 2rem;">
             <div style="font-size: larger;width: 5rem;">Bộ lọc:</div>
             <div class="sorting-button-container">
-                <form class="d-flex search-container">
+                <!-- <form class="d-flex search-container">
                     <button class="btn btn-outline-success" @click.prevent=""><i class="fas fa-search"></i></button>
                     <input @keydown.enter.prevent="" class="form-control me-2 search-box" type="search"
                         placeholder="Tìm kiếm theo tên" aria-label="Search">
-                </form>
+                </form> -->
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
@@ -63,6 +60,35 @@
             </tbody>
         </table>
         <TableLoading v-else></TableLoading>
+        <div class="add-container">
+
+            <div class="">
+                <input type="email" class="form-control" id="" placeholder="Tên khu vực	">
+            </div>
+            <div class="">
+                <input type="email" class="form-control" id="" placeholder="Slug">
+            </div>
+            <div class="">
+                <input type="email" class="form-control" id="" placeholder="Note">
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" style="color: white;">
+                    Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
+                </button>
+                <div class="dropdown-menu">
+                    <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
+                            class="fa-regular fa-rectangle-list"></i> </button>
+                    <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
+                            class="fa-solid fa-flag"></i> </button>
+                    <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
+                            class="fa-solid fa-globe"></i></button>
+                </div>
+            </div>
+            <button @click="addRegion" class="btn btn-success">
+                Thêm khu vực mới <i class=" fa-solid fa-plus"></i>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -217,5 +243,19 @@ table {
 .each-tour-row:hover {
     color: aliceblue !important;
     cursor: pointer;
+}
+
+.add-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%;
+    background-color: #dbf4e8;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 </style>

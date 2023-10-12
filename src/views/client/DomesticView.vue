@@ -13,9 +13,9 @@
             <div class="side-bar-container">
                 <div v-if="categoryList" class="other-side-bar" style="padding: 1rem;">
                     <p style="background-color: rgb(255, 135, 65);">Địa điểm Hot trong nước</p>
-                    <div v-for="region in categoryList.Regions" :key="region">
+                    <div v-if="categoryList.Regions" v-for="region in categoryList.Regions" :key="region">
                         <p style="background-color: rgb(255, 180, 76);">{{ region.name }}</p>
-                        <div v-for="location in region.Locations">
+                        <div v-if="region.Locations" v-for="location in region.Locations">
                             <p style="background-color: #F1FAF4;">{{ location.name }}</p>
                         </div>
                     </div>
