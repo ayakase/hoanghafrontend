@@ -11,7 +11,9 @@
 
         <div class="section-container">
             <div class="side-bar-container">
-                div.
+                <div style="background-color: rebeccapurple;" class="other-side-bar">
+                    Dia diem hot trong nuoc
+                </div>
                 <div class="hot-tour">
                     <h2 style="padding-left: 1rem;">Tour hot</h2>
                     <div v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
@@ -136,7 +138,7 @@ function duration() {
 let hotTour = ref()
 onMounted(() => {
     fetchTour()
-    baseUrl.get("/client/tour/hot-sidebar/" + 2)
+    baseUrl.get("/client/category/hot-sidebar/" + 1)
         .then(response => {
             console.log(response.data.rows)
             hotTour.value = response.data.rows
@@ -149,7 +151,7 @@ function getTourbyPage() {
 }
 function fetchTour() {
     tourList.value = null;
-    baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1

@@ -149,7 +149,7 @@ let showChatbox = () => {
                       &nbsp; <i class="fa-solid fa-vihara"></i>
                     </RouterLink>
                     <li>
-                      <RouterLink class="nav-link active" to="/du-lich-trong-nuoc" aria-current="page" href="#">Du lịch
+                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-trong-nuoc" aria-current="page" href="#">Du lịch
                         trong
                         nước
                         &nbsp; <i class="fa-solid fa-flag"></i>

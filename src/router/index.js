@@ -17,9 +17,17 @@ const router = createRouter({
     {
       path: '/danh-muc/du-lich-trong-nuoc',
       name: 'danh-muc',
-      component: () => import('../views/client/CategoryView.vue')
+      component: () => import('../views/client/DomesticView.vue')
     },
-
+    {
+      path: '/khu-vuc/:slug',
+      name: 'khu vuc',
+      component: () => import('../views/client/RegionView.vue')
+    },{
+      path: '/dia-diem/:slug',
+      name: 'dia diem',
+      component: () => import('../views/client/LocationView.vue')
+    },
     {
       path: '/tour-hot',
       name: 'tour-hot',
