@@ -3,8 +3,8 @@ import PlaceModal from '../../components/PlaceModal.vue'
 import AdvisoryModal from '../../components/AdvisoryModal.vue';
 import { onMounted, ref } from 'vue';
 import baseUrl from '../../connect';
-import { useRoute } from 'vue-router';
 import LoadingComponent from '../../components/LoadingComponent.vue';
+import { useRoute } from 'vue-router';
 const route = useRoute();
 const tourDetail = ref()
 const adultPrice = ref()
@@ -15,7 +15,10 @@ const renderVideo = ref(false)
 const tourId = ref()
 const tiktokUrl = ref()
 const tiktokId = ref()
-
+const pageUrl = ref()
+function getUrl(){
+    pageUrl.value = window.location.href
+}
 onMounted(() => {
     console.log(route.params.slug)
     baseUrl.get("client/each-tour/" + route.params.slug).then(response => {
@@ -45,7 +48,7 @@ let tabSec2 = ref()
             <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                     chủ</a></li>
 
-            <li v-if="tourDetail" class="breadcrumb-item">{{ tourDetail.Category.name }} </li>
+            <!-- <li v-if="tourDetail" class="breadcrumb-item">{{ tourDetail.Category.name }} </li> -->
             <li v-if="tourDetail" class="breadcrumb-item">{{ tourDetail.title }} </li>
 
         </ol>
@@ -121,6 +124,13 @@ let tabSec2 = ref()
                     </v-window>
                 </v-card-text>
             </v-card>
+            <div><button class="btn" @click="getUrl"
+                    style="height: 3rem;width: 3rem;background-color:#86c5a9;font-size: large;color: white;">
+                    <i class="fa-solid fa-link"></i>
+                </button>
+                <p>{{ pageUrl }}</p>
+            </div>
+
         </div>
         <div class="side-bar">
             <div class="place-order" v-if="tourDetail">
@@ -171,7 +181,6 @@ let tabSec2 = ref()
                         <hr class="hr" />
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

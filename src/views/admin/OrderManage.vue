@@ -46,7 +46,7 @@
             </thead>
             <tbody>
                 <tr v-for="order in orderTable" :key="order" class="each-tour-row">
-                    <td>{{ order.Tour.title }}</td>
+                    <td @click="router.push({ path: '/order/' + order.id })">{{ order.Tour.title }}</td>
                     <td>{{ order.name }}</td>
                     <td>{{ order.phone }}</td>
                     <td>{{ formatDate(order.createdAt) }}</td>
@@ -77,6 +77,8 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { ref, onMounted } from 'vue';
 import baseUrl from '../../connect';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 let pageNumber = ref(1)
 let totalPage = ref()
 let sortOrder = ref("DESC");

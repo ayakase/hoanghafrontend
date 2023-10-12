@@ -21,9 +21,9 @@
       </div>
       <!-- data-bs-ride="carousel" -->
       <div class="slide">
-        <Splide :options=headOption aria-label="">  
+        <Splide :options=headOption aria-label="">
           <SplideSlide v-for="slide in sliderItem" :key="slide">
-            <a :href="slide.tour_url"> 
+            <a :href="slide.tour_url">
               <v-img class="slide-image" style=" border-radius: 1rem;" :src="slide.image_src"></v-img>
             </a>
           </SplideSlide>
@@ -80,7 +80,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/tour/' + tour.slug })"
+          <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer;">
             <v-img style=" border-radius: 1rem;height: 100%;object-fit: cover;" :src=tour.thumbnail></v-img>
             <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
@@ -89,7 +89,9 @@
         </Splide>
       </div>
     </div>
-    <div v-if="china"
+    <HeartLoading v-else> </HeartLoading>
+
+    <!-- <div v-if="china"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch Trung Quốc &nbsp; <i
           class="fa-solid fa-vihara"></i>
@@ -105,6 +107,7 @@
         </Splide>
       </div>
     </div>
+    <HeartLoading v-else> </HeartLoading>
     <div v-if="domestic"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch trong nước &nbsp; <i
@@ -127,6 +130,8 @@
         </Splide>
       </div>
     </div>
+    <HeartLoading v-else> </HeartLoading>
+
     <div v-if="foreign"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch quốc tế &nbsp; <i
@@ -143,6 +148,7 @@
         </Splide>
       </div>
     </div>
+    <HeartLoading v-else> </HeartLoading> -->
 
   </div>
 </template>
@@ -196,12 +202,17 @@ export default {
         posts.value = response.data.rows
       })
       baseUrl.get('/client/carousel/china').then((response) => {
+        console.log(response.data)
         china.value = response.data.rows
       })
       baseUrl.get('/client/carousel/domestic').then((response) => {
+        console.log(response.data)
+
         domestic.value = response.data.rows
       })
       baseUrl.get('/client/carousel/foreign').then((response) => {
+        console.log(response.data)
+
         foreign.value = response.data.rows
       })
     })

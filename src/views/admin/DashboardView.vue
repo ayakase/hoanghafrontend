@@ -12,9 +12,9 @@
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour <i
                     class="fa-regular fa-paper-plane"></i></RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Khu vuc <i class="fa-regular fa-paper-plane"></i>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-khu-vuc">Qlý khu vực<i class="fa-regular fa-paper-plane"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Dia diem <i class="fa-regular fa-paper-plane"></i>
+            <RouterLink class="admin-side-item" to="/admin/quan-ly-dia-diem">Qlý địa điểm<i class="fa-regular fa-paper-plane"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-hot-tour">Tour Hot <i class="fa-solid fa-fire"></i>
             </RouterLink>

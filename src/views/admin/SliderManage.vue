@@ -1,6 +1,6 @@
 <template>
     <div class="slider-manage-container">
-        <button @click="router.push('quan-li-slider/them-slide')" style="margin-bottom: 2rem;" class="btn btn-success">
+        <button @click="router.push('quan-ly-slider/them-slide')" style="margin-bottom: 2rem;" class="btn btn-success">
             Thêm Slider
         </button>
         <div class="slider-list">
@@ -69,5 +69,4 @@ onMounted(() => {
     border-radius: 1rem;
     object-fit: cover;
 }
-
 </style>

@@ -169,7 +169,7 @@ let showChatbox = () => {
                             <li class="region-item"><a href="#">Le Hoi</a></li>
                           </ul>
                         </li>
-                        <li> 
+                        <li>
                           <a href="#">Du lich mien nam <span>&#11167;</span></a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Da Nang</a></li>
@@ -521,7 +521,7 @@ ul.nav-menu li:hover>.drop-one {
   position: absolute;
   top: 0;
   left: 100%;
-  background: #d3ecd7;
+  background: #dbebe1;
   display: none;
 }
 
@@ -535,7 +535,7 @@ ul.nav-menu li:hover>.drop-one {
   width: 100%;
   position: relative;
   top: 0;
-  background: #d3ecd7;
+  background: #dbebe1;
   display: block;
 }
 </style>

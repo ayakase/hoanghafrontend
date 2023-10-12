@@ -1,6 +1,6 @@
 <template>
     <div class="admin-tour-crud">
-        <button @click="router.push('/admin/quan-li-tour/them-tour')" class="btn btn-success add-btn"
+        <button @click="router.push('/admin/quan-ly-tour/them-tour')" class="btn btn-success add-btn"
             style="margin-bottom: 1rem;">
             Thêm tour mới <i class="fa-solid fa-plus"></i>
         </button>
@@ -29,6 +29,36 @@
                                 class="fa-solid fa-globe"></i></button>
                     </div>
                 </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        Khu vực &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
+                                class="fa-regular fa-rectangle-list"></i> </button>
+                        <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp;<i
+                                class="fa-solid fa-vihara"></i> </button>
+                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
+                                class="fa-solid fa-flag"></i> </button>
+                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
+                                class="fa-solid fa-globe"></i></button>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        Địa điểm &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
+                                class="fa-regular fa-rectangle-list"></i> </button>
+                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
+                                class="fa-solid fa-flag"></i> </button>
+                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
+                                class="fa-solid fa-globe"></i></button>
+                    </div>
+                </div>
                 <button class="sort-button btn btn-success" @click="Newest">Mới nhất &nbsp; <i
                         class="fa-solid fa-arrow-up-wide-short"></i></button>
                 <button class="sort-button btn btn-success" @click="Oldest">Cũ nhất &nbsp; <i
@@ -41,14 +71,14 @@
             </div>
         </div>
         <table v-if="tourTable" class="table table-success table-striped table-hover"
-            style="width: 80vw;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+            style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Tên tour</th>
                     <th scope="col">Slug</th>
                     <th scope="col">Lịch trình</th>
-                    <th scope="col">Danh mục</th>
+                    <!-- <th scope="col">Danh mục</th> -->
                     <th scope="col">Khởi hành</th>
                     <th scope="col">Số ngày</th>
                     <th scope="col">Tour Hot</th>
@@ -60,14 +90,14 @@
             </thead>
             <tbody>
                 <tr v-for="tour in tourTable" :key="tour" class="each-tour-row">
-                    <th scope="row" @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.id }}
+                    <th scope="row" @click="router.push({ path: '/' + tour.slug })">{{ tour.id }}
                     </th>
-                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.title }}</td>
-                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.slug }}</td>
+                    <td @click="router.push({ path: '/' + tour.slug })">{{ tour.title }}</td>
+                    <td @click="router.push({ path: '/' + tour.slug })">{{ tour.slug }}</td>
 
-                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.schedule }}</td>
-                    <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.Category.name }}
-                    </td>
+                    <td @click="router.push({ path: '/' + tour.slug })">{{ tour.schedule }}</td>
+                    <!-- <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.Category.name }}
+                    </td> -->
                     <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.departure }}
                     </td>
                     <td @click="router.push({ path: '/tour/' + tour.slug })">{{ tour.days }}</td>
@@ -80,7 +110,7 @@
                         formatDate(tour.createdAt)
                     }}</td>
                     <td> <button
-                            @click="router.push({ path: '/admin/quan-li-tour/chinh-sua-tour', query: { id: tour.id } })"
+                            @click="router.push({ path: '/admin/quan-ly-tour/chinh-sua-tour', query: { id: tour.id } })"
                             class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
                     <td> <button class="delete-button" @click="deleteTour(tour.id)"><i
@@ -116,6 +146,20 @@ function fetchTour() {
         }).catch((error) => {
             console.error(error);
         });
+}
+const region = ref()
+function fetchRegion() {
+    baseUrl.get("/admin/tour/region/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
+        .then(response => {
+            console.log(response.data)
+
+        }).catch((error) => {
+            console.error(error);
+        });
+}
+const location = ref()
+function fetchLocation() {
+
 }
 onMounted(() => {
     fetchTour()
@@ -231,10 +275,10 @@ table {
 }
 
 .sorting-button-container {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 

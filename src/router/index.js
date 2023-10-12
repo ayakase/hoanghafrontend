@@ -15,32 +15,28 @@ const router = createRouter({
       component: () => import('../views/NotFound.vue'),
     },
     {
-      path: '/du-lich-quoc-te',
-      name: 'du-lich-quoc-te',
-      component: () => import('../views/client/ForeignTravel.vue')
+      path: '/danh-muc/du-lich-trong-nuoc',
+      name: 'danh-muc',
+      component: () => import('../views/client/CategoryView.vue')
     },
-    {
-      path: '/du-lich-trong-nuoc',
-      name: 'du-lich-trong-nuoc',
-      component: () => import('../views/client/DomesticTravel.vue')
-    },
+
     {
       path: '/tour-hot',
       name: 'tour-hot',
       component: () => import('../views/client/HotTourView.vue')
     },
-    {
-      path: '/du-lich-trung-quoc',
-      name: 'du-lich-trung-quoc',
-      component: () => import('../views/client/ChinaTravel.vue')
-    },
+    // {
+    //   path: '/du-lich-trung-quoc',
+    //   name: 'du-lich-trung-quoc',
+    //   component: () => import('../views/client/ChinaTravel.vue')
+    // },
     {
       path: '/admin',
       name: 'admin',
       component: () => import('../views/admin/DashboardView.vue')
     },
     {
-      path: '/tour/:slug',
+      path: '/:slug',
       name: 'tour',
       component: () => import('../views/client/TourView.vue')
     },
@@ -48,6 +44,11 @@ const router = createRouter({
       path: '/postdetail',
       name: 'postdetail',
       component: () => import('../views/client/PostView.vue')
+    },
+    {
+      path: '/order/:id',
+      name: 'orderdetail',
+      component: () => import('../views/admin/OrderView.vue')
     },
     {
       path: '/about',
@@ -88,12 +89,20 @@ const router = createRouter({
           component: () => import('../views/admin/NewPost.vue')
         },
         {
-          path: 'quan-li-tour/them-tour',
+          path: 'quan-ly-tour/them-tour',
           component: () => import('../views/admin/AddTour.vue')
         },
         {
-          path: 'quan-li-tour/chinh-sua-tour',
+          path: 'quan-ly-tour/chinh-sua-tour',
           component: () => import('../views/admin/EditTour.vue')
+        },
+        {
+          path: 'quan-ly-khu-vuc',
+          component: () => import('../views/admin/RegionManage.vue')
+        },
+        {
+          path: 'quan-ly-dia-diem',
+          component: () => import('../views/admin/LocationManage.vue')
         },
         {
           path: 'thong-ke',
@@ -112,7 +121,7 @@ const router = createRouter({
           component: () => import('../views/admin/SliderManage.vue')
         },
         {
-          path: 'quan-li-slider/them-slide',
+          path: 'quan-ly-slider/them-slide',
           component: () => import('../views/admin/AddSlider.vue')
         },
         {

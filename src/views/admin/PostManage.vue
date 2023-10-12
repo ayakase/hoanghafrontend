@@ -1,37 +1,23 @@
 <template>
   <div class="admin-tour-crud">
-    <button
-      @click="router.push('/admin/bai-viet/tao-bai-viet')"
-      class="btn btn-success add-btn"
-      style="margin-bottom: 1rem"
-    >
+    <button @click="router.push('/admin/bai-viet/tao-bai-viet')" class="btn btn-success add-btn"
+      style="margin-bottom: 1rem">
       Tạo bài viết <i class="fa-solid fa-plus"></i>
     </button>
     <div class="sorting-container">
-      <div style="font-size: larger">Bộ lọc:</div>
       <div class="sorting-button-container">
+        <div style="font-size: larger">Bộ lọc:</div>
         <form class="d-flex search-container">
           <button class="btn btn-outline-success" @click.prevent="">
             <i class="fas fa-search"></i>
           </button>
-          <input
-            @keydown.enter.prevent=""
-            class="form-control me-2 search-box"
-            type="search"
-            placeholder="Tìm kiếm theo tên"
-            aria-label="Search"
-          />
+          <input @keydown.enter.prevent="" class="form-control me-2 search-box" type="search"
+            placeholder="Tìm kiếm theo tên" aria-label="Search" />
         </form>
 
         <div class="btn-group">
-          <button
-            type="button"
-            class="btn btn-success dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            style="color: white"
-          >
+          <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" style="color: white">
             Trạng thái &nbsp; <i class="fa-solid fa-book"> :</i>
             {{ publishLabel }}
           </button>
@@ -59,16 +45,13 @@
                         class="fa-solid fa-check fa-beat"></i></button> -->
       </div>
     </div>
-    <table
-      v-if="postTable"
-      class="table table-success table-striped table-hover"
-      style="width: 80vw; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px"
-    >
+    <table v-if="postTable" class="table table-success table-striped table-hover"
+      style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px">
       <thead>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Tiêu đề</th>
-          <th scope="col">Nội dung</th>
+          <!-- <th scope="col">Nội dung</th> -->
           <th scope="col">Ngày đăng</th>
           <th scope="col">Chỉnh sửa</th>
           <th scope="col">Hành động</th>
@@ -79,18 +62,15 @@
         <tr v-for="post in postTable" :key="post" class="each-tour-row">
           <td>{{ post.id }}</td>
           <td>{{ post.title }}</td>
-          <td>{{ post.content }}</td>
+          <!-- <td v-html="post.content.slice(0, 200)"></td> -->
           <td>{{ formatDate(post.createdAt) }}</td>
           <td>
-            <button
-              @click="
-                router.push({
-                  path: '/admin/quan-li-tour/chinh-sua-tour',
-                  query: { id: tour.id },
-                })
-              "
-              class="edit-button"
-            >
+            <button @click="
+              router.push({
+                path: '/admin/quan-ly-tour/chinh-sua-tour',
+                query: { id: tour.id },
+              })
+              " class="edit-button">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
           </td>
@@ -113,14 +93,8 @@
       </tbody>
     </table>
     <TableLoading v-else></TableLoading>
-    <v-pagination
-      @click="getTourbyPage"
-      v-model="pageNumber"
-      :length="totalPage"
-      :total-visible="5"
-      prev-icon="fa-solid fa-chevron-left"
-      next-icon="fa-solid fa-chevron-right"
-    ></v-pagination>
+    <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
+      prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
   </div>
 </template>
 
@@ -142,11 +116,11 @@ function fetchPost() {
   baseUrl
     .get(
       "/admin/post/" +
-        publishState.value +
-        "/" +
-        sortOrder.value +
-        "/" +
-        pageNumber.value
+      publishState.value +
+      "/" +
+      sortOrder.value +
+      "/" +
+      pageNumber.value
     )
     .then((response) => {
       console.log(response.data);
@@ -205,7 +179,7 @@ function unpublishedPost() {
   publishLabel.value = "Chưa xuất bản";
   fetchPost();
 }
-function publishPost(id){
+function publishPost(id) {
   console.log()
 }
 function formatDate(date) {
@@ -230,6 +204,11 @@ table {
   border-radius: 1rem !important;
   border-collapse: collapse;
   overflow: hidden;
+  width: 100%;
+}
+
+td {
+  height: 3rem !important;
 }
 
 .admin-tour-crud {
@@ -265,10 +244,10 @@ table {
 }
 
 .sorting-button-container {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 

@@ -66,7 +66,7 @@
                     <td @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">{{ formatDate(tour.createdAt)
                     }}</td>
                     <td> <button
-                            @click="router.push({ path: '/admin/quan-li-tour/chinh-sua-tour', query: { id: tour.id } })"
+                            @click="router.push({ path: '/admin/quan-ly-tour/chinh-sua-tour', query: { id: tour.id } })"
                             class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
                     <td> <button class="delete-button" @click="deleteTour(tour.id)"><i

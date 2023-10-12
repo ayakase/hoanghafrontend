@@ -4,11 +4,29 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                         chủ</a></li>
-                <li class="breadcrumb-item">Du lịch Trung Quốc</li>
+                <li class="breadcrumb-item">Du lịch trong nước</li>
             </ol>
         </nav>
-        <h2 style="color: #ff6b00;">Du lịch Trung Quốc</h2>
+        <h2 style="color: #ff6b00;">Du lịch trong nước</h2>
+
         <div class="section-container">
+            <div class="side-bar-container">
+                div.
+                <div class="hot-tour">
+                    <h2 style="padding-left: 1rem;">Tour hot</h2>
+                    <div v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
+                        class="card" style="background: none;border: none;">
+                        <img :src=tour.thumbnail class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ tour.title }}</h5>
+                            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice)
+                            }}</span>
+                                VNĐ </p>
+                            <hr class="hr" />
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tour-container">
                 <div class="sort-container">
                     <p>Sắp xếp theo: </p>
@@ -63,19 +81,7 @@
                     prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
                 <div>{{ pageNumber }}</div>
             </div>
-            <div class="hot-tour">
-                <h2 style="padding-left: 1rem;">Tour hot</h2>
-                <div v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
-                    class="card" style="background: none;border: none;">
-                    <img :src=tour.thumbnail class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ tour.title }}</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice) }}</span>
-                            VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </template>
@@ -130,7 +136,7 @@ function duration() {
 let hotTour = ref()
 onMounted(() => {
     fetchTour()
-    baseUrl.get("/client/tour/hot-sidebar/" + 1)
+    baseUrl.get("/client/tour/hot-sidebar/" + 2)
         .then(response => {
             console.log(response.data.rows)
             hotTour.value = response.data.rows
@@ -143,7 +149,7 @@ function getTourbyPage() {
 }
 function fetchTour() {
     tourList.value = null;
-    baseUrl.get("/client/tour/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/tour/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
@@ -190,6 +196,16 @@ p {
     width: 95%;
     margin: auto;
     padding: auto;
+}
+
+.breadcrumb-item {
+    font-size: large;
+}
+
+.home-breadcrumb {
+    text-decoration: none !important;
+    font-weight: bold;
+    color: black;
 }
 
 .tour-detail-container {
