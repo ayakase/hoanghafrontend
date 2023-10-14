@@ -1,4 +1,5 @@
 <template>
+    <LoadingOverlay v-if="showOverlay"></LoadingOverlay>
     <div class="admin-tour-crud">
 
         <div class="sorting-container" style="margin-top: 2rem;">
@@ -44,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="region in regionTable" :key="tour" class="each-tour-row">
+                <tr v-for="region in regionTable" :key="region" class="each-tour-row">
                     <td>{{ region.id }}</td>
                     <td>{{ region.name }}</td>
                     <td>{{ region.slug }}</td>
@@ -53,7 +54,7 @@
                             @click="router.push({ path: '/admin/quan-ly-tour/chinh-sua-tour', query: { id: tour.id } })"
                             class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
-                    <td> <button class="delete-button" @click="deleteTour(tour.id)"><i
+                    <td> <button class="delete-button" @click="deleteRegion(region.id)"><i
                                 class="fa-solid fa-trash"></i></button></td>
                 </tr>
 
@@ -63,37 +64,37 @@
         <div class="add-container">
 
             <div class="">
-                <input type="email" class="form-control" id="" placeholder="Tên khu vực	">
+                <input v-model="newTitle" type="text" class="form-control" id="" placeholder="Tên khu vực	">
             </div>
             <div class="">
-                <input type="email" class="form-control" id="" placeholder="Slug">
+                <input v-model="newSlug" type="text" class="form-control" id="" placeholder="Slug">
             </div>
             <div class="">
-                <input type="email" class="form-control" id="" placeholder="Note">
+                <input v-model="newNote" type="text" class="form-control" id="" placeholder="Note">
             </div>
             <div class="btn-group">
                 <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false" style="color: white;">
-                    Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
+                    Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ addLabel }}
                 </button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
-                            class="fa-regular fa-rectangle-list"></i> </button>
-                    <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
-                            class="fa-solid fa-flag"></i> </button>
-                    <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
+                    <button class="dropdown-item" @click="addDomestic">Trong nước &nbsp; <i class="fa-solid fa-flag"></i>
+                    </button>
+                    <button class="dropdown-item" @click="addGlobal">Quốc tế &nbsp; <i
                             class="fa-solid fa-globe"></i></button>
                 </div>
             </div>
             <button @click="addRegion" class="btn btn-success">
-                Thêm khu vực mới <i class=" fa-solid fa-plus"></i>
+                Khu vực mới <i class=" fa-solid fa-plus"></i>
             </button>
         </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import slugify from 'slugify'
+import LoadingOverlay from "../../components/LoadingOverlay.vue";
+import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 import baseUrl from '../../connect';
@@ -101,6 +102,7 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import TableLoading from '../../components/TableLoading.vue';
 let regionTable = ref()
+let showOverlay = ref(false);
 function fetchRegion() {
     regionTable.value = null
     console.log(categoryNumber.value)
@@ -109,21 +111,14 @@ function fetchRegion() {
         regionTable.value = response.data
     })
 }
-const location = ref()
-function fetchLocation() {
-
-}
 onMounted(() => {
     fetchRegion()
 })
-function getTourbyPage() {
-    fetchRegion()
-}
-function deleteTour(id) {
+function deleteRegion(id) {
     console.log(id)
     let text = "Bạn có chắc chắn muốn xóa Tour " + id;
     if (confirm(text) == true) {
-        baseUrl.delete("/admin/tour/" + id)
+        baseUrl.delete("/admin/region/" + id)
             .then(response => {
                 console.log(response)
                 toast.info("Đã xóa", {
@@ -135,9 +130,7 @@ function deleteTour(id) {
             }).catch((error) => {
                 console.error(error);
             });
-
     }
-
 }
 let categoryLabel = ref("Tất cả")
 let categoryNumber = ref(0)
@@ -148,32 +141,65 @@ function categoryAll() {
     fetchRegion()
 
 }
-
 function categoryDomestic() {
     categoryLabel.value = "Trong nước"
     categoryNumber.value = 1
-
     fetchRegion()
 
 } function categoryGlobal() {
     categoryLabel.value = "Quốc tế"
     categoryNumber.value = 2
-
     fetchRegion()
 
 }
-// sắp xếp
-let sortOrder = ref("DESC")
-function Newest() {
-    sortOrder.value = "DESC"
-
-    fetchRegion()
+let addLabel = ref("Trong nước")
+let addNumber = ref(1)
+let newTitle = ref()
+let newSlug = ref()
+let newNote = ref()
+function turnSlug(slug) {
+    return slugify(slug, {
+        locale: 'vi',
+        lower: true,
+    })
 }
-function Oldest() {
-    sortOrder.value = "ASC"
+watch(newTitle, (newValue) => {
+    newSlug.value = turnSlug(newValue)
+})
+function addDomestic() {
+    addLabel.value = "Trong nước"
+    addNumber.value = 1
 
-    fetchRegion()
+} function addGlobal() {
+    addLabel.value = "Quốc tế"
+    addNumber.value = 2
 }
+
+function addRegion() {
+    showOverlay.value = true;
+    let regionData = {
+        name: newTitle.value,
+        slug: newSlug.value,
+        note: newNote.value,
+        category_id: addNumber.value
+    }
+    console.log(regionData)
+    baseUrl.post('/admin/region', regionData)
+        .then((response) => {
+            console.log(response)
+            toast.info(response.data, {
+                autoClose: 2000,
+                theme: "colored",
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            showOverlay.value = false;
+            fetchRegion()
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
+
 
 function formatDate(date) {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };

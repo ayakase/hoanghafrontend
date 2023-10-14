@@ -195,7 +195,6 @@
         </div>
         <div @click="addTour" class="btn btn-success" style="margin-top: 1rem;right: 0;float: right;">Lưu Tour</div>
     </div>
-    <div v-html="tourGuide"></div>
 </template>
 
 <script setup>
