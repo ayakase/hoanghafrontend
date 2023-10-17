@@ -149,7 +149,8 @@ let showChatbox = () => {
                       &nbsp; <i class="fa-solid fa-vihara"></i>
                     </RouterLink>
                     <li>
-                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-trong-nuoc" aria-current="page" href="#">Du lịch
+                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-trong-nuoc" aria-current="page" href="#">
+                        Du lịch
                         trong
                         nước
                         &nbsp; <i class="fa-solid fa-flag"></i>
@@ -283,7 +284,13 @@ let showChatbox = () => {
     </nav>
   </div>
   <div class="content-container">
-    <RouterView />
+    <!-- <RouterView /> -->
+    <router-view v-slot="{ Component }">
+      <transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
+
   </div>
 
   <!-- <iframe
@@ -297,6 +304,16 @@ let showChatbox = () => {
 </template>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 .chatbox-enter-active {
   animation: bounce-in 0.5s;
 }
