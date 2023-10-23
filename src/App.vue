@@ -127,7 +127,7 @@ let showChatbox = () => {
             <li style="z-index: 9999999;">
               <ul class="nav-menu" style="border: 0;padding: 0;">
                 <li class="dropdown">
-                  <a href="#">Danh Mục <span>&#11167;</span></a>
+                  <a href="#" style="font-size: medium; font-weight: 500; color: #045B48 !important;">Danh Mục</a>
                   <ul class="drop-one" style="margin: 0;padding: 0;">
                     <li>
                       <RouterLink class="nav-link active" to="/" aria-current="page" href="#">Trang chủ</RouterLink>
@@ -157,7 +157,7 @@ let showChatbox = () => {
                       </RouterLink>
                       <ul class="drop-two" style="margin: 0;padding: 0;">
                         <li>
-                          <a href="#">Du lich mien bac <span>&#11167;</span></a>
+                          <a href="#" style="font-size: larger;">Du lich mien bac</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Cat Ba</a></li>
                             <li class="region-item"><a href="#">Ha Long</a></li>
@@ -171,7 +171,7 @@ let showChatbox = () => {
                           </ul>
                         </li>
                         <li>
-                          <a href="#">Du lich mien nam <span>&#11167;</span></a>
+                          <a href="#" style="font-size: larger;">Du lich mien nam</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Da Nang</a></li>
                             <li class="region-item"><a href="#">Hoi An</a></li>
@@ -186,7 +186,7 @@ let showChatbox = () => {
                           </ul>
                         </li>
                         <li>
-                          <a href="#">Du lich mien trung <span>&#11167;</span></a>
+                          <a href="#" style="font-size: larger;">Du lich mien trung</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Da Lat</a></li>
                             <li class="region-item"><a href="#">Con Dao</a></li>
@@ -207,7 +207,7 @@ let showChatbox = () => {
                       </RouterLink>
                       <ul class="drop-two">
                         <li>
-                          <a href="#">Du lich Chau A<span>&#11167;</span></a>
+                          <a href="#" style="font-size: larger;">Du lich Chau A</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Campuchia</a></li>
                             <li class="region-item"><a href="#">Malaysia</a></li>
@@ -220,7 +220,7 @@ let showChatbox = () => {
                           </ul>
                         </li>
                         <li>
-                          <a href="#">Du lich Chau Au<span>&#11167;</span></a>
+                          <a href="#" style="font-size: larger;">Du lich Chau Au</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Tay Au</a></li>
                             <li class="region-item"><a href="#">Phap</a></li>
@@ -229,14 +229,14 @@ let showChatbox = () => {
                           </ul>
                         </li>
                         <li>
-                          <a href="#">Du lich Chau My<span>&#11167;</span></a>
+                          <a href="#" style="font-size: larger;">Du lich Chau My</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">My</a></li>
                             <li class="region-item"><a href="#">Canada</a></li>
                           </ul>
                         </li>
                         <li>
-                          <a href="#">Du lich Chau Uc<span>&#11167;</span></a>
+                          <a href="#" style="font-size: larger;">Du lich Chau Uc</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Uc</a></li>
                             <li class="region-item"><a href="#">New Zealand</a></li>
@@ -249,7 +249,7 @@ let showChatbox = () => {
                         lich
                         &nbsp; <i class="fa-solid fa-vihara"></i>
                       </RouterLink>
-                      <ul class="drop-two">
+                      <ul class="drop-two-special">
                         <li class="region-item"><a href="#">Booking ve may bay</a></li>
                         <li class="region-item"><a href="#">Dich vu lam ho chieu</a></li>
                         <li class="region-item"><a href="#">Dat ve cap treo fansipan</a></li>
@@ -409,7 +409,7 @@ nav {
   color: #045B48 !important;
   margin-left: 0.2rem;
   margin-right: 0.2rem;
-  font-size: larger;
+  font-size: medium;
   font-weight: 500;
   transition: border-bottom 0.2s linear color 0.2s linear;
   border-bottom: 1px solid transparent;
@@ -422,7 +422,7 @@ nav {
 }
 
 .nav-link:hover {
-  border-bottom: 1px solid #ffffff;
+  border-right: 5px solid #ff6600;
   color: white;
 }
 
@@ -491,18 +491,16 @@ ul.nav-menu {
   background-color: #0aa886;
 }
 
-ul.nav-menu li {
+ul.nav-menu li{
   /* display: block; */
   margin: 0;
   padding: 0;
   text-decoration: none !important;
-
   list-style: none;
   line-height: 50px;
 }
 
 ul.nav-menu li:hover {
-
   /* background-color: #cefeca; */
   position: relative;
 }
@@ -517,6 +515,7 @@ ul.nav-menu li a {
 }
 
 .drop-one {
+  font-weight: 500;
   margin: 0;
   padding: 0;
   width: 250px;
@@ -544,6 +543,21 @@ ul.nav-menu li:hover>.drop-one {
 
 .drop-one li:hover>.drop-two {
   display: flex;
+}
+
+.drop-two-special {
+  margin: 0;
+  padding: 0;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #dbebe1;
+  display: none;
+}
+
+.drop-one li:hover>.drop-two-special {
+  display: block;
 }
 
 .drop-three {
