@@ -22,8 +22,8 @@
                 </div>
                 <div class="hot-tour">
                     <h2 style="padding-left: 1rem;">Tour hot</h2>
-                    <div v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
-                        class="card" style="background: none;border: none;">
+                    <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
+                        style="background: none;border: none;">
                         <img :src=tour.thumbnail class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ tour.title }}</h5>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
-                    <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
+                    <div class="image-container" @click="router.push({ path: '/' + tour.slug })">
                         <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
                             style="width: 100%;" alt=""> -->
                         <v-img style="height: 100%;" cover :width="50" class="thumbnail" :src=tour.thumbnail>
@@ -63,7 +63,7 @@
                             </template></v-img>
                     </div>
                     <div class="tour-detail-container">
-                        <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
+                        <div class="title" @click="router.push({ path: '/' + tour.slug })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
                             <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
@@ -153,7 +153,7 @@ onMounted(() => {
             console.error(error);
         });
     baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         categoryList.value = response.data
     })
 })
@@ -164,7 +164,7 @@ function fetchTour() {
     tourList.value = null;
     baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
-            console.log(response)
+            console.log(response.data.rows)
             tourList.value = response.data.rows
             // response.data.rows[0].Regions.forEach(Region => {
             //     Region.Locations.forEach(Location => {
@@ -175,7 +175,8 @@ function fetchTour() {
             //     })
             // })
             // tourList.value = response.data.rows
-            totalPage.value = response.data.count / 10 + 1
+            totalPage.value = response.data.count / 2 + 1
+            console.log(response.data.count)
             console.log(totalPage)
         }).catch((error) => {
             console.error(error);

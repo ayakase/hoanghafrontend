@@ -16,14 +16,19 @@ const router = createRouter({
     },
     {
       path: '/danh-muc/du-lich-trong-nuoc',
-      name: 'danh-muc',
+      name: 'du lich trong nuoc',
       component: () => import('../views/client/DomesticView.vue')
+    },
+    {
+      path: '/danh-muc/du-lich-quoc-te',
+      name: 'du lich quoc te',
+      component: () => import('../views/client/ForeignView.vue')
     },
     {
       path: '/khu-vuc/:slug',
       name: 'khu vuc',
       component: () => import('../views/client/RegionView.vue')
-    },{
+    }, {
       path: '/dia-diem/:slug',
       name: 'dia diem',
       component: () => import('../views/client/LocationView.vue')

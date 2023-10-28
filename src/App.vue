@@ -127,7 +127,8 @@ let showChatbox = () => {
             <li style="z-index: 9999999;">
               <ul class="nav-menu" style="border: 0;padding: 0;">
                 <li class="dropdown">
-                  <a href="#" style="font-size: medium; font-weight: 500; color: #045B48 !important;">Danh Mục</a>
+                  <a href="#" style="font-size: large; font-weight: bold; color: #045B48 !important;">DANH MUC <i
+                      class="fa-solid fa-chevron-down"></i> </a>
                   <ul class="drop-one" style="margin: 0;padding: 0;">
                     <li>
                       <RouterLink class="nav-link active" to="/" aria-current="page" href="#">Trang chủ</RouterLink>
@@ -201,7 +202,7 @@ let showChatbox = () => {
                       </ul>
                     </li>
                     <li>
-                      <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Du lịch quốc
+                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-quoc-te" aria-current="page" href="#">Du lịch quốc
                         tế
                         &nbsp; <i class="fa-solid fa-globe"></i>
                       </RouterLink>
@@ -491,7 +492,7 @@ ul.nav-menu {
   background-color: #0aa886;
 }
 
-ul.nav-menu li{
+ul.nav-menu li {
   /* display: block; */
   margin: 0;
   padding: 0;

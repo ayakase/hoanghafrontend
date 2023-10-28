@@ -153,7 +153,7 @@ onMounted(() => {
             console.error(error);
         });
     baseUrl.get("/client/category/side-bar-list/" + 2).then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         categoryList.value = response.data
     })
 })
@@ -162,9 +162,9 @@ function getTourbyPage() {
 }
 function fetchTour() {
     tourList.value = null;
-    baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/category/" + 2 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
-            console.log(response)
+            console.log(response.data)
             tourList.value = response.data.rows
             // response.data.rows[0].Regions.forEach(Region => {
             //     Region.Locations.forEach(Location => {

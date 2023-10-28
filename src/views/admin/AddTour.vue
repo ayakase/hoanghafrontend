@@ -33,15 +33,19 @@
             <label for="" class="form-label">Lịch Trình</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tourSchedule" />
         </div>
+        <div>
+            category
+        </div>
         <div class="category-type-from">
-            <div class="mb-3 w-25">
+            <!-- <div class="mb-3 w-25">
                 <label for="" class="form-label">Danh mục </label>
                 <select class="form-select mb-3" aria-label="Smal select example" v-model="tourCategory">
                     <option value="1">Du lịch Trung Quốc</option>
                     <option value="2">Du lịch trong nước</option>
                     <option value="3">Du lịch quốc tế</option>
                 </select>
-            </div>
+            </div> -->
+
             <div class="mb-3 w-25">
                 <label for="" class="form-label">Loại tour </label>
                 <select class="form-select mb-3" aria-label="Small select example" v-model="tourType">
@@ -279,7 +283,13 @@ let slug = ref()
 watch(tourTitle, (newValue) => {
     slug.value = turnSlug(newValue)
 })
-onMounted(() => { })
+onMounted(() => {
+    baseUrl
+        .get("/admin/tour/choose-category").then((response) => {
+            console.log(response.data)
+
+        })
+})
 let recommendColor = computed(() => {
     if (recommendText.value >= 0 && recommendText.value <= 3) {
         return "red";
