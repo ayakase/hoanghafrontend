@@ -11,6 +11,11 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/tim-kiem/:searchText',
+      name: 'tim-kiem',
+      component: () => import('../views/client/SearchView.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       component: () => import('../views/NotFound.vue'),
     },

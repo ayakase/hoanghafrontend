@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="home-first-section" style="margin-bottom: 5rem;">
       <div class="travel-category">
-        <div class="travel-category-item" @click="router.push('/du-lich-trong-nuoc')">
+        <div class="travel-category-item" @click="router.push('/danh-muc/du-lich-trong-nuoc')">
           <h5>Du lịch trong nước</h5> <i class="fa-solid fa-chevron-right"></i>
 
         </div>

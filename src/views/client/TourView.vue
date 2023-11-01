@@ -16,11 +16,11 @@ const tourId = ref()
 const tiktokUrl = ref()
 const tiktokId = ref()
 const pageUrl = ref()
-function getUrl(){
+function getUrl() {
     pageUrl.value = window.location.href
 }
 onMounted(() => {
-    console.log(route.params.slug)
+    // console.log(route.params.slug)
     baseUrl.get("client/each-tour/" + route.params.slug).then(response => {
         console.log(response.data[0])
         tourDetail.value = response.data[0]

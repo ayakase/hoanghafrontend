@@ -4,26 +4,29 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                         chủ</a></li>
-                <li class="breadcrumb-item">Du lịch trong nước</li>
+                <li class="breadcrumb-item">Tim kiem</li>
             </ol>
         </nav>
         <!-- <h2 style="color: #ff6b00;">Du lịch trong nước</h2> -->
-
+        <h3> Hien thi ket qua cho <span style="color: #ff6b00;">{{ searchText }}</span></h3>
         <div class="section-container">
             <div class="side-bar-container">
-                <div v-if="categoryList" class="other-side-bar" style="padding: 1rem;">
-                    <p style="background-color: rgb(255, 135, 65);">Địa điểm Hot trong nước</p>
+                <div v-if="categoryList" class="category-list">
+                    <div
+                        style="display: flex;align-items: center; height: 3rem; padding-left: 1rem; font-size: 20px;font-weight: bold;">
+                        Địa điểm &nbsp; <span style="color:#ff6b00;">HOT</span> &nbsp; trong
+                        nước</div>
                     <div v-if="categoryList.Regions" v-for="region in categoryList.Regions" :key="region">
-                        <p style="background-color: rgb(255, 180, 76);">{{ region.name }}</p>
+                        <div class="region-list">{{ region.name }}</div>
                         <div v-if="region.Locations" v-for="location in region.Locations">
-                            <p style="background-color: #F1FAF4;">{{ location.name }}</p>
+                            <div class="location-list">{{ location.name }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="hot-tour">
                     <h2 style="padding-left: 1rem;">Tour hot</h2>
-                    <div v-for="tour in hotTour" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"
-                        class="card" style="background: none;border: none;">
+                    <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
+                        style="background: none;border: none;">
                         <img :src=tour.thumbnail class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ tour.title }}</h5>
@@ -52,7 +55,7 @@
                     </div>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
-                    <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
+                    <div class="image-container" @click="router.push({ path: '/' + tour.slug })">
                         <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
                             style="width: 100%;" alt=""> -->
                         <v-img style="height: 100%;" cover :width="50" class="thumbnail" :src=tour.thumbnail>
@@ -63,7 +66,7 @@
                             </template></v-img>
                     </div>
                     <div class="tour-detail-container">
-                        <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
+                        <div class="title" @click="router.push({ path: '/' + tour.slug })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
                             <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
@@ -98,16 +101,25 @@
 <script setup>
 import LoadingComponent from '../../components/LoadingComponent.vue';
 import baseUrl from '../../connect';
-import { onMounted, ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { onMounted, ref, computed, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
+const route = useRoute();
+watch(
+    () => route.params.searchText,
+    (newValue, oldValue) => {
+        console.log(oldValue + ' and ' + newValue)
+        searchText.value = newValue
+    }
 
+)
 // let posts = ref()
 let totalPage = ref()
 let pageNumber = ref(1)
 let tourList = ref()
 let orderBy = ref("createdAt")
 let sortOrder = ref("DESC")
+let searchText = ref(route.params.searchText)
 function orderASC() {
     sortOrder.value = 'ASC'
     fetchTour()
@@ -145,15 +157,17 @@ function duration() {
 let hotTour = ref()
 const categoryList = ref()
 onMounted(() => {
+    console.log(route.params.searchText)
     fetchTour()
-    baseUrl.get("/client/category/hot-sidebar/" + 2)
+    baseUrl.get("/client/category/hot-sidebar/" + 1)
         .then(response => {
-            hotTour.value = response.data
+            console.log(response.data)
+            hotTour.value = response.data.rows
         }).catch((error) => {
             console.error(error);
         });
-    baseUrl.get("/client/category/side-bar-list/" + 2).then(response => {
-        console.log(response.data)
+    baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
+        // console.log(response.data)
         categoryList.value = response.data
     })
 })
@@ -164,7 +178,6 @@ function fetchTour() {
     tourList.value = null;
     baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
-            console.log(response)
             tourList.value = response.data.rows
             // response.data.rows[0].Regions.forEach(Region => {
             //     Region.Locations.forEach(Location => {
@@ -176,7 +189,6 @@ function fetchTour() {
             // })
             // tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
-            console.log(totalPage)
         }).catch((error) => {
             console.error(error);
         });
@@ -328,5 +340,29 @@ p {
     position: sticky;
     top: 0;
     height: 100%;
+}
+
+.category-list {
+    background-color: #97CBB4;
+    /* padding-left: 2rem; */
+    width: 18rem;
+}
+
+.region-list {
+    height: 3rem;
+    padding-left: 1rem;
+    font-size: large;
+    font-weight: bold;
+    background-color: #F1FAF4;
+    display: flex;
+    align-items: center;
+}
+
+.location-list {
+    height: 3rem;
+    padding-left: 1rem;
+    background-color: #F1FAF4;
+    display: flex;
+    align-items: center;
 }
 </style>

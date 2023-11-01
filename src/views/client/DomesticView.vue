@@ -11,12 +11,15 @@
 
         <div class="section-container">
             <div class="side-bar-container">
-                <div v-if="categoryList" class="other-side-bar" style="padding: 1rem;">
-                    <p style="background-color: rgb(255, 135, 65);">Địa điểm Hot trong nước</p>
+                <div v-if="categoryList" class="category-list">
+                    <div
+                        style="display: flex;align-items: center; height: 3rem; padding-left: 1rem; font-size: 20px;font-weight: bold;">
+                        Địa điểm &nbsp; <span style="color:#ff6b00;">HOT</span> &nbsp; trong
+                        nước</div>
                     <div v-if="categoryList.Regions" v-for="region in categoryList.Regions" :key="region">
-                        <p style="background-color: rgb(255, 180, 76);">{{ region.name }}</p>
+                        <div class="region-list">{{ region.name }}</div>
                         <div v-if="region.Locations" v-for="location in region.Locations">
-                            <p style="background-color: #F1FAF4;">{{ location.name }}</p>
+                            <div class="location-list">{{ location.name }}</div>
                         </div>
                     </div>
                 </div>
@@ -148,7 +151,8 @@ onMounted(() => {
     fetchTour()
     baseUrl.get("/client/category/hot-sidebar/" + 1)
         .then(response => {
-            hotTour.value = response.data
+            console.log(response.data)
+            hotTour.value = response.data.rows
         }).catch((error) => {
             console.error(error);
         });
@@ -164,7 +168,6 @@ function fetchTour() {
     tourList.value = null;
     baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
-            console.log(response.data.rows)
             tourList.value = response.data.rows
             // response.data.rows[0].Regions.forEach(Region => {
             //     Region.Locations.forEach(Location => {
@@ -175,9 +178,7 @@ function fetchTour() {
             //     })
             // })
             // tourList.value = response.data.rows
-            totalPage.value = response.data.count / 2 + 1
-            console.log(response.data.count)
-            console.log(totalPage)
+            totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {
             console.error(error);
         });
@@ -329,5 +330,29 @@ p {
     position: sticky;
     top: 0;
     height: 100%;
+}
+
+.category-list {
+    background-color: #97CBB4;
+    /* padding-left: 2rem; */
+    width: 18rem;
+}
+
+.region-list {
+    height: 3rem;
+    padding-left: 1rem;
+    font-size: large;
+    font-weight: bold;
+    background-color: #F1FAF4;
+    display: flex;
+    align-items: center;
+}
+
+.location-list {
+    height: 3rem;
+    padding-left: 1rem;
+    background-color: #F1FAF4;
+    display: flex;
+    align-items: center;
 }
 </style>

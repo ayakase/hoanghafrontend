@@ -10,6 +10,8 @@
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Đăng ký tư vấn<i class="fa-solid fa-headset"></i>
             </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Qly dich vu<i class="fa-solid fa-bell-concierge"></i>
+            </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour <i
                     class="fa-regular fa-paper-plane"></i></RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-khu-vuc">Qlý khu vực<i class="fa-solid fa-map"></i>

@@ -33,18 +33,37 @@
             <label for="" class="form-label">Lịch Trình</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tourSchedule" />
         </div>
-        <div>
-            category
-        </div>
-        <div class="category-type-from">
-            <!-- <div class="mb-3 w-25">
+        <div v-if="tourCategory" style="display: flex;align-items: center;gap: 1rem;">
+            <div class="mb-3 w-25">
                 <label for="" class="form-label">Danh mục </label>
-                <select class="form-select mb-3" aria-label="Smal select example" v-model="tourCategory">
-                    <option value="1">Du lịch Trung Quốc</option>
-                    <option value="2">Du lịch trong nước</option>
-                    <option value="3">Du lịch quốc tế</option>
+                <select class="form-select mb-3" aria-label="Smal select example" v-model="selectCategory">
+                    <option v-for="category in tourCategory" :key="category" :value=category>
+                        {{ category.name }}
+                    </option>
                 </select>
-            </div> -->
+            </div>
+            <i class="fa-solid fa-caret-right" style="font-size: 2rem;padding-top: 0.5rem;" v-if="selectCategory"></i>
+            <div class="mb-3 w-25" v-if="selectCategory">
+                <label for="" class="form-label">Khu vuc </label>
+                <select class="form-select mb-3" aria-label="Smal select example" v-model="selectRegion">
+                    <option v-for="region in selectCategory.Regions" :key="region" :value=region>
+                        {{ region.name }}
+                    </option>
+                </select>
+            </div>
+            <i class="fa-solid fa-caret-right" style="font-size: 2rem;padding-top: 0.5rem;" v-if="selectRegion"></i>
+            <div class="mb-3 w-25" v-if="selectRegion">
+                <label for="" class="form-label">Khu vuc </label>
+                <select class="form-select mb-3" aria-label="Smal select example" v-model="selectLocation">
+                    <option v-for="location in selectRegion.Locations" :key="location" :value=location>
+                        {{ location.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <p>{{ selectLocation }}</p>
+        <div class="category-type-from">
+
 
             <div class="mb-3 w-25">
                 <label for="" class="form-label">Loại tour </label>
@@ -252,10 +271,8 @@ function toggleGallery() {
 }
 let showOverlay = ref(false);
 let tourTitle = ref("");
-
 let tourThumbnail = ref(null);
 let tourSchedule = ref("");
-let tourCategory = ref();
 // let tiktokId = ref("")
 let tourType = ref("");
 let tourFrom = ref("");
@@ -283,11 +300,15 @@ let slug = ref()
 watch(tourTitle, (newValue) => {
     slug.value = turnSlug(newValue)
 })
+let tourCategory = ref();
+let selectCategory = ref()
+let selectRegion = ref()
+let selectLocation = ref()
 onMounted(() => {
     baseUrl
         .get("/admin/tour/choose-category").then((response) => {
             console.log(response.data)
-
+            tourCategory.value = response.data
         })
 })
 let recommendColor = computed(() => {
@@ -317,7 +338,7 @@ function addTour() {
     tourData.append("tourThumbnail", tourThumbnail.value);
     tourData.append("slug", slug.value)
     tourData.append("tourSchedule", tourSchedule.value);
-    tourData.append("tourCategory", tourCategory.value);
+    tourData.append("tourLocation", selectLocation.value.id);
     // tourData.append("tiktokId", tiktokId.value)
     tourData.append("tourType", tourType.value);
     tourData.append("tourFrom", tourFrom.value);
@@ -345,11 +366,25 @@ function addTour() {
         .then((response) => {
             console.log(response.data);
             showOverlay.value = false;
-            toast.success("Đã nhận thông tin", {
-                autoClose: 2000,
-                theme: "colored",
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
+            if (response.data == "1") {
+                toast.success("Da them tour moi", {
+                    autoClose: 2000,
+                    theme: "colored",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            } else if (response.data == "3") {
+                toast.error("Chua dien day du", {
+                    autoClose: 2000,
+                    theme: "colored",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            } else if (response.data == "2") {
+                toast.error("Bi trung slug", {
+                    autoClose: 2000,
+                    theme: "colored",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            }
         })
         .catch((error) => {
             console.error(error);

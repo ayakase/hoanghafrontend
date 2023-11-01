@@ -7,6 +7,8 @@ import PageFooter from './components/PageFooter.vue'
 import scrollToTop from './components/ScrollToTop.vue'
 import MessengerBtn from './components/MessengerBtn.vue'
 import baseUrl from './connect';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const notify = () => {
   toast.warn("Trang web đang trong quá trình xây dựng, còn nhiều thiết sót mong bạn thông cảm", {
@@ -202,7 +204,8 @@ let showChatbox = () => {
                       </ul>
                     </li>
                     <li>
-                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-quoc-te" aria-current="page" href="#">Du lịch quốc
+                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-quoc-te" aria-current="page" href="#">Du
+                        lịch quốc
                         tế
                         &nbsp; <i class="fa-solid fa-globe"></i>
                       </RouterLink>
@@ -268,9 +271,10 @@ let showChatbox = () => {
                   type="search" placeholder="Search" aria-label="Search">
               </form>
             </li>
+            <p>{{ searchText }}</p>
             <li>
-              <button style="margin-top:.3rem;" class=" btn btn-outline-success" @click.prevent="searchSend"><i
-                  class="fas fa-search"></i></button>
+              <button style="margin-top:.3rem;" class=" btn btn-outline-success"
+                @click="router.push({ path: '/tim-kiem/' + searchText })"><i class="fas fa-search"></i></button>
             </li>
             <li class="nav-item hotline">
               <a class="nav-link active" to="/" aria-current="page" href="tel:0124 3.855.158">HOTLINE: <span
