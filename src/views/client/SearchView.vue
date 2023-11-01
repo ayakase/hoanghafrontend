@@ -24,13 +24,13 @@
                     </div>
                 </div> -->
                 <div class="hot-tour">
-                    <h2 style="padding-left: 1rem;">Tour hot</h2>
+                    <h2 v-if="hotTour" style="padding-left: 1rem;">Tour hot</h2>
                     <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
                         style="background: none;border: none;">
                         <img :src=tour.thumbnail class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ tour.title }}</h5>
-                            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice)
+                            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adult_price)
                             }}</span>
                                 VNĐ </p>
                             <hr class="hr" />
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{
-                        numeralFormat(tour.adultprice)
+                        numeralFormat(tour.adult_price)
                     }} </b></span>
                         <span style="color: orangered; font-weight: 100;"> VNĐ</span>
                     </div>
@@ -108,12 +108,11 @@ const route = useRoute();
 watch(
     () => route.params.searchText,
     (newValue, oldValue) => {
-        if (newValue) {
+        if (newValue !== '') {
             searchText.value = newValue
             fetchTour()
             console.log(oldValue + ' and ' + newValue)
         } else {
-            totalPage.value = ''
         }
     }
 
