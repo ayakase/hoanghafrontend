@@ -21,7 +21,7 @@ function getUrl() {
 }
 onMounted(() => {
     // console.log(route.params.slug)
-    baseUrl.get("client/each-tour/" + route.params.slug).then(response => {
+    baseUrl.get("client/each-tour/" + route.params.slug).then((response) => {
         console.log(response.data[0])
         tourDetail.value = response.data[0]
         adultPrice.value = response.data[0].adult_price

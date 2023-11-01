@@ -267,11 +267,10 @@ let showChatbox = () => {
             </li>
             <li>
               <form class="d-flex search-container" style="margin-top:.3rem;padding: 0;">
-                <input @keydown.enter.prevent="searchSend" v-model="searchText" class="form-control me-2 search-box"
-                  type="search" placeholder="Search" aria-label="Search">
+                <input @keydown.enter.prevent="router.push({ path: '/tim-kiem/' + searchText })" v-model="searchText"
+                  class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
               </form>
             </li>
-            <p>{{ searchText }}</p>
             <li>
               <button style="margin-top:.3rem;" class=" btn btn-outline-success"
                 @click="router.push({ path: '/tim-kiem/' + searchText })"><i class="fas fa-search"></i></button>

@@ -11,7 +11,7 @@
         <h3> Hien thi ket qua cho <span style="color: #ff6b00;">{{ searchText }}</span></h3>
         <div class="section-container">
             <div class="side-bar-container">
-                <div v-if="categoryList" class="category-list">
+                <!-- <div v-if="categoryList" class="category-list">
                     <div
                         style="display: flex;align-items: center; height: 3rem; padding-left: 1rem; font-size: 20px;font-weight: bold;">
                         Địa điểm &nbsp; <span style="color:#ff6b00;">HOT</span> &nbsp; trong
@@ -22,7 +22,7 @@
                             <div class="location-list">{{ location.name }}</div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="hot-tour">
                     <h2 style="padding-left: 1rem;">Tour hot</h2>
                     <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
@@ -108,8 +108,13 @@ const route = useRoute();
 watch(
     () => route.params.searchText,
     (newValue, oldValue) => {
-        console.log(oldValue + ' and ' + newValue)
-        searchText.value = newValue
+        if (newValue) {
+            searchText.value = newValue
+            fetchTour()
+            console.log(oldValue + ' and ' + newValue)
+        } else {
+            totalPage.value = ''
+        }
     }
 
 )
@@ -166,17 +171,17 @@ onMounted(() => {
         }).catch((error) => {
             console.error(error);
         });
-    baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
-        // console.log(response.data)
-        categoryList.value = response.data
-    })
+    // baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
+    //     // console.log(response.data)
+    //     categoryList.value = response.data
+    // })
 })
 function getTourbyPage() {
     fetchTour()
 }
 function fetchTour() {
     tourList.value = null;
-    baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/search/" + searchText.value + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             tourList.value = response.data.rows
             // response.data.rows[0].Regions.forEach(Region => {
