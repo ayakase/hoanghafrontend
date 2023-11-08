@@ -254,7 +254,9 @@ let showChatbox = () => {
                         &nbsp; <i class="fa-solid fa-vihara"></i>
                       </RouterLink>
                       <ul class="drop-two-special">
+                        <li class="region-item"><a href="#">Thue xe</a></li>
                         <li class="region-item"><a href="#">Booking ve may bay</a></li>
+                        <li class="region-item"><a href="#">Dat phong khach san</a></li>
                         <li class="region-item"><a href="#">Dich vu lam ho chieu</a></li>
                         <li class="region-item"><a href="#">Dat ve cap treo fansipan</a></li>
                       </ul>

@@ -5,34 +5,20 @@
         <div class="sorting-container" style="margin-top: 2rem;">
             <div style="font-size: larger;width: 5rem;">Bộ lọc:</div>
             <div class="sorting-button-container">
-                <!-- <form class="d-flex search-container">
-                    <button class="btn btn-outline-success" @click.prevent=""><i class="fas fa-search"></i></button>
-                    <input @keydown.enter.prevent="" class="form-control me-2 search-box" type="search"
-                        placeholder="Tìm kiếm theo tên" aria-label="Search">
-                </form> -->
-
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" style="color: white;">
-                        Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
+                        Dia diem &nbsp; <i class="fa-solid fa-book"> :</i> {{ regionLabel }}
                     </button>
-                    <div class="dropdown-menu">
-                        <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
-                                class="fa-regular fa-rectangle-list"></i> </button>
-                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
-                                class="fa-solid fa-flag"></i> </button>
-                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
-                                class="fa-solid fa-globe"></i></button>
+                    <div class="dropdown-menu" v-if="regionList">
+                        <button class="dropdown-item" @click="">Tat ca</button>
+                        <button v-for="region in regionList" class="dropdown-item" @click="">{{ region.name }}</button>
                     </div>
                 </div>
-                <button class="btn btn-success" @click="fetchRegion"><i class="fa-solid fa-rotate-right"></i></button>
-                <!-- <button class="sort-button btn btn-success">Chưa xử lý &nbsp; <i
-                        class="fa-solid fa-hourglass fa-spin"></i></button>
-                <button class="sort-button btn btn-success">Đã xử lí &nbsp; <i
-                        class="fa-solid fa-check fa-beat"></i></button> -->
+                <button class="btn btn-success" @click="fetchLocation"><i class="fa-solid fa-rotate-right"></i></button>
             </div>
         </div>
-        <!-- <table v-if="regionTable" class="table table-success table-striped table-hover"
+        <table v-if="locationTable" class="table table-success table-striped table-hover"
             style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
             <thead>
                 <tr>
@@ -45,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="region in regionTable" :key="region" class="each-tour-row">
+                <tr v-for="region in locationTable" :key="region" class="each-tour-row">
                     <td>{{ region.id }}</td>
                     <td>{{ region.name }}</td>
                     <td>{{ region.slug }}</td>
@@ -54,13 +40,13 @@
                             @click="router.push({ path: '/admin/quan-ly-tour/chinh-sua-tour', query: { id: tour.id } })"
                             class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
-                    <td> <button class="delete-button" @click="deleteRegion(region.id)"><i
+                    <td> <button class="delete-button" @click="deleteLocation(region.id)"><i
                                 class="fa-solid fa-trash"></i></button></td>
                 </tr>
 
             </tbody>
-        </table> -->
-        <!-- <TableLoading v-else></TableLoading> -->
+        </table>
+        <TableLoading v-else></TableLoading>
         <div class="add-container">
 
             <div class="">
@@ -78,10 +64,8 @@
                     Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ addLabel }}
                 </button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" @click="addDomestic">Trong nước &nbsp; <i class="fa-solid fa-flag"></i>
+                    <button v-for="region in regionList" class="dropdown-item" @click=""> {{ region.name }}
                     </button>
-                    <button class="dropdown-item" @click="addGlobal">Quốc tế &nbsp; <i
-                            class="fa-solid fa-globe"></i></button>
                 </div>
             </div>
             <button @click="addRegion" class="btn btn-success">
@@ -101,27 +85,53 @@ import baseUrl from '../../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import TableLoading from '../../components/TableLoading.vue';
+let locationTable = ref()
 let showOverlay = ref(false);
-function fetchRegion() {
-    console.log(categoryNumber.value)
-    baseUrl.get('/admin/location/region' + categoryNumber.value).then((response) => {
-        console.log(response)
-    })
+let regionLabel = ref("Tất cả")
+let categoryNumber = ref(0)
+
+function categoryAll() {
+    categoryLabel.value = "Tất cả"
+    categoryNumber.value = 0
+    fetchLocation()
+
+}
+function categoryDomestic() {
+    categoryLabel.value = "Trong nước"
+    categoryNumber.value = 1
+    fetchLocation()
+
+} function categoryGlobal() {
+    categoryLabel.value = "Quốc tế"
+    categoryNumber.value = 2
+    fetchLocation()
+
 }
 function fetchLocation() {
-    baseUrl.get('/admin/location').then((response) => {
-        console.log(response)
+    locationTable.value = null
+    baseUrl.get('/admin/location/locationlist/' + categoryNumber.value).then((response) => {
         locationTable.value = response.data
     })
 }
+let regionList = ref()
+function fetchRegion() {
+    baseUrl.get('/admin/location/region')
+        .then((response) => {
+            console.log(response.data)
+            regionList.value = response.data
+        }).catch((error) => {
+            console.log(error)
+        })
+}
 onMounted(() => {
+    fetchLocation()
     fetchRegion()
 })
-function deleteRegion(id) {
+function deleteLocation(id) {
     console.log(id)
     let text = "Bạn có chắc chắn muốn xóa Tour " + id;
     if (confirm(text) == true) {
-        baseUrl.delete("/admin/region/" + id)
+        baseUrl.delete("/admin/location/" + id)
             .then(response => {
                 console.log(response)
                 toast.info("Đã xóa", {
@@ -129,32 +139,13 @@ function deleteRegion(id) {
                     theme: "colored",
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
-                fetchRegion()
+                fetchLocation()
             }).catch((error) => {
                 console.error(error);
             });
     }
 }
-let categoryLabel = ref("Tất cả")
-let categoryNumber = ref(0)
 
-function categoryAll() {
-    categoryLabel.value = "Tất cả"
-    categoryNumber.value = 0
-    fetchRegion()
-
-}
-function categoryDomestic() {
-    categoryLabel.value = "Trong nước"
-    categoryNumber.value = 1
-    fetchRegion()
-
-} function categoryGlobal() {
-    categoryLabel.value = "Quốc tế"
-    categoryNumber.value = 2
-    fetchRegion()
-
-}
 let addLabel = ref("Trong nước")
 let addNumber = ref(1)
 let newTitle = ref()
@@ -186,7 +177,6 @@ function addRegion() {
         note: newNote.value,
         category_id: addNumber.value
     }
-    console.log(regionData)
     baseUrl.post('/admin/region', regionData)
         .then((response) => {
             console.log(response)
@@ -196,7 +186,7 @@ function addRegion() {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
             showOverlay.value = false;
-            fetchRegion()
+            fetchLocation()
         })
         .catch((error) => {
             console.log(error)

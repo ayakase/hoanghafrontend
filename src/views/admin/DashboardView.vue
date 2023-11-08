@@ -6,11 +6,12 @@
             <RouterLink class="admin-side-item" to="/admin/thong-ke"><span>Thống kê</span> <i
                     class="fa-solid fa-chart-line"></i>
             </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Ve chung toi<i class="fa-solid fa-users"></i>
+            </RouterLink>
+
             <RouterLink class="admin-side-item" to="/admin/dat-tour">Đặt Tour<i class="fa-solid fa-box-archive"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/dang-ky-tu-van">Đăng ký tư vấn<i class="fa-solid fa-headset"></i>
-            </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Qly dich vu<i class="fa-solid fa-bell-concierge"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/quan-ly-tour">Quản Lí Tour <i
                     class="fa-regular fa-paper-plane"></i></RouterLink>
@@ -26,6 +27,16 @@
             <RouterLink class="admin-side-item" to="/admin/quan-ly-slider">Ảnh Slider<i class="fa-solid fa-photo-film"></i>
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết<i class="fa-regular fa-newspaper"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Thue xe<i class="fa-solid fa-bus"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Ve may bay<i class="fa-solid fa-plane"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Dat khach san<i class="fa-solid fa-hotel"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Lam ho chieu<i class="fa-solid fa-passport"></i>
+            </RouterLink>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Ve cap treo<i class="fa-solid fa-cable-car"></i>
             </RouterLink>
 
         </div>

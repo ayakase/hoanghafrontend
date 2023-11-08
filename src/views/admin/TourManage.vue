@@ -13,52 +13,6 @@
                         placeholder="Tìm kiếm theo tên" aria-label="Search">
                 </form>
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" style="color: white;">
-                        Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
-                    </button>
-                    <div class="dropdown-menu">
-                        <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
-                                class="fa-regular fa-rectangle-list"></i> </button>
-                        <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp;<i
-                                class="fa-solid fa-vihara"></i> </button>
-                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
-                                class="fa-solid fa-flag"></i> </button>
-                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
-                                class="fa-solid fa-globe"></i></button>
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" style="color: white;">
-                        Khu vực &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
-                    </button>
-                    <div class="dropdown-menu">
-                        <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
-                                class="fa-regular fa-rectangle-list"></i> </button>
-                        <button class="dropdown-item" @click="categoryChina">Trung Quốc &nbsp;<i
-                                class="fa-solid fa-vihara"></i> </button>
-                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
-                                class="fa-solid fa-flag"></i> </button>
-                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
-                                class="fa-solid fa-globe"></i></button>
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" style="color: white;">
-                        Địa điểm &nbsp; <i class="fa-solid fa-book"> :</i> {{ categoryLabel }}
-                    </button>
-                    <div class="dropdown-menu">
-                        <button class="dropdown-item" @click="categoryAll">Tất cả &nbsp;<i
-                                class="fa-regular fa-rectangle-list"></i> </button>
-                        <button class="dropdown-item" @click="categoryDomestic">Trong nước &nbsp; <i
-                                class="fa-solid fa-flag"></i> </button>
-                        <button class="dropdown-item" @click="categoryGlobal">Quốc tế &nbsp; <i
-                                class="fa-solid fa-globe"></i></button>
-                    </div>
-                </div>
                 <button class="sort-button btn btn-success" @click="Newest">Mới nhất &nbsp; <i
                         class="fa-solid fa-arrow-up-wide-short"></i></button>
                 <button class="sort-button btn btn-success" @click="Oldest">Cũ nhất &nbsp; <i
@@ -190,30 +144,7 @@ function deleteTour(id) {
 let categoryLabel = ref("Tất cả")
 let categoryNumber = ref(0)
 
-function categoryAll() {
-    categoryLabel.value = "Tất cả"
-    categoryNumber.value = 0
-    fetchTour()
 
-}
-function categoryChina() {
-    categoryLabel.value = "Trung Quốc"
-    categoryNumber.value = 1
-    fetchTour()
-}
-function categoryDomestic() {
-    categoryLabel.value = "Trong nước"
-    categoryNumber.value = 2
-
-    fetchTour()
-
-} function categoryGlobal() {
-    categoryLabel.value = "Quốc tế"
-    categoryNumber.value = 3
-
-    fetchTour()
-
-}
 // sắp xếp
 let sortOrder = ref("DESC")
 function Newest() {
