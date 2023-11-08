@@ -194,27 +194,27 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
-      baseUrl.get('/client/carousel/hottour').then((response) => {
-        hotTour.value = response.data.rows
-      })
-      baseUrl.get('/client/carousel/post-grid').then((response) => {
-        console.log(response.data)
-        posts.value = response.data.rows
-      })
-      baseUrl.get('/client/carousel/china').then((response) => {
-        console.log(response.data)
-        china.value = response.data.rows
-      })
-      baseUrl.get('/client/carousel/domestic').then((response) => {
-        console.log(response.data)
+      // baseUrl.get('/client/carousel/hottour').then((response) => {
+      //   hotTour.value = response.data.rows
+      // })
+      // baseUrl.get('/client/carousel/post-grid').then((response) => {
+      //   console.log(response.data)
+      //   posts.value = response.data.rows
+      // })
+      // baseUrl.get('/client/carousel/china').then((response) => {
+      //   console.log(response.data)
+      //   china.value = response.data.rows
+      // })
+      // baseUrl.get('/client/carousel/domestic').then((response) => {
+      //   console.log(response.data)
 
-        domestic.value = response.data.rows
-      })
-      baseUrl.get('/client/carousel/foreign').then((response) => {
-        console.log(response.data)
+      //   domestic.value = response.data.rows
+      // })
+      // baseUrl.get('/client/carousel/foreign').then((response) => {
+      //   console.log(response.data)
 
-        foreign.value = response.data.rows
-      })
+      //   foreign.value = response.data.rows
+      // })
     })
     return {
       router,

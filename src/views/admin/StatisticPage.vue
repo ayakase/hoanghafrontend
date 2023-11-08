@@ -4,6 +4,11 @@
             <h4 style="text-align: center;">Tổng lượt truy cập</h4>
             <count-up class="count-number" :end-val="count" :duration="1"></count-up>
         </div>
+        <div class="notification">
+            <div v-for="item in 20" :key="item.id">
+                <p>User x has done something</p>
+            </div>
+        </div>
         <div class="chart-container">
             <div class="year-chart">
                 <Bar :data="yeardata" :options="options" />
@@ -92,6 +97,13 @@ function clicked() {
 </script>
 
 <style scoped>
+.notification {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #cdecde;
+    border-radius: 1rem;
+}
+
 .access-number {
     height: 10rem;
     background-color: #cdecde;

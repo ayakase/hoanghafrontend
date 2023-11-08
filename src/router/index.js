@@ -69,16 +69,52 @@ const router = createRouter({
       component: () => import('../views/admin/OrderView.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/client/AboutView.vue'),
+      path: '/dich-vu',
+      name: 'dich vu',
+      component: () => import('../views/client/ServiceView.vue'),
       children: [
-        { path: 'introduction', component: () => import('../views/about/IntroductionView.vue') },
-        { path: 'aboutus', component: () => import('../views/about/AboutUsView.vue') },
-        { path: 'chinh-sach-va-quy-dinh', component: () => import('../views/about/PolicyView.vue') },
-        { path: 'bao-hiem-dich-vu', component: () => import('../views/about/InsuranceView.vue') },
-        { path: 'quy-trinh', component: () => import('../views/about/ProcedureView.vue') },
+        { path: 'thue-xe', component: () => import('../views/about/IntroductionView.vue') },
+        { path: 'dat-phong-khach-san', component: () => import('../views/about/AboutUsView.vue') },
+        { path: 'dat-ve-cap-treo', component: () => import('../views/about/PolicyView.vue') },
+        { path: 'dich-vu-ho-chieu', component: () => import('../views/about/InsuranceView.vue') },
+        { path: 'dat-ve-may-bay', component: () => import('../views/about/ProcedureView.vue') },
       ]
+    },
+
+    {
+      path: '/dich-vu',
+      name: 'dich vu',
+      component: () => import('../views/client/ServiceView.vue')
+    },
+    {
+      path: '/dat-ve-may-bay',
+      name: 'dat ve may bay',
+      component: () => import('../views/client/PlaneTicket.vue')
+    },
+    {
+      path: '/thue-xe',
+      name: 'thue xe',
+      component: () => import('../views/client/CarBooking.vue')
+    },
+    {
+      path: '/dich-vu-ho-chieu',
+      name: 'dich vu ho chieu',
+      component: () => import('../views/client/PassportService.vue')
+    },
+    {
+      path: '/dat-phong-khach-san',
+      name: 'dat phong khach san',
+      component: () => import('../views/client/HotelBooking.vue')
+    },
+    {
+      path: '/dat-ve-cap-treo',
+      name: 'dat ve cap treo',
+      component: () => import('../views/client/CableCar.vue')
+    },
+    {
+      path: '/cam-nang',
+      name: 'cam nang',
+      component: () => import('../views/client/PostList.vue')
     },
     {
       path: '/login',

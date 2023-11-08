@@ -25,9 +25,18 @@ function searchSend() {
     position: toast.POSITION.BOTTOM_RIGHT,
   });
 }
+const domesticMenu = ref()
+const foreignMenu = ref()
 onMounted(() => {
-  baseUrl.post("/client/count")
-  baseUrl.get("/connect")
+  baseUrl.post("/client/initial/count")
+  baseUrl
+    .get("/client/initial/menu").then((response) => {
+      domesticMenu.value = response.data[0]
+      console.log(domesticMenu.value.Regions)
+      foreignMenu.value = response.data[1]
+      // tourCategory.value = response.data
+    })
+  baseUrl.get("client/initial/connect")
     .then((response) => {
       toast.success("Đã kết nối với server", {
         autoClose: 2000,
@@ -76,56 +85,6 @@ let showChatbox = () => {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto ">
-
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                DANH MỤC
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <RouterLink class="nav-link active" to="/" aria-current="page" href="#">Trang chủ</RouterLink>
-                </li>
-                <li>
-                  <RouterLink class="nav-link active" to="/about/chinh-sach-va-quy-dinh" aria-current="page" href="#">Về
-                    chúng tôi
-                  </RouterLink>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <RouterLink class="nav-link active" to="/tour-hot" aria-current="page" href="#">Tour Hot &nbsp;<i
-                      style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
-                  </RouterLink>
-                </li>
-                <li>
-                  <RouterLink class="nav-link active" to="/du-lich-trong-nuoc" aria-current="page" href="#">Du lịch trong
-                    nước
-                    &nbsp; <i class="fa-solid fa-flag"></i>
-                  </RouterLink>
-                </li>
-                <li>
-                  <RouterLink class="nav-link active" to="/du-lich-trung-quoc" aria-current="page" href="#">Du lịch Trung
-                    Quốc
-                    &nbsp; <i class="fa-solid fa-vihara"></i>
-                  </RouterLink>
-                </li>
-                <li>
-                  <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Du lịch quốc tế
-                    &nbsp; <i class="fa-solid fa-globe"></i>
-                  </RouterLink>
-                </li>
-                <li>
-                  <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Dịch vụ du lịch
-                  </RouterLink>
-                </li>
-                <li>
-                  <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Cẩm nang
-                  </RouterLink>
-                </li>
-              </ul>
-            </li> -->
             <li style="z-index: 9999999;">
               <ul class="nav-menu" style="border: 0;padding: 0;">
                 <li class="dropdown">
@@ -159,7 +118,17 @@ let showChatbox = () => {
                         &nbsp; <i class="fa-solid fa-flag"></i>
                       </RouterLink>
                       <ul class="drop-two" style="margin: 0;padding: 0;">
-                        <li>
+                        <li v-if="domesticMenu" v-for="region in domesticMenu.Regions">
+                          <p style="font-size: larger;color: #045B48;">
+                            {{ region.name }}
+                          </p>
+                          <ul class="drop-three">
+                            <li v-for="location in region.Locations">
+                              <p style="color: #045B48;">{{ location.name }}</p>
+                            </li>
+                          </ul>
+                        </li>
+                        <!-- <li >
                           <a href="#" style="font-size: larger;">Du lich mien bac</a>
                           <ul class="drop-three">
                             <li class="region-item"><a href="#">Cat Ba</a></li>
@@ -200,7 +169,7 @@ let showChatbox = () => {
                             <li class="region-item"><a href="#">Cam Ranh</a></li>
                             <li class="region-item"><a href="#">Binh Phuoc</a></li>
                           </ul>
-                        </li>
+                        </li> -->
                       </ul>
                     </li>
                     <li>
@@ -249,19 +218,24 @@ let showChatbox = () => {
                       </ul>
                     </li>
                     <li>
-                      <RouterLink class="nav-link active" to="/du-lich-trung-quoc" aria-current="page" href="#">Dich vu du
+                      <RouterLink class="nav-link active" to="/dich-vu" aria-current="page" href="#">Dich vu du
                         lich
                         &nbsp; <i class="fa-solid fa-vihara"></i>
                       </RouterLink>
                       <ul class="drop-two-special">
-                        <li class="region-item"><a href="#">Thue xe</a></li>
-                        <li class="region-item"><a href="#">Booking ve may bay</a></li>
-                        <li class="region-item"><a href="#">Dat phong khach san</a></li>
-                        <li class="region-item"><a href="#">Dich vu lam ho chieu</a></li>
-                        <li class="region-item"><a href="#">Dat ve cap treo fansipan</a></li>
+                        <li @click="router.push('/thue-xe')" class="region-item"><a href="#">Thue xe</a></li>
+                        <li @click="router.push('/dat-ve-may-bay')" class="region-item"><a href="#">Booking ve may bay</a>
+                        </li>
+                        <li @click="router.push('/dat-phong-khach-san')" class="region-item"><a href="#">Dat phong khach
+                            san</a></li>
+                        <li @click="router.push('/dich-vu-ho-chieu')" class="region-item"><a href="#">Dich vu lam ho
+                            chieu</a></li>
+                        <li @click="router.push('/dat-ve-cap-treo')" class="region-item"><a href="#">Dat ve cap treo
+                            fansipan</a>
+                        </li>
                       </ul>
                     </li>
-                    <RouterLink class="nav-link active" to="/du-lich-quoc-te" aria-current="page" href="#">Cẩm nang
+                    <RouterLink class="nav-link active" to="/cam-nang" aria-current="page" href="#">Cẩm nang
                     </RouterLink>
                   </ul>
                 </li>
@@ -518,6 +492,16 @@ ul.nav-menu li a {
   color: #000000;
   /* text-transform: uppercase; */
   padding: 10px 25px;
+}
+
+ul.nav-menu li p {
+  text-decoration: none !important;
+
+  /* text-decoration: none; */
+  color: #000000;
+  /* text-transform: uppercase; */
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
 .drop-one {

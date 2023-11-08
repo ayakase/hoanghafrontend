@@ -6,8 +6,8 @@
             <RouterLink class="admin-side-item" to="/admin/thong-ke"><span>Thống kê</span> <i
                     class="fa-solid fa-chart-line"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Ve chung toi<i class="fa-solid fa-users"></i>
-            </RouterLink>
+            <!-- <RouterLink class="admin-side-item" to="/admin/bai-viet">Ve chung toi<i class="fa-solid fa-users"></i>
+            </RouterLink> -->
 
             <RouterLink class="admin-side-item" to="/admin/dat-tour">Đặt Tour<i class="fa-solid fa-box-archive"></i>
             </RouterLink>

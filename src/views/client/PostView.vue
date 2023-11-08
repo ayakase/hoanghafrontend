@@ -21,7 +21,7 @@ onMounted(() => {
             <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                     chủ</a></li>
 
-            <li class="breadcrumb-item">Cam namg</li>
+            <li class="breadcrumb-item">Cam nang</li>
             <li v-if="postDetail" class="breadcrumb-item">{{ postDetail.title }} </li>
 
         </ol>
