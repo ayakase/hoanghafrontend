@@ -1,12 +1,33 @@
 <template>
     <div class="outer-container">
-        <div class="access-number">
-            <h4 style="text-align: center;">Tổng lượt truy cập</h4>
-            <count-up class="count-number" :end-val="count" :duration="1"></count-up>
-        </div>
-        <div class="notification">
-            <div v-for="item in 20" :key="item.id">
-                <p>User x has done something</p>
+        <div class="first-section">
+
+            <div class="access-number">
+                <h4 style="text-align: center;">Tổng lượt truy cập</h4>
+                <count-up class="count-number" :end-val="count" :duration="1"></count-up>
+            </div>
+            <div class="notification">
+                <h4>Thong bao</h4>
+                <div class="noti-container">
+                    <div class="each-noti" v-for="item in 10" :key="item.id">
+                        <p style="font-weight: bold;">Nguyen Van A da dat tour a as as sad ad as dfas das d sd s r ert er e
+                            yr tyr yr yrt rt y</p>
+                        <p style="color: rgb(75, 75, 75);">vao luc a</p>
+                    </div>
+                </div>
+                <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="10" :total-visible="3"
+                    prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
+            </div>
+            <div class="notification">
+                <h4>Thong bao</h4>
+                <div class="noti-container">
+                    <div class="each-noti" v-for="item in 10" :key="item.id">
+                        <p class="action" style="font-weight: bold;">User x has done something</p>
+                        <p>vao luc a</p>
+                    </div>
+                </div>
+                <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="10" :total-visible="3"
+                    prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
             </div>
         </div>
         <div class="chart-container">
@@ -97,11 +118,39 @@ function clicked() {
 </script>
 
 <style scoped>
+.first-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .notification {
-    margin-top: 1rem;
-    padding: 1rem;
+    width: 42.5%;
+    height: 45rem;
     background-color: #cdecde;
     border-radius: 1rem;
+    overflow: hidden;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.noti-container {
+    height: 88%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.each-noti {
+    width: 98%;
+    border-radius: 0.3rem;
+    height: 10rem;
+    background-color: #bbdccd;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .access-number {
@@ -142,5 +191,12 @@ function clicked() {
     align-items: center;
     flex-wrap: wrap;
     margin-top: 1rem;
+}
+
+.each-noti p:first-child {
+    width: 33rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

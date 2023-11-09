@@ -68,12 +68,8 @@ let showChatbox = () => {
 
 <template>
   <div class="header-container">
-    <RouterLink class=" btn btn-success active admin-button" to="/admin" aria-current="page" href="#">Admin
+    <RouterLink class=" btn btn-success active admin-button" to="/admin/thong-ke" aria-current="page" href="#">Admin
     </RouterLink>
-    <!-- <div class="banner-text"> -->
-    <!-- <p class="company-name">HOÀNG HÀ</p>
-      <p class="subtext-1">travel and tourism</p> -->
-    <!-- </div> -->
     <RouterLink class="stamp" to="/"><img src="./assets/stamp.png" alt="" class="">
     </RouterLink>
     <img src="./assets/images/header1.jpg" alt="" class="banner">
@@ -119,7 +115,8 @@ let showChatbox = () => {
                       </RouterLink>
                       <ul class="drop-two" style="margin: 0;padding: 0;">
                         <li v-if="domesticMenu" v-for="region in domesticMenu.Regions">
-                          <p style="font-size: larger;color: #045B48;">
+                          <p style="font-size: larger;color: #045B48;"
+                            @click="router.push({ path: '/khu-vuc/' + region.slug })">
                             {{ region.name }}
                           </p>
                           <ul class="drop-three">
@@ -294,14 +291,6 @@ let showChatbox = () => {
   opacity: 0;
 }
 
-.chatbox-enter-active {
-  animation: bounce-in 0.5s;
-}
-
-.chatbox-leave-active {
-  animation: bounce-in 0.5s reverse;
-
-}
 
 @keyframes bounce-in {
   0% {

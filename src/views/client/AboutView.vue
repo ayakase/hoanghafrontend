@@ -1,21 +1,11 @@
 <template>
   <div class="about-container">
     <div class="about-sidebar">
-      <RouterLink class="about-sidebar-item" to="/about/introduction"
-        >Giới thiệu</RouterLink
-      >
-      <RouterLink class="about-sidebar-item" to="/about/aboutus"
-        >Về chúng tôi</RouterLink
-      >
-      <RouterLink class="about-sidebar-item" to="/about/chinh-sach-va-quy-dinh"
-        >Chính sách và quy định chung</RouterLink
-      >
-      <RouterLink class="about-sidebar-item" to="/about/bao-hiem-dich-vu"
-        >Bảo hiểm dịch vụ</RouterLink
-      >
-      <RouterLink class="about-sidebar-item" to="/about/quy-trinh"
-        >Quy trình đặt dịch vụ và thanh toán</RouterLink
-      >
+      <RouterLink class="about-sidebar-item" to="/about/gioi-thieu">Giới thiệu</RouterLink>
+      <RouterLink class="about-sidebar-item" to="/about/ve-chung-toi">Về chúng tôi</RouterLink>
+      <RouterLink class="about-sidebar-item" to="/about/chinh-sach-va-quy-dinh">Chính sách và quy định chung</RouterLink>
+      <RouterLink class="about-sidebar-item" to="/about/bao-hiem-dich-vu">Bảo hiểm dịch vụ</RouterLink>
+      <RouterLink class="about-sidebar-item" to="/about/quy-trinh">Quy trình đặt dịch vụ và thanh toán</RouterLink>
     </div>
     <div class="about-content">
       <!-- <RouterView></RouterView> -->
@@ -64,6 +54,7 @@ import { RouterLink, RouterView } from "vue-router";
     transform: scale(1);
   }
 }
+
 .about-container {
   padding-top: 5rem;
   width: 85%;

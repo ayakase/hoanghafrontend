@@ -69,15 +69,15 @@ const router = createRouter({
       component: () => import('../views/admin/OrderView.vue')
     },
     {
-      path: '/dich-vu',
-      name: 'dich vu',
-      component: () => import('../views/client/ServiceView.vue'),
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/client/AboutView.vue'),
       children: [
-        { path: 'thue-xe', component: () => import('../views/about/IntroductionView.vue') },
-        { path: 'dat-phong-khach-san', component: () => import('../views/about/AboutUsView.vue') },
-        { path: 'dat-ve-cap-treo', component: () => import('../views/about/PolicyView.vue') },
-        { path: 'dich-vu-ho-chieu', component: () => import('../views/about/InsuranceView.vue') },
-        { path: 'dat-ve-may-bay', component: () => import('../views/about/ProcedureView.vue') },
+        { path: 'gioi-thieu', component: () => import('../views/about/IntroductionView.vue') },
+        { path: 've-chung-toi', component: () => import('../views/about/AboutUsView.vue') },
+        { path: 'chinh-sach-va-quy-dinh', component: () => import('../views/about/PolicyView.vue') },
+        { path: 'bao-hiem-dich-vu', component: () => import('../views/about/InsuranceView.vue') },
+        { path: 'quy-trinh', component: () => import('../views/about/ProcedureView.vue') },
       ]
     },
 

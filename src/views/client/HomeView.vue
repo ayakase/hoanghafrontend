@@ -197,10 +197,10 @@ export default {
       // baseUrl.get('/client/carousel/hottour').then((response) => {
       //   hotTour.value = response.data.rows
       // })
-      // baseUrl.get('/client/carousel/post-grid').then((response) => {
-      //   console.log(response.data)
-      //   posts.value = response.data.rows
-      // })
+      baseUrl.get('/client/carousel/post-grid').then((response) => {
+        console.log(response.data)
+        posts.value = response.data.rows
+      })
       // baseUrl.get('/client/carousel/china').then((response) => {
       //   console.log(response.data)
       //   china.value = response.data.rows

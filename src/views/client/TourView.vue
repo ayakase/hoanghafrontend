@@ -5,6 +5,8 @@ import { onMounted, ref } from 'vue';
 import baseUrl from '../../connect';
 import LoadingComponent from '../../components/LoadingComponent.vue';
 import { useRoute } from 'vue-router';
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+
 const route = useRoute();
 const tourDetail = ref()
 const adultPrice = ref()
@@ -16,6 +18,19 @@ const tourId = ref()
 const tiktokUrl = ref()
 const tiktokId = ref()
 const pageUrl = ref()
+let sliderItem = ref()
+const options = {
+    rewind: true,
+    gap: '2rem',
+    perPage: 4,
+    perMove: 1,
+    autoplay: true,
+    // focus: 'center',
+};
+const headOption = {
+    drag: 'free',
+    autoplay: true,
+}
 function getUrl() {
     pageUrl.value = window.location.href
 }
@@ -66,17 +81,15 @@ let tabSec2 = ref()
                 <div class="iframe_container" v-if=tiktokId>
                     <iframe :src=tiktokUrl class="iframe" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
                 </div>
-                <div class="gallery">
-                    <img src="https://picsum.photos/id/1028/300/300" alt="a forest after an apocalypse">
-                    <img src="https://picsum.photos/id/15/300/300" alt="a waterfall and many rocks">
-                    <img src="https://picsum.photos/id/1040/300/300" alt="a house on a mountain">
-                    <img src="https://picsum.photos/id/106/300/300" alt="sime pink flowers">
-                    <img src="https://picsum.photos/id/136/300/300" alt="big rocks with some trees">
-                    <img src="https://picsum.photos/id/1039/300/300"
-                        alt="a waterfall, a lot of tree and a great view from the sky">
-                    <img src="https://picsum.photos/id/110/300/300" alt="a cool landscape">
-                    <img src="https://picsum.photos/id/1047/300/300" alt="inside a town between two big buildings">
-                    <img src="https://picsum.photos/id/1057/300/300" alt="a great view of the sea above the mountain">
+                <div class="slide">
+                    <Splide :options=headOption aria-label="">
+                        <SplideSlide v-for="slide in 10" :key="slide">
+                            <a :href="slide.tour_url">
+                                <v-img class="slide-image" style=" border-radius: 1rem;"
+                                    src="https://ik.imagekit.io/tvlk/blog/2022/02/dia-diem-du-lich-viet-nam-cover.jpeg"></v-img>
+                            </a>
+                        </SplideSlide>
+                    </Splide>
                 </div>
             </div>
             <h2 style="margin-bottom: 2rem;"> {{ tourDetail.title }}</h2>

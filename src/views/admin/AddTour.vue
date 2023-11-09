@@ -14,8 +14,8 @@
             </div>
         </div>
         <div class="form-label">Thư viện ảnh</div>
-        <button style="color: white;margin-bottom: 2rem;" class="btn btn-success" @click="toggleGallery">Tải ảnh
-            lên</button>
+        <button style="color: white;margin-bottom: 2rem;" class="btn btn-success" @click="toggleGallery">Mo thu
+            vien</button>
         <GalleryComponent v-if="showGallery"></GalleryComponent>
         <div class="mb-3">
             <label for="custom-slug" class="form-label">Custom slug</label>

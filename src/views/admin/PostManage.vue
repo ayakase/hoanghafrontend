@@ -61,7 +61,7 @@
       <tbody>
         <tr v-for="post in postTable" :key="post" class="each-tour-row">
           <td>{{ post.id }}</td>
-          <td>{{ post.title }}</td>
+          <td @click="router.push({ path: '/postdetail', query: { id: post.id } })">{{ post.title }}</td>
           <!-- <td v-html="post.content.slice(0, 200)"></td> -->
           <td>{{ formatDate(post.createdAt) }}</td>
           <td>

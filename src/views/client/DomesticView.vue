@@ -17,7 +17,8 @@
                         Địa điểm &nbsp; <span style="color:#ff6b00;">HOT</span> &nbsp; trong
                         nước</div>
                     <div v-if="categoryList.Regions" v-for="region in categoryList.Regions" :key="region">
-                        <div class="region-list">{{ region.name }}</div>
+                        <div class="region-list" @click="router.push({ path: '/khu-vuc/' + region.slug })">{{ region.name }}
+                        </div>
                         <div v-if="region.Locations" v-for="location in region.Locations">
                             <div class="location-list">{{ location.name }}</div>
                         </div>
@@ -82,7 +83,7 @@
                         </div>
                     </div>
                     <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{
-                        numeralFormat(tour.adultprice)
+                        numeralFormat(tour.adult_price)
                     }} </b></span>
                         <span style="color: orangered; font-weight: 100;"> VNĐ</span>
                     </div>
@@ -267,6 +268,9 @@ p {
     background-color: #F1FAF4;
     margin-bottom: 1rem;
     padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .inner-container {
@@ -302,6 +306,8 @@ p {
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
+    border-radius: 0.5rem;
+
 }
 
 .sort-type:active {
@@ -336,6 +342,8 @@ p {
     background-color: #97CBB4;
     /* padding-left: 2rem; */
     width: 18rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .region-list {
