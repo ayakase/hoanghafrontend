@@ -146,26 +146,29 @@ function duration() {
 }
 let hotTour = ref()
 const categoryList = ref()
-let regionSlug = route.params.slug
 onMounted(() => {
     fetchTour()
+    fetchList()
     baseUrl.get("/client/region/hot-sidebar/" + 1)
         .then(response => {
             hotTour.value = response.data.rows
         }).catch((error) => {
             console.error(error);
         });
-    baseUrl.get("/client/region/side-bar-list/" + regionSlug).then(response => {
-        console.log(response.data)
-        categoryList.value = response.data
-    })
+
 })
 function getTourbyPage() {
     fetchTour()
 }
+function fetchList() {
+    baseUrl.get("/client/region/side-bar-list/" + route.params.slug).then(response => {
+        console.log(response.data)
+        categoryList.value = response.data
+    })
+}
 function fetchTour() {
     tourList.value = null;
-    baseUrl.get("/client/region/" + regionSlug + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/region/" + route.params.slug + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             tourList.value = response.data.rows
             console.log(tourList.value)
@@ -177,8 +180,8 @@ function fetchTour() {
 watch(
     () => route.params.slug,
     (newValue, oldValue) => {
-        // fetchTour()
-        console.log(newValue + "and" + oldValue)
+        fetchTour()
+        fetchList()
     }
 
 )
