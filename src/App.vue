@@ -121,7 +121,8 @@ let showChatbox = () => {
                           </p>
                           <ul class="drop-three">
                             <li v-for="location in region.Locations">
-                              <p style="color: #045B48;">{{ location.name }}</p>
+                              <p style="color: #045B48;" @click="router.push({ path: '/dia-diem/' + location.slug })">{{
+                                location.name }}</p>
                             </li>
                           </ul>
                         </li>

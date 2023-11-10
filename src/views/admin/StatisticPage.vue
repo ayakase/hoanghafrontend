@@ -2,9 +2,23 @@
     <div class="outer-container">
         <div class="first-section">
 
-            <div class="access-number">
-                <h4 style="text-align: center;">Tổng lượt truy cập</h4>
-                <count-up class="count-number" :end-val="count" :duration="1"></count-up>
+            <div style="display: flex;flex-direction: column;gap: 1rem;">
+                <div class="access-number">
+                    <h4 style="text-align: center;">Tổng lượt truy cập</h4>
+                    <count-up class="count-number" :end-val="viewCount" :duration="1"></count-up>
+                </div>
+                <div class="access-number">
+                    <h4 style="text-align: center;">Tổng so tour dat</h4>
+                    <count-up class="count-number" :end-val="orderCount" :duration="1"></count-up>
+                </div>
+                <div class="tour-number">
+                    <h4 style="text-align: center;">Tổng so tour du lich</h4>
+                    <count-up class="count-number" :end-val="tourCount" :duration="1"></count-up>
+                </div>
+                <div class="advise-number">
+                    <h4 style="text-align: center;">Tổng yeu cau tu van</h4>
+                    <count-up class="count-number" :end-val="adviseCount" :duration="1"></count-up>
+                </div>
             </div>
             <div class="notification">
                 <h4>Thong bao</h4>
@@ -60,11 +74,32 @@ import {
 import { onMounted, ref } from 'vue';
 import { Bar, Line } from 'vue-chartjs'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, LineElement, PointElement)
-let count = ref()
+let viewCount = ref()
+let orderCount = ref()
+let tourCount = ref()
+let adviseCount = ref()
 onMounted(() => {
-    baseUrl.get('/admin/count').then((response) => {
+    baseUrl.get('/admin/count/view').then((response) => {
         console.log(response.data)
-        count.value = response.data.count
+        viewCount.value = response.data.count
+    }).catch((error) => {
+        console.log(error)
+    })
+    baseUrl.get('/admin/count/order').then((response) => {
+        console.log(response.data)
+        orderCount.value = response.data
+    }).catch((error) => {
+        console.log(error)
+    })
+    baseUrl.get('/admin/count/tour').then((response) => {
+        console.log(response.data)
+        tourCount.value = response.data
+    }).catch((error) => {
+        console.log(error)
+    })
+    baseUrl.get('/admin/count/advise').then((response) => {
+        console.log(response.data)
+        adviseCount.value = response.data
     }).catch((error) => {
         console.log(error)
     })
@@ -161,6 +196,24 @@ function clicked() {
     padding-top: 1.5rem;
     border-radius: 1rem;
 
+}
+
+.tour-number {
+    height: 10rem;
+    background-color: #cdecde;
+    width: 10rem;
+    padding: 0.5rem;
+    padding-top: 1.5rem;
+    border-radius: 1rem;
+}
+
+.advise-number {
+    height: 10rem;
+    background-color: #cdecde;
+    width: 10rem;
+    padding: 0.5rem;
+    padding-top: 1.5rem;
+    border-radius: 1rem;
 }
 
 .count-number {

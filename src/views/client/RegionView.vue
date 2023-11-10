@@ -18,7 +18,8 @@
                             categoryList.name }}
                         </div>
                         <div v-if="categoryList.Locations" v-for="location in categoryList.Locations">
-                            <div class="location-list">{{ location.name }}</div>
+                            <div class="location-list" @click="router.push({ path: '/dia-diem/' + location.slug })">{{
+                                location.name }}</div>
                         </div>
                     </div>
                 </div>
