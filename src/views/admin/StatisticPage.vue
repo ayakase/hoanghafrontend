@@ -23,13 +23,13 @@
             <div class="notification">
                 <h4>Thong bao</h4>
                 <div class="noti-container">
-                    <div class="each-noti" v-for="item in 10" :key="item.id">
-                        <p style="font-weight: bold;">Nguyen Van A da dat tour a as as sad ad as dfas das d sd s r ert er e
-                            yr tyr yr yrt rt y</p>
-                        <p style="color: rgb(75, 75, 75);">vao luc a</p>
+                    <div class="each-noti" v-for="item in notification" :key="item.id">
+                        <p style="font-weight: bold;">{{ item.action }}</p>
+                        <p style="color: rgb(75, 75, 75);text-align: end;">vao luc {{
+                            formatDate(item.createdAt) }}</p>
                     </div>
                 </div>
-                <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="10" :total-visible="3"
+                <v-pagination @click="fetchNotification" v-model="notiPage" :length="notiTotalPage" :total-visible="3"
                     prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
             </div>
             <div class="notification">
@@ -40,7 +40,7 @@
                         <p>vao luc a</p>
                     </div>
                 </div>
-                <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="10" :total-visible="3"
+                <v-pagination @click="fetchNotification" v-model="notiPage" :length="notiTotalPage" :total-visible="3"
                     prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
             </div>
         </div>
@@ -78,6 +78,18 @@ let viewCount = ref()
 let orderCount = ref()
 let tourCount = ref()
 let adviseCount = ref()
+let notification = ref()
+let notiTotalPage = ref()
+let notiPage = ref(1)
+function fetchNotification() {
+    baseUrl.get('/admin/notification/' + notiPage.value).then((response) => {
+        console.log(response.data)
+        notification.value = response.data.rows
+        notiTotalPage.value = response.data.count / 10 + 1
+    }).catch((error) => {
+        console.log(error)
+    });
+}
 onMounted(() => {
     baseUrl.get('/admin/count/view').then((response) => {
         console.log(response.data)
@@ -103,6 +115,8 @@ onMounted(() => {
     }).catch((error) => {
         console.log(error)
     })
+    fetchNotification()
+
 })
 let yeardata = ref({
     labels: ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'],
@@ -150,9 +164,18 @@ function clicked() {
     data.value.datasets[0].data = [20, 65, 35, 72, 86, 34, 63, 23]
     console.log(data.value.datasets[0].data)
 }
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    return new Date(date).toLocaleString('vi-VN', options).replace(' tháng ', '/').replace('lúc', '').replace(', ', '/');
+}
 </script>
 
 <style scoped>
+p {
+    margin: 0;
+    padding: o;
+}
+
 .first-section {
     display: flex;
     flex-direction: row;
@@ -161,7 +184,7 @@ function clicked() {
 
 .notification {
     width: 42.5%;
-    height: 45rem;
+    height: 50rem;
     background-color: #cdecde;
     border-radius: 1rem;
     overflow: hidden;
@@ -180,7 +203,7 @@ function clicked() {
 .each-noti {
     width: 98%;
     border-radius: 0.3rem;
-    height: 10rem;
+    /* height: 8rem; */
     background-color: #bbdccd;
     padding: 0.5rem;
     display: flex;
@@ -250,6 +273,7 @@ function clicked() {
     width: 33rem;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
+    white-space: initial;
 }
 </style>

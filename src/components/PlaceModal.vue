@@ -85,12 +85,13 @@ import baseUrl from '../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { computed, onMounted, ref } from 'vue';
-const props = defineProps(['tourId', 'childPrice', 'adultPrice', 'teenagerPrice', 'infantPrice'])
+const props = defineProps(['tourId', 'childPrice', 'adultPrice', 'teenagerPrice', 'infantPrice', 'tourTitle'],)
 console.log(props.tourId)
 console.log(props.adultPrice)
 console.log(props.teenagerPrice)
 console.log(props.childPrice)
 console.log(props.infantPrice)
+console.log(props.tourTitle)
 
 // let adultPrice = ref()
 // let childPrice = ref()
@@ -126,6 +127,7 @@ function sendOrder() {
     } else {
         const orderData = {
             tourId: props.tourId,
+            tourTitle: props.tourTitle,
             name: name.value,
             phone: phone.value,
             email: email.value,

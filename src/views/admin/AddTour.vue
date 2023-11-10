@@ -83,10 +83,17 @@
             <div class="w-25" style="margin-right: 5rem">
                 <input type="number" class="form-control" id="" placeholder="" v-model="tourLength" />
             </div>
-            <div style="display: flex; flex-direction: row; align-items: center">
-                <v-switch v-model="isHot" label="Tour hot" color="orange-darken-3" style="margin-right: 1rem"
-                    hide-details></v-switch>
-                <i v-if="isHot" style="color: orangered" class="fa-solid fa-fire fa-bounce"></i>
+            <div style="display: flex; width: 30rem;justify-content: space-between;">
+                <div style="display: flex; flex-direction: row; align-items: center">
+                    <v-switch v-model="isHot" label="Tour hot" color="orange-darken-3" style="margin-right: 1rem"
+                        hide-details></v-switch>
+                    <i v-if="isHot" style="color: orangered;font-size: 2rcap;" class="fa-solid fa-fire  fa-bounce"></i>
+                </div>
+                <div style="display: flex; flex-direction: row; align-items: center;width: 11rem;">
+                    <v-switch v-model="isDiscount" label="Khuyen mai" color="green-darken-3" style="margin-right: 1rem"
+                        hide-details></v-switch>
+                    <i v-if="isDiscount" class="fa-solid fa-beat-fade fa-tags" style="color: #42ae49;font-size: 2rcap;"></i>
+                </div>
             </div>
         </div>
         <div class="mb-3 w-50">
@@ -290,6 +297,7 @@ let tourDetail = ref();
 let tourPriceService = ref();
 let tourGuide = ref();
 let recommendText = ref(0);
+let isDiscount = ref(false);
 function turnSlug(slug) {
     return slugify(slug, {
         locale: 'vi',
@@ -356,7 +364,7 @@ function addTour() {
     tourData.append("tourDetail", tourDetail.value);
     tourData.append("tourPriceService", tourPriceService.value);
     tourData.append("tourGuide", tourGuide.value);
-
+    tourData.append("tourDiscount", isDiscount.value);
     baseUrl
         .post("/admin/tour", tourData, {
             headers: {

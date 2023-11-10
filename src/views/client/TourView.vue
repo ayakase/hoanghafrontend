@@ -13,6 +13,7 @@ const adultPrice = ref()
 const teenagerPrice = ref()
 const childPrice = ref()
 const infantPrice = ref()
+const tourTitle = ref()
 const renderVideo = ref(false)
 const tourId = ref()
 const tiktokUrl = ref()
@@ -45,8 +46,8 @@ onMounted(() => {
         infantPrice.value = response.data[0].infant_price
         tourId.value = response.data[0].id
         tiktokId.value = response.data[0].tik_tok_id
+        tourTitle.value = response.data[0].title
         tiktokUrl.value = 'https://www.tiktok.com/embed/' + tiktokId.value
-
     }).catch((error) => {
         console.error(error);
     });
@@ -69,10 +70,10 @@ let tabSec2 = ref()
         </ol>
     </nav>
     <PlaceModal v-if="tourDetail" :tourId="tourId" :childPrice="childPrice" :adultPrice="adultPrice"
-        :teenagerPrice="teenagerPrice" :infantPrice="infantPrice">
+        :teenagerPrice="teenagerPrice" :infantPrice="infantPrice" :tourTitle="tourTitle">
     </PlaceModal>
     <AdvisoryModal :tourId="tourId"></AdvisoryModal>
-    <!-- :title="gameTitle" :description="gameDescription" :download="downloadUrl" -->
+    <!-- :title=" gameTitle" :description="gameDescription" :download="downloadUrl" -->
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">
 
@@ -157,7 +158,8 @@ let tabSec2 = ref()
                 <p>Giá tour: <span style="color: #ff6b00;">{{ numeralFormat(tourDetail.adult_price) }}</span></p>
                 <div class="action-button">
                     <button class="btn place-btn" data-bs-toggle="modal" data-bs-target="#placeModal">Đặt tour</button>
-                    <button class="btn advise-btn" data-bs-toggle="modal" data-bs-target="#advisoryModal">Tư vấn</button>
+                    <button class="btn advise-btn" data-bs-toggle="modal" data-bs-target="#advisoryModal">Tư
+                        vấn</button>
                 </div>
             </div>
             <div class="hot-tour">
