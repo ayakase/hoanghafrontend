@@ -20,18 +20,20 @@
                         <div class="region-list" @click="router.push({ path: '/khu-vuc/' + region.slug })">{{ region.name }}
                         </div>
                         <div v-if="region.Locations" v-for="location in region.Locations">
-                            <div class="location-list">{{ location.name }}</div>
+                            <div class="location-list" @click="router.push({ path: '/dia-diem/' + location.slug })">{{
+                                location.name }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="hot-tour">
-                    <h2 style="padding-left: 1rem;">Tour hot</h2>
+                <div class="hot-tour" v-if="hotTour">
+                    <h2 style="padding-left: 1rem;margin-bottom: 2rem;">Tour hot &nbsp; <i style="color: orangered;"
+                            class="fa-solid fa-fire fa-bounce"></i></h2>
                     <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
                         style="background: none;border: none;">
-                        <img :src=tour.thumbnail class="card-img-top" alt="...">
+                        <img :src=tour.thumbnail class="card-img-top" style="height: 10rem;" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ tour.title }}</h5>
-                            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice)
+                            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adult_price)
                             }}</span>
                                 VNĐ </p>
                             <hr class="hr" />
@@ -187,7 +189,13 @@ function fetchTour() {
 </script>
 <style scoped>
 .hot-tour {
-    width: 16rem;
+    margin-top: 1rem;
+    width: 18rem;
+    background-color: #F1FAF4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .china-container {
@@ -362,5 +370,18 @@ p {
     background-color: #F1FAF4;
     display: flex;
     align-items: center;
+}
+
+.region-list:hover {
+    background-color: rgb(69, 169, 147);
+    cursor: pointer;
+    color: white;
+}
+
+.location-list:hover {
+    background-color: rgb(69, 169, 147);
+    cursor: pointer;
+    color: white;
+
 }
 </style>

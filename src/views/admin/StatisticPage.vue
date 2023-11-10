@@ -2,7 +2,7 @@
     <div class="outer-container">
         <div class="first-section">
 
-            <div style="display: flex;flex-direction: column;gap: 1rem;">
+            <div style="display: flex;flex-direction: column;gap: 1.65rem;">
                 <div class="access-number">
                     <h4 style="text-align: center;">Tổng lượt truy cập</h4>
                     <count-up class="count-number" :end-val="viewCount" :duration="1"></count-up>

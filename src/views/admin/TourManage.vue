@@ -30,6 +30,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Tên tour</th>
+                    <th scope="col">Dia diem</th>
                     <th scope="col">Slug</th>
                     <th scope="col">Lịch trình</th>
                     <!-- <th scope="col">Danh mục</th> -->
@@ -47,6 +48,8 @@
                     <th scope="row" @click="router.push({ path: '/' + tour.slug })">{{ tour.id }}
                     </th>
                     <td @click="router.push({ path: '/' + tour.slug })">{{ tour.title }}</td>
+                    <td @click="router.push({ path: '/' + tour.slug })">{{ tour.Location.name }}</td>
+
                     <td @click="router.push({ path: '/' + tour.slug })">{{ tour.slug }}</td>
 
                     <td @click="router.push({ path: '/' + tour.slug })">{{ tour.schedule }}</td>

@@ -101,7 +101,8 @@ let showChatbox = () => {
                           style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
                       </RouterLink>
                     </li>
-                    <RouterLink class="nav-link active" to="/du-lich-trung-quoc" aria-current="page" href="#">Du lịch
+                    <RouterLink class="nav-link active" to="/dia-diem/du-lich-trung-quoc" aria-current="page" href="#">Du
+                      lịch
                       Trung
                       Quốc
                       &nbsp; <i class="fa-solid fa-vihara"></i>
@@ -115,102 +116,37 @@ let showChatbox = () => {
                       </RouterLink>
                       <ul class="drop-two" style="margin: 0;padding: 0;">
                         <li v-if="domesticMenu" v-for="region in domesticMenu.Regions">
-                          <p style="font-size: larger;color: #045B48;"
+                          <p style="font-size: larger;color: #045B48;" class="region-menu"
                             @click="router.push({ path: '/khu-vuc/' + region.slug })">
                             {{ region.name }}
                           </p>
                           <ul class="drop-three">
-                            <li v-for="location in region.Locations">
-                              <p style="color: #045B48;" @click="router.push({ path: '/dia-diem/' + location.slug })">{{
-                                location.name }}</p>
+                            <li v-for="location in region.Locations" class="location-menu">
+                              <p style=" color: #045B48;" @click="router.push({ path: '/dia-diem/' + location.slug })">
+                                {{
+                                  location.name }}</p>
                             </li>
                           </ul>
                         </li>
-                        <!-- <li >
-                          <a href="#" style="font-size: larger;">Du lich mien bac</a>
-                          <ul class="drop-three">
-                            <li class="region-item"><a href="#">Cat Ba</a></li>
-                            <li class="region-item"><a href="#">Ha Long</a></li>
-                            <li class="region-item"><a href="#">Sa Pa</a></li>
-                            <li class="region-item"><a href="#">Hanoi</a></li>
-                            <li class="region-item"><a href="#">Ninh Binh</a></li>
-                            <li class="region-item"><a href="#">Moc Chau</a></li>
-                            <li class="region-item"><a href="#">Co To</a></li>
-                            <li class="region-item"><a href="#">Tam Dao</a></li>
-                            <li class="region-item"><a href="#">Le Hoi</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#" style="font-size: larger;">Du lich mien nam</a>
-                          <ul class="drop-three">
-                            <li class="region-item"><a href="#">Da Nang</a></li>
-                            <li class="region-item"><a href="#">Hoi An</a></li>
-                            <li class="region-item"><a href="#">Hue</a></li>
-                            <li class="region-item"><a href="#">Quy Nhon</a></li>
-                            <li class="region-item"><a href="#">Ly Son</a></li>
-                            <li class="region-item"><a href="#">Nghe An</a></li>
-                            <li class="region-item"><a href="#">Quang Binh</a></li>
-                            <li class="region-item"><a href="#">Phan Thiet</a></li>
-                            <li class="region-item"><a href="#">Sam Son</a></li>
-                            <li class="region-item"><a href="#">Tay Nguyen</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#" style="font-size: larger;">Du lich mien trung</a>
-                          <ul class="drop-three">
-                            <li class="region-item"><a href="#">Da Lat</a></li>
-                            <li class="region-item"><a href="#">Con Dao</a></li>
-                            <li class="region-item"><a href="#">Phu Quoc</a></li>
-                            <li class="region-item"><a href="#">Can Tho</a></li>
-                            <li class="region-item"><a href="#">Nha Trang</a></li>
-                            <li class="region-item"><a href="#">Sai Gon</a></li>
-                            <li class="region-item"><a href="#">Cam Ranh</a></li>
-                            <li class="region-item"><a href="#">Binh Phuoc</a></li>
-                          </ul>
-                        </li> -->
                       </ul>
                     </li>
                     <li>
-                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-quoc-te" aria-current="page" href="#">Du
-                        lịch quốc
-                        tế
-                        &nbsp; <i class="fa-solid fa-globe"></i>
+                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-trong-nuoc" aria-current="page" href="#">
+                        Du lịch quoc te
+                        &nbsp; <i class="fa-solid fa-flag"></i>
                       </RouterLink>
-                      <ul class="drop-two">
-                        <li>
-                          <a href="#" style="font-size: larger;">Du lich Chau A</a>
+                      <ul class="drop-two" style="margin: 0;padding: 0;">
+                        <li v-if="domesticMenu" v-for="region in foreignMenu.Regions">
+                          <p style="font-size: larger;color: #045B48;" class="region-menu"
+                            @click="router.push({ path: '/khu-vuc/' + region.slug })">
+                            {{ region.name }}
+                          </p>
                           <ul class="drop-three">
-                            <li class="region-item"><a href="#">Campuchia</a></li>
-                            <li class="region-item"><a href="#">Malaysia</a></li>
-                            <li class="region-item"><a href="#">Thai Lan</a></li>
-                            <li class="region-item"><a href="#">Dubai</a></li>
-                            <li class="region-item"><a href="#">Nhat Ban</a></li>
-                            <li class="region-item"><a href="#">Singapore</a></li>
-                            <li class="region-item"><a href="#">Trung Quốc</a></li>
-                            <li class="region-item"><a href="#">Vân Nam - Trung Quốc</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#" style="font-size: larger;">Du lich Chau Au</a>
-                          <ul class="drop-three">
-                            <li class="region-item"><a href="#">Tay Au</a></li>
-                            <li class="region-item"><a href="#">Phap</a></li>
-                            <li class="region-item"><a href="#">Bi</a></li>
-                            <li class="region-item"><a href="#">Nga</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#" style="font-size: larger;">Du lich Chau My</a>
-                          <ul class="drop-three">
-                            <li class="region-item"><a href="#">My</a></li>
-                            <li class="region-item"><a href="#">Canada</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#" style="font-size: larger;">Du lich Chau Uc</a>
-                          <ul class="drop-three">
-                            <li class="region-item"><a href="#">Uc</a></li>
-                            <li class="region-item"><a href="#">New Zealand</a></li>
+                            <li v-for="location in region.Locations" class="location-menu">
+                              <p style=" color: #045B48;" @click="router.push({ path: '/dia-diem/' + location.slug })">
+                                {{
+                                  location.name }}</p>
+                            </li>
                           </ul>
                         </li>
                       </ul>
@@ -459,6 +395,17 @@ ul.nav-menu {
 
 .region-item:hover {
   background-color: #0aa886;
+}
+
+.region-menu:hover {
+  background-color: #0aa886;
+  cursor: pointer;
+}
+
+.location-menu:hover {
+  background-color: #0aa886;
+  cursor: pointer;
+
 }
 
 ul.nav-menu li {

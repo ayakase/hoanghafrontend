@@ -189,7 +189,12 @@ watch(
 </script>
 <style scoped>
 .hot-tour {
-    width: 16rem;
+    margin-top: 1rem;
+    width: 18rem;
+    background-color: #F1FAF4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .china-container {
@@ -364,5 +369,18 @@ p {
     background-color: #F1FAF4;
     display: flex;
     align-items: center;
+}
+
+.region-list:hover {
+    background-color: rgb(69, 169, 147);
+    cursor: pointer;
+    color: white;
+}
+
+.location-list:hover {
+    background-color: rgb(69, 169, 147);
+    cursor: pointer;
+    color: white;
+
 }
 </style>

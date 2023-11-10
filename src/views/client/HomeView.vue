@@ -6,13 +6,13 @@
           <h5>Du lịch trong nước</h5> <i class="fa-solid fa-chevron-right"></i>
 
         </div>
-        <div class="travel-category-item" @click="router.push('/du-lich-trung-quoc')">
+        <div class="travel-category-item" @click="router.push('/dia-diem/du-lich-trung-quoc')">
           <h5>Du lịch Trung Quốc </h5><i class=" fa-solid fa-chevron-right"></i>
         </div>
-        <div class="travel-category-item" @click="router.push('/du-lich-quoc-te')">
+        <div class="travel-category-item" @click="router.push('/danh-muc/du-lich-quoc-te')">
           <h5>Du lịch quốc tế </h5><i class="fa-solid fa-chevron-right"></i>
         </div>
-        <div class="travel-category-item">
+        <div class="travel-category-item" @click="router.push('/cam-nang')">
           <h5>Cẩm nang </h5><i class="fa-solid fa-chevron-right"></i>
         </div>
         <div class="travel-category-item">
@@ -30,7 +30,7 @@
         </Splide>
       </div>
       <div class="extended-category">
-        <div class="extent-item">
+        <div class="extent-item" @click="router.push({ path: '/tim-kiem/Hà Khẩu' })">
           <h5>Hà Khẩu</h5>
         </div>
         <div class="extent-item">
@@ -149,8 +149,11 @@
       </div>
     </div>
     <HeartLoading v-else> </HeartLoading> -->
-
   </div>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.2521232744994!2d103.96182131119717!3d22.49472183573427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd139cd20452db%3A0x1e087d472f4b71ce!2zMTE2IFPGoW4gxJDhuqFvLCBD4buRYyBM4bq_dSwgTMOgbyBDYWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1699640028623!5m2!1svi!2s"
+    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
 </template>
 
 <script>
@@ -322,6 +325,7 @@ img {
 
 .travel-category-item:hover {
   background-color: #bcecc4;
+  cursor: pointer;
 }
 
 .travel-category i {
@@ -347,6 +351,13 @@ img {
   text-align: center;
   padding-top: 2.5rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.extent-item:hover {
+  background-color: #bcecc4;
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .extent-item p {

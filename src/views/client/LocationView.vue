@@ -74,8 +74,8 @@
                             </div>
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
-                            <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
                             </div>
+                            <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
                             <div class="days"><b>Thời gian: </b>{{ tour.days }}N{{ tour.days - 1 }}Đ</div>
                             <div class="departure"><b>Khởi hành: </b>{{ tour.departure }}</div>
                             <div class="transportation"><b>Vận chuyển: </b>{{ tour.transportation }}</div>
