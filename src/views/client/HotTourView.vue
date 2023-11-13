@@ -41,7 +41,7 @@
                             <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
                             }}</span>
                             </div>
-                            <div> <b>Danh mục: </b> <span style="color: green;">{{ tour.Category.name }} </span> </div>
+                            <!-- <div> <b>Danh mục: </b> <span style="color: green;">{{ tour.Category.name }} </span> </div> -->
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
@@ -209,6 +209,8 @@ p {
     background-color: #F1FAF4;
     margin-bottom: 1rem;
     padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .inner-container {
@@ -244,6 +246,8 @@ p {
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
+    border-radius: 0.5rem;
+
 }
 
 .sort-type:active {

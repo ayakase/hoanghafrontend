@@ -15,7 +15,7 @@
         <div class="travel-category-item" @click="router.push('/cam-nang')">
           <h5>Cẩm nang </h5><i class="fa-solid fa-chevron-right"></i>
         </div>
-        <div class="travel-category-item">
+        <div class="travel-category-item" @click="router.push('/tour-khuyen-mai')">
           <h5>Khuyến mãi</h5> <i class="fa-solid fa-chevron-right"></i>
         </div>
       </div>

@@ -81,9 +81,12 @@
                             <div class="transportation"><b>Vận chuyển: </b>{{ tour.transportation }}</div>
                         </div>
                     </div>
-                    <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{
-                        numeralFormat(tour.adult_price)
-                    }} </b></span>
+                    <div class="price">
+                        <div v-if="tour.isdiscount" style="color: #42ae49;"><span style="font-size: large;">Khuyến
+                                mãi</span> ! &nbsp;<i class="fa-solid fa-tags fa-beat-fade "></i></div>
+                        <span style="font-size: x-large; color: orangered;"><b>{{
+                            numeralFormat(tour.adult_price)
+                        }} </b></span>
                         <span style="color: orangered; font-weight: 100;"> VNĐ</span>
                     </div>
                 </div>
@@ -105,7 +108,6 @@ import { onMounted, ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
-// let posts = ref()
 let totalPage = ref()
 let pageNumber = ref(1)
 let tourList = ref()

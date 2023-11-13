@@ -74,17 +74,29 @@
                             </div>
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
-                            </div>
-                            <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
+                        </div>
+                        <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
                             <div class="days"><b>Thời gian: </b>{{ tour.days }}N{{ tour.days - 1 }}Đ</div>
                             <div class="departure"><b>Khởi hành: </b>{{ tour.departure }}</div>
                             <div class="transportation"><b>Vận chuyển: </b>{{ tour.transportation }}</div>
                         </div>
                     </div>
-                    <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{
-                        numeralFormat(tour.adult_price)
-                    }} </b></span>
-                        <span style="color: orangered; font-weight: 100;"> VNĐ</span>
+                    <div class="price">
+
+                        <span style="font-size: x-large; color: orangered;"><b>{{
+                            numeralFormat(tour.adult_price)
+                        }} </b>
+                            <span style="color: orangered; font-weight: 100;"> VNĐ</span>
+                        </span>
+                        <div
+                            style="font-size: 2rem; width: 6rem;display: flex;flex-direction: row;justify-content: space-between;">
+                            <div v-if="tour.isdiscount" style="color: #42ae49;"><span style="font-size: large;"></span>
+                                &nbsp;<i class="fa-solid fa-tags fa-beat-fade "></i>
+                            </div>
+                            <div v-if="tour.ishottour">
+                                <i class="fa-solid fa-fire fa-bounce" style="color: #ff6600;"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <LoadingComponent v-else />
@@ -281,6 +293,9 @@ p {
 }
 
 .price {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
     width: 12rem;
     text-align: end;
 }

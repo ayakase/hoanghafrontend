@@ -72,9 +72,9 @@
                         <div class="title" @click="router.push({ path: '/' + tour.slug })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
-                            <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
+                            <!-- <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
                             }}</span>
-                            </div>
+                            </div> -->
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
@@ -84,9 +84,14 @@
                             <div class="transportation"><b>Vận chuyển: </b>{{ tour.transportation }}</div>
                         </div>
                     </div>
-                    <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{
-                        numeralFormat(tour.adult_price)
-                    }} </b></span>
+                    <div class="price">
+                        <div v-if="tour.isdiscount" style="color: #42ae49;"><span style="font-size: large;">Khuyến
+                                mãi</span> ! &nbsp;<i class="fa-solid fa-tags fa-beat-fade "></i></div>
+                        <span style="font-size: x-large; color: orangered;">
+                            <b>{{
+                                numeralFormat(tour.adult_price)
+                            }} </b>
+                        </span>
                         <span style="color: orangered; font-weight: 100;"> VNĐ</span>
                     </div>
                 </div>
@@ -281,7 +286,11 @@ p {
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.2s linear;
+}
 
+.tour-individual:hover {
+    transform: scale(1.05);
 }
 
 .inner-container {

@@ -43,11 +43,11 @@ const router = createRouter({
       name: 'tour-hot',
       component: () => import('../views/client/HotTourView.vue')
     },
-    // {
-    //   path: '/du-lich-trung-quoc',
-    //   name: 'du-lich-trung-quoc',
-    //   component: () => import('../views/client/ChinaTravel.vue')
-    // },
+    {
+      path: '/tour-khuyen-mai',
+      name: 'tour-khuyen-mai',
+      component: () => import('../views/client/DiscountView.vue')
+    },
     {
       path: '/admin',
       name: 'admin',

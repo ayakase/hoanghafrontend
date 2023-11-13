@@ -4,43 +4,11 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                         chủ</a></li>
-                <li class="breadcrumb-item">Du lịch trong nước</li>
+                <li class="breadcrumb-item">Tour Hot</li>
             </ol>
         </nav>
-        <!-- <h2 style="color: #ff6b00;">Du lịch trong nước</h2> -->
-
+        <h2 style="color: #ff6b00;">Tour đang Hot</h2>
         <div class="section-container">
-            <div class="side-bar-container">
-                <div v-if="categoryList" class="category-list">
-                    <div
-                        style="display: flex;align-items: center; height: 3rem; padding-left: 1rem; font-size: 20px;font-weight: bold;">
-                        Địa điểm &nbsp; <span style="color:#ff6b00;">HOT</span> &nbsp; trong
-                        nước</div>
-                    <div v-if="categoryList.Regions" v-for="region in categoryList.Regions" :key="region">
-                        <div class="region-list" @click="router.push({ path: '/khu-vuc/' + region.slug })">{{ region.name }}
-                        </div>
-                        <div v-if="region.Locations" v-for="location in region.Locations">
-                            <div class="location-list" @click="router.push({ path: '/dia-diem/' + location.slug })">{{
-                                location.name }}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hot-tour" v-if="hotTour">
-                    <h2 style="padding-left: 1rem;">Tour hot &nbsp; <i style="color: orangered;"
-                            class="fa-solid fa-fire fa-bounce"></i></h2>
-                    <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
-                        style="border: none;">
-                        <img :src=tour.thumbnail class="card-img-top" style="height: 10rem;" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ tour.title }}</h5>
-                            <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adult_price)
-                            }}</span>
-                                VNĐ </p>
-                            <!-- <hr class="hr" /> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="tour-container">
                 <div class="sort-container">
                     <p>Sắp xếp theo: </p>
@@ -49,19 +17,17 @@
                         <div class="sort-type" @click="newest">Mới nhất</div>
                         <div class="sort-type" @click="duration">Thời lượng tour</div>
                         <div class="sort-type" @click="price">Giá tour</div>
-
                         <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC">Từ cao đến thấp &nbsp; <i
                                 class="fa-solid fa-arrow-down-wide-short"></i> </div>
                         <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao &nbsp; <i
                                 class="fa-solid fa-arrow-up-wide-short"></i></div>
-
                     </div>
                 </div>
                 <div v-if="tourList" v-for="tour in  tourList " :key="tour" class="tour-individual">
-                    <div class="image-container" @click="router.push({ path: '/' + tour.slug })">
+                    <div class="image-container" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })">
                         <!-- <img src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_245773270v2.jpg"
                             style="width: 100%;" alt=""> -->
-                        <v-img style="height: 100%;" cover :width="50" class="thumbnail" :src=tour.thumbnail>
+                        <v-img cover :width="50" class="thumbnail" :src=tour.thumbnail>
                             <template v-slot:placeholder>
                                 <div class="d-flex align-center justify-center fill-height">
                                     <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
@@ -69,12 +35,13 @@
                             </template></v-img>
                     </div>
                     <div class="tour-detail-container">
-                        <div class="title" @click="router.push({ path: '/' + tour.slug })"> {{
+                        <div class="title" @click="router.push({ path: '/tourdetail', query: { id: tour.id } })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
                             <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
                             }}</span>
                             </div>
+                            <!-- <div> <b>Danh mục: </b> <span style="color: green;">{{ tour.Category.name }} </span> </div> -->
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
@@ -85,18 +52,16 @@
                         </div>
                     </div>
                     <div class="price"><span style="font-size: x-large; color: orangered;"><b>{{
-                        numeralFormat(tour.adult_price)
+                        numeralFormat(tour.adultprice)
                     }} </b></span>
                         <span style="color: orangered; font-weight: 100;"> VNĐ</span>
                     </div>
                 </div>
                 <LoadingComponent v-else />
-                <v-pagination v-if="totalPage" @click="getTourbyPage" v-model="pageNumber" :length="totalPage"
-                    :total-visible="5" prev-icon="fa-solid fa-chevron-left"
-                    next-icon="fa-solid fa-chevron-right"></v-pagination>
+                <v-pagination @click="getTourbyPage" v-model="pageNumber" :length="totalPage" :total-visible="5"
+                    prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
                 <div>{{ pageNumber }}</div>
             </div>
-
         </div>
     </div>
 </template>
@@ -137,7 +102,7 @@ function recommend() {
 
 }
 function price() {
-    orderBy.value = 'adult_price'
+    orderBy.value = 'adultprice'
     sortOrder.value = 'ASC'
     fetchTour()
 
@@ -148,39 +113,17 @@ function duration() {
     fetchTour()
 
 }
-let hotTour = ref()
-const categoryList = ref()
 onMounted(() => {
     fetchTour()
-    baseUrl.get("/client/category/hot-sidebar/" + 1)
-        .then(response => {
-            console.log(response.data)
-            hotTour.value = response.data.rows
-        }).catch((error) => {
-            console.error(error);
-        });
-    baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
-        // console.log(response.data)
-        categoryList.value = response.data
-    })
 })
 function getTourbyPage() {
     fetchTour()
 }
 function fetchTour() {
     tourList.value = null;
-    baseUrl.get("/client/category/" + 1 + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/discount/" + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             tourList.value = response.data.rows
-            // response.data.rows[0].Regions.forEach(Region => {
-            //     Region.Locations.forEach(Location => {
-            //         Location.Tours.forEach(Tour => {
-            //             console.log(Tour)
-            //             tourList.value.push(Tour)
-            //         })
-            //     })
-            // })
-            // tourList.value = response.data.rows
             totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {
             console.error(error);
@@ -188,19 +131,6 @@ function fetchTour() {
 }
 </script>
 <style scoped>
-.hot-tour {
-    margin-top: 1rem;
-    width: 18rem;
-    background-color: #F1FAF4;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-}
-
 .china-container {
     padding-top: 2rem;
     width: 90%;
@@ -231,7 +161,7 @@ p {
 
 .outer-container {
     padding-top: 2rem;
-    width: 95%;
+    width: 90%;
     margin: auto;
     padding: auto;
 }
@@ -281,7 +211,6 @@ p {
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
 }
 
 .inner-container {
@@ -343,61 +272,5 @@ p {
     transform: scale(1.3);
 }
 
-.hot-tour {
-    position: sticky;
-    top: 0;
-    height: 100%;
-}
-
-.category-list {
-    background-color: #97CBB4;
-    /* padding-left: 2rem; */
-    width: 18rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-}
-
-.region-list {
-    height: 2rem;
-    padding-left: 1rem;
-    font-size: large;
-    font-weight: bold;
-    background-color: #F1FAF4;
-    display: flex;
-    align-items: center;
-}
-
-.location-list {
-    height: 2rem;
-    padding-left: 1rem;
-    background-color: #F1FAF4;
-    display: flex;
-    align-items: center;
-}
-
-.region-list:hover {
-    background-color: rgb(69, 169, 147);
-    cursor: pointer;
-    color: white;
-}
-
-.location-list:hover {
-    background-color: rgb(69, 169, 147);
-    cursor: pointer;
-    color: white;
-
-}
-
-.card-title {
-    font-size: large;
-}
-
-.card {
-    transition: transform 0.1s ease-in-out;
-}
-
-.card:hover {
-    background-color: #97CBB4;
-    transform: scale(1.05);
-}
+.hot-tour {}
 </style>
