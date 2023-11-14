@@ -72,8 +72,7 @@ let tabSec2 = ref()
     <PlaceModal v-if="tourDetail" :tourId="tourId" :childPrice="childPrice" :adultPrice="adultPrice"
         :teenagerPrice="teenagerPrice" :infantPrice="infantPrice" :tourTitle="tourTitle">
     </PlaceModal>
-    <AdvisoryModal :tourId="tourId"></AdvisoryModal>
-    <!-- :title=" gameTitle" :description="gameDescription" :download="downloadUrl" -->
+    <AdvisoryModal v-if="tourDetail" :tourId="tourId" :tourTitle="tourTitle"></AdvisoryModal>
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">
 
@@ -84,7 +83,7 @@ let tabSec2 = ref()
                 </div>
                 <div class="slide">
                     <Splide :options=headOption aria-label="">
-                        <SplideSlide v-for="slide in 10" :key="slide">
+                        <SplideSlide v-for=" slide  in  10 " :key="slide">
                             <a :href="slide.tour_url">
                                 <v-img class="slide-image" style=" border-radius: 1rem;"
                                     src="https://ik.imagekit.io/tvlk/blog/2022/02/dia-diem-du-lich-viet-nam-cover.jpeg"></v-img>

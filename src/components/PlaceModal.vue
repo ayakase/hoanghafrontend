@@ -79,27 +79,13 @@
 </template>
 
 <script setup>
-import CountUp from 'vue-countup-v3'
-
 import baseUrl from '../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 const props = defineProps(['tourId', 'childPrice', 'adultPrice', 'teenagerPrice', 'infantPrice', 'tourTitle'],)
-console.log(props.tourId)
-console.log(props.adultPrice)
-console.log(props.teenagerPrice)
-console.log(props.childPrice)
-console.log(props.infantPrice)
-console.log(props.tourTitle)
+console.log(props)
 
-// let adultPrice = ref()
-// let childPrice = ref()
-// let teenagerPrice = ref()
-// onMounted(() => {
-//     adultPrice.value = props.adultPrice
-//     console.log(adultPrice.value)
-// })
 let totalPrice = computed(() => {
     return props.adultPrice * adult.value
         +

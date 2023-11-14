@@ -1,7 +1,7 @@
 <template>
     <div style="z-index: 9999;">
-        <div style="margin-top: 0rem;" class="modal fade" id="advisoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div style="margin-top: 0rem;" class="modal fade" id="advisoryModal" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" style="background-color: F1FAF4;">
                 <div class="modal-content" style="background-color: #F1FAF4;">
                     <div class="modal-header">
@@ -31,7 +31,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn" style="background-color: #97CBB4;" target="_blank" @click.prevent="sendInfo">Đặt Tour</a>
+                        <a class="btn" style="background-color: #97CBB4;" target="_blank" @click.prevent="sendInfo">Đặt
+                            Tour</a>
                     </div>
                 </div>
             </div>
@@ -40,18 +41,16 @@
 </template>
 
 <script setup>
-const props = defineProps(['tourId'])
-console.log(props.tourId)
+const props = defineProps(['tourId', 'tourTitle'])
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import baseUrl from '../connect';
-import { useRouter } from 'vue-router';
-const router = useRouter();
 import { ref } from 'vue'
 const name = ref()
 const phone = ref()
 const email = ref()
 const note = ref()
+console.log(props)
 function sendInfo() {
     if (!name.value || !phone.value || !email.value || !note.value) {
         toast.error("Bạn cần điền đầy đủ thông tin", {
@@ -65,7 +64,8 @@ function sendInfo() {
             phone: phone.value,
             email: email.value,
             note: note.value,
-            tour_id:props.tourId
+            tour_id: props.tourId,
+            tour_title: props.tourTitle
         }
         baseUrl.post("/client/advisory", formData)
             .then(response => {

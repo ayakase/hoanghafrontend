@@ -21,19 +21,27 @@
                 </div>
             </div>
             <div class="notification">
-                <h4>Thong bao &nbsp; <i class="fa-solid fa-bell fa-shake"></i></h4>
+                <div
+                    style="width: 100%;display: flex;justify-content: space-between;margin-bottom: 1rem;align-items: start;">
+                    <h4>Thong bao &nbsp; <i class="fa-solid fa-bell fa-shake"></i></h4>
+                    <button @click="fetchNotification" class="btn-success" style="margin-right: 2rem;font-size: large;"><i
+                            class="fa-solid fa-arrow-rotate-right"></i></button>
+                </div>
                 <div class=" noti-container">
-                    <div class="each-noti" v-for="item in notification" :key="item.id">
-                        <p style="font-weight: bold;">{{ item.action }}</p>
-                        <p style="color: rgb(75, 75, 75);text-align: end;">vao luc {{
+                    <div v-if="notification" class="each-noti" v-for="item in notification" :key="item.id">
+                        <p v-html="item.action"></p>
+                        <p style="color: rgb(75, 75, 75);text-align: end;">vào lúc {{
                             formatDate(item.createdAt) }}</p>
                     </div>
+                    <TableLoading v-else></TableLoading>
                 </div>
                 <v-pagination @click="fetchNotification" v-model="notiPage" :length="notiTotalPage" :total-visible="3"
                     prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
             </div>
             <div class="notification">
-                <h4>Thong bao</h4>
+                <div>
+                    <h4>Thong bao</h4>
+                </div>
                 <div class="noti-container">
                     <div class="each-noti" v-for="item in 10" :key="item.id">
                         <p class="action" style="font-weight: bold;">User x has done something</p>
@@ -59,6 +67,7 @@
 <script setup>
 import baseUrl from "../../connect";
 import CountUp from 'vue-countup-v3'
+import TableLoading from '../../components/TableLoading.vue';
 
 import {
     Chart as ChartJS,
@@ -82,6 +91,7 @@ let notification = ref()
 let notiTotalPage = ref()
 let notiPage = ref(1)
 function fetchNotification() {
+    notification.value = null
     baseUrl.get('/admin/notification/' + notiPage.value).then((response) => {
         console.log(response.data)
         notification.value = response.data.rows
@@ -183,14 +193,16 @@ p {
 }
 
 .notification {
-    width: 42.5%;
-    height: 50rem;
+    width: 40rem;
+    height: 51rem;
     background-color: #cdecde;
     border-radius: 1rem;
     overflow: hidden;
     padding-left: 1rem;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .noti-container {
@@ -198,6 +210,7 @@ p {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+
 }
 
 .each-noti {
@@ -218,6 +231,7 @@ p {
     padding: 0.5rem;
     padding-top: 1.5rem;
     border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }
 
@@ -228,6 +242,8 @@ p {
     padding: 0.5rem;
     padding-top: 1.5rem;
     border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .advise-number {
@@ -237,6 +253,8 @@ p {
     padding: 0.5rem;
     padding-top: 1.5rem;
     border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .count-number {
@@ -252,6 +270,8 @@ p {
     padding: 2rem;
     border-radius: 1rem;
     background-color: #cdecde;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .outer-container {

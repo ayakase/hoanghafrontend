@@ -1,38 +1,38 @@
 <template>
   <div class="footer-container">
-    <!-- <div class="footer-head">
-            <div class="footer-head-item">
-                <img src="../assets/images/ftimg1.png" class="footer-head-icon" alt="">
-                <div class="footer-head-text">
-                    <p><span style="color: #ff6b00; font-weight: bold;">TƯ VẤN 24/7</span></p>
-                    <p><span style="color: white;">Tổng đài tư vấn 349349, Hỗ trợ 24/7
+    <div class="footer-head">
+      <div class="footer-head-item">
+        <img src="../assets/images/ftimg1.png" class="footer-head-icon" alt="">
+        <div class="footer-head-text">
+          <p><span style="color: #ff6b00; font-weight: bold;">TƯ VẤN 24/7</span></p>
+          <p><span style="color: white;">Tổng đài tư vấn 349349, Hỗ trợ 24/7
 
-                        </span></p>
-                </div>
-            </div>
-            <div class="footer-head-item">
-                <img src="../assets/images/ftimg2.png" class="footer-head-icon" alt="">
-                <div class="footer-head-text">
-                    <p><span style="color: #ff6b00; font-weight: bold;">BẢO HIỂM DỊCH VỤ</span></p>
-                    <p><span style="color: white;">Cam kết hoàn tiền nếu Dịch vụ không đúng</span></p>
-                </div>
-            </div>
-            <div class="footer-head-item">
-                <img src="../assets/images/ftimg3.png" class="footer-head-icon" alt="">
-                <div class="footer-head-text">
-                    <p><span style="color: #ff6b00; font-weight: bold;">CHẤT LƯỢNG HÀNG ĐẦU</span></p>
-                    <p><span style="color: white;">Không cạnh tranh về giá, chỉ tập trung vào chất lượng</span></p>
-                </div>
-            </div>
-            <div class="footer-head-item">
-                <img src="../assets/images/ftimg4.png" class="footer-head-icon" alt="">
-                <div class="footer-head-text">
-                    <p><span style="color: #ff6b00; font-weight: bold;">NIỀM TIN PHÁT TRIỂN</span></p>
-                    <p><span style="color: white;">Nỗ lực phát tiển để trở thành Công ty lữ hành hàng đầu tại Lào Cai</span>
-                    </p>
-                </div>
-            </div>
-        </div> -->
+            </span></p>
+        </div>
+      </div>
+      <div class="footer-head-item">
+        <img src="../assets/images/ftimg2.png" class="footer-head-icon" alt="">
+        <div class="footer-head-text">
+          <p><span style="color: #ff6b00; font-weight: bold;">BẢO HIỂM DỊCH VỤ</span></p>
+          <p><span style="color: white;">Cam kết hoàn tiền nếu Dịch vụ không đúng</span></p>
+        </div>
+      </div>
+      <div class="footer-head-item">
+        <img src="../assets/images/ftimg3.png" class="footer-head-icon" alt="">
+        <div class="footer-head-text">
+          <p><span style="color: #ff6b00; font-weight: bold;">CHẤT LƯỢNG HÀNG ĐẦU</span></p>
+          <p><span style="color: white;">Không cạnh tranh về giá, chỉ tập trung vào chất lượng</span></p>
+        </div>
+      </div>
+      <div class="footer-head-item">
+        <img src="../assets/images/ftimg4.png" class="footer-head-icon" alt="">
+        <div class="footer-head-text">
+          <p><span style="color: #ff6b00; font-weight: bold;">NIỀM TIN PHÁT TRIỂN</span></p>
+          <p><span style="color: white;">Nỗ lực phát tiển để trở thành Công ty lữ hành hàng đầu tại Lào Cai</span>
+          </p>
+        </div>
+      </div>
+    </div>
     <div class="footer-main-content">
       <div class="footer-section footer-section-1">
         <div class="section-top-bar"></div>
