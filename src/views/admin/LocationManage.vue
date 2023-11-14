@@ -11,10 +11,13 @@
                         Dia diem &nbsp; <i class="fa-solid fa-book"> :</i> {{ regionLabel }}
                     </button>
                     <div class="dropdown-menu" v-if="regionList">
-                        <button class="dropdown-item" @click="">Tat ca</button>
-                        <button v-for="region in regionList" class="dropdown-item" @click="">{{ region.name }}</button>
+                        <button class="dropdown-item" @click="chooseRegion('', 'Tất cả')">Tất cả</button>
+                        <button v-for="region in regionList" class="dropdown-item"
+                            @click="chooseRegion(region.slug, region.name)">{{
+                                region.name }}</button>
                     </div>
                 </div>
+                <p>{{ regionSlug }}</p>
                 <button class="btn btn-success" @click="fetchLocation"><i class="fa-solid fa-rotate-right"></i></button>
             </div>
         </div>
@@ -31,16 +34,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="region in locationTable" :key="region" class="each-tour-row">
-                    <td>{{ region.id }}</td>
-                    <td>{{ region.name }}</td>
-                    <td>{{ region.slug }}</td>
-                    <td>{{ region.note }}</td>
+                <tr v-for="location in locationTable" :key="location" class="each-tour-row">
+                    <td>{{ location.id }}</td>
+                    <td>{{ location.name }}</td>
+                    <td>{{ location.slug }}</td>
+                    <td>{{ location.note }}</td>
                     <td> <button
                             @click="router.push({ path: '/admin/quan-ly-tour/chinh-sua-tour', query: { id: tour.id } })"
                             class="edit-button"><i class=" fa-solid fa-pen-to-square"></i></button>
                     </td>
-                    <td> <button class="delete-button" @click="deleteLocation(region.id)"><i
+                    <td> <button class="delete-button" @click="deleteLocation(location.id)"><i
                                 class="fa-solid fa-trash"></i></button></td>
                 </tr>
 
@@ -64,13 +67,15 @@
                     Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ addLabel }}
                 </button>
                 <div class="dropdown-menu">
-                    <button v-for="region in regionList" class="dropdown-item" @click=""> {{ region.name }}
-                    </button>
+                    <button v-for="region in regionList" class="dropdown-item"
+                        @click="chooseAddRegion(region.id, region.name)">{{
+                            region.name }}</button>
                 </div>
             </div>
-            <button @click="addRegion" class="btn btn-success">
+            <button @click="addLocation" class="btn btn-success">
                 Khu vực mới <i class=" fa-solid fa-plus"></i>
             </button>
+            <p>{{ addRegionId }}</p>
         </div>
     </div>
 </template>
@@ -88,28 +93,21 @@ import TableLoading from '../../components/TableLoading.vue';
 let locationTable = ref()
 let showOverlay = ref(false);
 let regionLabel = ref("Tất cả")
-let categoryNumber = ref(0)
-
-function categoryAll() {
-    categoryLabel.value = "Tất cả"
-    categoryNumber.value = 0
+let regionSlug = ref("")
+let addLabel = ref();
+let addRegionId = ref()
+function chooseRegion(id, name) {
+    regionSlug.value = id
+    regionLabel.value = name
     fetchLocation()
-
 }
-function categoryDomestic() {
-    categoryLabel.value = "Trong nước"
-    categoryNumber.value = 1
-    fetchLocation()
-
-} function categoryGlobal() {
-    categoryLabel.value = "Quốc tế"
-    categoryNumber.value = 2
-    fetchLocation()
-
+function chooseAddRegion(slug, name) {
+    addRegionId.value = slug
+    addLabel.value = name
 }
 function fetchLocation() {
     locationTable.value = null
-    baseUrl.get('/admin/location/locationlist/' + categoryNumber.value).then((response) => {
+    baseUrl.get('/admin/location/locationlist', { params: { region: regionSlug.value } }).then((response) => {
         locationTable.value = response.data
     })
 }
@@ -146,8 +144,6 @@ function deleteLocation(id) {
     }
 }
 
-let addLabel = ref("Trong nước")
-let addNumber = ref(1)
 let newTitle = ref()
 let newSlug = ref()
 let newNote = ref()
@@ -160,24 +156,17 @@ function turnSlug(slug) {
 watch(newTitle, (newValue) => {
     newSlug.value = turnSlug(newValue)
 })
-function addDomestic() {
-    addLabel.value = "Trong nước"
-    addNumber.value = 1
 
-} function addGlobal() {
-    addLabel.value = "Quốc tế"
-    addNumber.value = 2
-}
 
-function addRegion() {
+function addLocation() {
     showOverlay.value = true;
-    let regionData = {
+    let locationData = {
         name: newTitle.value,
         slug: newSlug.value,
         note: newNote.value,
-        category_id: addNumber.value
+        region_id: addRegionId.value
     }
-    baseUrl.post('/admin/region', regionData)
+    baseUrl.post('/admin/location', locationData)
         .then((response) => {
             console.log(response)
             toast.info(response.data, {

@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="notification">
-                <h4>Thong bao</h4>
-                <div class="noti-container">
+                <h4>Thong bao &nbsp; <i class="fa-solid fa-bell fa-shake"></i></h4>
+                <div class=" noti-container">
                     <div class="each-noti" v-for="item in notification" :key="item.id">
                         <p style="font-weight: bold;">{{ item.action }}</p>
                         <p style="color: rgb(75, 75, 75);text-align: end;">vao luc {{
@@ -33,7 +33,7 @@
                     prev-icon="fa-solid fa-chevron-left" next-icon="fa-solid fa-chevron-right"></v-pagination>
             </div>
             <div class="notification">
-                <h4>Thong bao &nbsp; <i class="fa-solid fa-bell fa-shake"></i></h4>
+                <h4>Thong bao</h4>
                 <div class="noti-container">
                     <div class="each-noti" v-for="item in 10" :key="item.id">
                         <p class="action" style="font-weight: bold;">User x has done something</p>
