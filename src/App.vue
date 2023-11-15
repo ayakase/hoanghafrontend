@@ -131,8 +131,8 @@ let showChatbox = () => {
                       </ul>
                     </li>
                     <li>
-                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-trong-nuoc" aria-current="page" href="#">
-                        Du lịch quoc te
+                      <RouterLink class="nav-link active" to="/danh-muc/du-lich-quoc-te" aria-current="page" href="#">
+                        Du lịch quốc tế
                         &nbsp; <i class="fa-solid fa-flag"></i>
                       </RouterLink>
                       <ul class="drop-two" style="margin: 0;padding: 0;">
@@ -152,8 +152,7 @@ let showChatbox = () => {
                       </ul>
                     </li>
                     <li>
-                      <RouterLink class="nav-link active" to="/dich-vu" aria-current="page" href="#">Dich vu du
-                        lich
+                      <RouterLink class="nav-link active" to="/dich-vu" aria-current="page" href="#">Dịch vụ du lịch
                         &nbsp; <i class="fa-solid fa-vihara"></i>
                       </RouterLink>
                       <ul class="drop-two-special">
@@ -178,7 +177,7 @@ let showChatbox = () => {
             <li>
               <form class="d-flex search-container" style="margin-top:.3rem;padding: 0;">
                 <input @keydown.enter.prevent="router.push({ path: '/tim-kiem/' + searchText })" v-model="searchText"
-                  class="form-control me-2 search-box" type="search" placeholder="Search" aria-label="Search">
+                  class="form-control me-2 search-box" type="search" placeholder="Tìm kiếm" aria-label="Search">
               </form>
             </li>
             <li>

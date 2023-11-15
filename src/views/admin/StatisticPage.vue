@@ -8,22 +8,22 @@
                     <count-up class="count-number" :end-val="viewCount" :duration="1"></count-up>
                 </div>
                 <div class="access-number">
-                    <h4 style="text-align: center;">Tổng so tour dat</h4>
+                    <h4 style="text-align: center;">Tổng số đặt tour</h4>
                     <count-up class="count-number" :end-val="orderCount" :duration="1"></count-up>
                 </div>
                 <div class="tour-number">
-                    <h4 style="text-align: center;">Tổng so tour du lich</h4>
+                    <h4 style="text-align: center;">Tổng số tour</h4>
                     <count-up class="count-number" :end-val="tourCount" :duration="1"></count-up>
                 </div>
                 <div class="advise-number">
-                    <h4 style="text-align: center;">Tổng yeu cau tu van</h4>
+                    <h4 style="text-align: center;">Tổng yêu cầu tư vấn</h4>
                     <count-up class="count-number" :end-val="adviseCount" :duration="1"></count-up>
                 </div>
             </div>
             <div class="notification">
                 <div
                     style="width: 100%;display: flex;justify-content: space-between;margin-bottom: 1rem;align-items: start;">
-                    <h4>Thong bao &nbsp; <i class="fa-solid fa-bell fa-shake"></i></h4>
+                    <h4>Thông báo &nbsp; <i class="fa-solid fa-bell fa-shake"></i></h4>
                     <button @click="fetchNotification" class="btn-success" style="margin-right: 2rem;font-size: large;"><i
                             class="fa-solid fa-arrow-rotate-right"></i></button>
                 </div>

@@ -28,15 +28,15 @@
             </RouterLink>
             <RouterLink class="admin-side-item" to="/admin/bai-viet">Bài viết<i class="fa-regular fa-newspaper"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Thue xe<i class="fa-solid fa-bus"></i>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Thuê xe<i class="fa-solid fa-bus"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Ve may bay<i class="fa-solid fa-plane"></i>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Vé máy bay<i class="fa-solid fa-plane"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Dat khach san<i class="fa-solid fa-hotel"></i>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Đặt khách sạn<i class="fa-solid fa-hotel"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Lam ho chieu<i class="fa-solid fa-passport"></i>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Làm hộ chiếu <i class="fa-solid fa-passport"></i>
             </RouterLink>
-            <RouterLink class="admin-side-item" to="/admin/bai-viet">Ve cap treo<i class="fa-solid fa-cable-car"></i>
+            <RouterLink class="admin-side-item" to="/admin/bai-viet">Vé cáp treo<i class="fa-solid fa-cable-car"></i>
             </RouterLink>
 
         </div>

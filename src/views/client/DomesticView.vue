@@ -355,7 +355,6 @@ p {
 .hot-tour {
     position: sticky;
     top: 0;
-    height: 100%;
 }
 
 .category-list {

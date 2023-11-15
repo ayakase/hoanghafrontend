@@ -73,28 +73,30 @@
                     <option value="Ghép đoàn / Đi riêng">Ghép đoàn/đi riêng</option>
                 </select>
             </div>
+            <div class="w-25" style="margin-right: 5rem">
+                <label for="" class="form-label">Thời gian: {{ tourLength }}N{{ tourLength - 1 }}Đ</label>
+                <input type="number" class="form-control" id="" placeholder="" v-model="tourLength" />
+            </div>
             <div class="mb-3 w-25">
                 <label for="" class="form-label">Khởi hành từ</label>
                 <input type="text" class="form-control" id="" placeholder="" v-model="tourFrom" />
             </div>
         </div>
-        <label for="" class="form-label">Thời gian: {{ tourLength }}N{{ tourLength - 1 }}Đ</label>
-        <div style="display: flex; flex-direction: row; align-items: center">
-            <div class="w-25" style="margin-right: 5rem">
-                <input type="number" class="form-control" id="" placeholder="" v-model="tourLength" />
+        <div style="display: flex; width: 40rem;justify-content: space-between;align-items: center;">
+            <div style="display: flex; flex-direction: row; align-items: center">
+                <v-switch v-model="isHot" label="Tour hot" color="orange-darken-3" style="margin-right: 1rem"
+                    hide-details></v-switch>
+                <i v-if="isHot" style="color: orangered;font-size: 2rcap;" class="fa-solid fa-fire  fa-bounce"></i>
             </div>
-            <div style="display: flex; width: 30rem;justify-content: space-between;">
-                <div style="display: flex; flex-direction: row; align-items: center">
-                    <v-switch v-model="isHot" label="Tour hot" color="orange-darken-3" style="margin-right: 1rem"
-                        hide-details></v-switch>
-                    <i v-if="isHot" style="color: orangered;font-size: 2rcap;" class="fa-solid fa-fire  fa-bounce"></i>
-                </div>
-                <div style="display: flex; flex-direction: row; align-items: center;width: 11rem;">
-                    <v-switch v-model="isDiscount" label="Khuyen mai" color="green-darken-3" style="margin-right: 1rem"
-                        hide-details></v-switch>
-                    <i v-if="isDiscount" class="fa-solid fa-beat-fade fa-tags" style="color: #42ae49;font-size: 2rcap;"></i>
-                </div>
-            </div>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: center;width: 11rem;">
+            <v-switch v-model="isDiscount" label="Khuyến mại" color="green-darken-3" style="margin-right: 1rem"
+                hide-details></v-switch>
+            <i v-if="isDiscount" class="fa-solid fa-beat-fade fa-tags" style="color: #42ae49;font-size: 2rcap;"></i>
+        </div>
+        <div class="w-25 mb-3" v-if="isDiscount">
+            <label for="" class="form-label">Giá Người lớn gốc (chưa giảm)</label>
+            <input type="number" class="form-control" id="" placeholder="" v-model="originalPrice" />
         </div>
         <div class="mb-3 w-50">
             <label for="" class="form-label">Di chuyển:
@@ -127,19 +129,22 @@
         </div>
         <div class="age-price">
             <div class="mb-3 w-20">
-                <label for="" class="form-label">Giá Người lớn (Trên 12 tuổi) (VNĐ)</label>
+                <label for="" class="form-label">Giá Người lớn (Trên 12 tuổi) <span v-if="isDiscount"
+                        style="font-weight: bold;color: red;">(Ưu
+                        đãi)</span>
+                </label>
                 <input type="number" class="form-control" id="" placeholder="" v-model="adultPrice" />
             </div>
             <div class="mb-3 w-20">
-                <label for="" class="form-label">Giá trẻ em(Từ 6 - 10 tuổi) (VNĐ)</label>
+                <label for="" class="form-label">Giá trẻ em(Từ 6 - 10 tuổi) </label>
                 <input type="number" class="form-control" id="" placeholder="" v-model="teenagerPrice" />
             </div>
             <div class="mb-3 w-20">
-                <label for="" class="form-label">Giá trẻ em (Từ 2 - 5 tuổi) (VNĐ)</label>
+                <label for="" class="form-label">Giá trẻ em (Từ 2 - 5 tuổi) </label>
                 <input type="number" class="form-control" id="" placeholder="" v-model="childPrice" />
             </div>
             <div class="mb-3 w-20">
-                <label for="" class="form-label">Giá trẻ em (Dưới 2 tuổi) (VNĐ)</label>
+                <label for="" class="form-label">Giá trẻ em (Dưới 2 tuổi) </label>
                 <input type="number" class="form-control" id="" placeholder="" v-model="infantPrice" />
             </div>
         </div>
