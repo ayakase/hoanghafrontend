@@ -19,6 +19,8 @@ const tourId = ref()
 const tiktokUrl = ref()
 const tiktokId = ref()
 const pageUrl = ref()
+const imageArray = ref()
+
 let sliderItem = ref()
 const options = {
     rewind: true,
@@ -48,6 +50,7 @@ onMounted(() => {
         tiktokId.value = response.data[0].tik_tok_id
         tourTitle.value = response.data[0].title
         tiktokUrl.value = 'https://www.tiktok.com/embed/' + tiktokId.value
+        imageArray.value = response.data[0].images.split(',')
     }).catch((error) => {
         console.error(error);
     });
@@ -83,10 +86,9 @@ let tabSec2 = ref()
                 </div>
                 <div class="slide">
                     <Splide :options=headOption aria-label="">
-                        <SplideSlide v-for=" slide  in  10 " :key="slide">
+                        <SplideSlide v-for=" slide  in  imageArray " :key="slide">
                             <a :href="slide.tour_url">
-                                <v-img class="slide-image" style=" border-radius: 1rem;"
-                                    src="https://ik.imagekit.io/tvlk/blog/2022/02/dia-diem-du-lich-viet-nam-cover.jpeg"></v-img>
+                                <v-img class="slide-image" style=" border-radius: 1rem;" :src="slide"></v-img>
                             </a>
                         </SplideSlide>
                     </Splide>

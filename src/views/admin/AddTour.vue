@@ -17,6 +17,7 @@
         <button style="color: white;margin-bottom: 2rem;" class="btn btn-success" @click="toggleGallery">Mở thư
             viện</button>
         <!-- <GalleryComponent v-if="showGallery"></GalleryComponent> -->
+        <!-- <p>{{ imageArray }}</p> -->
         <div v-if="showGallery">
             <div style="display: flex;flex-direction: row;gap: 2rem;width: 80%;">
                 <v-file-input v-model="files" placeholder="Upload your documents" label="Ảnh" multiple
@@ -38,7 +39,7 @@
                     truyền</p>
             </div>
             <div style="display: flex; gap: 1rem;width: 100%;flex-wrap: wrap;">
-                <div v-for="image in copyUrl" :key="image" class="each-image" @click="showUrl(image)">
+                <div v-for="image in imageArray" :key="image" class="each-image" @click=" addImg(image)">
                     <v-img cover class=" each-image" :src=image>
                         <template v-slot:placeholder>
                             <div class="d-flex align-center justify-center fill-height">
@@ -53,8 +54,9 @@
                 <div class="images-section">
 
                     <div class="image-grid">
-                        <div v-for="image in images" :key="image" class="each-image">
-                            <v-img cover class="each-image" :src=image.url @click="showUrl(image.url)">
+                        <div v-for="image in images" :key="image" class="each-image"
+                            :class="{ 'image-selected': isSelected(image.url) }">
+                            <v-img cover class=" each-image" :src=image.url @click="addImg(image.url)">
                                 <template v-slot:placeholder>
                                     <div class="d-flex align-center justify-center fill-height">
                                         <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
@@ -64,24 +66,20 @@
 
                     </div>
                     <div class="button-container">
-                        <!-- <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success "
-                    v-if="nextCursor != null"> Tải thêm </button>
-                <button style="margin: auto; padding: auto;" @click="nextPage" class="load-btn btn btn-success " v-else
-                    disabled> Tải
-                    thêm </button> -->
-                        <div ref="target" style="margin-top: 10rem;">
-                            <h4 v-if="loadMore && nextCursor"> Load thêm...</h4>
+                        <div ref="target" style="margin-top: 5rem;">
+                            <h4 v-if="loadMore && nextCursor"> Đang load thêm ảnh...</h4>
+                            <!-- <TableLoading v-if="loadMore && nextCursor"></TableLoading> -->
                             <h4 v-else>Không còn ảnh</h4>
                         </div>
                     </div>
                 </div>
-                <div class="action-section">
+                <!-- <div class="action-section">
                     <h3>URL</h3>
-                    <textarea readonly name="" id="" rows="8" placeholder="" :value=copyUrl>
+                    <textarea readonly name="" id="" rows="8" placeholder="" :value=imageArray>
             </textarea>
                     <button class="btn btn-success" style="justify-self: end;align-self: end;font-size:x-large"><i
                             class="fa-regular fa-copy"></i></button>
-                </div>
+                </div> -->
             </div>
 
 
@@ -340,17 +338,18 @@
 <script setup>
 import slugify from 'slugify'
 import LoadingOverlay from "../../components/LoadingOverlay.vue";
+import TableLoading from '../../components/TableLoading.vue';
 import baseUrl from "../../connect";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import Editor from "@tinymce/tinymce-vue";
 import { ref, computed, onMounted, watch } from "vue";
-import GalleryComponent from "../../components/GalleryComponent.vue";
+
 let images = ref()
 let files = ref([])
 let showOverlay = ref(false)
 let loadMore = ref(false)
-let copyUrl = ref([])
+let imageArray = ref([])
 import { useElementVisibility } from '@vueuse/core'
 const target = ref(null)
 const isVisible = useElementVisibility(target)
@@ -440,7 +439,7 @@ function addTour() {
     tourData.append("slug", slug.value)
     tourData.append("tourSchedule", tourSchedule.value);
     tourData.append("tourLocation", selectLocation.value.id);
-    // tourData.append("tiktokId", tiktokId.value)
+    tourData.append("images", imageArray.value);
     tourData.append("tourType", tourType.value);
     tourData.append("tourFrom", tourFrom.value);
     tourData.append("tourLength", tourLength.value);
@@ -521,16 +520,22 @@ watch(isVisible, (newValue, oldValue) => {
     }
 })
 
-function showUrl(url) {
-    if (copyUrl.value.includes(url)) {
-        let index = copyUrl.value.indexOf(url)
+function addImg(url) {
+    if (imageArray.value.includes(url)) {
+        let index = imageArray.value.indexOf(url)
         if (index !== -1) {
-            copyUrl.value.splice(index, 1)
+            imageArray.value.splice(index, 1)
         }
     } else {
-        copyUrl.value.push(url)
+        imageArray.value.push(url)
     }
-
+}
+function isSelected(url) {
+    if (imageArray.value.includes(url)) {
+        return true
+    } else {
+        return false
+    }
 }
 let totalCount = ref()
 let displayCount = ref()
@@ -635,7 +640,7 @@ let nextCursor = ref(null)
 }
 
 .images-section {
-    width: 80%;
+    width: 100%;
     height: 50rem;
     overflow: scroll;
 }
@@ -645,10 +650,10 @@ html {
     overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 0;
     background: transparent;
-}
+} */
 
 
 .image-grid {
@@ -661,10 +666,20 @@ html {
 }
 
 .each-image {
-    width: 10rem;
-    height: 10rem;
+    width: 9rem;
+    height: 9rem;
     object-fit: cover;
     background-color: rgb(91, 91, 91);
+    transition: transform 0.1s linear;
+}
+
+.each-image:hover {
+    transform: scale(1.05);
+}
+
+.image-selected {
+    border: solid 4px rgb(255, 0, 0);
+    transform: scale(0.95);
 }
 
 .action-section {
