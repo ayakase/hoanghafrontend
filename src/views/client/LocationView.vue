@@ -82,7 +82,10 @@
                         </div>
                     </div>
                     <div class="price">
-
+                        <span v-if="tour.isdiscount"
+                            style="text-decoration: line-through;color: #42ae49;font-size: 1.2rem;"><b>{{
+                                numeralFormat(tour.original_price)
+                            }} </b> VNĐ </span>
                         <span style="font-size: x-large; color: orangered;"><b>{{
                             numeralFormat(tour.adult_price)
                         }} </b>
