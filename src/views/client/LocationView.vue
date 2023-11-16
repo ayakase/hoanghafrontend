@@ -187,7 +187,6 @@ function fetchTour() {
     baseUrl.get("/client/location/" + route.params.slug + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
         .then(response => {
             tourList.value = response.data.rows
-            console.log(tourList.value)
             totalPage.value = response.data.count / 10 + 1
         }).catch((error) => {
             console.error(error);

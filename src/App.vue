@@ -156,14 +156,15 @@ let showChatbox = () => {
                         &nbsp; <i class="fa-solid fa-vihara"></i>
                       </RouterLink>
                       <ul class="drop-two-special">
-                        <li @click="router.push('/thue-xe')" class="region-item"><a href="#">Thue xe</a></li>
-                        <li @click="router.push('/dat-ve-may-bay')" class="region-item"><a href="#">Booking ve may bay</a>
+                        <li @click="router.push('/thue-xe')" class="service-item"><a href="#">Thue xe</a></li>
+                        <li @click="router.push('/dat-ve-may-bay')" class="service-item"><a href="#">Booking ve may
+                            bay</a>
                         </li>
-                        <li @click="router.push('/dat-phong-khach-san')" class="region-item"><a href="#">Dat phong khach
+                        <li @click="router.push('/dat-phong-khach-san')" class="service-item"><a href="#">Dat phong khach
                             san</a></li>
-                        <li @click="router.push('/dich-vu-ho-chieu')" class="region-item"><a href="#">Dich vu lam ho
+                        <li @click="router.push('/dich-vu-ho-chieu')" class="service-item"><a href="#">Dich vu lam ho
                             chieu</a></li>
-                        <li @click="router.push('/dat-ve-cap-treo')" class="region-item"><a href="#">Dat ve cap treo
+                        <li @click="router.push('/dat-ve-cap-treo')" class="service-item"><a href="#">Dat ve cap treo
                             fansipan</a>
                         </li>
                       </ul>
@@ -472,18 +473,30 @@ ul.nav-menu li:hover>.drop-one {
 }
 
 .drop-two-special {
+
   margin: 0;
   padding: 0;
   width: max-content;
   position: absolute;
-  top: 0;
+  top: -50px;
   left: 100%;
   background: #dbebe1;
   display: none;
+  font-size: large;
+  color: #045B48;
+}
+
+.service-item {
+  color: #045B48 !important;
+}
+
+.service-item:hover {
+  background-color: #0aa886;
 }
 
 .drop-one li:hover>.drop-two-special {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .drop-three {

@@ -43,7 +43,9 @@
             </div>
             <div class="tour-container">
                 <div class="sort-container">
-                    <p>Sắp xếp theo: </p>
+                    <p style="font-size: larger;">Sắp xếp theo: &nbsp;<span style="color: #1f8726;font-weight: bolder;">{{
+                        orderLabel }}</span>
+                    </p>
                     <div class="sort-types">
                         <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
                         <div class="sort-type" @click="newest">Mới nhất</div>
@@ -118,6 +120,7 @@ let totalPage = ref()
 let pageNumber = ref(1)
 let tourList = ref()
 let orderBy = ref("createdAt")
+let orderLabel = ref("Mới nhất")
 let sortOrder = ref("DESC")
 function orderASC() {
     sortOrder.value = 'ASC'
@@ -131,12 +134,14 @@ function orderDESC() {
 }
 function newest() {
     orderBy.value = 'createdAt'
+    orderLabel.value = 'Mới nhất'
     sortOrder.value = 'DESC'
     fetchTour()
 
 }
 function recommend() {
     orderBy.value = 'recommend'
+    orderLabel.value = 'Hoàng Hà đề xuất'
     sortOrder.value = 'DESC'
     fetchTour()
 
@@ -144,12 +149,14 @@ function recommend() {
 function price() {
     orderBy.value = 'adult_price'
     sortOrder.value = 'ASC'
+    orderLabel.value = 'Giá tour'
     fetchTour()
 
 }
 function duration() {
     orderBy.value = 'days'
     sortOrder.value = 'DESC'
+    orderLabel.value = 'Thời lượng tour'
     fetchTour()
 
 }
@@ -165,7 +172,6 @@ onMounted(() => {
             console.error(error);
         });
     baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
-        // console.log(response.data)
         categoryList.value = response.data
     })
 })
@@ -310,10 +316,10 @@ p {
 }
 
 .sort-container {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .sort-types {
@@ -328,6 +334,10 @@ p {
     padding: 0.8rem;
     border-radius: 0.5rem;
 
+}
+
+.sort-type:focus {
+    background-color: rebeccapurple;
 }
 
 .sort-type:active {

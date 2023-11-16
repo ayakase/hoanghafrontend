@@ -78,7 +78,7 @@
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Hot Tour &nbsp; <i
           class="fa-solid fa-fire fa-bounce" style="color: #ff6600;"></i>
       </h2>
-      <div style="width: 95%;margin: auto;">
+      <div style="width: 95%;margin: auto;" v-if="hotTour">
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer;">

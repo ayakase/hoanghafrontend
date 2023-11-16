@@ -111,7 +111,6 @@ watch(
         if (newValue !== '') {
             searchText.value = newValue
             fetchTour()
-            console.log(oldValue + ' and ' + newValue)
         } else {
         }
     }
@@ -161,7 +160,6 @@ function duration() {
 let hotTour = ref()
 const categoryList = ref()
 onMounted(() => {
-    console.log(route.params.searchText)
     fetchTour()
     baseUrl.get("/client/category/hot-sidebar/" + 1)
         .then(response => {

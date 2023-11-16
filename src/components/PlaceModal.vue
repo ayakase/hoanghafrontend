@@ -66,6 +66,7 @@
                                 <label class="form-label">Ghi chú</label>
                                 <textarea class="form-control" rows="3" v-model="note"></textarea>
                             </div>
+                            <p>{{ note.length }}/255</p>
                         </div>
                     </div>
                     <div class="modal-footer">
