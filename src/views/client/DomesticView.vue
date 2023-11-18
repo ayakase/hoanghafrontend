@@ -439,5 +439,11 @@ p {
     .tourtype {
         display: none;
     }
+
+    .sort-types {
+        flex-direction: column;
+        gap: 0.1rem;
+        width: 100%;
+    }
 }
 </style>
