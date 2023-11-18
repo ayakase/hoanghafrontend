@@ -178,6 +178,7 @@ onMounted(() => {
 })
 function getTourbyPage() {
     fetchTour()
+    window.scrollTo(0, 0);
 }
 function fetchTour() {
     tourList.value = null;
