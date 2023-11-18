@@ -8,7 +8,7 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" style="color: white;">
-                        Dia diem &nbsp; <i class="fa-solid fa-book"> :</i> {{ regionLabel }}
+                        Địa điểm &nbsp; <i class="fa-solid fa-book"> :</i> {{ regionLabel }}
                     </button>
                     <div class="dropdown-menu" v-if="regionList">
                         <button class="dropdown-item" @click="chooseRegion('', 'Tất cả')">Tất cả</button>
@@ -64,7 +64,7 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false" style="color: white;">
-                    Danh mục &nbsp; <i class="fa-solid fa-book"> :</i> {{ addLabel }}
+                    Địa điểm &nbsp; <i class="fa-solid fa-book"> :</i> {{ addLabel }}
                 </button>
                 <div class="dropdown-menu">
                     <button v-for="region in regionList" class="dropdown-item"
@@ -159,27 +159,35 @@ watch(newTitle, (newValue) => {
 
 
 function addLocation() {
-    showOverlay.value = true;
-    let locationData = {
-        name: newTitle.value,
-        slug: newSlug.value,
-        note: newNote.value,
-        region_id: addRegionId.value
+    if (addRegionId.value) {
+        showOverlay.value = true;
+        let locationData = {
+            name: newTitle.value,
+            slug: newSlug.value,
+            note: newNote.value,
+            region_id: addRegionId.value
+        }
+        baseUrl.post('/admin/location', locationData)
+            .then((response) => {
+                console.log(response)
+                toast.info(response.data, {
+                    autoClose: 2000,
+                    theme: "colored",
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+                showOverlay.value = false;
+                fetchLocation()
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    } else {
+        toast.info("Vui lòng chọn khu vực cho địa điểm của bạn", {
+            autoClose: 2000,
+            theme: "colored",
+            position: toast.POSITION.BOTTOM_RIGHT,
+        });
     }
-    baseUrl.post('/admin/location', locationData)
-        .then((response) => {
-            console.log(response)
-            toast.info(response.data, {
-                autoClose: 2000,
-                theme: "colored",
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
-            showOverlay.value = false;
-            fetchLocation()
-        })
-        .catch((error) => {
-            console.log(error)
-        })
 }
 
 

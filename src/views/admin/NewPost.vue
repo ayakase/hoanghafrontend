@@ -6,6 +6,10 @@
       <label for="" class="form-label">Tiêu đề</label>
       <input type="text" class="form-control" id="" placeholder="" v-model="postTitle" />
     </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Slug</label>
+      <input type="text" class="form-control" id="" placeholder="" v-model="slug" />
+    </div>
     <div class="mb-3 thumbnail">
       <label for="formFile" class="form-label">Hình thu nhỏ</label>
       <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg" />
@@ -47,14 +51,25 @@ import baseUrl from "../../connect";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import Editor from "@tinymce/tinymce-vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 const publishState = ref(true);
 const showOverlay = ref(false);
 const thumbnailSrc = ref();
 const postTitle = ref();
 const postContent = ref();
 const postThumbnail = ref();
+import slugify from 'slugify'
 
+function turnSlug(slug) {
+  return slugify(slug, {
+    locale: 'vi',
+    lower: true,
+  })
+}
+let slug = ref()
+watch(postTitle, (newValue) => {
+  slug.value = turnSlug(newValue)
+})
 function processImg(event) {
   console.log(event);
   if (event.target.files.length) {
@@ -70,6 +85,7 @@ function addpost() {
   postData.append("postThumbnail", postThumbnail.value);
   postData.append("postContent", postContent.value);
   postData.append("publishState", publishState.value);
+  postData.append("postSlug", slug.value);
   baseUrl
     .post("/admin/post", postData, {
       headers: {

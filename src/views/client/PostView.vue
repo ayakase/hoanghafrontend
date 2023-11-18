@@ -6,7 +6,8 @@ const route = useRoute();
 
 let postDetail = ref()
 onMounted(() => {
-    baseUrl.get("client/each-post/" + route.query.id).then(response => {
+    console.log(route.params.slug)
+    baseUrl.get("client/each-post/" + route.params.slug).then(response => {
         postDetail.value = response.data[0]
     }).catch((error) => {
         console.error(error);

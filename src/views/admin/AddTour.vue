@@ -6,6 +6,16 @@
             <label for="" class="form-label">Tiêu đề tour</label>
             <input type="text" class="form-control" id="" placeholder="" v-model="tourTitle" />
         </div>
+        <div style="
+        width: 12rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      ">
+            <v-switch v-model="publishState" label="Xuất bản luôn" color="info" style="margin-right: 1rem"
+                hide-details></v-switch>
+            <i v-if="publishState" style="color: rgb(0, 102, 255)" class="fa-regular fa-paper-plane"></i>
+        </div>
         <div class="mb-3 thumbnail">
             <label for="formFile" class="form-label">Hình thu nhỏ</label>
             <input class="form-control" accept="image/*" type="file" id="formFile" @change="processImg" />
@@ -73,18 +83,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="action-section">
-                    <h3>URL</h3>
-                    <textarea readonly name="" id="" rows="8" placeholder="" :value=imageArray>
-            </textarea>
-                    <button class="btn btn-success" style="justify-self: end;align-self: end;font-size:x-large"><i
-                            class="fa-regular fa-copy"></i></button>
-                </div> -->
+
             </div>
-
-
-
-
         </div>
         <div class="mb-3">
             <label for="custom-slug" class="form-label">Custom slug</label>
@@ -113,7 +113,7 @@
             </div>
             <i class="fa-solid fa-caret-right" style="font-size: 2rem;padding-top: 0.5rem;" v-if="selectCategory"></i>
             <div class="mb-3 w-25" v-if="selectCategory">
-                <label for="" class="form-label">Khu vuc </label>
+                <label for="" class="form-label">Khu vực </label>
                 <select class="form-select mb-3" aria-label="Smal select example" v-model="selectRegion">
                     <option v-for="region in selectCategory.Regions" :key="region" :value=region>
                         {{ region.name }}
@@ -122,15 +122,18 @@
             </div>
             <i class="fa-solid fa-caret-right" style="font-size: 2rem;padding-top: 0.5rem;" v-if="selectRegion"></i>
             <div class="mb-3 w-25" v-if="selectRegion">
-                <label for="" class="form-label">Khu vuc </label>
+                <label for="" class="form-label">Địa điểm </label>
                 <select class="form-select mb-3" aria-label="Smal select example" v-model="selectLocation">
                     <option v-for="location in selectRegion.Locations" :key="location" :value=location>
                         {{ location.name }}
                     </option>
                 </select>
             </div>
+            <i class="fa-solid fa-caret-right" style="font-size: 2rem;padding-top: 0.5rem;" v-if="selectRegion"></i>
+            <p v-if="selectLocation" style="margin: 0;padding-top: 8px;font-size: large;font-weight: bolder;color: red;">{{
+                selectLocation.name }}
+            </p>
         </div>
-        <p>{{ selectLocation }}</p>
         <div class="category-type-from">
 
 
@@ -185,7 +188,7 @@
                 <label class="form-check-label" for="train-check"> Tàu hỏa </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Xe máy" id="train-check" v-model="tourTransport" />
+                <input class="form-check-input" type="checkbox" value="Xe máy" id="motor-check" v-model="tourTransport" />
                 <label class="form-check-label" for="motor-check"> Xe máy </label>
             </div>
         </div>
@@ -344,6 +347,7 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import Editor from "@tinymce/tinymce-vue";
 import { ref, computed, onMounted, watch } from "vue";
+const publishState = ref(true);
 
 let images = ref()
 let files = ref([])
@@ -431,76 +435,84 @@ function processImg(event) {
     tourThumbnail.value = event.target.files[0];
 }
 function addTour() {
-    showOverlay.value = true;
-    // console.log(tourThumbnail.value)
-    const tourData = new FormData();
-    tourData.append("tourTitle", tourTitle.value);
-    tourData.append("tourThumbnail", tourThumbnail.value);
-    tourData.append("slug", slug.value)
-    tourData.append("tourSchedule", tourSchedule.value);
-    tourData.append("tourLocation", selectLocation.value.id);
-    tourData.append("images", imageArray.value);
-    tourData.append("tourType", tourType.value);
-    tourData.append("tourFrom", tourFrom.value);
-    tourData.append("tourLength", tourLength.value);
-    tourData.append("isHot", isHot.value);
-    tourData.append("recommend", recommendText.value);
-    tourData.append("tourTransport", tourTransport.value.toString());
-    tourData.append("originalPrice", originalPrice.value);
-    tourData.append("adultPrice", adultPrice.value);
-    tourData.append("teenagerPrice", teenagerPrice.value);
-    tourData.append("childPrice", childPrice.value);
-    tourData.append("infantPrice", infantPrice.value);
-    tourData.append("tourSpecial", tourSpecial.value);
-    tourData.append("tourBonus", tourBonus.value);
-    tourData.append("tourVisa", tourVisa.value);
-    tourData.append("tourDetail", tourDetail.value);
-    tourData.append("tourPriceService", tourPriceService.value);
-    tourData.append("tourGuide", tourGuide.value);
-    tourData.append("tourDiscount", isDiscount.value);
-    baseUrl
-        .post("/admin/tour", tourData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
-        .then((response) => {
-            console.log(response.data);
-            showOverlay.value = false;
-            if (response.data == "1") {
-                toast.success("Da them tour moi", {
-                    autoClose: 2000,
-                    theme: "colored",
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                });
-            } else if (response.data == "3") {
-                toast.error("Chua dien day du", {
-                    autoClose: 2000,
-                    theme: "colored",
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                });
-            } else if (response.data == "2") {
-                toast.error("Bi trung slug", {
-                    autoClose: 2000,
-                    theme: "colored",
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                });
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-            showOverlay.value = false;
-            toast.error(
-                "Lỗi " +
-                error +
-                " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang",
-                {
-                    autoClose: 2000,
-                    theme: "colored",
-                    position: toast.POSITION.BOTTOM_RIGHT,
+    if (selectLocation.value) {
+        showOverlay.value = true;
+        const tourData = new FormData();
+        tourData.append("tourTitle", tourTitle.value);
+        tourData.append("tourThumbnail", tourThumbnail.value);
+        tourData.append("slug", slug.value)
+        tourData.append("tourSchedule", tourSchedule.value);
+        tourData.append("tourLocation", selectLocation.value.id);
+        tourData.append("images", imageArray.value);
+        tourData.append("tourType", tourType.value);
+        tourData.append("tourFrom", tourFrom.value);
+        tourData.append("tourLength", tourLength.value);
+        tourData.append("isHot", isHot.value);
+        tourData.append("recommend", recommendText.value);
+        tourData.append("tourTransport", tourTransport.value.toString());
+        tourData.append("originalPrice", originalPrice.value);
+        tourData.append("adultPrice", adultPrice.value);
+        tourData.append("teenagerPrice", teenagerPrice.value);
+        tourData.append("childPrice", childPrice.value);
+        tourData.append("infantPrice", infantPrice.value);
+        tourData.append("tourSpecial", tourSpecial.value);
+        tourData.append("tourBonus", tourBonus.value);
+        tourData.append("tourVisa", tourVisa.value);
+        tourData.append("tourDetail", tourDetail.value);
+        tourData.append("tourPriceService", tourPriceService.value);
+        tourData.append("tourGuide", tourGuide.value);
+        tourData.append("tourDiscount", isDiscount.value);
+        baseUrl
+            .post("/admin/tour", tourData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((response) => {
+                console.log(response.data);
+                showOverlay.value = false;
+                if (response.data == "1") {
+                    toast.success("Thêm tour mới thành công", {
+                        autoClose: 2000,
+                        theme: "colored",
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                    });
+                } else if (response.data == "3") {
+                    toast.error("Chưa điền đầy đủ thông tin", {
+                        autoClose: 2000,
+                        theme: "colored",
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                    });
+                } else if (response.data == "2") {
+                    toast.error("Slug bị trùng với một tour khác, vui lòng thay đổi", {
+                        autoClose: 2000,
+                        theme: "colored",
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                    });
                 }
-            );
+            })
+            .catch((error) => {
+                console.error(error);
+                showOverlay.value = false;
+                toast.error(
+                    "Lỗi " +
+                    error +
+                    " , đảm bảo là bạn đã điền đủ thông tin, hãy đợi 1p rồi submit lại hoặc là reload lại trang",
+                    {
+                        autoClose: 2000,
+                        theme: "colored",
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                    }
+                );
+            });
+    }
+    else {
+        toast.error("Vui lòng chọn địa điểm cho tour", {
+            autoClose: 2000,
+            theme: "colored",
+            position: toast.POSITION.BOTTOM_RIGHT,
         });
+    }
 }
 
 watch(isVisible, (newValue, oldValue) => {

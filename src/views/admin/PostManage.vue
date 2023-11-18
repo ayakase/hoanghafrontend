@@ -51,7 +51,7 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Tiêu đề</th>
-          <!-- <th scope="col">Nội dung</th> -->
+          <th scope="col">Slug</th>
           <th scope="col">Ngày đăng</th>
           <th scope="col">Chỉnh sửa</th>
           <th scope="col">Hành động</th>
@@ -61,14 +61,14 @@
       <tbody>
         <tr v-for="post in postTable" :key="post" class="each-tour-row">
           <td>{{ post.id }}</td>
-          <td @click="router.push({ path: '/postdetail', query: { id: post.id } })">{{ post.title }}</td>
+          <td @click="router.push({ path: '/bai-viet/' + post.slug })">{{ post.title }}</td>
+          <td>{{ post.slug }}</td>
           <!-- <td v-html="post.content.slice(0, 200)"></td> -->
           <td>{{ formatDate(post.createdAt) }}</td>
           <td>
             <button @click="
               router.push({
-                path: '/admin/quan-ly-tour/chinh-sua-tour',
-                query: { id: tour.id },
+                path: '/admin/bai-viet/chinh-sua-bai-viet/' + post.slug
               })
               " class="edit-button">
               <i class="fa-solid fa-pen-to-square"></i>
@@ -80,12 +80,12 @@
             </button>
           </td>
           <td v-else style="vertical-align: middle">
-            <button class="solve-btn" @click="publishPost(order.id)">
+            <button class="solve-btn" @click="publishPost(post.id)">
               <i class="fa-regular fa-circle-xmark fa-lg"></i>
             </button>
           </td>
           <td>
-            <button class="delete-button" @click="deleteTour(tour.id)">
+            <button class="delete-button" @click="deleteTour(post.id)">
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -142,7 +142,7 @@ function deleteTour(id) {
   let text = "Bạn có chắc chắn muốn xóa Tour " + id;
   if (confirm(text) == true) {
     baseUrl
-      .delete("/admin/tour/" + id)
+      .delete("/admin/post/" + id)
       .then((response) => {
         console.log(response);
         toast.info("Đã xóa", {

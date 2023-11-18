@@ -5,23 +5,34 @@
             Thêm tour mới <i class="fa-solid fa-plus"></i>
         </button>
         <div class="sorting-container">
-            <div style="font-size: larger;">Bộ lọc:</div>
+            <div style="font-size: larger;width: 5rem;">Bộ lọc:</div>
             <div class="sorting-button-container">
                 <form class="d-flex search-container">
                     <button class="btn btn-outline-success" @click.prevent=""><i class="fas fa-search"></i></button>
-                    <input @keydown.enter.prevent="" class="form-control me-2 search-box" type="search"
-                        placeholder="Tìm kiếm theo tên" aria-label="Search">
+                    <input @keydown.enter.prevent="fetchTour" class="form-control me-2 search-box" type="search"
+                        placeholder="Tìm kiếm theo tên" aria-label="Search" v-model="searchTerm">
                 </form>
-
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="color: white">
+                        Trạng thái &nbsp; <i class="fa-solid fa-book"> :</i>
+                        {{ publishLabel }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" @click="published">
+                            Đã xuất bản &nbsp;<i class="fa-solid fa-vihara"></i>
+                        </button>
+                        <button class="dropdown-item" @click="unpublished">
+                            Chưa xuất bản &nbsp; <i class="fa-solid fa-flag"></i>
+                        </button>
+                    </div>
+                </div>
                 <button class="sort-button btn btn-success" @click="Newest">Mới nhất &nbsp; <i
                         class="fa-solid fa-arrow-up-wide-short"></i></button>
                 <button class="sort-button btn btn-success" @click="Oldest">Cũ nhất &nbsp; <i
                         class="fa-solid fa-arrow-down-wide-short"></i></button>
                 <button class="btn btn-success" @click="fetchTour"><i class="fa-solid fa-rotate-right"></i></button>
-                <!-- <button class="sort-button btn btn-success">Chưa xử lý &nbsp; <i
-                        class="fa-solid fa-hourglass fa-spin"></i></button>
-                <button class="sort-button btn btn-success">Đã xử lí &nbsp; <i
-                        class="fa-solid fa-check fa-beat"></i></button> -->
+
             </div>
         </div>
         <table v-if="tourTable" class="table table-success table-striped table-hover"
@@ -83,7 +94,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 import baseUrl from '../../connect';
@@ -93,9 +104,20 @@ import TableLoading from '../../components/TableLoading.vue';
 let pageNumber = ref(1)
 let tourTable = ref()
 let totalPage = ref()
+let publishLabel = ref("Đã xuất bản")
+let publishState = ref()
+const searchTerm = ref("")
+function published() {
+    publishState.value = 1;
+    publishLabel.value = "Đã xuất bản";
+}
+function unpublished() {
+    publishState.value = 0;
+    publishLabel.value = "Chưa xuất bản";
+}
 function fetchTour() {
     tourTable.value = null
-    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value, { params: { keyword: searchTerm.value } })
         .then(response => {
             console.log(response.data)
             tourTable.value = response.data.rows
@@ -104,20 +126,7 @@ function fetchTour() {
             console.error(error);
         });
 }
-const region = ref()
-function fetchRegion() {
-    baseUrl.get("/admin/tour/region/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value)
-        .then(response => {
-            console.log(response.data)
 
-        }).catch((error) => {
-            console.error(error);
-        });
-}
-const location = ref()
-function fetchLocation() {
-
-}
 onMounted(() => {
     fetchTour()
 })

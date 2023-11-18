@@ -59,8 +59,8 @@ const router = createRouter({
       component: () => import('../views/client/TourView.vue')
     },
     {
-      path: '/postdetail',
-      name: 'postdetail',
+      path: '/bai-viet/:slug',
+      name: 'bai-viet',
       component: () => import('../views/client/PostView.vue')
     },
     {
@@ -141,6 +141,10 @@ const router = createRouter({
         {
           path: 'bai-viet/tao-bai-viet',
           component: () => import('../views/admin/NewPost.vue')
+        },
+        {
+          path: 'bai-viet/chinh-sua-bai-viet/:slug',
+          component: () => import('../views/admin/EditPost.vue')
         },
         {
           path: 'quan-ly-tour/them-tour',
