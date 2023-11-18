@@ -76,7 +76,7 @@ let showChatbox = () => {
       <button class="btn mobile-btn" @click="toggleNav"><i class="fa-solid fa-bars"></i></button>
     </div>
     <Transition name="slide-fade">
-      <div class="nav-category" v-if="showNav">
+      <div class="nav-category" v-if="showNav" @click="toggleNav">
         <RouterLink class="mobile-nav-item" to="/" aria-current="page" href="#">Trang chủ</RouterLink>
         <hr>
         <RouterLink class="mobile-nav-item" to="/about/chinh-sach-va-quy-dinh" aria-current="page" href="#">
@@ -86,6 +86,13 @@ let showChatbox = () => {
         <hr>
         <RouterLink class="mobile-nav-item" to="/tour-hot" aria-current="page" href="#">Tour Hot &nbsp;<i
             style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
+        </RouterLink>
+        <hr>
+        <RouterLink class="mobile-nav-item" to="/danh-muc/du-lich-trong-nuoc" aria-current="page" href="#">
+          Du lịch
+          trong
+          nước
+          &nbsp; <i class="fa-solid fa-flag"></i>
         </RouterLink>
         <hr>
         <div v-if="domesticMenu" v-for="region in domesticMenu.Regions">
