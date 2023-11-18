@@ -447,7 +447,7 @@ p {
     }
 
     .sort-type {
-        width: 49%;
+        width: 48%;
     }
 }
 </style>
