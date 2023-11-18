@@ -133,6 +133,23 @@
     <!-- <img src=" ../assets/images/footer-img.png" class="footer-img" alt=""> -->
   </div>
   <LoadingOverlay v-if="showOverlay"></LoadingOverlay>
+  <div class="mobile-footer">
+    <div style="font-size: large;">CÔNG TY TNHH MTV DU LỊCH QUỐC TẾ HOÀNG HÀ</div>
+    <div><b>Văn phòng chính:</b> 040 Trần Nguyên Hãn, phường Lào Cai, thành phố Lào Cai</div>
+    <div><b>Địa chỉ:</b> 116b Sơn Đạo, phường Cốc Lếu, thành phố Lào Cai</div>
+    <div><b>Điện thoại:</b> 0214 3.855.158 - <b> Fax:</b> 0214 3.858.178 <b>Di động: </b>0904.678.168 - 0904.243.088</div>
+    <div class="about-us-items">
+      <p class="about-us-item" @click="router.push('/about/chinh-sach-va-quy-dinh')">
+        Chính sách và quy định chung
+      </p>
+      <p class="about-us-item" @click="router.push('/about/bao-hiem-dich-vu')">
+        Bảo hiểm dịch vụ
+      </p>
+      <p class="about-us-item" @click="router.push('/about/quy-trinh')">
+        Quy trình đặt dịch vụ và thanh toán
+      </p>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -396,5 +413,22 @@ textarea {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
+}
+
+
+.mobile-footer {
+  border-top: 2px solid rgb(58, 58, 58);
+  display: none;
+  position: relative;
+  bottom: 0;
+  padding: 1rem;
+  background-color: #045b48;
+  color: white;
+}
+
+@media screen and (max-width: 992px) {
+  .mobile-footer {
+    display: block;
+  }
 }
 </style>

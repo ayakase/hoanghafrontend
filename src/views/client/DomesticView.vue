@@ -1,5 +1,5 @@
 <template>
-    <div class="china-container">
+    <div class="domestic-container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
@@ -53,10 +53,10 @@
                         <div class="sort-type" @click="duration">Thời lượng tour</div>
                         <div class="sort-type" @click="price">Giá tour</div>
 
-                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC"><span class="sort-text">Từ cao
-                                đến thấp </span>
+                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC">Từ cao
+                            đến thấp
                             &nbsp; <i class="fa-solid fa-arrow-down-wide-short"></i> </div>
-                        <div v-else class="sort-type" @click="orderDESC"><span class="sort-text">Từ thấp lên cao</span>
+                        <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao
                             &nbsp; <i class="fa-solid fa-arrow-up-wide-short"></i></div>
 
                     </div>
@@ -103,7 +103,6 @@
                 <v-pagination v-if="totalPage" @click="getTourbyPage" v-model="pageNumber" :length="totalPage"
                     :total-visible="5" prev-icon="fa-solid fa-chevron-left"
                     next-icon="fa-solid fa-chevron-right"></v-pagination>
-                <div>{{ pageNumber }}</div>
             </div>
 
         </div>
@@ -214,7 +213,7 @@ function fetchTour() {
 
 }
 
-.china-container {
+.domestic-container {
     padding-top: 2rem;
     width: 90%;
     margin: auto;
@@ -441,9 +440,14 @@ p {
     }
 
     .sort-types {
-        flex-direction: column;
-        gap: 0.1rem;
+        gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
         width: 100%;
+    }
+
+    .sort-type {
+        width: 49%;
     }
 }
 </style>
