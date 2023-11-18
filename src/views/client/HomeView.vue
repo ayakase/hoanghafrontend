@@ -1,5 +1,6 @@
 <template>
   <div class="home-container">
+
     <div class="home-first-section" style="margin-bottom: 5rem;">
       <div class="travel-category">
         <div class="travel-category-item" @click="router.push('/danh-muc/du-lich-trong-nuoc')">
@@ -286,7 +287,6 @@ img {
 }
 
 .travel-category {
-  position: relative;
   display: flex;
   width: 15rem;
   box-sizing: border-box;
@@ -298,13 +298,14 @@ img {
 }
 
 .travel-category-item {
+  width: 100%;
   box-sizing: border-box;
   flex: 1;
   display: flex;
   flex-direction: row;
   align-content: center;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: auto;
 }
 
@@ -326,11 +327,6 @@ img {
 .travel-category-item:hover {
   background-color: #bcecc4;
   cursor: pointer;
-}
-
-.travel-category i {
-  position: absolute;
-  right: 15px;
 }
 
 .extended-category {

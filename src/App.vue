@@ -9,7 +9,10 @@ import MessengerBtn from './components/MessengerBtn.vue'
 import baseUrl from './connect';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-
+const showNav = ref(false)
+function toggleNav() {
+  showNav.value = !showNav.value
+}
 const notify = () => {
   toast.warn("Trang web đang trong quá trình xây dựng, còn nhiều thiết sót mong bạn thông cảm", {
     autoClose: 60000,
@@ -67,11 +70,40 @@ let showChatbox = () => {
 </script>
 
 <template>
-  <div style="position: relative;">
-    <div>Du lich hoang ha</div>
-    <RouterLink to="/">
-      <p>Home</p>
-    </RouterLink>
+  <div class="mobile-nav-container">
+    <div style="position: relative;" class="mobile-nav">
+      <div class="logo-container"><img src="./assets/logo.png" alt="" class="mobile-logo"></div>
+      <button class="btn mobile-btn" @click="toggleNav"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <Transition name="slide-fade">
+      <div class="nav-category" v-if="showNav">
+        <RouterLink class="mobile-nav-item" to="/" aria-current="page" href="#">Trang chủ</RouterLink>
+        <hr>
+        <RouterLink class="mobile-nav-item" to="/about/chinh-sach-va-quy-dinh" aria-current="page" href="#">
+          Về
+          chúng tôi
+        </RouterLink>
+        <hr>
+        <RouterLink class="mobile-nav-item" to="/tour-hot" aria-current="page" href="#">Tour Hot &nbsp;<i
+            style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
+        </RouterLink>
+        <hr>
+        <div v-if="domesticMenu" v-for="region in domesticMenu.Regions">
+          <div class="mobile-nav-item" @click="router.push({ path: '/khu-vuc/' + region.slug })">
+            {{ region.name }}
+          </div>
+          <div v-for="location in region.Locations" class="mobile-nav-item">
+            <div @click="router.push({ path: '/dia-diem/' + location.slug })">
+              {{
+                location.name }}</div>
+          </div>
+
+        </div>
+      </div>
+    </Transition>
+  </div>
+  <div class="black-layout" v-if="showNav" @click="toggleNav">
+
   </div>
   <div class="header-container">
     <RouterLink class=" btn btn-success active admin-button" to="/admin/thong-ke" aria-current="page" href="#">Admin
@@ -513,5 +545,85 @@ ul.nav-menu li:hover>.drop-one {
   top: 0;
   background: #dbebe1;
   display: block;
+}
+
+.mobile-nav-container {
+
+  display: none;
+  top: 0;
+  width: 100%;
+}
+
+.mobile-nav {
+  background-color: #045B48;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+.mobile-btn {
+  width: 4rem;
+  font-size: 2rem;
+}
+
+.logo-container {
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.mobile-logo {}
+
+.nav-category {
+  position: absolute;
+  right: 0;
+  z-index: 9;
+  background-color: #d3ecd7;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 992px) {
+  .mobile-nav-container {
+    display: block;
+  }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(50px);
+  opacity: 0;
+}
+
+.mobile-nav-item {
+  text-decoration: none;
+  height: 3rem;
+  font-size: larger;
+  color: black;
+  padding: 0.5rem;
+}
+
+.black-layout {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+hr {
+  margin: 0;
+  padding: 0;
 }
 </style>
