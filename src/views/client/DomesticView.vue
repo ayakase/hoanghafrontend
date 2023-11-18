@@ -447,6 +447,7 @@ p {
     }
 
     .sort-type {
+        font-size: small;
         width: 48%;
     }
 }
