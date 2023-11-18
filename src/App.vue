@@ -72,7 +72,7 @@ let showChatbox = () => {
 <template>
   <div class="mobile-nav-container">
     <div style="position: relative;" class="mobile-nav">
-      <div class="logo-container"><img src="./assets/logo.png" alt="" class="mobile-logo"></div>
+      <div class="logo-container" @click="router.push('/')"><img src="./assets/logo.png" alt="" class="mobile-logo"></div>
       <button class="btn mobile-btn" @click="toggleNav"><i class="fa-solid fa-bars"></i></button>
     </div>
     <Transition name="slide-fade">
