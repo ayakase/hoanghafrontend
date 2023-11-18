@@ -43,8 +43,9 @@
             </div>
             <div class="tour-container">
                 <div class="sort-container">
-                    <p style="font-size: larger;">Sắp xếp theo: &nbsp;<span style="color: #1f8726;font-weight: bolder;">{{
-                        orderLabel }}</span>
+                    <p class="sort-text" style="font-size: larger;">Sắp xếp theo: &nbsp;<span
+                            style="color: #1f8726;font-weight: bolder;">{{
+                                orderLabel }}</span>
                     </p>
                     <div class="sort-types">
                         <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
@@ -52,10 +53,11 @@
                         <div class="sort-type" @click="duration">Thời lượng tour</div>
                         <div class="sort-type" @click="price">Giá tour</div>
 
-                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC">Từ cao đến thấp &nbsp; <i
-                                class="fa-solid fa-arrow-down-wide-short"></i> </div>
-                        <div v-else class="sort-type" @click="orderDESC">Từ thấp lên cao &nbsp; <i
-                                class="fa-solid fa-arrow-up-wide-short"></i></div>
+                        <div v-if="sortOrder == 'DESC'" class="sort-type" @click="orderASC"><span class="sort-text">Từ cao
+                                đến thấp </span>
+                            &nbsp; <i class="fa-solid fa-arrow-down-wide-short"></i> </div>
+                        <div v-else class="sort-type" @click="orderDESC"><span class="sort-text">Từ thấp lên cao</span>
+                            &nbsp; <i class="fa-solid fa-arrow-up-wide-short"></i></div>
 
                     </div>
                 </div>
@@ -417,5 +419,25 @@ p {
 .card:hover {
     background-color: #97CBB4;
     transform: scale(1.05);
+}
+
+@media screen and (max-width: 1136px) {
+    .side-bar-container {
+        display: none;
+    }
+
+    .tour-container {
+        width: 100%;
+    }
+
+    .sort-text {
+        display: none;
+    }
+
+    .transportation,
+    .schedule,
+    .tourtype {
+        display: none;
+    }
 }
 </style>

@@ -178,7 +178,7 @@ function getTourbyPage() {
 }
 function fetchTour() {
     tourList.value = null;
-    baseUrl.get("/client/search/" + searchText.value + "/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value)
+    baseUrl.get("/client/search/" + orderBy.value + "/" + sortOrder.value + "/" + pageNumber.value, { params: { keyword: searchText.value } })
         .then(response => {
             tourList.value = response.data.rows
             // response.data.rows[0].Regions.forEach(Region => {
