@@ -230,6 +230,19 @@ let tabSec2 = ref()
     justify-content: space-around;
 }
 
+@media screen and (max-width: 1214px ) {
+    .side-bar {
+        display: none;
+    }
+    .slide {
+        display: none;
+    }
+    .content-container-outer {
+    width: 100%;
+
+    }
+}
+
 .first-section {
     background-color: #DBEBE1;
     padding: 2rem;
@@ -283,6 +296,7 @@ let tabSec2 = ref()
     position: sticky;
     top: 0rem;
     width: 25%;
+    min-width: 200px;
     height: 100%;
     box-sizing: border-box;
     padding: 1rem;
@@ -377,5 +391,10 @@ let tabSec2 = ref()
     filter: grayscale(0);
     width: calc(var(--s)*var(--f));
     height: calc(var(--s)*var(--f));
+}
+.slide {
+    width: 80%;
+    margin: auto;
+    padding: auto;
 }
 </style>
