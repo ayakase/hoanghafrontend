@@ -43,34 +43,34 @@
       </div>
     </div>
     <h2 style="text-align: center;margin-bottom: 2rem;">Cẩm nang</h2>
-    <div class="post-container" v-if="posts">
+    <div class="post-container" v-if="posts && posts.length > 0">
       <div @click="router.push({ path: '/postdetail', query: { id: posts[0].id } })" class="post-1"
-        v-if=posts[0].thumbnail>
+        v-if="posts[0].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
         <h1>{{ posts[0].title }}</h1>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[1].id } })" class="post-2"
-        v-if=posts[1].thumbnail>
+        v-if="posts[1].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[1].thumbnail alt="">
         <h4>{{ posts[1].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[2].id } })" class="post-3"
-        v-if=posts[2].thumbnail>
+        v-if="posts[2].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[2].thumbnail alt="">
         <h4>{{ posts[2].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[3].id } })" class="post-4"
-        v-if=posts[3].thumbnail>
+        v-if="posts[3].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[3].thumbnail alt="">
         <h4>{{ posts[3].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[4].id } })" class="post-5"
-        v-if=posts[4].thumbnail>
+        v-if="posts[4].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[4].thumbnail alt="">
         <h4>{{ posts[4].title }}</h4>
       </div>
       <div @click="router.push({ path: '/postdetail', query: { id: posts[5].id } })" class="post-6"
-        v-if=posts[5].thumbnail>
+        v-if="posts[5].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[5].thumbnail alt="">
         <h4>{{ posts[5].title }}</h4>
       </div>
@@ -193,7 +193,6 @@ export default {
     const router = useRouter();
     onMounted(() => {
       baseUrl.get('/client/slide').then((response) => {
-        console.log(response.data.rows)
         sliderItem.value = response.data.rows
       }).catch((error) => {
         console.log(error)
@@ -204,6 +203,7 @@ export default {
       baseUrl.get('/client/carousel/post-grid').then((response) => {
         console.log(response.data)
         posts.value = response.data.rows
+        console.log(posts.value)
       })
       // baseUrl.get('/client/carousel/china').then((response) => {
       //   console.log(response.data)
