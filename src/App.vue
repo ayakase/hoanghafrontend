@@ -590,6 +590,9 @@ ul.nav-menu li:hover>.drop-one {
   width: 80%;
   display: flex;
   flex-direction: column;
+  border-top-left-radius: 0.5rem;
+  height: 90vh;
+  overflow: scroll;
 }
 
 @media screen and (max-width: 992px) {
