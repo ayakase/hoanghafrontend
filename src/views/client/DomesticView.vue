@@ -76,9 +76,6 @@
                         <div class="title" @click="router.push({ path: '/' + tour.slug })"> {{
                             tour.title }}</div>
                         <div class="below-section" style="">
-                            <!-- <div class="schedule"><b>Mức độ đề xuất: </b><span style="color: orange;">{{ tour.recommend
-                            }}</span>
-                            </div> -->
                             <div class="schedule"><b>Lịch trình: </b><span style="color: orange;">{{ tour.schedule }}</span>
                             </div>
                             <div class="tourtype"><b>Loại tour: </b> <span style="color: green;">{{ tour.tourtype }} </span>
@@ -89,14 +86,20 @@
                         </div>
                     </div>
                     <div class="price">
-                        <div v-if="tour.isdiscount" style="color: #42ae49;"><span style="font-size: large;">Khuyến
-                                mãi</span> ! &nbsp;<i class="fa-solid fa-tags fa-beat-fade "></i></div>
-                        <span style="font-size: x-large; color: orangered;">
+                        <div class="hot-and-discount">
+                            <div v-if="tour.isdiscount"><i style="color: #1f8726;"
+                                    class="fa-solid fa-tags fa-beat-fade "></i></div>
+                            <div v-if="tour.ishottour"><i style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
+                            </div>
+                        </div>
+                        <div class="original-price" v-if="tour.isdiscount" style="text-decoration: line-through;font-size: 1.2rem;color: #1f8726;">
+                            {{ numeralFormat(tour.original_price) }} VNĐ</div>
+                        <span class="real-price" style="font-size: x-large; color: orangered;">
                             <b>{{
                                 numeralFormat(tour.adult_price)
                             }} </b>
+                            <span style="color: orangered; font-weight: 200;"> VNĐ</span>
                         </span>
-                        <span style="color: orangered; font-weight: 100;"> VNĐ</span>
                     </div>
                 </div>
                 <LoadingComponent v-else />
@@ -269,6 +272,8 @@ p {
 
 .title {
     font-size: 22px;
+   
+    width: 20rem;
     font-weight: bold;
     color: #045B48;
     cursor: pointer;
@@ -307,6 +312,9 @@ p {
 }
 
 .price {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
     width: 12rem;
     text-align: end;
 }
@@ -417,8 +425,18 @@ p {
 }
 
 .card:hover {
-    background-color: #97CBB4;
+    background-color: #bce2d1;
     transform: scale(1.05);
+}
+
+
+.hot-and-discount {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 3.5rem;
+
 }
 
 @media screen and (max-width: 1136px) {
@@ -450,6 +468,45 @@ p {
     .sort-type {
         font-size: small;
         width: 48%;
+    }
+
+    .tour-individual {
+        flex-direction: column;
+        max-height: 50rem;
+        gap: 0.2rem;
+
+    }
+
+    .image-container {
+        width: 100%;
+        border-radius: 0.4rem;
+        /* height: 10rem; */
+    }
+
+    .hot-and-discount {
+        float: right;
+        background-color: rebeccapurple;
+    }
+    .original-price { 
+        float: right;
+    }
+    .days {
+        width: 10rem;
+        font-size: 0.9rem;
+    }
+    .departure {
+        width: 18rem;
+        font-size: 0.9rem;
+
+    }
+    .below-section {
+        width: 18rem;
+    }
+    .tour-detail-container {
+        width: 18rem;
+    }
+    .title {
+        font-size: 1rem;
     }
 }
 </style>
