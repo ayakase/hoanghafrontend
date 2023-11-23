@@ -51,6 +51,7 @@ onMounted(() => {
         tourTitle.value = response.data[0].title
         tiktokUrl.value = 'https://www.tiktok.com/embed/' + tiktokId.value
         imageArray.value = response.data[0].images.split(',')
+        console.log(imageArray.value)
     }).catch((error) => {
         console.error(error);
     });
@@ -84,10 +85,10 @@ let tabSec2 = ref()
                 <div class="iframe_container" v-if=tiktokId>
                     <iframe :src=tiktokUrl class="iframe" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
                 </div>
-                <div class="slide">
+                <div class="slide" v-if="imageArray && imageArray[0] != ''">
                     <Splide :options=headOption aria-label="">
                         <SplideSlide v-for=" slide  in  imageArray " :key="slide">
-                            <a :href="slide.tour_url">
+                            <a>
                                 <v-img class="slide-image" style=" border-radius: 1rem;" :src="slide"></v-img>
                             </a>
                         </SplideSlide>
@@ -230,15 +231,17 @@ let tabSec2 = ref()
     justify-content: space-around;
 }
 
-@media screen and (max-width: 1214px ) {
+@media screen and (max-width: 1214px) {
     .side-bar {
         display: none;
     }
+
     .slide {
         display: none;
     }
+
     .content-container-outer {
-    width: 100%;
+        width: 100%;
 
     }
 }
@@ -392,6 +395,7 @@ let tabSec2 = ref()
     width: calc(var(--s)*var(--f));
     height: calc(var(--s)*var(--f));
 }
+
 .slide {
     width: 80%;
     margin: auto;

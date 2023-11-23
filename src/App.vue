@@ -591,7 +591,8 @@ ul.nav-menu li:hover>.drop-one {
   display: flex;
   flex-direction: column;
   border-top-left-radius: 0.5rem;
-  height: 90vh;
+  border-bottom-left-radius: 0.5rem;
+  height: 85vh;
   overflow: scroll;
 }
 

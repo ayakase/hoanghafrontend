@@ -92,14 +92,17 @@
                             <div v-if="tour.ishottour"><i style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
                             </div>
                         </div>
-                        <div class="original-price" v-if="tour.isdiscount" style="text-decoration: line-through;font-size: 1.2rem;color: #1f8726;">
-                            {{ numeralFormat(tour.original_price) }} VNĐ</div>
-                        <span class="real-price" style="font-size: x-large; color: orangered;">
-                            <b>{{
-                                numeralFormat(tour.adult_price)
-                            }} </b>
-                            <span style="color: orangered; font-weight: 200;"> VNĐ</span>
-                        </span>
+                        <div class="price-container">
+                            <div class="original-price" v-if="tour.isdiscount"
+                                style="text-decoration: line-through;font-size: 1.2rem;color: #1f8726;">
+                                {{ numeralFormat(tour.original_price) }} VNĐ</div>
+                            <span class="real-price" style="font-size: x-large; color: orangered;">
+                                <b>{{
+                                    numeralFormat(tour.adult_price)
+                                }} </b>
+                                <span style="color: orangered; font-weight: 200;"> VNĐ</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <LoadingComponent v-else />
@@ -272,8 +275,7 @@ p {
 
 .title {
     font-size: 22px;
-   
-    width: 20rem;
+    width: 100%;
     font-weight: bold;
     color: #045B48;
     cursor: pointer;
@@ -346,9 +348,7 @@ p {
 
 }
 
-.sort-type:focus {
-    background-color: rebeccapurple;
-}
+.sort-type:focus {}
 
 .sort-type:active {
     background-color: #d1f7df;
@@ -483,30 +483,45 @@ p {
         /* height: 10rem; */
     }
 
-    .hot-and-discount {
-        float: right;
-        background-color: rebeccapurple;
-    }
-    .original-price { 
+    .hot-and-discount {}
+
+    .original-price {
         float: right;
     }
+
     .days {
         width: 10rem;
         font-size: 0.9rem;
     }
+
     .departure {
         width: 18rem;
         font-size: 0.9rem;
 
     }
+
     .below-section {
         width: 18rem;
     }
+
     .tour-detail-container {
         width: 18rem;
     }
+
     .title {
         font-size: 1rem;
+    }
+
+    .price {
+        width: 100%;
+    }
+
+    .price-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
     }
 }
 </style>

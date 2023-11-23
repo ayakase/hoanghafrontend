@@ -1,5 +1,5 @@
 <template>
-    <div class="china-container">
+    <div class="region-container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
@@ -24,23 +24,26 @@
                     </div>
                 </div>
                 <div class="hot-tour">
-                    <h2 style="padding-left: 1rem;">Tour hot</h2>
+                    <h2 style="padding-left: 1rem;">Tour hot &nbsp; <i style="color: orangered;"
+                            class="fa-solid fa-fire fa-bounce"></i></h2>
                     <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
-                        style="background: none;border: none;">
-                        <img :src=tour.thumbnail class="card-img-top" alt="...">
+                        style="border: none;">
+                        <img :src=tour.thumbnail style="height: 10rem;" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ tour.title }}</h5>
                             <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice)
                             }}</span>
                                 VNĐ </p>
-                            <hr class="hr" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tour-container">
                 <div class="sort-container">
-                    <p>Sắp xếp theo: </p>
+                    <p class="sort-text" style="font-size: larger;">Sắp xếp theo: &nbsp;<span
+                            style="color: #1f8726;font-weight: bolder;">{{
+                                orderLabel }}</span>
+                    </p>
                     <div class="sort-types">
                         <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
                         <div class="sort-type" @click="newest">Mới nhất</div>
@@ -82,19 +85,29 @@
                         </div>
                     </div>
                     <div class="price">
-                        <div v-if="tour.isdiscount" style="color: #42ae49;"><span style="font-size: large;">Khuyến
-                                mãi</span> ! &nbsp;<i class="fa-solid fa-tags fa-beat-fade "></i></div>
-                        <span style="font-size: x-large; color: orangered;"><b>{{
-                            numeralFormat(tour.adult_price)
-                        }} </b></span>
-                        <span style="color: orangered; font-weight: 100;"> VNĐ</span>
+                        <div class="hot-and-discount">
+                            <div v-if="tour.isdiscount"><i style="color: #1f8726;"
+                                    class="fa-solid fa-tags fa-beat-fade "></i></div>
+                            <div v-if="tour.ishottour"><i style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
+                            </div>
+                        </div>
+                        <div class="price-container">
+                            <div class="original-price" v-if="tour.isdiscount"
+                                style="text-decoration: line-through;font-size: 1.2rem;color: #1f8726;">
+                                {{ numeralFormat(tour.original_price) }} VNĐ</div>
+                            <span class="real-price" style="font-size: x-large; color: orangered;">
+                                <b>{{
+                                    numeralFormat(tour.adult_price)
+                                }} </b>
+                                <span style="color: orangered; font-weight: 200;"> VNĐ</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <LoadingComponent v-else />
                 <v-pagination v-if="totalPage" @click="getTourbyPage" v-model="pageNumber" :length="totalPage"
                     :total-visible="5" prev-icon="fa-solid fa-chevron-left"
                     next-icon="fa-solid fa-chevron-right"></v-pagination>
-                <div>{{ pageNumber }}</div>
             </div>
 
         </div>
@@ -197,9 +210,13 @@ watch(
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
 }
 
-.china-container {
+.region-container {
     padding-top: 2rem;
     width: 90%;
     margin: auto;
@@ -250,11 +267,11 @@ p {
     flex-direction: column;
     justify-content: space-between;
 
-
 }
 
 .title {
     font-size: 22px;
+    width: 100%;
     font-weight: bold;
     color: #045B48;
     cursor: pointer;
@@ -280,6 +297,11 @@ p {
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.2s linear;
+}
+
+.tour-individual:hover {
+    transform: scale(1.05);
 }
 
 .inner-container {
@@ -288,6 +310,9 @@ p {
 }
 
 .price {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
     width: 12rem;
     text-align: end;
 }
@@ -299,10 +324,10 @@ p {
 }
 
 .sort-container {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .sort-types {
@@ -318,6 +343,8 @@ p {
     border-radius: 0.5rem;
 
 }
+
+.sort-type:focus {}
 
 .sort-type:active {
     background-color: #d1f7df;
@@ -344,7 +371,6 @@ p {
 .hot-tour {
     position: sticky;
     top: 0;
-    height: 100%;
 }
 
 .category-list {
@@ -356,7 +382,7 @@ p {
 }
 
 .region-list {
-    height: 3rem;
+    height: 2rem;
     padding-left: 1rem;
     font-size: large;
     font-weight: bold;
@@ -366,7 +392,7 @@ p {
 }
 
 .location-list {
-    height: 3rem;
+    height: 2rem;
     padding-left: 1rem;
     background-color: #F1FAF4;
     display: flex;
@@ -384,5 +410,114 @@ p {
     cursor: pointer;
     color: white;
 
+}
+
+.card-title {
+    font-size: large;
+}
+
+.card {
+    transition: transform 0.1s ease-in-out;
+}
+
+.card:hover {
+    background-color: #bce2d1;
+    transform: scale(1.05);
+}
+
+
+.hot-and-discount {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 3.5rem;
+
+}
+
+@media screen and (max-width: 1136px) {
+    .side-bar-container {
+        display: none;
+    }
+
+    .tour-container {
+        width: 100%;
+    }
+
+    .sort-text {
+        display: none;
+    }
+
+    .transportation,
+    .schedule,
+    .tourtype {
+        display: none;
+    }
+
+    .sort-types {
+        gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .sort-type {
+        font-size: small;
+        width: 48%;
+    }
+
+    .tour-individual {
+        flex-direction: column;
+        max-height: 50rem;
+        gap: 0.2rem;
+
+    }
+
+    .image-container {
+        width: 100%;
+        border-radius: 0.4rem;
+        /* height: 10rem; */
+    }
+
+    .hot-and-discount {}
+
+    .original-price {
+        float: right;
+    }
+
+    .days {
+        width: 10rem;
+        font-size: 0.9rem;
+    }
+
+    .departure {
+        width: 18rem;
+        font-size: 0.9rem;
+
+    }
+
+    .below-section {
+        width: 18rem;
+    }
+
+    .tour-detail-container {
+        width: 18rem;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .price {
+        width: 100%;
+    }
+
+    .price-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
+    }
 }
 </style>
