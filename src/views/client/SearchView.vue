@@ -1,14 +1,14 @@
 <template>
-    <div class="china-container">
+    <div class="search-container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                         chủ</a></li>
-                <li class="breadcrumb-item">Tim kiem</li>
+                <li class="breadcrumb-item">Tìm kiếm</li>
             </ol>
         </nav>
         <!-- <h2 style="color: #ff6b00;">Du lịch trong nước</h2> -->
-        <h3> Hien thi ket qua cho <span style="color: #ff6b00;">{{ searchText }}</span></h3>
+        <h3> Hiển thị kết quả cho <span style="color: #ff6b00;">{{ searchText }}</span></h3>
         <div class="section-container">
             <div class="side-bar-container">
                 <!-- <div v-if="categoryList" class="category-list">
@@ -40,7 +40,7 @@
             </div>
             <div class="tour-container">
                 <div class="sort-container">
-                    <p>Sắp xếp theo: </p>
+                    <p class="sort-text">Sắp xếp theo: </p>
                     <div class="sort-types">
                         <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
                         <div class="sort-type" @click="newest">Mới nhất</div>
@@ -198,10 +198,19 @@ function fetchTour() {
 </script>
 <style scoped>
 .hot-tour {
-    width: 16rem;
+    margin-top: 1rem;
+    width: 18rem;
+    background-color: #F1FAF4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
 }
 
-.china-container {
+.search-container {
     padding-top: 2rem;
     width: 90%;
     margin: auto;
@@ -256,6 +265,7 @@ p {
 
 .title {
     font-size: 22px;
+    width: 100%;
     font-weight: bold;
     color: #045B48;
     cursor: pointer;
@@ -279,6 +289,13 @@ p {
     background-color: #F1FAF4;
     margin-bottom: 1rem;
     padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.2s linear;
+}
+
+.tour-individual:hover {
+    transform: scale(1.05);
 }
 
 .inner-container {
@@ -287,6 +304,9 @@ p {
 }
 
 .price {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
     width: 12rem;
     text-align: end;
 }
@@ -298,10 +318,10 @@ p {
 }
 
 .sort-container {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .sort-types {
@@ -314,7 +334,11 @@ p {
     background-color: #DBEBE1;
     text-align: center;
     padding: 0.8rem;
+    border-radius: 0.5rem;
+
 }
+
+.sort-type:focus {}
 
 .sort-type:active {
     background-color: #d1f7df;
@@ -341,17 +365,18 @@ p {
 .hot-tour {
     position: sticky;
     top: 0;
-    height: 100%;
 }
 
 .category-list {
     background-color: #97CBB4;
     /* padding-left: 2rem; */
     width: 18rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .region-list {
-    height: 3rem;
+    height: 2rem;
     padding-left: 1rem;
     font-size: large;
     font-weight: bold;
@@ -361,10 +386,132 @@ p {
 }
 
 .location-list {
-    height: 3rem;
+    height: 2rem;
     padding-left: 1rem;
     background-color: #F1FAF4;
     display: flex;
     align-items: center;
+}
+
+.region-list:hover {
+    background-color: rgb(69, 169, 147);
+    cursor: pointer;
+    color: white;
+}
+
+.location-list:hover {
+    background-color: rgb(69, 169, 147);
+    cursor: pointer;
+    color: white;
+
+}
+
+.card-title {
+    font-size: large;
+}
+
+.card {
+    transition: transform 0.1s ease-in-out;
+}
+
+.card:hover {
+    background-color: #bce2d1;
+    transform: scale(1.05);
+}
+
+
+.hot-and-discount {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 3.5rem;
+
+}
+
+@media screen and (max-width: 1136px) {
+    .side-bar-container {
+        display: none;
+    }
+
+    .tour-container {
+        width: 100%;
+    }
+
+    .sort-text {
+        display: none;
+    }
+
+    .transportation,
+    .schedule,
+    .tourtype {
+        display: none;
+    }
+
+    .sort-types {
+        gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .sort-type {
+        font-size: small;
+        width: 48%;
+    }
+
+    .tour-individual {
+        flex-direction: column;
+        max-height: 50rem;
+        gap: 0.2rem;
+
+    }
+
+    .image-container {
+        width: 100%;
+        border-radius: 0.4rem;
+        /* height: 10rem; */
+    }
+
+    .hot-and-discount {}
+
+    .original-price {
+        float: right;
+    }
+
+    .days {
+        width: 10rem;
+        font-size: 0.9rem;
+    }
+
+    .departure {
+        width: 18rem;
+        font-size: 0.9rem;
+
+    }
+
+    .below-section {
+        width: 18rem;
+    }
+
+    .tour-detail-container {
+        width: 18rem;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .price {
+        width: 100%;
+    }
+
+    .price-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
+    }
 }
 </style>
