@@ -7,7 +7,7 @@
                 <li class="breadcrumb-item">Tour Hot</li>
             </ol>
         </nav>
-        <h2 style="color: #ff6b00;">Địa điểm đang Hot</h2>
+        <h2 style="color: #ff6b00;" class="hot-title">Địa điểm đang Hot</h2>
         <div class="section-container">
             <div class="side-bar-container">
                 <div v-if="categoryList" class="category-list">
@@ -27,7 +27,7 @@
             </div>
             <div class="tour-container">
                 <div class="sort-container">
-                    <p>Sắp xếp theo: </p>
+                    <p class="sort-text">Sắp xếp theo: </p>
                     <div class="sort-types">
                         <div class="sort-type" @click="recommend">Hoàng Hà đề xuất</div>
                         <div class="sort-type" @click="newest">Mới nhất</div>
@@ -415,6 +415,10 @@ p {
     }
 
     .sort-text {
+        display: none;
+    }
+
+    .hot-title {
         display: none;
     }
 
