@@ -126,7 +126,7 @@
     </div>
     <h2 style="text-align: center;margin-bottom: 2rem;">Cẩm nang</h2>
     <div class="post-container" v-if="posts && posts.length > 0">
-      <div @click="router.push({ path: '/bai-viet/' + post[0].slug })" class="post-1" v-if="posts[0].thumbnail">
+      <div @click="router.push({ path: '/bai-viet/' + posts[0].slug })" class="post-1" v-if="posts[0].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
         <h1>{{ posts[0].title }}</h1>
       </div>
