@@ -165,7 +165,7 @@ const categoryList = ref()
 onMounted(() => {
     fetchTour()
     fetchList()
-    baseUrl.get("/client/region/hot-sidebar/" + 1)
+    baseUrl.get("/client/region/hot-sidebar")
         .then(response => {
             hotTour.value = response.data.rows
         }).catch((error) => {
@@ -175,6 +175,8 @@ onMounted(() => {
 })
 function getTourbyPage() {
     fetchTour()
+    window.scrollTo(0, 0);
+
 }
 function fetchList() {
     baseUrl.get("/client/region/side-bar-list/" + route.params.slug).then(response => {

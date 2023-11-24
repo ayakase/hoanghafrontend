@@ -92,7 +92,7 @@
     </div>
     <HeartLoading v-else> </HeartLoading>
 
-    <!-- <div v-if="china"
+    <div v-if="china"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
       <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch Trung Quốc &nbsp; <i
           class="fa-solid fa-vihara"></i>
@@ -149,7 +149,7 @@
         </Splide>
       </div>
     </div>
-    <HeartLoading v-else> </HeartLoading> -->
+    <HeartLoading v-else> </HeartLoading>
   </div>
   <iframe
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.2521232744994!2d103.96182131119717!3d22.49472183573427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd139cd20452db%3A0x1e087d472f4b71ce!2zMTE2IFPGoW4gxJDhuqFvLCBD4buRYyBM4bq_dSwgTMOgbyBDYWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1699640028623!5m2!1svi!2s"
@@ -197,28 +197,28 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
-      // baseUrl.get('/client/carousel/hottour').then((response) => {
-      //   hotTour.value = response.data.rows
-      // })
+      baseUrl.get('/client/carousel/hottour').then((response) => {
+        hotTour.value = response.data.rows
+      })
       baseUrl.get('/client/carousel/post-grid').then((response) => {
         console.log(response.data)
         posts.value = response.data.rows
         console.log(posts.value)
       })
-      // baseUrl.get('/client/carousel/china').then((response) => {
-      //   console.log(response.data)
-      //   china.value = response.data.rows
-      // })
-      // baseUrl.get('/client/carousel/domestic').then((response) => {
-      //   console.log(response.data)
+      baseUrl.get('/client/carousel/china').then((response) => {
+        console.log(response.data)
+        china.value = response.data.rows
+      })
+      baseUrl.get('/client/carousel/domestic').then((response) => {
+        console.log(response.data)
 
-      //   domestic.value = response.data.rows
-      // })
-      // baseUrl.get('/client/carousel/foreign').then((response) => {
-      //   console.log(response.data)
+        domestic.value = response.data.rows
+      })
+      baseUrl.get('/client/carousel/foreign').then((response) => {
+        console.log(response.data)
 
-      //   foreign.value = response.data.rows
-      // })
+        foreign.value = response.data.rows
+      })
     })
     return {
       router,
@@ -281,7 +281,6 @@ img {
 
 .home-first-section {
   display: flex;
-  /* gap: 1rem; */
   flex-direction: row;
   justify-content: space-around;
 }
@@ -298,6 +297,8 @@ img {
 }
 
 .travel-category-item {
+  padding-left: 1rem;
+  padding-right: 1rem;
   width: 100%;
   box-sizing: border-box;
   flex: 1;
@@ -444,5 +445,10 @@ img {
 .post-6 {
   grid-area: 3 / 3 / 4 / 4;
   height: 15rem;
+}
+@media screen and (max-width: 1136px) {
+  .home-first-section {
+    display: none;
+  }
 }
 </style>

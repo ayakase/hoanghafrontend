@@ -161,7 +161,7 @@ let hotTour = ref()
 const categoryList = ref()
 onMounted(() => {
     fetchTour()
-    baseUrl.get("/client/category/hot-sidebar/" + 1)
+    baseUrl.get("/client/category/hot-sidebar")
         .then(response => {
             console.log(response.data)
             hotTour.value = response.data.rows
