@@ -94,12 +94,12 @@ function addpost() {
     })
     .then((response) => {
       console.log(response.data);
-      showOverlay.value = false;
-      toast.success("Đã nhận thông tin", {
+      toast.info(response.data, {
         autoClose: 2000,
         theme: "colored",
         position: toast.POSITION.BOTTOM_RIGHT,
       });
+      showOverlay.value = false;
     })
     .catch((error) => {
       console.error(error);

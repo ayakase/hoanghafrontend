@@ -1,6 +1,14 @@
 <template>
   <div class="home-container">
-
+    <div class="mobile-slide">
+      <Splide :options=headOption aria-label="">
+        <SplideSlide v-for="slide in sliderItem" :key="slide">
+          <a :href="slide.tour_url">
+            <v-img class="mobile-slide-image" style=" border-radius: 1rem;" :src="slide.image_src"></v-img>
+          </a>
+        </SplideSlide>
+      </Splide>
+    </div>
     <div class="home-first-section" style="margin-bottom: 5rem;">
       <div class="travel-category">
         <div class="travel-category-item" @click="router.push('/danh-muc/du-lich-trong-nuoc')">
@@ -446,9 +454,25 @@ img {
   grid-area: 3 / 3 / 4 / 4;
   height: 15rem;
 }
+
 @media screen and (max-width: 1136px) {
   .home-first-section {
     display: none;
+  }
+}
+
+.mobile-slide {
+  display: none;
+  width: 100%;
+}
+
+.mobile-slide-image {
+  height: 20rem;
+}
+
+@media screen and (max-width: 1136px) {
+  .mobile-slide {
+    display: block;
   }
 }
 </style>
