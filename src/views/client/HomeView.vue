@@ -57,10 +57,29 @@
       <div style="width: 95%;margin: auto;" v-if="hotTour">
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;height: 100%;object-fit: cover;" :src=tour.thumbnail></v-img>
-            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
           </SplideSlide>
         </Splide>
       </div>
@@ -75,10 +94,29 @@
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide v-for="tour in china" @click="router.push({ path: '/tour/' + tour.slug })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
           </SplideSlide>
         </Splide>
       </div>
@@ -92,16 +130,29 @@
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tour/' + tour.slug })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail>
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
               <template v-slot:placeholder>
                 <div class="d-flex align-center justify-center fill-height">
                   <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
                 </div>
               </template>
             </v-img>
-            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
           </SplideSlide>
         </Splide>
       </div>
@@ -116,10 +167,29 @@
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tour/' + tour.slug })"
-            style="cursor: pointer;">
-            <v-img style=" border-radius: 1rem;" :src=tour.thumbnail></v-img>
-            <h5 style="width: 90%;padding-top: 0.8rem;">{{ tour.title }}</h5>
-            <h5><span style="color: orange;">{{ numeralFormat(tour.adultprice) }}</span></h5>
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
           </SplideSlide>
         </Splide>
       </div>

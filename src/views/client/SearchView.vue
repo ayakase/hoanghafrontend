@@ -168,10 +168,9 @@ onMounted(() => {
         }).catch((error) => {
             console.error(error);
         });
-    // baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
-    //     // console.log(response.data)
-    //     categoryList.value = response.data
-    // })
+    baseUrl.get("/client/category/side-bar-list/" + 1).then(response => {
+        categoryList.value = response.data
+    })
 })
 function getTourbyPage() {
     fetchTour()
