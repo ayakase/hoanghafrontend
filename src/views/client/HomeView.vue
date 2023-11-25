@@ -4,7 +4,7 @@
       <Splide :options=headOption aria-label="">
         <SplideSlide v-for="slide in sliderItem" :key="slide">
           <a :href="slide.tour_url">
-            <v-img class="mobile-slide-image" style=" border-radius: 1rem;" :src="slide.image_src"></v-img>
+            <v-img class="mobile-slide-image" :src="slide.image_src"></v-img>
           </a>
         </SplideSlide>
       </Splide>
@@ -28,7 +28,6 @@
           <h5>Khuyến mãi</h5> <i class="fa-solid fa-chevron-right"></i>
         </div>
       </div>
-      <!-- data-bs-ride="carousel" -->
       <div class="slide">
         <Splide :options=headOption aria-label="">
           <SplideSlide v-for="slide in sliderItem" :key="slide">
@@ -55,7 +54,7 @@
         &nbsp; <i class="fa-solid fa-fire fa-bounce" style="color: #ff6600;"></i>&nbsp;
       </h2>
 
-      <div style="width: 95%;margin: auto;" v-if="hotTour">
+      <div class="carousel" style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
@@ -84,7 +83,37 @@
           </SplideSlide>
         </Splide>
       </div>
+      <div class="mobile-carousel" style="width: 95%;margin: auto;">
+        <Splide :options=mobileOptions aria-label="Vue Splide Example">
+          <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })"
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
+          </SplideSlide>
+        </Splide>
+      </div>
     </div>
+
     <HeartLoading v-else> </HeartLoading>
 
     <div v-if="china"
@@ -93,8 +122,37 @@
           class="fa-solid fa-vihara"></i>&nbsp;
 
       </h2>
-      <div style="width: 95%;margin: auto;">
+      <div class="carousel" style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in china" @click="router.push({ path: '/' + tour.slug })"
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
+          </SplideSlide>
+        </Splide>
+      </div>
+      <div class="mobile-carousel" style="width: 95%;margin: auto;">
+        <Splide :options=mobileOptions aria-label="Vue Splide Example">
           <SplideSlide v-for="tour in china" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
             <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
@@ -130,8 +188,37 @@
           class="fa-solid fa-flag"></i>&nbsp;
 
       </h2>
-      <div style="width: 95%;margin: auto;">
+      <div class="carousel" style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/' + tour.slug })"
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
+          </SplideSlide>
+        </Splide>
+      </div>
+      <div class="mobile-carousel" style="width: 95%;margin: auto;">
+        <Splide :options=mobileOptions aria-label="Vue Splide Example">
           <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
             <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
@@ -168,8 +255,37 @@
           class="fa-solid fa-globe"></i>&nbsp;
 
       </h2>
-      <div style="width: 95%;margin: auto;">
+      <div class="carousel" style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
+          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/' + tour.slug })"
+            style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
+            <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
+            </v-img>
+            <h5
+              style="width: 90%;padding-top: 0.8rem; white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">
+              {{ tour.title }}</h5>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <div>
+                <h5 v-if="tour.isdiscount"><span style="color: orange;text-decoration: line-through;">{{
+                  numeralFormat(tour.original_price)
+                }} VNĐ</span></h5>
+                <h5><span style="color: red;">{{ numeralFormat(tour.adult_price) }} VNĐ</span></h5>
+              </div>
+              <div style="display: flex;gap: 0.7rem;font-size: 1.5rem;">
+                <i v-if="tour.ishottour" class="fa-solid fa-fire" style="color: #ff6600;"></i>
+                <i v-if="tour.isdiscount" class="fa-solid fa-tags" style="color: #4fd858;"></i>
+              </div>
+            </div>
+          </SplideSlide>
+        </Splide>
+      </div>
+      <div class="mobile-carousel" style="width: 95%;margin: auto;">
+        <Splide :options=mobileOptions aria-label="Vue Splide Example">
           <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
             <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
@@ -265,6 +381,12 @@ export default {
       autoplay: true,
       // focus: 'center',
     };
+    const mobileOptions = {
+      rewind: true,
+      perPage: 1,
+      perMove: 1,
+      autoplay: true,
+    };
     const headOption = {
       autoplay: true,
       perMove: 1,
@@ -351,15 +473,6 @@ img {
 
 
 
-.carousel-inner {
-  border-radius: 1rem;
-
-  height: 100%;
-}
-
-.carousel-item {
-  height: 25rem !important;
-}
 
 
 .home-first-section {
@@ -538,7 +651,26 @@ img {
 }
 
 .mobile-slide-image {
-  height: 20rem;
+  width: 100%;
+  /* height: 10rem; */
+}
+
+
+.section-title {
+  display: block;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #045B48;
+}
+
+.section-title:hover {
+  color: #ff6600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mobile-carousel {
+  display: none;
 }
 
 @media screen and (max-width: 1136px) {
@@ -553,18 +685,18 @@ img {
   .map {
     display: none;
   }
-}
 
-.section-title {
-  display: block;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #045B48;
-}
+  .home-container {
+    width: 100%;
+    padding-top: 0;
+  }
 
-.section-title:hover {
-  color: #ff6600;
-  text-decoration: underline;
-  cursor: pointer;
+  .carousel {
+    display: none;
+  }
+
+  .mobile-carousel {
+    display: block;
+  }
 }
 </style>

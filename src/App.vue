@@ -10,8 +10,18 @@ import baseUrl from './connect';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const showNav = ref(false)
+const showDomestic = ref(false)
+const showForeign = ref(false)
 function toggleNav() {
   showNav.value = !showNav.value
+}
+function toggleDomestic(event) {
+  showNav.value = true
+  showDomestic.value = !showDomestic.value
+}
+function toggleForeign(event) {
+  showNav.value = true
+  showForeign.value = !showForeign.value
 }
 const notify = () => {
   toast.warn("Trang web đang trong quá trình xây dựng, còn nhiều thiết sót mong bạn thông cảm", {
@@ -76,7 +86,7 @@ let showChatbox = () => {
       <button class="btn mobile-btn" @click="toggleNav"><i class="fa-solid fa-bars"></i></button>
     </div>
     <Transition name="slide-fade">
-      <div class="nav-category" v-if="showNav" @click="toggleNav">
+      <div class="nav-category" v-if="showNav">
         <RouterLink class="mobile-nav-item" to="/" aria-current="page" href="#">Trang chủ</RouterLink>
         <hr>
         <RouterLink class="mobile-nav-item" to="/about/chinh-sach-va-quy-dinh" aria-current="page" href="#">
@@ -88,23 +98,49 @@ let showChatbox = () => {
             style="color: orangered;" class="fa-solid fa-fire fa-bounce"></i>
         </RouterLink>
         <hr>
-        <RouterLink class="mobile-nav-item" to="/danh-muc/du-lich-trong-nuoc" aria-current="page" href="#">
-          Du lịch
-          trong
-          nước
-          &nbsp; <i class="fa-solid fa-flag"></i>
-        </RouterLink>
+        <div style="display: flex;justify-content: space-between;">
+          <RouterLink style="width: 18rem;" class="mobile-nav-item" to="/danh-muc/du-lich-trong-nuoc" aria-current="page"
+            href="#">
+            Du lịch
+            trong
+            nước
+            &nbsp; <i class="fa-solid fa-flag"></i>
+          </RouterLink>
+          <div class="arrow-toggle" @click="toggleDomestic"><i v-if="!showDomestic"
+              class="fa-solid fa-chevron-down"></i><i v-if="showDomestic" class="fa-solid fa-chevron-up"></i></div>
+        </div>
         <hr>
-        <div v-if="domesticMenu" v-for="region in domesticMenu.Regions">
-          <div class="mobile-nav-item" @click="router.push({ path: '/khu-vuc/' + region.slug })">
+        <div v-if="domesticMenu && showDomestic" v-for="region in domesticMenu.Regions">
+          <div class="mobile-nav-item" style="font-weight: bold;"
+            @click="router.push({ path: '/khu-vuc/' + region.slug })">
             {{ region.name }}
           </div>
           <div v-for="location in region.Locations" class="mobile-nav-item">
             <div @click="router.push({ path: '/dia-diem/' + location.slug })">
-              {{
-                location.name }}</div>
+              &nbsp;&nbsp;&nbsp;{{ location.name }}</div>
           </div>
-
+        </div>
+        <div style="display: flex;justify-content: space-between;">
+          <RouterLink style="width: 18rem;" class="mobile-nav-item" to="/danh-muc/du-lich-trong-nuoc" aria-current="page"
+            href="#">
+            Du lịch
+            quốc tế
+            &nbsp; <i class="fa-solid fa-flag"></i>
+          </RouterLink>
+          <div class="arrow-toggle" @click="toggleForeign"><i v-if="!showForeign" class="fa-solid fa-chevron-down"></i>
+            <i v-if="showForeign" class="fa-solid fa-chevron-up"></i>
+          </div>
+        </div>
+        <hr>
+        <div v-if="domesticMenu && showForeign" v-for="region in foreignMenu.Regions">
+          <div class="mobile-nav-item" style="font-weight: bold;"
+            @click="router.push({ path: '/khu-vuc/' + region.slug })">
+            {{ region.name }}
+          </div>
+          <div v-for="location in region.Locations" class="mobile-nav-item">
+            <div @click="router.push({ path: '/dia-diem/' + location.slug })">
+              &nbsp;&nbsp;&nbsp;{{ location.name }}</div>
+          </div>
         </div>
       </div>
     </Transition>
@@ -617,8 +653,10 @@ ul.nav-menu li:hover>.drop-one {
 }
 
 .mobile-nav-item {
+  height: 100%;
   text-decoration: none;
   height: 3rem;
+  min-height: 3rem;
   font-size: larger;
   color: black;
   padding: 0.5rem;
@@ -636,5 +674,11 @@ ul.nav-menu li:hover>.drop-one {
 hr {
   margin: 0;
   padding: 0;
+}
+
+.arrow-toggle {
+  width: 4rem;
+  text-align: center;
+  font-size: 2rem;
 }
 </style>
