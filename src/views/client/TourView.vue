@@ -24,7 +24,6 @@ const imageArray = ref()
 let sliderItem = ref()
 const options = {
     rewind: true,
-    gap: '2rem',
     perMove: 1,
     autoplay: true,
     focus: 'center',
@@ -51,7 +50,7 @@ onMounted(() => {
         tourTitle.value = response.data[0].title
         tiktokUrl.value = 'https://www.tiktok.com/embed/' + tiktokId.value
         imageArray.value = response.data[0].images.split(',')
-        console.log(imageArray.value)
+        console.log(tourDetail.value)
     }).catch((error) => {
         console.error(error);
     });
@@ -105,12 +104,13 @@ let tabSec2 = ref()
                 </div>
             </div>
 
-            <v-card class="first-section" elevation="0">
+            <v-card class="first-section" elevation="0"
+                v-if="!(tourDetail.special != 'undefined' && tourDetail.bonus != 'undefined' && tourDetail.visa != 'undefined')">
                 <v-tabs class="tab-slider" v-model="tabSec1" color="white" align-tabs="start">
                     <v-tab class="each-tab" value="one" v-if="tourDetail.special != 'undefined'">Điểm khác biệt</v-tab>
-                    <p style="width: 4rem;"></p>
+                    <p class="separator"></p>
                     <v-tab class="each-tab" value="two" v-if="tourDetail.bonus != 'undefined'">Dịch vụ đi kèm</v-tab>
-                    <p style="width: 4rem;"></p>
+                    <p class="separator"></p>
 
                     <v-tab class="each-tab" value="three" v-if="tourDetail.visa != 'undefined'">Visa</v-tab>
                 </v-tabs>
@@ -131,10 +131,10 @@ let tabSec2 = ref()
             <v-card class="second-section" elevation="0">
                 <v-tabs class="tab-slider" v-model="tabSec2" color="white" align-tabs="start">
                     <v-tab class="each-tab" value="one" v-if="tourDetail.detail != 'undefined'">Lịch trình chi tiết</v-tab>
-                    <p style="width: 4rem;"></p>
+                    <p class="separator"></p>
                     <v-tab class="each-tab" value="two" v-if="tourDetail.priceservice != 'undefined'">Bảng giá và dịch
                         vụ</v-tab>
-                    <p style="width: 4rem;"></p>
+                    <p class="separator"></p>
 
                     <v-tab class="each-tab" value="three" v-if="tourDetail.guide != 'undefined'">Lưu ý và hướng dẫn</v-tab>
                 </v-tabs>
@@ -233,20 +233,6 @@ let tabSec2 = ref()
     justify-content: space-around;
 }
 
-@media screen and (max-width: 1214px) {
-    .side-bar {
-        display: none;
-    }
-
-    .slide {
-        display: none;
-    }
-
-    .content-container-outer {
-        width: 100%;
-
-    }
-}
 
 .first-section {
     background-color: #DBEBE1;
@@ -402,6 +388,54 @@ let tabSec2 = ref()
 
     100% {
         color: #1f8726;
+    }
+}
+
+.separator {
+    width: 4rem;
+}
+
+@media screen and (max-width: 1214px) {
+    .content-container-outer {
+        width: 100%;
+
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .side-bar {
+        display: none;
+    }
+
+    .slide {
+        display: none;
+    }
+
+    .content-container-outer {
+        width: 100%;
+    }
+
+    .separator {
+        width: 0.5rem;
+    }
+
+    .first-section,
+    .second-section {
+        padding: 0;
+    }
+
+    .each-tab {
+        padding: 0.2rem;
+        height: 2.5rem;
+        font-size: small;
+    }
+
+    .tour-title {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: larger;
     }
 }
 </style>

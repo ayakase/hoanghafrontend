@@ -212,8 +212,6 @@ p {
 .tour-individual {
     width: 20rem;
     height: 20rem;
-
-    /* max-height: 15rem; */
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -323,7 +321,6 @@ p {
     }
 
     .tour-individual {
-        max-height: 50rem;
         width: 100%;
     }
 

@@ -30,7 +30,7 @@
                             class="fa-solid fa-fire fa-bounce"></i></h2>
                     <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
                         style="border: none;">
-                        <img :src=tour.thumbnail class="card-img-top" style="height: 10rem;" alt="...">
+                        <img :src=tour.thumbnail class="card-img-top" style="" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ tour.title }}</h5>
                             <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adult_price)
@@ -291,9 +291,7 @@ p {
 
 .tour-individual {
     width: 100%;
-    max-height: 18rem;
     height: 15rem;
-
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -442,6 +440,10 @@ p {
 }
 
 @media screen and (max-width: 1136px) {
+    .thumbnail {
+        height: 50rem;
+    }
+
     .side-bar-container {
         display: none;
     }
@@ -474,7 +476,7 @@ p {
 
     .tour-individual {
         flex-direction: column;
-        max-height: 50rem;
+        height: 25rem;
         gap: 0.2rem;
 
     }
@@ -482,7 +484,7 @@ p {
     .image-container {
         width: 100%;
         border-radius: 0.4rem;
-        /* height: 10rem; */
+        height: 20rem;
     }
 
     .hot-and-discount {}

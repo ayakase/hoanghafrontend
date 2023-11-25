@@ -290,7 +290,6 @@ p {
 
 .tour-individual {
     width: 100%;
-    max-height: 18rem;
     display: flex;
     height: 15rem;
     justify-content: space-between;
@@ -472,7 +471,8 @@ p {
 
     .tour-individual {
         flex-direction: column;
-        max-height: 50rem;
+        height: 25rem;
+
         gap: 0.2rem;
 
     }
