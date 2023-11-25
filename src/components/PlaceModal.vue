@@ -1,4 +1,6 @@
 <template>
+    <LoadingOverlay v-if="showOverlay"></LoadingOverlay>
+
     <div style="z-index: 9999;">
         <div style="margin-top: 0rem;" class="modal fade" id="placeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -84,6 +86,8 @@ import baseUrl from '../connect';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { computed, ref } from 'vue';
+import LoadingOverlay from "./LoadingOverlay.vue";
+
 const props = defineProps(['tourId', 'childPrice', 'adultPrice', 'teenagerPrice', 'infantPrice', 'tourTitle'],)
 console.log(props)
 
@@ -104,6 +108,7 @@ let teenager = ref(0)
 let children = ref(0)
 let infant = ref(0)
 let note = ref("")
+const showOverlay = ref(false)
 function sendOrder() {
     if (!name.value || !phone.value || !email.value || !adult.value || !note.value) {
         toast.error("Bạn cần điền đầy đủ thông tin đặt tour", {
@@ -112,6 +117,7 @@ function sendOrder() {
             position: toast.POSITION.BOTTOM_RIGHT,
         });
     } else {
+        showOverlay.value = true
         const orderData = {
             tourId: props.tourId,
             tourTitle: props.tourTitle,
@@ -126,6 +132,8 @@ function sendOrder() {
         }
         baseUrl.post("/client/order", orderData)
             .then(response => {
+                showOverlay.value = false
+
                 console.log(response.data)
                 toast.success("Đặt tour thành công", {
                     autoClose: 2000,

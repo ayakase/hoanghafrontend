@@ -1,4 +1,5 @@
 <template>
+    <LoadingOverlay v-if="showOverlay"></LoadingOverlay>
     <div style="z-index: 9999;">
         <div style="margin-top: 0rem;" class="modal fade" id="advisoryModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -41,6 +42,7 @@
 </template>
 
 <script setup>
+import LoadingOverlay from './LoadingOverlay.vue';
 const props = defineProps(['tourId', 'tourTitle'])
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -51,6 +53,7 @@ const phone = ref()
 const email = ref()
 const note = ref()
 console.log(props)
+const showOverlay = ref(false)
 function sendInfo() {
     if (!name.value || !phone.value || !email.value || !note.value) {
         toast.error("Bạn cần điền đầy đủ thông tin", {
@@ -59,6 +62,7 @@ function sendInfo() {
             position: toast.POSITION.BOTTOM_RIGHT,
         });
     } else {
+        showOverlay.value = true
         const formData = {
             name: name.value,
             phone: phone.value,
@@ -69,6 +73,7 @@ function sendInfo() {
         }
         baseUrl.post("/client/advisory", formData)
             .then(response => {
+                showOverlay.value = false
                 console.log(response.data)
                 toast.success("Đã nhận thông tin", {
                     autoClose: 2000,

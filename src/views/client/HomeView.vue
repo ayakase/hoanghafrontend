@@ -266,8 +266,12 @@ export default {
       // focus: 'center',
     };
     const headOption = {
-      drag: 'free',
       autoplay: true,
+      perMove: 1,
+      perPage: 1,
+      focus: 'center',
+
+
     }
     const router = useRouter();
     onMounted(() => {

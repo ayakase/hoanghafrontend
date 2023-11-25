@@ -6,7 +6,7 @@ import baseUrl from '../../connect';
 import LoadingComponent from '../../components/LoadingComponent.vue';
 import { useRoute } from 'vue-router';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
-
+const showOverlay = ref(false);
 const route = useRoute();
 const tourDetail = ref()
 const adultPrice = ref()
@@ -25,10 +25,9 @@ let sliderItem = ref()
 const options = {
     rewind: true,
     gap: '2rem',
-    perPage: 4,
     perMove: 1,
     autoplay: true,
-    // focus: 'center',
+    focus: 'center',
 };
 const headOption = {
     drag: 'free',
@@ -71,6 +70,8 @@ let tabSec2 = ref()
 
 </script>
 <template>
+    <LoadingOverlay v-if="showOverlay"></LoadingOverlay>
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
@@ -87,14 +88,14 @@ let tabSec2 = ref()
     <AdvisoryModal v-if="tourDetail" :tourId="tourId" :tourTitle="tourTitle"></AdvisoryModal>
     <hr class="hr" />
     <div v-if="tourDetail" class="content-container-outer">
-
         <div class="main-content">
+            <h2 class="tour-title">{{ tourDetail.title }}</h2>
             <div>
                 <!-- <div class="iframe_container" v-if=tiktokId>
                     <iframe :src=tiktokUrl class="iframe" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
                 </div> -->
                 <div class="slide" v-if="imageArray && imageArray[0] != ''">
-                    <Splide :options=headOption aria-label="">
+                    <Splide :options=options aria-label="">
                         <SplideSlide v-for=" slide  in  imageArray " :key="slide">
                             <a>
                                 <v-img class="slide-image" :src="slide"></v-img>
@@ -379,5 +380,28 @@ let tabSec2 = ref()
     height: 50rem;
     /* background-position: center center;
     background-repeat: no-repeat; */
+}
+
+.tour-title {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    animation: change-color 3s infinite;
+}
+
+@keyframes change-color {
+    0% {
+        color: #1f8726;
+    }
+
+    50% {
+        color: #ff6600;
+    }
+
+    100% {
+        color: #1f8726;
+    }
 }
 </style>
