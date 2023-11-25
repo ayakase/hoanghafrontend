@@ -50,7 +50,7 @@
             </div>
             <div style="display: flex; gap: 1rem;width: 100%;flex-wrap: wrap;">
                 <div v-for="image in imageArray" :key="image" class="each-image" @click=" addImg(image)">
-                    <v-img cover class=" each-image" :src=image>
+                    <v-img cover class=" each-image" :src=image style="height: 100%;">
                         <template v-slot:placeholder>
                             <div class="d-flex align-center justify-center fill-height">
                                 <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>

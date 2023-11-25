@@ -106,12 +106,12 @@ let tabSec2 = ref()
 
             <v-card class="first-section" elevation="0">
                 <v-tabs class="tab-slider" v-model="tabSec1" color="white" align-tabs="start">
-                    <v-tab class="each-tab" value="one">Điểm khác biệt</v-tab>
+                    <v-tab class="each-tab" value="one" v-if="tourDetail.special != 'undefined'">Điểm khác biệt</v-tab>
                     <p style="width: 4rem;"></p>
-                    <v-tab class="each-tab" value="two">Dịch vụ đi kèm</v-tab>
+                    <v-tab class="each-tab" value="two" v-if="tourDetail.bonus != 'undefined'">Dịch vụ đi kèm</v-tab>
                     <p style="width: 4rem;"></p>
 
-                    <v-tab class="each-tab" value="three">Visa</v-tab>
+                    <v-tab class="each-tab" value="three" v-if="tourDetail.visa != 'undefined'">Visa</v-tab>
                 </v-tabs>
 
                 <v-card-text>
@@ -129,12 +129,13 @@ let tabSec2 = ref()
             </v-card>
             <v-card class="second-section" elevation="0">
                 <v-tabs class="tab-slider" v-model="tabSec2" color="white" align-tabs="start">
-                    <v-tab class="each-tab" value="one">Lịch trình chi tiết</v-tab>
+                    <v-tab class="each-tab" value="one" v-if="tourDetail.detail != 'undefined'">Lịch trình chi tiết</v-tab>
                     <p style="width: 4rem;"></p>
-                    <v-tab class="each-tab" value="two">Bảng giá và dịch vụ</v-tab>
+                    <v-tab class="each-tab" value="two" v-if="tourDetail.priceservice != 'undefined'">Bảng giá và dịch
+                        vụ</v-tab>
                     <p style="width: 4rem;"></p>
 
-                    <v-tab class="each-tab" value="three">Lưu ý và hướng dẫn</v-tab>
+                    <v-tab class="each-tab" value="three" v-if="tourDetail.guide != 'undefined'">Lưu ý và hướng dẫn</v-tab>
                 </v-tabs>
 
                 <v-card-text>
@@ -367,6 +368,7 @@ let tabSec2 = ref()
 
 .slide {
     width: 100%;
+    height: 50rem;
     margin: auto;
     margin-bottom: 2rem;
     padding: auto;
@@ -374,7 +376,7 @@ let tabSec2 = ref()
 
 .slide-image {
     border-radius: 1rem;
-    height: 30rem;
+    height: 50rem;
     /* background-position: center center;
     background-repeat: no-repeat; */
 }

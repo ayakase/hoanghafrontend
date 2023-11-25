@@ -280,7 +280,9 @@ p {
 
 .tour-individual {
     width: 100%;
-    max-height: 15rem;
+    max-height: 18rem;
+    height: 15rem;
+
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -512,5 +514,10 @@ p {
         justify-content: space-between;
 
     }
+}
+
+.card:hover {
+    background-color: #bce2d1;
+    transform: scale(1.05);
 }
 </style>

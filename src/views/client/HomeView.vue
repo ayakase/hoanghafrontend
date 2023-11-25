@@ -51,9 +51,10 @@
       </div>
     </div>
     <div v-if="hotTour" style="width: 100%;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 4rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Hot Tour &nbsp; <i
-          class="fa-solid fa-fire fa-bounce" style="color: #ff6600;"></i>
+      <h2 class="section-title" @click="router.push('/tour-hot')">Hot Tour
+        &nbsp; <i class="fa-solid fa-fire fa-bounce" style="color: #ff6600;"></i>&nbsp;
       </h2>
+
       <div style="width: 95%;margin: auto;" v-if="hotTour">
         <Splide :options=options aria-label="Vue Splide Example">
           <SplideSlide class="slide-item" v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })"
@@ -88,8 +89,9 @@
 
     <div v-if="china"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch Trung Quốc &nbsp; <i
-          class="fa-solid fa-vihara"></i>
+      <h2 class="section-title" @click="router.push('/dia-diem/du-lich-trung-quoc')">Du lịch Trung Quốc &nbsp; <i
+          class="fa-solid fa-vihara"></i>&nbsp;
+
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
@@ -124,8 +126,9 @@
     <HeartLoading v-else> </HeartLoading>
     <div v-if="domestic"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch trong nước &nbsp; <i
-          class="fa-solid fa-flag"></i>
+      <h2 class="section-title" @click="router.push('/danh-muc/du-lich-trong-nuoc')">Du lịch trong nước &nbsp; <i
+          class="fa-solid fa-flag"></i>&nbsp;
+
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
@@ -161,8 +164,9 @@
 
     <div v-if="foreign"
       style="width: 100%;margin-top: 5rem;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 1rem;">
-      <h2 style="text-align: center;margin-bottom: 1.5rem;color: #045B48">Du lịch quốc tế &nbsp; <i
-          class="fa-solid fa-globe"></i>
+      <h2 class="section-title" @click="router.push('/danh-muc/du-lich-quoc-te')">Du lịch quốc tế &nbsp; <i
+          class="fa-solid fa-globe"></i>&nbsp;
+
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
@@ -194,7 +198,10 @@
         </Splide>
       </div>
     </div>
-    <h2 style="text-align: center;margin-bottom: 2rem;">Cẩm nang</h2>
+    <h2 class="section-title" @click="router.push('/cam-nang')">Cẩm
+      nang &nbsp;<i class="fa-solid fa-book"></i>
+
+    </h2>
     <div class="post-container" v-if="posts && posts.length > 0">
       <div @click="router.push({ path: '/bai-viet/' + posts[0].slug })" class="post-1" v-if="posts[0].thumbnail">
         <img style="height: 100%;width: 100%;object-fit: cover;" :src=posts[0].thumbnail alt="">
@@ -542,5 +549,18 @@ img {
   .map {
     display: none;
   }
+}
+
+.section-title {
+  display: block;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #045B48;
+}
+
+.section-title:hover {
+  color: #ff6600;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>

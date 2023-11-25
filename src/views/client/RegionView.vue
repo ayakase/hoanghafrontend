@@ -289,7 +289,9 @@ p {
 
 .tour-individual {
     width: 100%;
-    max-height: 15rem;
+    height: 15rem;
+
+    max-height: 18rem;
     display: flex;
     justify-content: space-between;
     gap: 2rem;

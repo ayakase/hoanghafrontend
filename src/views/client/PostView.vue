@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import baseUrl from '../../connect';
 import { useRoute } from 'vue-router';
 const route = useRoute();
-
+const hotTour = ref()
 let postDetail = ref()
 onMounted(() => {
     console.log(route.params.slug)
@@ -12,6 +12,13 @@ onMounted(() => {
     }).catch((error) => {
         console.error(error);
     });
+    baseUrl.get("/client/category/hot-sidebar")
+        .then(response => {
+            console.log(response.data)
+            hotTour.value = response.data.rows
+        }).catch((error) => {
+            console.error(error);
+        });
 })
 
 </script>
@@ -35,38 +42,18 @@ onMounted(() => {
             <div v-html="postDetail.content"></div>
         </div>
         <div class="side-bar">
-            <div class="hot-tour">
-                <h2 style="padding-left: 1rem;">Tour hot</h2>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
+            <div class="hot-tour" v-if="hotTour">
+                <h2 style="padding-left: 1rem;">Tour hot &nbsp; <i style="color: orangered;"
+                        class="fa-solid fa-fire fa-bounce"></i></h2>
+                <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
+                    style="border: none;">
+                    <img :src=tour.thumbnail class="card-img-top" style="height: 10rem;" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
+                        <h5 class="card-title">{{ tour.title }}</h5>
+                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adult_price)
+                        }}</span>
+                            VNĐ </p>
+                        <!-- <hr class="hr" /> -->
                     </div>
                 </div>
             </div>
@@ -96,10 +83,11 @@ onMounted(() => {
     padding-top: 1rem;
     margin: auto;
     padding: auto;
-    width: 85%;
+    width: 95%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 2rem;
 }
 
 .first-section {
@@ -130,7 +118,7 @@ onMounted(() => {
 }
 
 .main-content {
-    width: 70%;
+    width: 75%;
     display: flex;
     flex-direction: column;
 }
@@ -154,17 +142,13 @@ onMounted(() => {
 .side-bar {
     position: sticky;
     top: 0rem;
-    width: 25%;
+    width: 20%;
     height: 100%;
     box-sizing: border-box;
     padding: 1rem;
     border-radius: 1rem;
 }
 
-.hot-tour {
-    background-color: #f1faf4;
-    padding-top: 1rem;
-}
 
 .card-img-top {
     width: 90%;
@@ -249,5 +233,23 @@ onMounted(() => {
     filter: grayscale(0);
     width: calc(var(--s)*var(--f));
     height: calc(var(--s)*var(--f));
+}
+
+.hot-tour {
+    margin-top: 1rem;
+    width: 100%;
+    background-color: #F1FAF4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.card:hover {
+    background-color: #bce2d1;
+    transform: scale(1.05);
 }
 </style>

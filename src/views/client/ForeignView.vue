@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa-solid fa-house"></i> <a href="/" class="home-breadcrumb">Trang
                         chủ</a></li>
-                <li class="breadcrumb-item">Du lịch trong nước</li>
+                <li class="breadcrumb-item">Du lịch quốc tế</li>
             </ol>
         </nav>
         <!-- <h2 style="color: #ff6b00;">Du lịch trong nước</h2> -->
@@ -14,8 +14,7 @@
                 <div v-if="categoryList" class="category-list">
                     <div
                         style="display: flex;align-items: center; height: 3rem; padding-left: 1rem; font-size: 20px;font-weight: bold;">
-                        Địa điểm &nbsp; <span style="color:#ff6b00;">HOT</span> &nbsp; trong
-                        nước</div>
+                        Địa điểm &nbsp; <span style="color:#ff6b00;">HOT</span> &nbsp; quốc tế</div>
                     <div v-if="categoryList.Regions" v-for="region in categoryList.Regions" :key="region">
                         <div class="region-list" @click="router.push({ path: '/khu-vuc/' + region.slug })">{{ region.name }}
                         </div>
@@ -291,8 +290,9 @@ p {
 
 .tour-individual {
     width: 100%;
-    max-height: 15rem;
+    max-height: 18rem;
     display: flex;
+    height: 15rem;
     justify-content: space-between;
     gap: 2rem;
     flex-direction: row;
