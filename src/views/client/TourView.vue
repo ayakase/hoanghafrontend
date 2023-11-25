@@ -437,5 +437,14 @@ let tabSec2 = ref()
         padding-right: 1rem;
         font-size: larger;
     }
+
+    .breadcrumb {
+        padding: 0.2rem;
+    }
+
+    .breadcrumb-item {
+        font-size: 1rem;
+
+    }
 }
 </style>
