@@ -37,6 +37,7 @@ const headOption = {
 function getUrl() {
     pageUrl.value = window.location.href
 }
+const hotTour = ref()
 onMounted(() => {
     // console.log(route.params.slug)
     baseUrl.get("client/each-tour/" + route.params.slug).then((response) => {
@@ -58,9 +59,16 @@ onMounted(() => {
     setTimeout(() => {
         renderVideo.value = true
     }, 1000);
+    baseUrl.get("/client/region/hot-sidebar")
+        .then(response => {
+            hotTour.value = response.data.rows
+        }).catch((error) => {
+            console.error(error);
+        });
 })
 let tabSec1 = ref()
 let tabSec2 = ref()
+
 </script>
 <template>
     <nav aria-label="breadcrumb">
@@ -82,20 +90,20 @@ let tabSec2 = ref()
 
         <div class="main-content">
             <div>
-                <div class="iframe_container" v-if=tiktokId>
+                <!-- <div class="iframe_container" v-if=tiktokId>
                     <iframe :src=tiktokUrl class="iframe" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
-                </div>
+                </div> -->
                 <div class="slide" v-if="imageArray && imageArray[0] != ''">
                     <Splide :options=headOption aria-label="">
                         <SplideSlide v-for=" slide  in  imageArray " :key="slide">
                             <a>
-                                <v-img class="slide-image" style=" border-radius: 1rem;" :src="slide"></v-img>
+                                <v-img class="slide-image" :src="slide"></v-img>
                             </a>
                         </SplideSlide>
                     </Splide>
                 </div>
             </div>
-            <h2 style="margin-bottom: 2rem;"> {{ tourDetail.title }}</h2>
+
             <v-card class="first-section" elevation="0">
                 <v-tabs class="tab-slider" v-model="tabSec1" color="white" align-tabs="start">
                     <v-tab class="each-tab" value="one">Điểm khác biệt</v-tab>
@@ -165,37 +173,16 @@ let tabSec2 = ref()
                 </div>
             </div>
             <div class="hot-tour">
-                <h2 style="padding-left: 1rem;">Tour hot</h2>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
+                <h2 style="padding-left: 1rem;">Tour hot &nbsp; <i style="color: orangered;"
+                        class="fa-solid fa-fire fa-bounce"></i></h2>
+                <div v-for="tour in hotTour" @click="router.push({ path: '/' + tour.slug })" class="card"
+                    style="border: none;">
+                    <img :src=tour.thumbnail style="height: 10rem;" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="card" style="background: none;border: none;">
-                    <img src="../../assets/images/img2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Lào Cai - Hà Khẩu - Kiến Thủy 2n1Đ</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">3.600.000</span> VNĐ </p>
-                        <hr class="hr" />
+                        <h5 class="card-title">{{ tour.title }}</h5>
+                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice)
+                        }}</span>
+                            VNĐ </p>
                     </div>
                 </div>
             </div>
@@ -219,6 +206,19 @@ let tabSec2 = ref()
     text-decoration: none !important;
     font-weight: bold;
     color: black;
+}
+
+.hot-tour {
+    margin-top: 1rem;
+    width: 18rem;
+    background-color: #F1FAF4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
 }
 
 .content-container-outer {
@@ -274,7 +274,7 @@ let tabSec2 = ref()
 }
 
 .main-content {
-    width: 70%;
+    width: 75%;
     display: flex;
     flex-direction: column;
 }
@@ -298,7 +298,7 @@ let tabSec2 = ref()
 .side-bar {
     position: sticky;
     top: 0rem;
-    width: 25%;
+    width: 20%;
     min-width: 200px;
     height: 100%;
     box-sizing: border-box;
@@ -364,41 +364,18 @@ let tabSec2 = ref()
     border: 0;
 }
 
-.gallery {
-    --s: 150px;
-    /* control the size */
-    --g: 10px;
-    /* control the gap */
-    --f: 1.5;
-    /* control the scale factor */
-
-    display: grid;
-    gap: var(--g);
-    width: calc(3*var(--s) + 2*var(--g));
-    aspect-ratio: 1;
-    grid-template-columns: repeat(3, auto);
-}
-
-.gallery>img {
-    width: 0;
-    height: 0;
-    min-height: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    filter: grayscale(80%);
-    transition: .35s linear;
-}
-
-.gallery img:hover {
-    filter: grayscale(0);
-    width: calc(var(--s)*var(--f));
-    height: calc(var(--s)*var(--f));
-}
 
 .slide {
-    width: 80%;
+    width: 100%;
     margin: auto;
+    margin-bottom: 2rem;
     padding: auto;
+}
+
+.slide-image {
+    border-radius: 1rem;
+    height: 30rem;
+    /* background-position: center center;
+    background-repeat: no-repeat; */
 }
 </style>

@@ -93,7 +93,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in china" @click="router.push({ path: '/tour/' + tour.slug })"
+          <SplideSlide v-for="tour in china" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
             <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
               <template v-slot:placeholder>
@@ -129,7 +129,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/tour/' + tour.slug })"
+          <SplideSlide v-for="tour in domestic" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
             <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
               <template v-slot:placeholder>
@@ -166,7 +166,7 @@
       </h2>
       <div style="width: 95%;margin: auto;">
         <Splide :options=options aria-label="Vue Splide Example">
-          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/tour/' + tour.slug })"
+          <SplideSlide v-for="tour in foreign" @click="router.push({ path: '/' + tour.slug })"
             style="cursor: pointer; background-color: #f1faf4;padding: 1rem;border-radius: 1rem;">
             <v-img style=" border-radius: 0.5rem; height: 12rem;width: 100%;" :src=tour.thumbnail>
               <template v-slot:placeholder>

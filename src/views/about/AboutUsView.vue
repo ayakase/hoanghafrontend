@@ -26,4 +26,4 @@ import { ref } from 'vue';
 let tab = ref()
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

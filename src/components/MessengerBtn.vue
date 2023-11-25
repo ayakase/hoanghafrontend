@@ -24,7 +24,7 @@
 <script>
 </script>
 
-<style >
+<style scoped>
 .messenger-btn {
     position: fixed;
     bottom: 6rem;

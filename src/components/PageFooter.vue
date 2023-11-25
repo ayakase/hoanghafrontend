@@ -202,7 +202,7 @@ function sendInfo() {
   }
 }
 </script>
-<style>
+<style scoped>
 .map-container {
   border-radius: 2rem;
   border: 2px solid rgb(146, 146, 146);
