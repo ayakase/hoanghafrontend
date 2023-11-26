@@ -16,12 +16,11 @@
         <div class="row mb-4">
             <div class="col">
                 <!-- Simple link -->
-                <a href="">Forgot password?</a>
             </div>
         </div>
 
         <!-- Submit button -->
-        <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+        <button type="button" class="btn btn-success btn-block mb-4">Sign in</button>
 
         <!-- Register buttons -->
 
@@ -34,8 +33,13 @@
 <style scoped>
 .login-container {
     width: 30%;
+    background-color: #97CBB4;
     margin: auto;
     padding: auto;
+    padding: 3rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 </style>

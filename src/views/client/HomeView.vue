@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div v-if="hotTour" style="width: 100%;margin: auto;padding: auto;padding-bottom: 2rem;padding-top: 4rem;">
+    <div v-if="hotTour" style="width: 100%;margin: auto;padding: auto;padding-bottom: 2rem;">
       <h2 class="section-title" @click="router.push('/tour-hot')">Hot Tour
         &nbsp; <i class="fa-solid fa-fire fa-bounce" style="color: #ff6600;"></i>&nbsp;
       </h2>
@@ -673,6 +673,8 @@ img {
 .mobile-carousel {
   display: none;
 }
+
+
 
 @media screen and (max-width: 1136px) {
   .mobile-slide {

@@ -364,7 +364,6 @@ function toggleGallery() {
 let tourTitle = ref("");
 let tourThumbnail = ref(null);
 let tourSchedule = ref("");
-// let tiktokId = ref("")
 let tourType = ref("");
 let tourFrom = ref("");
 let tourLength = ref(1);
