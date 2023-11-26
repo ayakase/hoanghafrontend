@@ -42,6 +42,7 @@ onMounted(() => {
         console.log(response.data[0])
         tourDetail.value = response.data[0]
         adultPrice.value = response.data[0].adult_price
+        originalPrice.value = response.data[0].original_price
         teenagerPrice.value = response.data[0].teenager_price
         childPrice.value = response.data[0].child_price
         infantPrice.value = response.data[0].infant_price
@@ -167,6 +168,7 @@ let tabSec2 = ref()
                 <p>Khởi hành: <span style="color: #ff6b00;">{{ tourDetail.departure }}</span></p>
                 <p>Vận chuyển: <span style="color: #ff6b00;">{{ tourDetail.transportation }}</span></p>
                 <div style="height: 5rem;"></div>
+                <p>Gia goc <span style="color: #ff6b00;">{{ numeralFormat(tourDetail.original_price) }}</span></p>
                 <p>Giá tour: <span style="color: #ff6b00;">{{ numeralFormat(tourDetail.adult_price) }}</span></p>
                 <div class="action-button">
                     <button class="btn place-btn" data-bs-toggle="modal" data-bs-target="#placeModal">Đặt tour</button>
@@ -182,7 +184,7 @@ let tabSec2 = ref()
                     <img :src=tour.thumbnail style="height: 10rem;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ tour.title }}</h5>
-                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adultprice)
+                        <p>Giá: <span style="font-weight: bold; color: #ff6b00;">{{ numeralFormat(tour.adult_price)
                         }}</span>
                             VNĐ </p>
                     </div>
@@ -306,7 +308,7 @@ let tabSec2 = ref()
 }
 
 .place-order {
-    /* height: 20rem; */
+    font-size: large;
     background-color: #DBEBE1;
     padding: 1rem;
     border-radius: 4px;

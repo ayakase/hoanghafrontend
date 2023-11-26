@@ -214,7 +214,7 @@ let showChatbox = () => {
                     <li>
                       <RouterLink class="nav-link active" to="/danh-muc/du-lich-quoc-te" aria-current="page" href="#">
                         Du lịch quốc tế
-                        &nbsp; <i class="fa-solid fa-flag"></i>
+                        &nbsp; <i class="fa-solid fa-globe"></i>
                       </RouterLink>
                       <ul class="drop-two" style="margin: 0;padding: 0;">
                         <li v-if="domesticMenu" v-for="region in foreignMenu.Regions">
