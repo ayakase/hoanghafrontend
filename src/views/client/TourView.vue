@@ -42,7 +42,6 @@ onMounted(() => {
         console.log(response.data[0])
         tourDetail.value = response.data[0]
         adultPrice.value = response.data[0].adult_price
-        originalPrice.value = response.data[0].original_price
         teenagerPrice.value = response.data[0].teenager_price
         childPrice.value = response.data[0].child_price
         infantPrice.value = response.data[0].infant_price
