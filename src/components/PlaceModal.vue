@@ -58,7 +58,7 @@
                                 </p>
                             </div>
                             <h4 class="mb-4">Tổng số tiền: <span style="color: chocolate;">{{ numeralFormat(totalPrice)
-                            }}</span></h4>
+                            }} &nbsp;VNĐ </span></h4>
                             <div style="display: flex; flex-direction: row;gap: 1rem; font-size: 1.5rem;">
                                 <!-- <p>Tổng số tiền:</p> <span style="color: orangered;"><count-up class="count-number"
                                         :end-val=totalPrice :duration="1"></count-up></span> -->

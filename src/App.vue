@@ -414,7 +414,7 @@ nav {
 }
 
 .search-box {
-  background: none;
+  background-color: white;
   margin-left: 1rem;
   border: #0aa886 1px solid;
 }
