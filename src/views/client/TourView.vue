@@ -105,7 +105,7 @@ let tabSec2 = ref()
             </div>
 
             <v-card class="first-section" elevation="0"
-                v-if="!(tourDetail.special != 'undefined' && tourDetail.bonus != 'undefined' && tourDetail.visa != 'undefined')">
+                v-if="(tourDetail.special != 'undefined' && tourDetail.bonus != 'undefined' && tourDetail.visa != 'undefined')">
                 <v-tabs class="tab-slider" v-model="tabSec1" color="white" align-tabs="start">
                     <v-tab class="each-tab" value="one" v-if="tourDetail.special != 'undefined'">Điểm khác biệt</v-tab>
                     <p class="separator"></p>
@@ -128,7 +128,8 @@ let tabSec2 = ref()
                     </v-window>
                 </v-card-text>
             </v-card>
-            <v-card class="second-section" elevation="0">
+            <v-card class="second-section" elevation="0"
+                v-if="(tourDetail.detail != 'undefined' && tourDetail.priceservice != 'undefined' && tourDetail.guide != 'undefined')">
                 <v-tabs class="tab-slider" v-model="tabSec2" color="white" align-tabs="start">
                     <v-tab class="each-tab" value="one" v-if="tourDetail.detail != 'undefined'">Lịch trình chi tiết</v-tab>
                     <p class="separator"></p>
