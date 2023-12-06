@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <v-avatar image="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" size="80"></v-avatar>
+    <div class="container">
+        <v-avatar class="avatar"
+            image="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"></v-avatar>
     </div>
 </template>
 
@@ -10,4 +11,18 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.avatar {
+    margin-top: 2rem;
+    width: 8rem;
+    height: 8rem;
+}
+</style>

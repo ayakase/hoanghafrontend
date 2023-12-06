@@ -117,7 +117,7 @@ function unpublished() {
 }
 function fetchTour() {
     tourTable.value = null
-    baseUrl.get("/admin/tour/" + categoryNumber.value + "/" + sortOrder.value + "/" + pageNumber.value, { params: { keyword: searchTerm.value } })
+    baseUrl.get("/admin/tour/" + sortOrder.value + "/" + pageNumber.value, { params: { keyword: searchTerm.value } })
         .then(response => {
             console.log(response.data)
             tourTable.value = response.data.rows

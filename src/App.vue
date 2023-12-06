@@ -12,6 +12,8 @@ const router = useRouter();
 const showNav = ref(false)
 const showDomestic = ref(false)
 const showForeign = ref(false)
+import { useCookies } from "vue3-cookies";
+let { cookies } = useCookies()
 function toggleNav() {
   showNav.value = !showNav.value
 }
@@ -41,6 +43,7 @@ function searchSend() {
 const domesticMenu = ref()
 const foreignMenu = ref()
 onMounted(() => {
+  cookies.set("a", "b")
   baseUrl.post("/client/initial/count")
   baseUrl
     .get("/client/initial/menu").then((response) => {
