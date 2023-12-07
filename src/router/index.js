@@ -2,6 +2,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/client/HomeView.vue'
 import LoadingOverlay from '../components/LoadingOverlay.vue'
+import { useLoginStore } from '../stores/loginstate';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -190,8 +192,18 @@ const router = createRouter({
           path: 'thu-vien',
           component: () => import('../views/admin/ImageLibrary.vue')
         },
+      ],
+      beforeEnter: async (to, from, next) => {
+        const loginStore = useLoginStore()
+        const loginState = loginStore.login
+        console.log(loginState)
+        if (loginState) {
+          next();
+        } else {
+          next({ path: '/' })
+        }
+      }
 
-      ]
     },
   ]
 

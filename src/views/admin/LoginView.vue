@@ -40,8 +40,8 @@ function login() {
         username: username.value,
         password: password.value
     }
-    baseUrl.post('/admin/login', loginData).then((response) => {
-        console.log(response)
+    baseUrl.post('/admin/login/info', loginData).then((response) => {
+        console.log(response.data)
         toast.info(response.data,
             {
                 autoClose: 2000,

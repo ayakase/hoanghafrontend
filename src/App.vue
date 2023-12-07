@@ -7,12 +7,14 @@ import PageFooter from './components/PageFooter.vue'
 import scrollToTop from './components/ScrollToTop.vue'
 import MessengerBtn from './components/MessengerBtn.vue'
 import baseUrl from './connect';
+import { useLoginStore } from './stores/loginstate';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const showNav = ref(false)
 const showDomestic = ref(false)
 const showForeign = ref(false)
 import { useCookies } from "vue3-cookies";
+const loginStore = useLoginStore()
 let { cookies } = useCookies()
 function toggleNav() {
   showNav.value = !showNav.value
@@ -25,13 +27,7 @@ function toggleForeign(event) {
   showNav.value = true
   showForeign.value = !showForeign.value
 }
-const notify = () => {
-  toast.warn("Trang web đang trong quá trình xây dựng, còn nhiều thiết sót mong bạn thông cảm", {
-    autoClose: 60000,
-    theme: "dark",
-    position: toast.POSITION.BOTTOM_RIGHT,
-  });
-}
+
 let searchText = ref("")
 function searchSend() {
   toast.success("Đang tìm kiếm " + searchText.value, {
@@ -43,7 +39,8 @@ function searchSend() {
 const domesticMenu = ref()
 const foreignMenu = ref()
 onMounted(() => {
-  cookies.set("a", "b")
+  loginStore.checkLogin()
+  console.log(loginStore.login)
   baseUrl.post("/client/initial/count")
   baseUrl
     .get("/client/initial/menu").then((response) => {
@@ -152,7 +149,8 @@ let showChatbox = () => {
 
   </div>
   <div class="header-container">
-    <RouterLink class=" btn btn-success active admin-button" to="/admin/thong-ke" aria-current="page" href="#">Admin
+    <RouterLink v-if="loginStore.login" class=" btn btn-success active admin-button" to="/admin/thong-ke"
+      aria-current="page" href="#">Admin
     </RouterLink>
     <RouterLink class="stamp" to="/"><img src="./assets/stamp.png" alt="" class="">
     </RouterLink>
@@ -417,7 +415,7 @@ nav {
 }
 
 .search-box {
-  background-color: white;
+  background: none;
   margin-left: 1rem;
   border: #0aa886 1px solid;
 }
