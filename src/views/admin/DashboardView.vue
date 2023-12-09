@@ -42,12 +42,8 @@
         </div>
         <div class="admin-content">
 
-            <!-- <RouterView></RouterView> -->
-            <router-view v-slot="{ Component }">
-                <transition>
-                    <component :is="Component" />
-                </transition>
-            </router-view>
+            <RouterView></RouterView>
+
         </div>
     </div>
 </template>
@@ -55,16 +51,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 <style scoped>
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
-}
-
 .admin-container {
     display: flex;
     flex-direction: row;

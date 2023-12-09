@@ -15,12 +15,8 @@
       <RouterLink class="mobile-sidebar-item" to="/about/quy-trinh">Quy trình đặt dịch vụ và thanh toán</RouterLink>
     </div>
     <div class="about-content">
-      <!-- <RouterView></RouterView> -->
-      <router-view v-slot="{ Component }">
-        <transition>
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <RouterView></RouterView>
+
     </div>
   </div>
 </template>
@@ -30,16 +26,6 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
 .chatbox-enter-active {
   animation: bounce-in 0.5s;
 }

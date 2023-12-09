@@ -76,7 +76,10 @@ let showChatbox = () => {
     chatBoxValue.value = false;
   }
 }
-
+function logout() {
+  console.log("logout")
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
 </script>
 
 <template>
@@ -149,7 +152,10 @@ let showChatbox = () => {
 
   </div>
   <div class="header-container">
-    <RouterLink v-if="loginStore.login" class=" btn btn-success active admin-button" to="/admin/thong-ke"
+    <button v-if="loginStore.login" @click="logout" class=" btn btn-danger active admin-button" aria-current="page"
+      href="#">Logout
+    </button>
+    <RouterLink v-if="loginStore.login" class=" btn btn-success active logout-button" to="/admin/thong-ke"
       aria-current="page" href="#">Admin
     </RouterLink>
     <RouterLink class="stamp" to="/"><img src="./assets/stamp.png" alt="" class="">
@@ -280,12 +286,7 @@ let showChatbox = () => {
     </nav>
   </div>
   <div class="content-container">
-    <!-- <RouterView /> -->
-    <router-view v-slot="{ Component }">
-      <transition>
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <RouterView />
 
   </div>
 
@@ -300,31 +301,6 @@ let showChatbox = () => {
 </template>
 
 <style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
-
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-
-  50% {
-    transform: scale(1.25);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
 .header-container {
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -459,6 +435,12 @@ nav {
 .admin-button {
   position: absolute;
   right: 1rem;
+  top: 1rem;
+}
+
+.logout-button {
+  position: absolute;
+  right: 6.5rem;
   top: 1rem;
 }
 
